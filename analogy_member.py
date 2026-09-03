@@ -7,7 +7,7 @@ the row's (relation, direction), excluding src itself. Popularity-free
 (MAX not SUM — the drug-sideeffect lesson), label-free, and computable
 at query time from the oracle graph.
 
-Embeddings: spectral cosine from --model (unit-norm E), averaged over
+Embeddings: embedding cosine from --model (unit-norm E), averaged over
 --models if several are given. Output ens_cache/analogy.valid.npz in
 the standard sp/sn/rel layout so ensemble_weights.py picks it up as an
 18th member. Rows with no holders get -1.
