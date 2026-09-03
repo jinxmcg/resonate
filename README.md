@@ -1,5 +1,10 @@
 # ResonatE on ogbl-biokg
 
+> **Preprint / draft (3 September 2026), not peer reviewed.** The
+> results below are self-reported and not yet on the OGB leaderboard;
+> everything needed to check them is in this repo. Project page:
+> [resonate.page](https://resonate.page).
+
 A 27M-parameter knowledge-graph embedding — unit-norm complex spectra
 for entities, block-unitary operators for relations — plus four
 label-free retrieval features read from the training graph, evaluated
@@ -29,7 +34,7 @@ ensemble). The parameter count above counts every complex coefficient
 as two reals (the convention used for ComplEx's 188M); the literal
 `sum(p.numel())` over the module's parameters is 13,562,065.
 
-The paper: [`paper/resonate.pdf`](paper/resonate.pdf).
+The paper (preprint): [`paper/resonate.pdf`](paper/resonate.pdf).
 
 ## The model (`resonate.py`)
 
