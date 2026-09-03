@@ -215,3 +215,8 @@ Release `v1.0-biokg` carries the twenty checkpoints
 (`model_final_seed{0..9}.pt`, `dist27_s{0..9}.pt`, 108 MB each; each
 stores `{"model", "offset", "n_rel", "args"}`) and their `SHA256SUMS`,
 which `scripts/fetch_checkpoints.sh` checks after downloading.
+
+## License
+
+MIT — see [`LICENSE`](LICENSE). The checkpoints in the release are
+covered by the same terms.

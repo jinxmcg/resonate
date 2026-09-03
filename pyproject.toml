@@ -3,6 +3,8 @@ name = "resonate"
 version = "1.0.0"
 description = "ResonatE: unit-norm complex spectra with block-unitary relation operators, plus label-free retrieval features, on ogbl-biokg"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = [
     # The reported runs used torch 2.6.0+cu124 (GTX 1080 Ti: last build
