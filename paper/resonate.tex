@@ -1,0 +1,569 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!50!black]{hyperref}
+\usepackage{url}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\cnorm}{\operatorname{cnorm}}
+\newcommand{\Rel}{\operatorname{Re}}
+
+\title{ResonatE: Unit-Norm Complex Spectra with Block-Unitary Relation
+  Operators, and Label-Free Retrieval from the Training Graph, on
+  \texttt{ogbl-biokg}}
+\author{Cristian Malaia\\ \texttt{cristian.malaia@gmail.com} \and Claude Fable 5\\ Anthropic}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We report three results on \texttt{ogbl-biokg}, the Open Graph
+Benchmark's biomedical link-prediction task, each as the mean and
+unbiased standard deviation of ten independent runs with one test
+evaluation per run under the official Evaluator.
+(A) A 27.1M-parameter embedding in which entities are complex vectors of
+144 coefficients and each of the 102 (relation, direction) operators is
+a set of 36 independent $4\times4$ complex blocks initialised unitary
+reaches test MRR $0.8118\pm0.0013$, above ComplEx, DistMult and RotatE
+at 188M parameters.
+(B) Four label-free retrieval features computed from the training graph
+alone---the similarity, under the model's own embeddings or under raw
+edge overlap, between the query entity and the training entities that
+already hold the candidate edge---blended with the model by a
+per-relation weight selected on validation, reach $0.8425\pm0.0007$.
+(C) A fresh 27.1M model distilled at training time from the ten models
+of (A), with its own features, reaches $0.8505\pm0.0004$, which would
+place fifth of twelve on the public leaderboard as of September 2026 and
+fourth among single models, at the smallest parameter count on it. The
+recipe was found by a pre-registered screen-then-confirm search on the
+validation split in which fourteen of sixteen candidate levers were
+rejected, several because the architecture already supplies what the
+lever would add; we report them. Code, logs, frozen blend weights and
+checkpoints are released; the per-run test receipts reproduce
+deterministically from the released caches.
+\end{abstract}
+
+\section{Introduction}
+
+Knowledge-graph embedding models score a triple $(h,r,t)$ by a function
+of learned vectors, and on \texttt{ogbl-biokg} \citep{hu2020ogb} the
+classic bilinear and rotational families (DistMult, ComplEx, RotatE)
+sit near test MRR 0.80--0.81 at roughly 188M parameters, while the
+current leaders reach 0.85--0.86 through learned scoring functions,
+auxiliary objectives or relation-aware ensembles
+\citep{ogbl_biokg_leaderboard}. This report describes a model with a
+different inductive bias and a different budget---27.1M parameters---and
+two label-free additions that lift it from 0.812 to 0.851 without adding
+a single parameter fitted to anything but the training triples.
+
+The model, ResonatE, was designed for multi-hop reasoning: an entity is
+a unit-norm complex vector, a relation is a linear operator on that
+space, a hop is ``apply the operator and renormalise'', and a chain of
+hops is a chain of operators. \texttt{ogbl-biokg} is a single-edge task,
+so here only the one-hop score matters, but the design leaves marks on
+the results: unit-norm renormalisation after every hop makes the usual
+N3 regulariser redundant, type-grouped batches make a
+relation-prediction auxiliary loss redundant, and exact operator
+composition makes path training redundant---each verified negatively in
+Section~\ref{sec:negative}.
+
+The two additions are (i) \emph{retrieval features}: for a candidate
+answer $c$ to a query $(h,r,?)$, look up the training entities that
+already hold $(\cdot,r,c)$ and score $c$ by how similar they are to $h$,
+either in the model's own embedding space or by raw edge overlap
+(Section~\ref{sec:retrieval}); and (ii) \emph{distillation at training
+time}: a fresh model whose loss includes the KL divergence to the mean
+prediction of ten frozen models on each batch's own candidate set
+(Section~\ref{sec:distill}). Neither reads validation or test edges. The
+blend weights of (i) are selected on validation from a fixed list of at
+most nine candidate vectors per relation and direction; the selection is
+reported alongside its held-out estimate, which is within $0.001$ of test
+on every one of the twenty runs.
+
+Our contributions are the three ten-run results, the recipe search with
+its negative results, the retrieval-feature construction, and a fully
+scripted reproduction path with released checkpoints.
+
+\section{Model}
+\label{sec:model}
+
+\paragraph{Entities and relations.}
+Let $N$ be the number of entities and $M=k^2$ with $k=12$, so $M=144$.
+The entity table is $E\in\C^{N\times M}$. A query entity is read through
+$\cnorm(E_h)=E_h/\lVert E_h\rVert$; a target entity is read as the raw
+row $E_t$, so target norms are free and act as a learned per-entity
+popularity channel. For each of the $2R$ (relation, direction) pairs
+($R=51$, both directions trained as separate operators, $2R=102$) the
+operator $H_r$ is block-diagonal with $M/b$ independent $b\times b$
+complex blocks, $b=4$, initialised as random unitaries by QR
+decomposition and then trained freely. A hop is
+\begin{equation}
+  z = \cnorm(H_r\,\cnorm(E_h)),
+\end{equation}
+and the score of candidate $t$ is
+\begin{equation}
+  s(h,r,t) = \Rel\langle z, E_t\rangle\cdot e^{\tau},
+\end{equation}
+with a single learned log-temperature $\tau$. Blocks larger than
+$1\times1$ do not commute, so mixed-relation chains are representable;
+$b=4$ was chosen on validation (Section~\ref{sec:recipe}).
+
+\paragraph{Parameter count.}
+$N\cdot M$ complex entity coefficients ($93{,}773\times144$), $2R\cdot
+(M/b)\cdot b^2$ complex operator coefficients ($102\times36\times16$) and
+$\tau$: counting each complex coefficient as two reals, as the
+leaderboard does for ComplEx, $27{,}124{,}129$ parameters. The literal
+number of parameter elements is $13{,}562{,}065$.
+
+\paragraph{Training.}
+Entity ids are per type in OGB; we flatten them with per-type offsets so
+that each relation's head and tail types map to contiguous ranges. A
+training batch is 2{,}048 triples of a single relation (relations
+sampled in proportion to their frequency), scored in one random
+direction against a single shared set of 4{,}096 negatives drawn
+uniformly from the target type's range---the same candidate distribution
+the Evaluator uses. The loss is the sampled softmax cross-entropy over
+$[\text{positive}\mid\text{negatives}]$ plus a trajectory term
+$0.1\,\lVert z-E_t\rVert^2$ on the hopped state, with gradient-norm
+clipping at 1. Adam \citep{kingma2015adam} at learning rate
+$5\cdot10^{-3}$ with cosine decay \citep{loshchilov2017sgdr} for 50{,}000
+steps ($\approx21$ epochs). Training takes about four minutes on an RTX
+5090 and eighteen on a GTX 1080 Ti.
+
+\section{Retrieval features from the training graph}
+\label{sec:retrieval}
+
+The Evaluator scores each query $(h,r,?)$ over 501 candidates: the true
+tail and 500 fixed, type-matched negatives (and symmetrically for
+heads). For every candidate $c$ we form features from the
+\emph{holders} of $c$ under $r$ in the training graph,
+$\mathcal{H}_r(c)=\{h' : (h',r,c)\in\mathcal{T}_{\text{train}}\}$, and
+the similarity between the query entity $h$ and those holders:
+\begin{align}
+  \text{analogy}(h,r,c) &= \max_{h'\in\mathcal{H}_r(c)}
+     \cos(\cnorm(E_h),\cnorm(E_{h'}))^{3}, \\
+  \text{jaccard}(h,r,c) &= \max_{h'\in\mathcal{H}_r(c)}
+     \frac{|\mathcal{N}(h)\cap\mathcal{N}(h')|}{|\mathcal{N}(h)\cup\mathcal{N}(h')|},
+\end{align}
+where $\mathcal{N}(\cdot)$ is the typed training-edge set of an entity,
+plus the two ``top-3'' variants that replace the max by the mean of the
+three largest similarities. The cube on the cosine sharpens the
+analogy score; it is the only shape choice and was made on validation.
+A candidate with no holders gets the minimum score. Both families read
+training edges only---validation and test edges are never looked
+up---so they are as label-free as the embedding itself; the Jaccard
+pair does not use the model at all. This is case-based reasoning in
+the model's own geometry (analogy) and in the raw graph (Jaccard): the
+embedding compresses an entity's neighbourhood at training time, the
+graph remembers it exactly at query time. Alone, on validation, the
+four features reach MRR 0.645 (analogy), 0.751 (analogy top-3), 0.671
+(Jaccard) and 0.764 (Jaccard top-3).
+
+\paragraph{Blend.}
+For each member (the model plus the four features) the 501 candidate
+scores of a query are $z$-normalised. The blended score is a weighted
+sum with one weight vector $w\in\Delta^{4}$ per (relation, direction)
+group. The candidate set for a group is fixed: uniform, the uniform mean
+of the top-1, -3, -5 or -9 members by that group's validation MRR, and
+$\operatorname{softmax}(\eta\cdot\text{MRR})$ for $\eta\in\{20,50,100\}$;
+the choice is made hierarchically---a global vector first, then one per
+relation family (the \texttt{drug-drug\_*} and
+\texttt{protein-protein\_*} relations pooled), then one per relation,
+each level adding the parent's choice to its candidate list and a group
+only receiving its own weights if it has at least 4{,}000 validation
+rows. This is a selection among at most nine vectors per group, not a
+gradient fit. Its optimism is measured by the same procedure with the
+weights fit on a random half of the validation triples (a triple's two
+directions stay together) and evaluated on the other half
+(\texttt{ensemble\_weights.py}); the committed test shot refits on the
+full validation split and applies the frozen weights once
+(\texttt{freeze\_test.py}). The frozen weights are released with each
+receipt.
+
+\section{Distillation at training time}
+\label{sec:distill}
+
+Ten checkpoints are a deployment cost, and a uniform score average of
+the ten row-A models reaches only $0.8428$ (one test shot, retired).
+Instead we train a fresh model of the same architecture and recipe
+whose loss adds, on every batch,
+\begin{equation}
+  \lambda\,T^2\,\mathrm{KL}\!\left(\operatorname{softmax}(\bar\ell/T)\,\big\|\,
+  \operatorname{softmax}(\ell/T)\right),
+\end{equation}
+where $\ell$ are the student's logits over the batch's
+$[\text{positive}\mid4{,}096\text{ negatives}]$ and $\bar\ell$ the mean
+of the ten frozen teachers' logits on the same candidates
+\citep{hinton2015distilling}, with $\lambda=1$, $T=1$. The teachers see
+only the training triples the student sees; the student runs alone at
+inference. Ten students (seeds 0--9, the same ten teachers) reach
+validation MRR $0.8287\pm0.0006$ alone---$+0.016$ over their
+teachers---and $0.8505\pm0.0004$ on test with their own retrieval
+features.
+
+\section{Protocol}
+\label{sec:protocol}
+
+\paragraph{Data and metric.}
+\texttt{ogbl-biokg}: 93{,}773 entities of five types (disease 10{,}687,
+drug 10{,}533, function 45{,}085, protein 17{,}499, side effect 9{,}969),
+51 relations, 4{,}762{,}678 training, 162{,}886 validation and 162{,}870
+test triples. Filtered MRR over 500 type-matched negatives per direction
+via \texttt{ogb.linkproppred.Evaluator} (\texttt{ogb} 1.3.6). Our
+loader asserts that the three splits are pairwise disjoint as loaded
+(\texttt{verify.py}).
+
+\paragraph{Pre-registration and test reads.}
+Every configuration's expected test range was written in the project
+log before its first test read. All comparisons between recipes,
+features, blend rules and distillation settings were made on validation.
+The test split is read once per run: row A by the trainer's final
+evaluation, rows B and C by the committed blend shot; test score caches
+are written without computing any per-member test metric. Nine test
+reads were made during development outside the three rows, each a
+single shot of a configuration chosen on validation and none re-run:
+the 25k-step baseline (0.8024); 50k steps with $2\times2$ blocks, seeds
+0 and 1 (0.8084, 0.8080); the final recipe's seeds 0 and 1 trained on
+the 1080 Ti (0.8134, 0.8123; their 5090 retrains are row A seeds 0 and
+1, 0.8135 and 0.8130); the uniform
+ten-model ensemble (0.8428); seed 0 with three analogy features
+(0.8368); a 48M single model ($k=16$, 16{,}384 negatives, per-entity
+bias) with its features (0.8472); and the same 48M recipe distilled from
+twelve checkpoints, with features (0.8535). The last two are exploratory
+and are not part of any reported row.
+
+\paragraph{Statistics.}
+Mean $\pm$ unbiased standard deviation (\texttt{torch.std}) over seeds
+0--9. Row C's ten students share the same ten teachers, so its
+deviation reflects student-seed variance only.
+
+\paragraph{Hardware.}
+Rows A--C were trained on rented RTX 5090 (32~GB) instances with
+torch 2.11.0 (CUDA 12.8); the retrieval features of seeds 7--9 of row B
+and all verification ran on a GTX 1080 Ti (11~GB) with torch 2.6.0
+(CUDA 12.4).
+Checkpoints trained on one machine re-evaluate on the other to within
+$3\cdot10^{-4}$ MRR. The analogy features need about 6~GB of RAM and
+25--40 minutes per split per seed on one CPU core.
+
+\section{Results}
+
+\subsection{Main result}
+
+\begin{table}[t]
+\centering
+\caption{\texttt{ogbl-biokg}, official Evaluator, ten runs per row, one
+test read per run. ``valid'' for rows B and C is the in-sample value of
+the blend weights, which are selected on the full validation split;
+``held-out'' is the same procedure fit on half of validation and
+measured on the other half. Every row has 27{,}124{,}129 parameters.}
+\label{tab:main}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccc}
+\toprule
+ & test MRR & valid MRR & held-out & hits@1 & hits@3 & hits@10 \\
+\midrule
+A. single model & $0.8118\pm0.0013$ & $0.8124\pm0.0013$ & --- & 0.741 & 0.862 & 0.939 \\
+B. A + retrieval features & $0.8425\pm0.0007$ & $0.8434\pm0.0007$ & $0.8429\pm0.0007$ & 0.783 & 0.884 & 0.951 \\
+C. distilled + retrieval & $\mathbf{0.8505\pm0.0004}$ & $0.8515\pm0.0004$ & $0.8512\pm0.0005$ & 0.794 & 0.890 & 0.952 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:main} gives the three rows. The three clusters of ten do
+not overlap: each step ($+0.031$, $+0.008$) is an order of magnitude
+larger than the seed noise. The held-out estimate of the blend is within
+$0.001$ of test on every run (mean gap $+0.0004$ for B, $+0.0007$ for C),
+so the selection on validation carries no measurable optimism to test.
+
+\begin{table}[t]
+\centering
+\caption{Public leaderboard for \texttt{ogbl-biokg} as fetched on
+2026-09-02 \citep{ogbl_biokg_leaderboard}, with published parameter
+counts, and where the three rows would sit.}
+\label{tab:board}
+\small
+\begin{tabular}{llcc}
+\toprule
+ & method & test MRR & params \\
+\midrule
+1 & RelEns \citep{yue2023relens} (ensemble) & 0.9618 & 849M \\
+2 & ComplEx$^2$ & 0.8583 & 188M \\
+3 & UniBi & 0.8550 & 182M \\
+4 & AutoBLM \citep{zhang2022autoblm} & 0.8536 & 192M \\
+  & \textbf{ResonatE C: distilled 27M + retrieval} & $\mathbf{0.8505}$ & \textbf{27M} \\
+5 & ComplEx-RP \citep{chen2021relation} & 0.8492 & 188M \\
+  & \textbf{ResonatE B: 27M + retrieval} & $\mathbf{0.8425}$ & \textbf{27M} \\
+6 & TripleRE \citep{yu2021triplere} & 0.8348 & 470M \\
+7 & AutoSF \citep{zhang2020autosf} & 0.8309 & 94M \\
+8 & PairRE \citep{chao2021pairre} & 0.8164 & 188M \\
+  & \textbf{ResonatE A: 27M single model} & $\mathbf{0.8118}$ & \textbf{27M} \\
+9 & ComplEx \citep{trouillon2016complex} & 0.8095 & 188M \\
+10 & DistMult \citep{yang2015distmult} & 0.8043 & 188M \\
+11 & RotatE \citep{sun2019rotate} & 0.7989 & 188M \\
+12 & TransE \citep{bordes2013transe} & 0.7452 & 188M \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:board} places the rows on the public board. Row C would
+be fifth overall and fourth among single models; every ResonatE row is
+the smallest model on the board by $3.5\times$ (AutoSF is 94M; every
+other entry is 182M or more).
+
+\subsection{How the recipe was found}
+\label{sec:recipe}
+
+The starting point was a hand-picked recipe from smaller graphs: $k=12$,
+$2\times2$ blocks, 4{,}096 negatives, learning rate $5\cdot10^{-3}$
+cosine, 25{,}000 steps. Each default was then treated as a hypothesis
+under a tiered protocol written down before each run: a 12{,}500-step
+\emph{screen} on validation, promotion only above the current recipe by
+$+0.004$ MRR, then a 50{,}000-step \emph{confirmation}. Sixteen levers
+went through it; two survived.
+
+\paragraph{Budget.} Validation MRR at 6{,}250 / 12{,}500 / 25{,}000 /
+50{,}000 steps (each with its own cosine schedule) is 0.7351 / 0.7829 /
+0.8032 / 0.8085: the inherited budget had not plateaued. The gain per
+doubling shrinks fast enough that 100k projects at $\le+0.002$, so the
+budget was doubled once and frozen.
+
+\paragraph{Capacity: blocks, not spectra.} Capacity can go into $k$
+(every entity's spectrum grows; millions of parameters) or into the
+relation blocks ($2\times2\to4\times4$; 118k real parameters in total). In
+2{,}000-step probes validation MRR grows log-linearly in $k$ with no
+plateau (Table~\ref{tab:capacity}), but the gain compresses with budget:
+$k=16$'s $+0.025$ at 2k steps is $+0.003$ at 50k, and even $k=32$ (192M
+parameters) misses the promotion bar. Blocks are the opposite: their
+$+0.0064$ screen gain barely compresses to $+0.0055$ at 50k
+(0.8140)---expressivity rather than capacity, at roughly $1/300$ the
+parameter price per MRR point. Stacking $k=16$ on $4\times4$ blocks adds
+almost nothing; the two knobs buy overlapping capacity. Uniform
+$8\times8$ blocks are flat (0.7904 at the screen vs 0.7893).
+
+\begin{table}[t]
+\centering
+\caption{Capacity sweep on validation, seed 0, $2\times2$ blocks except
+the last row. Parameters count complex coefficients as two reals.}
+\label{tab:capacity}
+\small
+\begin{tabular}{lrcc}
+\toprule
+config & params & 2k-step probe & 50k steps \\
+\midrule
+$k=4$ & 3.0M & 0.3722 & --- \\
+$k=8$ & 12.0M & 0.5350 & --- \\
+$k=12$ & 27.1M & 0.5869 & 0.8085 \\
+$k=16$ & 48.1M & 0.6115 & 0.8118 \\
+$k=20$ & 75.2M & 0.6267 & --- \\
+$k=24$ & 108.3M & 0.6349 & --- \\
+$k=32$ & 192.5M & 0.6510 & 0.8129 \\
+$k=12$, $4\times4$ blocks & 27.1M & --- & \textbf{0.8140} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{What did not work}
+\label{sec:negative}
+
+The remaining fourteen levers---mostly the tricks other leaderboard
+entries rely on---went through the same screen-then-confirm pipeline on
+top of the adopted recipe (Table~\ref{tab:negative}; the 12{,}500-step
+reference is that recipe's own 0.7893). Two patterns account for them.
+First, \emph{the architecture pre-empts the trick}: a relation-prediction
+auxiliary loss \citep{chen2021relation} is monotonically harmful because
+type-grouped batches already force the model to separate relations; N3
+regularisation \citep{lacroix2018canonical} has a real but tiny interior
+optimum because renormalising after every hop already disciplines
+magnitudes; compositional path training \citep{guu2015traversing} has
+nothing to repair because hops compose exactly by construction and the
+chains only spend the update budget. Second, \emph{screen-tier wins
+vanish at the plateau}: more negatives and tied reverse operators both
+pass the 12{,}500-step screen and are flat or negative at 50k---they
+speed convergence without raising the ceiling. A one-cycle schedule
+loses to cosine, and phase-only (unitary) relation operators never reach
+90\% accuracy at any depth in the synthetic chain testbed: the moduli
+off the unit circle are load-bearing.
+
+\begin{table}[t]
+\centering
+\caption{Levers rejected on validation. Screen: 12{,}500 steps on the
+$4\times4$ recipe (reference 0.7893); confirm: 50{,}000 steps (reference
+0.8140). ``$\checkmark$'' marks a passed screen.}
+\label{tab:negative}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.0cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{4.1cm}}
+\toprule
+lever & screen & confirm & verdict \\
+\midrule
+relation-prediction aux loss, $\lambda=0.25/1/4$ & 0.7886/0.7849/0.7741 & --- & monotone negative; type-grouped batches already separate relations \\
+N3 regularisation, $w=10^{-3}/10^{-2}/10^{-1}$ & 0.7902/0.7912/0.7894 & --- & real interior peak, half the promotion bar \\
+compositional (path) training, $p=0.25/0.5$ & 0.7711/0.7475 & --- & hops compose exactly already; chains tax the update budget \\
+16{,}384 negatives & 0.7963 $\checkmark$ & 0.8148 ($+0.0008$) & convergence-speed effect \\
+tied reverse operators (adjoint) & 0.7936 $\checkmark$ & 0.8128 ($-0.0012$) & reverse blocks are not slack \\
+one-cycle schedule, max lr $3\cdot10^{-2}$ & 0.7474$^{\dagger}$ & --- & update count is the bottleneck \\
+uniform $8\times8$ blocks & 0.7904 & --- & flat; $4\times4$ is the knee \\
+unitary (phase-only) relations & \multicolumn{2}{l}{$<90\%$ at every depth (synthetic)} & off-circle moduli are load-bearing \\
+\midrule
+50k budget (adopted) & --- & 0.8085 vs 0.8032 (25k) & \\
+$4\times4$ blocks (adopted) & 0.7893 $\checkmark$ & 0.8140 $\checkmark$ & survives the budget \\
+\bottomrule
+\end{tabular}
+\\[2pt]
+{\footnotesize $^{\dagger}$screened on the $2\times2$ baseline against its
+own cosine 0.7829.}
+\end{table}
+
+\subsection{Retrieval and distillation, step by step}
+
+Table~\ref{tab:shots} lists the single-seed shots that led to rows B and
+C. Each configuration was chosen on validation and read on test once.
+Three analogy features on top of seed 0 give 0.8368; adding the Jaccard
+pair lifts the held-out estimate to 0.8441 (with analogy features that
+borrowed three seeds' spectra); a model with its \emph{own} four
+features gives 0.8433---above the uniform ten-model ensemble's 0.8428
+with one model. The two rows that go on the board are these last two
+recipes re-run as ten-seed protocols.
+
+Two levers rejected in Section~\ref{sec:negative} returned once the
+recipe was stronger: 16{,}384 negatives and $k=16$ are each flat alone
+but reach 0.8171 validation together, and a per-entity score bias adds
+$+0.003$ on top; that 48M model with its features gives 0.8472, and
+distilled from twelve checkpoints 0.8535. We did not run them as
+ten-seed rows. What did not help, all measured held-out before any
+shot: $k=24$ (parity at twice the parameters), a confidence gate on the
+blend weights ($-0.0015$), cross-relation neighbourhood overlap
+($+0.0002$), compositional training ($-0.005$).
+
+\begin{table}[t]
+\centering
+\caption{Development shots (seed 0 unless noted; validation is the
+held-out estimate of the blend), and the two ten-run rows built from
+them.}
+\label{tab:shots}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{9.4cm}cc}
+\toprule
+configuration & valid & test \\
+\midrule
+single model, $k=12$, 27M & 0.8135 & 0.8118 (10-seed mean) \\
++ 3 analogy features (shot 1) & 0.8370 & 0.8368 \\
++ Jaccard pair (analogy from three seeds' spectra) & 0.8441 & --- \\
+27M + its own analogy, top-3 and Jaccard pair (shot 3) & 0.8434 & 0.8433 \\
+\quad row B: the same, ten seeds & $0.8429\pm0.0007$ & $0.8425\pm0.0007$ \\
+48M single ($k=16$, 16k neg., entity bias) + own features (shot~2) & 0.8474 & 0.8472 \\
+48M distilled from 12 checkpoints + own features (shot 4) & 0.8540 & 0.8535 \\
+27M distilled from the ten row-A models + own features (shot 5) & 0.8516 & 0.8509 \\
+\quad row C: the same, ten student seeds & $0.8512\pm0.0005$ & $0.8505\pm0.0004$ \\
+uniform ten-model score average (retired) & --- & 0.8428 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Where the errors are.} On the rarest relations the lookup
+beats the embedding outright: on side effects with at most 19 training
+edges the analogy feature alone reaches held-out MRR 0.0175 against the
+27M model's 0.0147 (blend 0.0196; paired bootstrap significant). Of the
+remaining errors 36\% are drug$\to$side-effect tails, where even a
+22-member ensemble scores 0.17---a floor set by the data. Across the ten
+seeds the truth-versus-runner-up margin has a constant spread of 0.28
+and only its mean moves: seeds disagree on which near-tied candidate
+wins, not on what they know, which is why more seeds were never going to
+close the gap and why the deployable unit is one table plus a lookup.
+
+\section{Beyond the single-edge task}
+\label{sec:beyond}
+
+The leaderboard credential is a one-hop score; the architecture was
+built for chains, and the same code trained on graphs with multi-hop
+questions shows the properties the benchmark cannot. We summarise them
+briefly; they are not part of the submission.
+
+\paragraph{Depth.} On a synthetic chain-reasoning testbed with exact
+ground truth at every depth, a model trained only on chains of depth
+$\le4$ holds 0.987 accuracy at depth 8, crosses 90\% around depth 11
+and 50\% around 17--19; the ceiling is a function of training precision
+(at 5k steps it collapses just past the trained depth, at 25k it
+extrapolates $\approx4.4\times$ beyond it), consistent with accumulated
+angular error in the composed operators.
+
+\paragraph{Latency and a compiled index.} Because the per-hop
+renormalisation is a scalar, a metapath's operator chain collapses into
+one block-diagonal operator (2{,}304 bytes for the $2\times2$ models),
+and the readout is a real inner product---maximum-inner-product search
+over a real $N\times2M$ table. On DRKG \citep{ioannidis2020drkg}
+(97{,}238 nodes, 5.87M edges, a 28.1M-parameter model) batched
+multi-hop queries take 0.08--0.11~ms at every depth 1--6 while exact
+traversal grows with fan-out, up to $45\times$ slower at depth 5--6;
+compiled scores equal hop-by-hop scores to $10^{-5}$ with identical
+top-10 sets over 1{,}867 queries, and an HNSW index
+\citep{malkov2018hnsw,johnson2019faiss} over the table gives recall@10
+0.993 against the exact readout. Storing the table in fp16 (848 bytes
+per row including HNSW links) leaves the top-10 identical on all 3{,}334
+queries over two graphs; int8 costs a little (top-1 agreement 0.98),
+int4 breaks retrieval (0.70).
+
+\paragraph{Oracle validation.} On Hetionet \citep{himmelstein2017hetionet}
+and DRKG every top answer is checked against an exact graph oracle and
+labelled as a citable path or as a novel hypothesis; on the trained
+metapath libraries the top answer is oracle-verified 94.6--100\% of the
+time across all ten DRKG paths and 99--100\% on all eight Hetionet
+paths. Fine-tuning 496 held-out \emph{treats} edges into a trained DRKG
+model took 3.7 GPU-minutes, absorbed all of them to rank 1 (MRR
+$0.147\to1.000$) with a worst metapath regression of $-0.008$.
+
+\paragraph{Scaling.} A training step touches about 10k rows whatever
+$N$ is; what kept the table resident was dense Adam state. Replacing it
+for the entity table by row-wise Adagrad \citep{duchi2011adagrad,
+lerer2019pbg} (one accumulator per row, no decay, untouched rows left
+bit-identical) costs nothing measurable on Hetionet (hits@10 0.782 vs
+0.782 over three seeds) and lies within one standard error on DRKG
+(link-prediction MRR 0.157 vs 0.163 on 496 edges). From measured
+per-row costs, 100M entities at $k=12$ would need a 115~GB fp32
+training table, 0.4~GB of optimiser state, an 85~GB fp16 HNSW serving
+index (or about 5~GB of RAM plus NVMe in a DiskANN layout
+\citep{subramanya2019diskann}) and roughly 7 GPU-hours for 20 epochs of
+500M edges on one 5090-class card; the remaining work is sparse
+row-gradient plumbing and type-sharding, and none of it has been run.
+
+\section{Limitations and disclosures}
+
+The blend weights of rows B and C are selected on the full validation
+split; we report the in-sample validation number and the held-out
+estimate of the same selection, which is within $0.001$ of test on all
+twenty runs. Row C's ten students share one teacher pool. The retrieval
+features cost 25--40 CPU-minutes per split per seed and roughly 6~GB of
+RAM, and at inference a query needs the holder lists of its 501
+candidates---cheap, but a graph lookup the pure embedding does not
+need. Nine development test reads are listed in
+Section~\ref{sec:protocol}. Training is seeded but CUDA kernels are not
+bit-deterministic, so a retrained checkpoint reproduces its MRR to
+seed-level noise rather than bit-for-bit; the blend stage is exact. No
+external data was used.
+
+\section{Reproducibility}
+
+The repository \url{https://github.com/jinxmcg/resonate} contains the
+model and training code, the feature and blend scripts, the per-run
+logs and receipts behind Table~\ref{tab:main}, the frozen blend
+weights, three scripts that reproduce rows A--C end to end, a
+\texttt{verify.py} that asserts split disjointness and re-evaluates the
+released checkpoints against their logs, and a release with all twenty
+checkpoints. \texttt{summarize.py} recomputes every statistic in this
+report from the receipts.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

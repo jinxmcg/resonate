@@ -1,0 +1,12 @@
+members (5): model_final_seed9, analogy_s9, analogy_s9_t3, jaccard, jaccard_t3  norm: z
+global weights on full valid: top3 (0.8366)
+family weights fitted for 12 (family,dir) groups
+groups with local weights: 6/102; family weights: 91
+weights frozen -> frozen_single_s9.npz
+frozen weights on full valid (in-sample): 0.8437
+
+================= COMMITTED TEST RESULT =================
+official Evaluator test MRR: 0.8429
+hits@1: 0.7833
+hits@3: 0.8845
+hits@10: 0.9506

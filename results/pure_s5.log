@@ -1,0 +1,12 @@
+excluded: ['analogy_dist27_t3', 'analogy_dist27', 'analogy_dist_t3', 'analogy_dist', 'analogy_eb_s1_t3', 'analogy_eb_s1', 'analogy_eb_t3', 'analogy_eb', 'analogy_gain27_t3', 'analogy_gain27', 'analogy_gain_t3', 'analogy_gain', 'analogy_k16_t3', 'analogy_k16', 'analogy_k24eb_t3', 'analogy_k24eb', 'analogy_ms', 'analogy_s0_t3', 'analogy_s1_t3', 'analogy_s1', 'analogy_s2_t3', 'analogy_s2', 'analogy_s3_t3', 'analogy_s3', 'analogy_s4_t3', 'analogy_s4', 'analogy_s7_t3', 'analogy_s7', 'analogy_s8_t3', 'analogy_s8', 'analogy_s9_t3', 'analogy_s9', 'analogy_t3', 'analogy', 'item_analogy_t3', 'item_analogy', 'model_final_seed0', 'model_final_seed1', 'model_final_seed2', 'model_final_seed3', 'model_final_seed4', 'model_final_seed6', 'model_final_seed7', 'model_final_seed8', 'model_final_seed9', 'model_k12_gain', 'model_ogb_k16_s50000', 'model_ogb_k32_s50000', 'model_ogb_s50000', 'model_rp_0', 'pool2_k32bs4', 'pool2_neg16k_k16', 'pool2_neg16k_s2', 'pool3_k16_compose', 'pool3_k16_entbias', 'pool3_k16_s1', 'pool3_k24_entbias', 'pool3_k24', 'pool4_k16_eb_s1', 'pool5_distill', 'pool6_k16_eb_gain', 'pool7_k12_distill', 'pool_k16bs4', 'pool_n3', 'pool_neg16k', 'pool_tied', 'xrel_t3', 'xrel']
+norm: z
+members (5): analogy_s5, analogy_s5_t3, jaccard, jaccard_t3, model_final_seed5
+uniform-17 (z-mean): fit-half 0.8350  held-out 0.8345
+uniform-10-seeds (z-mean): fit-half 0.8102  held-out 0.8083
+global best on fit half: top3 (0.8365)
+family weights fitted for 12 (family,dir) groups
+
+per-relation recipe: fit-half 0.8430  HELD-OUT 0.8421
+held-out delta vs uniform-17: +0.0076
+groups with local weights: 6/102; family weights: 91
+local choices: (2, 0): family:global:top3; (2, 1): family:global:top3; (3, 0): family:global:top3; (3, 1): family:global:top3; (4, 0): family:global:top3; (4, 1): family:global:top3; (5, 0): family:global:top3; (5, 1): family:global:top3; (6, 0): family:global:top3; (6, 1): family:global:top3; (7, 0): family:global:top3; (7, 1): family:global:top3; (8, 0): family:global:top3; (8, 1): family:global:top3; (9, 0): family:global:top3; (9, 1): family:global:top3; (10, 0): family:global:top3; (10, 1): family:global:top3; (11, 0): family:global:top3; (11, 1): family:global:top3 ...

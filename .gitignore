@@ -1,0 +1,24 @@
+# data (auto-downloaded by ogb), derived caches, checkpoints (release assets)
+data_ogb/
+ens_cache/
+checkpoints/
+runs/
+*.pt
+*.ckpt
+
+# python
+.venv/
+__pycache__/
+*.pyc
+uv.lock
+
+# paper build intermediates (the PDF itself is committed)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz

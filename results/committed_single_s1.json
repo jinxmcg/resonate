@@ -1,0 +1,12 @@
+{
+  "members": [
+    "model_final_seed1",
+    "analogy_s1",
+    "analogy_s1_t3",
+    "jaccard",
+    "jaccard_t3"
+  ],
+  "test_mrr": 0.8431954979896545,
+  "global": "top3",
+  "local_groups": 5
+}

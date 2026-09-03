@@ -1,0 +1,11 @@
+excluded: ['item_analogy', 'item_analogy_t3', 'model_rp_0', 'analogy_ms', 'analogy_t3', 'pool2_neg16k_k16', 'model_final_seed1', 'model_final_seed2', 'model_final_seed3', 'model_final_seed4', 'model_final_seed5', 'model_final_seed6', 'model_final_seed7', 'model_final_seed8', 'model_final_seed9', 'model_ogb_k16_s50000', 'model_ogb_k32_s50000', 'model_ogb_s50000', 'pool_k16bs4', 'pool_n3', 'pool_neg16k', 'pool_tied']
+members (5): analogy, analogy_s0_t3, jaccard, jaccard_t3, model_final_seed0
+uniform-17 (z-mean): fit-half 0.8356  held-out 0.8352
+uniform-10-seeds (z-mean): fit-half 0.8133  held-out 0.8124
+global best on fit half: top3 (0.8376)
+family weights fitted for 12 (family,dir) groups
+
+per-relation recipe: fit-half 0.8446  HELD-OUT 0.8434
+held-out delta vs uniform-17: +0.0081
+groups with local weights: 4/102; family weights: 94
+local choices: (2, 0): family:global:top3; (2, 1): family:soft20; (3, 0): family:global:top3; (3, 1): family:soft20; (4, 0): family:global:top3; (4, 1): family:soft20; (5, 0): family:global:top3; (5, 1): family:soft20; (6, 0): family:global:top3; (6, 1): family:soft20; (7, 0): family:global:top3; (7, 1): family:soft20; (8, 0): family:global:top3; (8, 1): family:soft20; (9, 0): family:global:top3; (9, 1): family:soft20; (10, 0): family:global:top3; (10, 1): family:soft20; (11, 0): family:global:top3; (11, 1): family:soft20 ...

@@ -1,0 +1,12 @@
+{
+  "members": [
+    "dist27_s1",
+    "analogy_dist27_s1",
+    "analogy_dist27_s1_t3",
+    "jaccard",
+    "jaccard_t3"
+  ],
+  "test_mrr": 0.8508292436599731,
+  "global": "soft20",
+  "local_groups": 5
+}

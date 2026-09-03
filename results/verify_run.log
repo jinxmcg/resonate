@@ -1,0 +1,31 @@
+== 1. split disjointness ==
+  train: 4,762,678 triples (4,762,677 unique)
+  valid: 162,886 triples (162,886 unique)
+  test: 162,870 triples (162,870 unique)
+  train ∩ valid = 0  [OK]
+  train ∩ test = 0  [OK]
+  valid ∩ test = 0  [OK]
+
+== 2. checkpoint reproduction (test MRR vs logs) ==
+[seed0] MRR 0.8135  hits@1 0.7435  hits@3 0.8627  hits@10 0.9395
+  seed 0: recomputed 0.8135 vs logged 0.8135  (|d|=0.00003) [OK]
+[seed1] MRR 0.8130  hits@1 0.7427  hits@3 0.8628  hits@10 0.9397
+  seed 1: recomputed 0.8130 vs logged 0.8130  (|d|=0.00001) [OK]
+[seed2] MRR 0.8109  hits@1 0.7398  hits@3 0.8613  hits@10 0.9386
+  seed 2: recomputed 0.8109 vs logged 0.8109  (|d|=0.00001) [OK]
+[seed3] MRR 0.8110  hits@1 0.7394  hits@3 0.8621  hits@10 0.9391
+  seed 3: recomputed 0.8110 vs logged 0.8110  (|d|=0.00001) [OK]
+[seed4] MRR 0.8111  hits@1 0.7397  hits@3 0.8620  hits@10 0.9390
+  seed 4: recomputed 0.8111 vs logged 0.8111  (|d|=0.00004) [OK]
+[seed5] MRR 0.8106  hits@1 0.7387  hits@3 0.8617  hits@10 0.9393
+  seed 5: recomputed 0.8106 vs logged 0.8106  (|d|=0.00000) [OK]
+[seed6] MRR 0.8100  hits@1 0.7377  hits@3 0.8615  hits@10 0.9391
+  seed 6: recomputed 0.8100 vs logged 0.8100  (|d|=0.00003) [OK]
+[seed7] MRR 0.8119  hits@1 0.7416  hits@3 0.8614  hits@10 0.9379
+  seed 7: recomputed 0.8119 vs logged 0.8119  (|d|=0.00003) [OK]
+[seed8] MRR 0.8135  hits@1 0.7432  hits@3 0.8634  hits@10 0.9398
+  seed 8: recomputed 0.8135 vs logged 0.8135  (|d|=0.00003) [OK]
+[seed9] MRR 0.8125  hits@1 0.7420  hits@3 0.8619  hits@10 0.9391
+  seed 9: recomputed 0.8125 vs logged 0.8125  (|d|=0.00002) [OK]
+
+  ALL 10 CHECKPOINTS REPRODUCE. test MRR 0.8118 +/- 0.0013

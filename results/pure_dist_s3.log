@@ -1,0 +1,12 @@
+excluded: ['analogy_dist27_s1_t3', 'analogy_dist27_s1', 'analogy_dist27_t3', 'analogy_dist27', 'analogy_dist_t3', 'analogy_dist', 'analogy_eb_t3', 'analogy_eb', 'analogy_s0_t3', 'analogy_s1_t3', 'analogy_s1', 'analogy_s2_t3', 'analogy_s2', 'analogy_s3_t3', 'analogy_s3', 'analogy_s4_t3', 'analogy_s4', 'analogy_s5_t3', 'analogy_s5', 'analogy_s6_t3', 'analogy_s6', 'analogy_s7_t3', 'analogy_s7', 'analogy_s8_t3', 'analogy_s8', 'analogy_s9_t3', 'analogy_s9', 'analogy_t3', 'analogy', 'dist27_s1', 'model_final_seed0', 'model_final_seed1', 'model_final_seed2', 'model_final_seed3', 'model_final_seed4', 'model_final_seed5', 'model_final_seed6', 'model_final_seed7', 'model_final_seed8', 'model_final_seed9', 'pool2_neg16k_k16', 'pool3_k16_entbias', 'pool5_distill', 'pool7_k12_distill']
+norm: z
+members (5): analogy_dist27_s3, analogy_dist27_s3_t3, dist27_s3, jaccard, jaccard_t3
+uniform-17 (z-mean): fit-half 0.8391  held-out 0.8391
+uniform-10-seeds (z-mean): fit-half 0.0020  held-out 0.0020
+global best on fit half: soft20 (0.8433)
+family weights fitted for 12 (family,dir) groups
+
+per-relation recipe: fit-half 0.8517  HELD-OUT 0.8506
+held-out delta vs uniform-17: +0.0115
+groups with local weights: 6/102; family weights: 90
+local choices: (2, 0): family:global:soft20; (2, 1): family:global:soft20; (3, 0): family:global:soft20; (3, 1): family:global:soft20; (4, 0): family:global:soft20; (4, 1): family:global:soft20; (5, 0): family:global:soft20; (5, 1): family:global:soft20; (6, 0): family:global:soft20; (6, 1): family:global:soft20; (7, 0): family:global:soft20; (7, 1): family:global:soft20; (8, 0): family:global:soft20; (8, 1): family:global:soft20; (9, 0): family:global:soft20; (9, 1): family:global:soft20; (10, 0): family:global:soft20; (10, 1): family:global:soft20; (11, 0): family:global:soft20; (11, 1): family:global:soft20 ...
