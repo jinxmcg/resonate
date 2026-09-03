@@ -8,7 +8,8 @@ ddof=1) over the ten seeds, the matching validation number, and the
 per-seed values, read from:
   final_seed{s}.log         row A  [valid]/[test] MRR lines (train_ogb.py)
   committed_single_s{s}.json  row B  test_mrr (freeze_test.py)
-  committed_single_s{s}.log         'frozen weights on full valid (in-sample)'
+  committed_single_s{s}.log         'frozen weights on full valid (in-sample)',
+                                    test 'hits@k:' lines
   pure_s{s}.log                     'HELD-OUT' (ensemble_weights.py)
   committed_dist_s{s}.json / .log, pure_dist_s{s}.log, dist27_s{s}.log  row C
 """
@@ -38,14 +39,21 @@ def stat(vals):
     return f"{v.mean():.4f} +/- {v.std(ddof=1):.4f}"
 
 
-def row(name, test, valid, extra=None):
+def row(name, test, valid, hits, extra=None):
     print(f"\n{name}")
     print(f"  test  MRR  {stat(test)}")
     print(f"  valid MRR  {stat(valid)}")
     if extra:
         for lab, vals in extra.items():
             print(f"  {lab:<10} {stat(vals)}")
+    print("  test hits@1/3/10  " + "  ".join(
+        f"{np.mean(hits[k]):.4f}" for k in (1, 3, 10)))
     print("  per seed: " + " ".join(f"{x:.4f}" for x in test))
+
+
+def hits_at(paths, fmt):
+    """Mean test hits@k over seeds; fmt is the per-k regex template."""
+    return {k: [grab(p, fmt.format(k=k)) for p in paths] for k in (1, 3, 10)}
 
 
 def main():
@@ -57,7 +65,9 @@ def main():
             for s in SEEDS]
     valid = [grab(f"{d}/final_seed{s}.log", r"\[valid\] MRR ([0-9.]+)")
              for s in SEEDS]
-    row("A. single 27M model (10 seeds)", test, valid)
+    hits = hits_at([f"{d}/final_seed{s}.log" for s in SEEDS],
+                   r"\[test\] MRR [0-9.]+.*?hits@{k} ([0-9.]+)")
+    row("A. single 27M model (10 seeds)", test, valid, hits)
 
     for tag, label, alone in (
             ("single", "B. 27M model + retrieval features", None),
@@ -77,7 +87,9 @@ def main():
             extra["alone(val)"] = [grab(f"{d}/{alone.format(s=s)}",
                                         r"\[valid\] MRR ([0-9.]+)")
                                    for s in SEEDS]
-        row(label, test, valid, extra)
+        hits = hits_at([f"{d}/committed_{tag}_s{s}.log" for s in SEEDS],
+                       r"hits@{k}: ([0-9.]+)")
+        row(label, test, valid, hits, extra)
         # a blend fit on full valid must not beat its held-out estimate
         # by more than noise; print the gap so drift is visible
         gap = np.array(held) - np.array(test)
