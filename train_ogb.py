@@ -227,6 +227,9 @@ def main():
                         "every N steps (~seconds per probe)")
     p.add_argument("--probe-size", type=int, default=5000)
     p.add_argument("--device", type=str, default="cpu")
+    p.add_argument("--real", action="store_true",
+                   help="real-valued model (E in R^{N x 2M}, real bxb "
+                        "blocks); same real param count as complex")
     p.add_argument("--data-root", type=str, default="data_ogb",
                    help="ogb dataset root (auto-downloads ogbl-biokg)")
     args = p.parse_args()
@@ -295,7 +298,7 @@ def main():
                     block=True, block_size=args.block_size,
                     tied_reverse=args.tied_reverse,
                     ent_bias=args.ent_bias,
-                    rel_gain=args.rel_gain).to(dev)
+                    rel_gain=args.rel_gain, real=args.real).to(dev)
     print(f"params: {model.n_params():,} (M={model.m})", flush=True)
     # H18: peer copies share the batch but have their own random init
     # (the RNG has advanced past copy 0's draw); only copy 0 survives
@@ -309,7 +312,8 @@ def main():
                                   block_size=args.block_size,
                                   tied_reverse=args.tied_reverse,
                                   ent_bias=args.ent_bias,
-                                  rel_gain=args.rel_gain).to(dev))
+                                  rel_gain=args.rel_gain,
+                                  real=args.real).to(dev))
         print(f"peers: {args.peers} copies, KL w={args.distill_w} "
               f"T={args.distill_T} from {args.peer_warmup:.0%} of steps",
               flush=True)
@@ -336,13 +340,15 @@ def main():
                 or ca.get("block_size", 2) != args.block_size
                 or ca.get("tied_reverse", False) != args.tied_reverse
                 or ca.get("ent_bias", False) != args.ent_bias
-                or ca.get("rel_gain", False) != args.rel_gain):
+                or ca.get("rel_gain", False) != args.rel_gain
+                or ca.get("real", False) != args.real):
             model = ResonatE(n_entities=n_ent, n_relations=n_rel,
                             k=ca.get("k", args.k), block=True,
                             block_size=ca.get("block_size", 2),
                             tied_reverse=ca.get("tied_reverse", False),
                             ent_bias=ca.get("ent_bias", False),
-                            rel_gain=ca.get("rel_gain", False)
+                            rel_gain=ca.get("rel_gain", False),
+                            real=ca.get("real", False)
                             ).to(dev)
             print(f"eval-only: rebuilt model from checkpoint args "
                   f"(k={ca.get('k')}, bs={ca.get('block_size', 2)})",

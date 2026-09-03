@@ -1,19 +1,27 @@
-"""ResonatE: multi-hop relational reasoning as signal processing.
+"""ResonatE: entities as unit-norm complex vectors, relations as linear
+operators, a hop = apply the operator and renormalise, readout = real
+inner product against the entity table scaled by exp(log_tau).
 
-Entities are unit-norm complex vectors of M = k^2 coefficients (k x k
-Fourier modes on a 2-torus, flattened). A relation is a learned linear
-operator on that space; a reasoning hop applies it and renormalises;
-readout is the real inner product against the entity table, scaled by
-a learnable temperature exp(log_tau).
+M = k^2 coefficients per entity. The "k x k modes" vocabulary is a
+coordinate label kept for continuity with the project's history, not a
+claim: no Fourier transform is taken anywhere, and the score is
+invariant under any block-diagonal unitary change of basis (E -> UE,
+H -> U H U^dagger), so nothing depends on the coordinates being
+spectral (real=True tests the one measurable residue of "complex" at
+equal parameter count).
 
 Operator variants (constructor flags):
-  block=True (used for every real-graph result, incl. ogbl-biokg):
-      M/b independent b x b complex blocks per relation, initialised
-      unitary via QR. Blocks do not commute, so mixed-relation chains
-      are representable. ogbl-biokg uses k=12, b=4.
-  default (diagonal): one complex multiplier per mode; commuting, so a
-      chain is one relation applied n times. Synthetic studies only.
+  block=True (every real-graph result, incl. ogbl-biokg): M/b
+      independent b x b complex blocks per relation, initialised
+      unitary via QR and free afterwards. Blocks do not commute, so
+      mixed-relation chains are representable. ogbl-biokg: k=12, b=4.
+  default (diagonal): one complex multiplier per coordinate;
+      commuting, so a chain is one relation applied n times.
+      Synthetic studies only.
   dense / unitary: ablations.
+  real=True: the same model over the reals — E in R^{N x 2M},
+      real b x b blocks on R^{2M}; identical real parameter count to
+      the complex model at the same b.
 """
 
 import math
@@ -33,9 +41,10 @@ class ResonatE(nn.Module):
                  k: int = 8, dense: bool = False, block: bool = False,
                  unitary: bool = False, block_size: int = 2,
                  tied_reverse: bool = False, ent_bias: bool = False,
-                 rel_gain: bool = False):
+                 rel_gain: bool = False, real: bool = False):
         super().__init__()
         assert not (dense and block)
+        assert not (real and (unitary or dense)), "real: block/diag only"
         # unitary: phase-only relation params (H = e^{i.theta} always,
         # instead of free complex init'd on the unit circle). Diagonal
         # variant only — mechanism test for the depth-ceiling
@@ -48,8 +57,12 @@ class ResonatE(nn.Module):
         self.m = k * k
         self.dense = dense
         self.block = block
+        self.real = real
+        # width of the state vector: M complex, or 2M real (H22)
+        width = 2 * self.m if real else self.m
+        cdt = torch.float if real else torch.cfloat
 
-        e = torch.randn(n_entities, self.m, dtype=torch.cfloat)
+        e = torch.randn(n_entities, width, dtype=cdt)
         self.E = nn.Parameter(cnorm(e))
 
         theta = (torch.rand(n_relations, self.m) * 2 - 1) * math.pi
@@ -67,14 +80,17 @@ class ResonatE(nn.Module):
             # tied_reverse: ids >= n_ops apply the adjoint (conj-T) of
             # the forward blocks — Re<Qh,t> = Re<h,Q^H t>, so both
             # directions score consistently at half the relation params
-            assert self.m % block_size == 0
+            assert width % block_size == 0
             self.block_size = block_size
             self.tied_reverse = tied_reverse
             n_ops = n_relations // 2 if tied_reverse else n_relations
-            a = torch.randn(n_ops, self.m // block_size,
-                            block_size, block_size, dtype=torch.cfloat)
+            a = torch.randn(n_ops, width // block_size,
+                            block_size, block_size, dtype=cdt)
             q, _ = torch.linalg.qr(a)
             self.H = nn.Parameter(q)
+        elif real:
+            # real diagonal: free scalars, init +-1 (no phases exist)
+            self.H = nn.Parameter(torch.sign(torch.randn(n_relations, width)))
         elif unitary:
             self.theta = nn.Parameter(theta)
         else:
@@ -94,7 +110,7 @@ class ResonatE(nn.Module):
         # composition is untouched; the gain lets a relation collapse
         # or stress modes when comparing against targets (1-to-N,
         # hierarchy). Log-parametrised, init 0 = identity.
-        self.gain = nn.Parameter(torch.zeros(n_relations, self.m)) \
+        self.gain = nn.Parameter(torch.zeros(n_relations, width)) \
             if rel_gain else None
 
     def embed(self, idx: torch.Tensor) -> torch.Tensor:

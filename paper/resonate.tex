@@ -95,7 +95,45 @@ on every one of the twenty runs.
 
 Our contributions are the three ten-run results, the recipe search with
 its negative results, the retrieval-feature construction, and a fully
-scripted reproduction path with released checkpoints.
+scripted reproduction path with released checkpoints. The operator
+family itself is not a contribution; the next paragraph places it.
+
+\paragraph{Relation to prior operator families.}
+Representing a relation as a rotation or a small orthogonal block, so
+that mixed-relation chains compose non-commutatively, is an established
+line: RotatE \citep{sun2019rotate} uses $1\times1$ complex rotations
+(commuting), QuatE \citep{zhang2019quate} and DensE \citep{lu2022dense}
+quaternion rotations, Rotate3D \citep{gao2020rotate3d} rotations in
+$\mathbb{R}^3$, OrthogonalE \citep{zhu2024orthogonale} block-diagonal
+orthogonal matrices with Riemannian optimisation and matrix-valued
+entities, and Knowledgebra \citep{yang2022knowledgebra} free matrix
+semigroups. ResonatE's operator is nearest to OrthogonalE: block-diagonal
+with small complex blocks, unitary at initialisation---but the
+constraint is dropped afterwards (the blocks are free), the query side
+is renormalised after every hop while the target side keeps its norm as
+a popularity channel, and no path or composition loss is used
+(Section~\ref{sec:negative}). We make no claim that this operator is
+new or better than those families; on this benchmark the block size
+moves validation MRR by $+0.0055$ ($2\times2\to4\times4$, 50k steps)
+and $8\times8$ is flat against $4\times4$ at the screen (0.7904 vs
+0.7893, Section~\ref{sec:recipe}), which is the size of the effect the
+operator form has here. The project's name and the
+``mode'' vocabulary in the code are a coordinate label: the score is
+invariant under any block-diagonal unitary change of basis
+($E\to UE$, $H_r\to UH_rU^\dagger$), no Fourier transform is taken
+anywhere, and nothing in the results depends on the coordinates being
+spectral. Nor is ``complex'' a claim. The one testable residue of the
+complex form is its parameter sharing: a complex $4\times4$ block on
+$\C^{144}$ and a free real $4\times4$ block on $\mathbb{R}^{288}$ both
+have 1{,}152 real coefficients per relation and the same 27{,}124{,}129
+parameters in total. Pre-registered and run on the 12.5k-step validation
+screen with two seeds each, the real model scores 0.7923 against the
+complex model's 0.7897, and a real $8\times8$ block (which contains the
+complex $4\times4$ as a special case) 0.7898; the difference is below
+the 0.005 we had fixed as the smallest meaningful gap and its sign is
+against the complex form. The complex arithmetic is a way of writing a
+real block model on $\mathbb{R}^{2M}$, and the released code accepts
+\texttt{real=True} to write it the other way.
 
 \section{Model}
 \label{sec:model}
@@ -342,8 +380,8 @@ went through it; two survived.
 doubling shrinks fast enough that 100k projects at $\le+0.002$, so the
 budget was doubled once and frozen.
 
-\paragraph{Capacity: blocks, not spectra.} Capacity can go into $k$
-(every entity's spectrum grows; millions of parameters) or into the
+\paragraph{Capacity: blocks, not embedding width.} Capacity can go into $k$
+(every entity's embedding grows; millions of parameters) or into the
 relation blocks ($2\times2\to4\times4$; 118k real parameters in total). In
 2{,}000-step probes validation MRR grows log-linearly in $k$ with no
 plateau (Table~\ref{tab:capacity}), but the gain compresses with budget:
@@ -435,7 +473,7 @@ Table~\ref{tab:shots} lists the single-seed shots that led to rows B and
 C. Each configuration was chosen on validation and read on test once.
 Three analogy features on top of seed 0 give 0.8368; adding the Jaccard
 pair lifts the held-out estimate to 0.8441 (with analogy features that
-borrowed three seeds' spectra); a model with its \emph{own} four
+borrowed three seeds' embeddings); a model with its \emph{own} four
 features gives 0.8433---above the uniform ten-model ensemble's 0.8428
 with one model. The two rows that go on the board are these last two
 recipes re-run as ten-seed protocols.
@@ -464,7 +502,7 @@ configuration & valid & test \\
 \midrule
 single model, $k=12$, 27M & 0.8135 & 0.8118 (10-seed mean) \\
 + 3 analogy features (shot 1) & 0.8370 & 0.8368 \\
-+ Jaccard pair (analogy from three seeds' spectra) & 0.8441 & --- \\
++ Jaccard pair (analogy from three seeds' embeddings) & 0.8441 & --- \\
 27M + its own analogy, top-3 and Jaccard pair (shot 3) & 0.8434 & 0.8433 \\
 \quad row B: the same, ten seeds & $0.8429\pm0.0007$ & $0.8425\pm0.0007$ \\
 48M single ($k=16$, 16k neg., entity bias) + own features (shot~2) & 0.8474 & 0.8472 \\
@@ -495,13 +533,39 @@ built for chains, and the same code trained on graphs with multi-hop
 questions shows the properties the benchmark cannot. We summarise them
 briefly; they are not part of the submission.
 
-\paragraph{Depth.} On a synthetic chain-reasoning testbed with exact
-ground truth at every depth, a model trained only on chains of depth
-$\le4$ holds 0.987 accuracy at depth 8, crosses 90\% around depth 11
-and 50\% around 17--19; the ceiling is a function of training precision
-(at 5k steps it collapses just past the trained depth, at 25k it
-extrapolates $\approx4.4\times$ beyond it), consistent with accumulated
-angular error in the composed operators.
+\paragraph{Depth.} On synthetic worlds with exact ground truth at every
+depth, models trained only on chains of depth $\le4$ ($k=8$, 25k steps,
+three seeds, 2{,}000 chains per depth) are read out to depth 48. Three
+results, in decreasing order of what they show. \emph{One relation
+applied $n$ times}, on 1{,}000 entities with seven random permutations
+as relations: the diagonal model holds 0.987 at depth 8 and crosses 90\%
+between depth 10 and 12 and 50\% between 16 and 20; the $4\times4$-block
+model 0.963 at depth 8. This is a statement about powers of a single
+operator, not about composition. \emph{A different relation at every
+hop}, so that order matters, on the same random permutations: neither the
+block model nor a dense $64\times64$ operator learns depth 2 (0.21 and
+0.65 accuracy, $\approx0$ beyond), because random permutations share no
+low-dimensional structure; the block model does not compose arbitrary
+relations. \emph{A different relation at every hop on relations that
+form a group}: a turtle on a $16\times16$ torus with forward, back, turn
+left and right, strafe left and right, and U-turn, i.e.\ 1{,}024
+(heading, $x$, $y$) states and rigid motions generating
+$\mathbb{Z}_{16}^2\rtimes\mathbb{Z}_4$, whose irreducible representations
+are at most four-dimensional. Half of all depth-2 chains change their
+answer when reordered, and a commuting diagonal model reaches 0.75 at
+depth 2. The $4\times4$-block model trained on depth $\le4$ reaches 0.949
+at depth 8, crosses 90\% between depth 10 and 12 and 50\% between 20 and
+24 (seed s.d.\ $\le0.003$ to depth 8); the dense operator reaches
+further (0.996 at depth 8, 0.899 at depth 20), so the block size is a
+ceiling rather than the mechanism. The allowed statement is therefore
+that the model composes non-commuting relations beyond its trained depth
+when the relations form a group with a low-dimensional representation,
+and not for arbitrary permutations; whether the relations of a real graph
+are closer to the former or the latter is not measured. Both
+mixed-relation experiments were pre-registered after a first external
+review asked for them, and the earlier single-relation number was the
+only one we had quoted. Mapping natural-language questions onto chains
+of relation operators is outside this report.
 
 \paragraph{Latency and a compiled index.} Because the per-hop
 renormalisation is a scalar, a metapath's operator chain collapses into

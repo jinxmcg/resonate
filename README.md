@@ -5,8 +5,8 @@
 > everything needed to check them is in this repo. Project page:
 > [resonate.page](https://resonate.page).
 
-A 27M-parameter knowledge-graph embedding — unit-norm complex spectra
-for entities, block-unitary operators for relations — plus four
+A 27M-parameter knowledge-graph embedding — unit-norm complex vectors
+for entities, small block operators for relations — plus four
 label-free retrieval features read from the training graph, evaluated
 on [ogbl-biokg](https://ogb.stanford.edu/docs/linkprop/#ogbl-biokg)
 with the official OGB Evaluator. Three configurations, ten
