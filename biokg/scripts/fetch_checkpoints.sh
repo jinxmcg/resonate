@@ -18,8 +18,21 @@ case "$what" in
   *) echo "usage: $0 [sparse|dense|wikikg2]" >&2; exit 2 ;;
 esac
 mkdir -p "$dir"
-gh release download "$TAG" --repo "$REPO" --dir "$dir" --pattern SHA256SUMS --clobber
+BASE="https://github.com/$REPO/releases/download/$TAG"
+if command -v gh >/dev/null && gh auth status >/dev/null 2>&1; then
+  gh release download "$TAG" --repo "$REPO" --dir "$dir" --pattern SHA256SUMS --clobber
+  for pat in "${pats[@]}"; do
+    gh release download "$TAG" --repo "$REPO" --dir "$dir" --pattern "$pat" --skip-existing
+  done
+else
+  # no GitHub CLI or not logged in: the release is public, plain curl works
+  curl -fsSL "$BASE/SHA256SUMS" -o "$dir/SHA256SUMS"
+  for pat in "${pats[@]}"; do
+    for f in $(grep -oE "[^ ]*$(echo "$pat" | sed 's/\*/[^ ]*/g')$" "$dir/SHA256SUMS" | sort -u); do
+      [ -f "$dir/$f" ] || curl -fL --retry 3 -o "$dir/$f" "$BASE/$f"
+    done
+  done
+fi
 for pat in "${pats[@]}"; do
-  gh release download "$TAG" --repo "$REPO" --dir "$dir" --pattern "$pat" --skip-existing
   grep -E " (${pat//\*/.*})$" "$dir/SHA256SUMS" | (cd "$dir" && sha256sum -c --strict)
 done
