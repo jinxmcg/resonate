@@ -1,0 +1,5 @@
+     blend  held-out  test-mix   head |  P1412   P106    P27   P641
+ selection    0.7585    0.7184  0.551 |  0.296  0.289  0.399  0.545
+   learned    0.7874    0.7403  0.604 |  0.325  0.339  0.508  0.561   (136 local groups)
+global weights: {'model_dist_s1': np.float32(1.707), 'analogy_d1_t3': np.float32(-0.103), 'holders': np.float32(-0.117), 'cn_aa': np.float32(-0.036), 'linked': np.float32(0.134), 'cn3_aa': np.float32(-0.043), 'typed': np.float32(0.136), 'analogy_d1_t3_aug': np.float32(0.173), 'holders_aug': np.float32(0.088), 'cn_aa_aug': np.float32(0.119), 'cn3_aa_aug': np.float32(0.068)}
+head-direction weights: {'model_dist_s1': np.float32(1.696), 'analogy_d1_t3': np.float32(-0.158), 'holders': np.float32(-0.117), 'cn_aa': np.float32(-0.045), 'linked': np.float32(0.121), 'cn3_aa': np.float32(-0.045), 'typed': np.float32(0.158), 'analogy_d1_t3_aug': np.float32(0.43), 'holders_aug': np.float32(-0.216), 'cn_aa_aug': np.float32(0.125), 'cn3_aa_aug': np.float32(0.051)}

@@ -49,3 +49,10 @@ step 44000/50000  loss 3.468  (445s)
 step 45000/50000  loss 5.373  (455s)
 step 46000/50000  loss 3.738  (465s)
 step 47000/50000  loss 4.741  (475s)
+step 48000/50000  loss 4.659  (485s)
+step 49000/50000  loss 5.712  (495s)
+step 50000/50000  loss 3.133  (505s)
+
+=== OGB official evaluation ===
+[valid] MRR 0.8328  hits@1 0.7684  hits@3 0.8794  hits@10 0.9476
+leaderboard context: TransE 0.745, RotatE 0.799, DistMult 0.804, ComplEx 0.810, top ~0.86

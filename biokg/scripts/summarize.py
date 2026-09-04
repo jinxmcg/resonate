@@ -74,7 +74,11 @@ def main():
     hits = hits_at([f"{d}/{final.format(s=s)}" for s in SEEDS], r"\[test\] MRR [0-9.]+.*?hits@{k} ([0-9.]+)")
     row("A. single 27M model (10 seeds)", test, valid, hits)
     for tag, label, pure, alone in cfg["rows"]:
-        if not glob.glob(f"{d}/committed_{tag}_s*.json"):
+        have = glob.glob(f"{d}/committed_{tag}_s*.json")
+        if not have:
+            continue
+        if len(have) < len(SEEDS):
+            print(f"\n{label}: {len(have)}/{len(SEEDS)} seeds present, skipped")
             continue
         test = [json.load(open(f"{d}/committed_{tag}_s{s}.json"))["test_mrr"] for s in SEEDS]
         valid = [grab(f"{d}/committed_{tag}_s{s}.log", r"in-sample\): ([0-9.]+)") for s in SEEDS]
