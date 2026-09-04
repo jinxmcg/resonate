@@ -4,16 +4,9 @@ family weights fitted for 12 (family,dir) groups
 groups with local weights: 2/102; family weights: 95
 weights frozen -> runs/frozen_dist_s5.npz
 frozen weights on full valid (in-sample): 0.8520
-Traceback (most recent call last):
-  File "/root/resonate_pub/freeze_test.py", line 178, in <module>
-    main()
-  File "/root/resonate_pub/freeze_test.py", line 152, in main
-    Zt, relt = load_split(args.members, "test", args.norm, args.cache_dir)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/resonate_pub/freeze_test.py", line 30, in load_split
-    d = np.load(f)
-        ^^^^^^^^^^
-  File "/root/wiki/.venv/lib/python3.12/site-packages/numpy/lib/_npyio_impl.py", line 454, in load
-    fid = stack.enter_context(open(os.fspath(file), "rb"))
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: 'ens_cache/analogy_dist_sparse_s5.test.npz'
+
+================= COMMITTED TEST RESULT =================
+official Evaluator test MRR: 0.8508
+hits@1: 0.7937
+hits@3: 0.8914
+hits@10: 0.9529

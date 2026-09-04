@@ -69,3 +69,24 @@ holders: valid MRR alone 0.4250 (positive has holders on 55% of rows) -> ens_cac
 analogy_s4_aug: valid MRR alone 0.4940 (positive has holders on 58% of rows) -> ens_cache/analogy_s4_aug.valid.npz
 analogy_s4_t3_aug: valid MRR alone 0.4962 (positive has holders on 58% of rows) -> ens_cache/analogy_s4_t3_aug.valid.npz
 holders_aug: valid MRR alone 0.4250 (positive has holders on 58% of rows) -> ens_cache/holders_aug.valid.npz
+12:48 rowf_s4: 0.7796
+analogy_s5: valid MRR alone 0.4920 (positive has holders on 55% of rows) -> ens_cache/analogy_s5.valid.npz
+analogy_s5_t3: valid MRR alone 0.4941 (positive has holders on 55% of rows) -> ens_cache/analogy_s5_t3.valid.npz
+holders: valid MRR alone 0.4250 (positive has holders on 55% of rows) -> ens_cache/holders.valid.npz
+analogy_s5_aug: valid MRR alone 0.4933 (positive has holders on 58% of rows) -> ens_cache/analogy_s5_aug.valid.npz
+analogy_s5_t3_aug: valid MRR alone 0.4954 (positive has holders on 58% of rows) -> ens_cache/analogy_s5_t3_aug.valid.npz
+holders_aug: valid MRR alone 0.4250 (positive has holders on 58% of rows) -> ens_cache/holders_aug.valid.npz
+12:57 rowf_s5: 0.7793
+analogy_s6: valid MRR alone 0.4927 (positive has holders on 55% of rows) -> ens_cache/analogy_s6.valid.npz
+analogy_s6_t3: valid MRR alone 0.4943 (positive has holders on 55% of rows) -> ens_cache/analogy_s6_t3.valid.npz
+holders: valid MRR alone 0.4250 (positive has holders on 55% of rows) -> ens_cache/holders.valid.npz
+analogy_s6_aug: valid MRR alone 0.4940 (positive has holders on 58% of rows) -> ens_cache/analogy_s6_aug.valid.npz
+analogy_s6_t3_aug: valid MRR alone 0.4957 (positive has holders on 58% of rows) -> ens_cache/analogy_s6_t3_aug.valid.npz
+holders_aug: valid MRR alone 0.4250 (positive has holders on 58% of rows) -> ens_cache/holders_aug.valid.npz
+13:07 rowf_s6: 0.7795
+analogy_s7: valid MRR alone 0.4933 (positive has holders on 55% of rows) -> ens_cache/analogy_s7.valid.npz
+analogy_s7_t3: valid MRR alone 0.4951 (positive has holders on 55% of rows) -> ens_cache/analogy_s7_t3.valid.npz
+holders: valid MRR alone 0.4250 (positive has holders on 55% of rows) -> ens_cache/holders.valid.npz
+analogy_s7_aug: valid MRR alone 0.4947 (positive has holders on 58% of rows) -> ens_cache/analogy_s7_aug.valid.npz
+analogy_s7_t3_aug: valid MRR alone 0.4965 (positive has holders on 58% of rows) -> ens_cache/analogy_s7_t3_aug.valid.npz
+holders_aug: valid MRR alone 0.4250 (positive has holders on 58% of rows) -> ens_cache/holders_aug.valid.npz

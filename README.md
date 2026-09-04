@@ -83,8 +83,9 @@ split, so its in-sample validation number is optimistic; the held-out
 column is the same fit on a random half of the validation triples,
 scored on the other half (`learned_blend.py` default mode), which is
 what the submission form carries. It is within 0.001 of in-sample on
-every seed where the member caches survived (all ten for the ensemble
-and row F, seven for C-F).
+every seed where it was computed (the ensemble's one fit, seven of ten
+row-F seeds, six C-F seeds whose member caches survived; the machine was
+released before the rest).
 
 ## The model (`resonate.py`, `resonate_wiki.py`, `rowadagrad.py`)
 

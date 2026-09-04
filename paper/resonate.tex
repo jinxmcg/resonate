@@ -424,7 +424,8 @@ in-sample value and the cross-fitted estimate of the same procedure. On
 \texttt{ogbl-biokg} the estimate is within 0.001 of test on every run. On
 \texttt{ogbl-wikikg2} the learned combiner overstates by $\le0.001$
 in-sample (ensemble 0.7998 vs 0.7992 held-out; C-F 0.7880 vs 0.787 over
-the seven seeds whose member caches survived; row F 0.7800 vs 0.779), and
+the six seeds whose member caches survived; row F 0.7800 vs 0.779 over
+seven seeds), and
 the self-augmentation thresholds are themselves calibrated on validation,
 so the held-out figures are the ones filed. The validation--test gap on
 \texttt{ogbl-wikikg2} (0.70 vs 0.67 for a single model) is a relation
@@ -534,8 +535,8 @@ sit.}
 \centering
 \caption{\texttt{ogbl-wikikg2}, ten runs per row, one test read per run.
 ``valid'' is in-sample for the blend rows; ``held-out'' is the
-cross-fitted estimate of the learned combiner (ensemble and row F: all
-ten seeds; C-F: the seven seeds whose member caches survived). The
+cross-fitted estimate of the learned combiner (ensemble: the one fit;
+row F: seven of ten seeds; C-F: the six seeds whose member caches survived). The
 single-model rows have 328{,}842{,}753 parameters.}
 \label{tab:wiki}
 \footnotesize
