@@ -1,0 +1,18 @@
+{
+ "members": [
+  "model_dist_s4",
+  "analogy_d4_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed",
+  "analogy_d4_t3_aug",
+  "holders_aug",
+  "cn_aa_aug",
+  "cn3_aa_aug"
+ ],
+ "valid_in_sample": 0.7880426910077625,
+ "test_mrr": 0.7316263914108276,
+ "local_groups": 138
+}

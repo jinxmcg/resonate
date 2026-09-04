@@ -1,0 +1,17 @@
+ogbl-wikikg2 loaded in 38s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 400000, 'batch': 2048, 'neg': 4096, 'k': 8, 'block_size': 64, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': ['teachers/model_wiki_s0.bf16.pt', 'teachers/model_wiki_s1.bf16.pt', 'teachers/model_wiki_s2.bf16.pt', 'teachers/model_wiki_s3.bf16.pt', 'teachers/model_wiki_s4.bf16.pt', 'teachers/model_wiki_s5.bf16.pt', 'teachers/model_wiki_s6.bf16.pt', 'teachers/model_wiki_s7.bf16.pt', 'teachers/model_wiki_s8.bf16.pt', 'teachers/model_wiki_s9.bf16.pt'], 'distill_w': 1.0, 'distill_T': 2.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'comp': 0, 'comp_k': 8, 'comp_drop': 0.3, 'comp_lam': 1.0, 'comp_gain': False, 'comp_free_min_deg': 0, 'rev_frac': 0.75, 'seed': 5, 'save': 'model_dist_s5.pt', 'eval': 'both', 'eval_only': False, 'probe_every': 100000, 'probe_size': 20000, 'ckpt_every': 100000, 'log_every': 50000, 'device': 'cuda', 'data_root': 'data_ogb'}
+params: 328,842,753 (M=64, table 1.19 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+resumed from checkpoint at step 200000
+distill: 10 teachers (bf16 tables), w=1.0, T=2.0
+step 250000/400000  loss 3.146  9.5 ms/step  tau 8.07  (476s)
+step 300000/400000  loss 3.014  9.2 ms/step  tau 8.77  (937s)
+[probe@300000] MRR 0.7187  hits@1 0.6519  hits@3 0.7505  hits@10 0.8510  (n=20,000, 0s)
+step 350000/400000  loss 2.921  9.5 ms/step  tau 9.14  (1415s)
+step 400000/400000  loss 2.913  9.4 ms/step  tau 9.22  (1885s)
+[probe@400000] MRR 0.7196  hits@1 0.6532  hits@3 0.7513  hits@10 0.8529  (n=20,000, 0s)
+saved model_dist_s5.pt  (train 1886s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7194  hits@1 0.6524  hits@3 0.7520  hits@10 0.8528  (n=429,456, 3s)
+[test] MRR 0.6873  hits@1 0.6194  hits@3 0.7176  hits@10 0.8226  (n=598,543, 4s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739

@@ -1,0 +1,12 @@
+members (5): sparse_s5, analogy_sparse_s5, analogy_sparse_s5_t3, jaccard, jaccard_t3  norm: z
+global weights on full valid: top3 (0.8412)
+family weights fitted for 12 (family,dir) groups
+groups with local weights: 6/102; family weights: 92
+weights frozen -> runs/frozen_single_s5.npz
+frozen weights on full valid (in-sample): 0.8470
+
+================= COMMITTED TEST RESULT =================
+official Evaluator test MRR: 0.8460
+hits@1: 0.7870
+hits@3: 0.8876
+hits@10: 0.9522
