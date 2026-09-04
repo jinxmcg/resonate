@@ -381,7 +381,10 @@ filtered MRR over 500 type-matched negatives per direction.
 training, 429{,}456 validation and 598{,}543 test triples; MRR over 500
 uniform negatives per direction. Both via
 \texttt{ogb.linkproppred.Evaluator} (\texttt{ogb} 1.3.6); our loaders
-assert that the three splits are pairwise disjoint as loaded.
+assert that the three splits are pairwise disjoint as loaded. MRR ranks
+the true answer among the sampled alternatives of each query; a value of
+0.85 is a rank statistic on that task, not the fraction of arbitrary
+questions answered correctly.
 
 \paragraph{Pre-registration and test reads.}
 Every configuration's expected test range was written in the project log
@@ -801,8 +804,15 @@ relation operators is outside this report.
 \paragraph{Latency, flat in depth, and a compiled index.} Because the
 per-hop renormalisation is a scalar, a chain of relation operators
 collapses into one block-diagonal operator (2{,}304 bytes for the
-$2\times2$ models) and the readout is a real inner product---maximum
-inner-product search over a real $N\times2M$ table. On DRKG
+$2\times2$ models; a few small block products per question template,
+computed once) and the readout is a real inner product---maximum
+inner-product search over a real $N\times2M$ table. The constant cost
+below is therefore the cost \emph{after} the chain is compiled, and it
+is the model's readout alone: the oracle lookup that labels an answer
+is a separate graph query whose latency we have not timed, and the
+retrieval members of Section~\ref{sec:retrieval} need the holder lists
+of a query's candidates at query time; the complete verified-answer
+workflow has not been measured end to end. On DRKG
 \citep{ioannidis2020drkg} (97{,}238 nodes, 5.87M edges, a 28.1M-parameter
 model) batched multi-hop queries take 0.08--0.11~ms at every depth 1--6
 while exact graph traversal grows with fan-out, up to $45\times$ slower at
@@ -823,8 +833,11 @@ $\sqrt{R^2-\lVert x\rVert^2}$); a raw inner-product build lost hub rows
 
 \paragraph{Oracle validation and new edges.} On Hetionet
 \citep{himmelstein2017hetionet} and DRKG every top answer is checked
-against an exact graph oracle and labelled as a citable path or as a
-novel hypothesis; on the trained metapath libraries the top answer is
+against an exact graph oracle and labelled \emph{graph-supported} (a
+supporting path exists in the training graph, which can itself be
+incomplete, outdated or wrong) or \emph{unverified prediction}
+(unsupported by that graph; not a discovery)---\texttt{[ok]} and
+\texttt{[NOVEL]} in the tool's output; on the trained metapath libraries the top answer is
 oracle-verified 94.6--100\% of the time across all ten DRKG paths and
 99--100\% on all eight Hetionet paths. On \texttt{ogbl-wikikg2} the same
 readout with the same flags: for Douglas Adams, ``notable work'' (two
