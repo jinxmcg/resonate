@@ -1,4 +1,4 @@
-# ResonatE — one knowledge-graph model, two OGB leaderboards
+# ResonatE: Row-Sparse Knowledge-Graph Embeddings with Composable Relation Operators
 
 > **Preprint / draft (4 September 2026), not peer reviewed.** The results
 > below are self-reported; the OGB leaderboard submissions (five entries,
