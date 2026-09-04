@@ -256,7 +256,8 @@ bf16 table, `to_bf16.py`) and write to `ens_cache/`, `results/`, `logs/`.
   the model trained on them.
 
 Hardware: the sparse biokg ladder and all wikikg2 rows were trained on
-rented RTX 5090 (32 GB) instances (torch 2.14+cu130); the first biokg
+rented RTX 5090 (32 GB) instances (torch 2.14+cu130), for a total
+rented-GPU bill of $52.93 (vast.ai, everything on both boards); the first biokg
 ladder on RTX 5090 and GTX 1080 Ti (torch 2.6.0+cu124); verification on
 the 1080 Ti. `verify.py` shows checkpoints trained on one reproduce on
 the other to < 3·10⁻⁴.

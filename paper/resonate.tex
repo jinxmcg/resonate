@@ -444,7 +444,11 @@ read once.
 The sparse \texttt{ogbl-biokg} ladder and all \texttt{ogbl-wikikg2} rows
 were trained on rented RTX 5090 (32~GB) instances (torch 2.14, CUDA 13);
 the first \texttt{ogbl-biokg} ladder on RTX 5090 and GTX 1080 Ti (torch
-2.6.0, CUDA 12.4); verification on the 1080 Ti. Checkpoints trained on
+2.6.0, CUDA 12.4); verification on the 1080 Ti. The rented-GPU cost of everything in this report---the
+sparse \texttt{ogbl-biokg} ladder, every \texttt{ogbl-wikikg2} row,
+students, ensembles, probes and validation sweeps---was \$52.93 on
+vast.ai; the rest ran on a GTX 1080 Ti and a laptop GPU already owned.
+Checkpoints trained on
 one machine re-evaluate on the other to within $3\cdot10^{-4}$ MRR; the
 converted sparse-shell seed 0 re-evaluates through the dense code path to
 its logged test MRR exactly. The biokg analogy features need about 6~GB
