@@ -178,15 +178,24 @@ python scripts/summarize.py dense         # the first ladder from results/dense
 cd ../wikikg2 && python summarize_wiki.py # the wikikg2 table from results/
 ```
 
+Measured on a fresh rented RTX 5090 (24 CPUs) with nothing but this
+repository, the release and the OGB download: clone + `uv sync` 129 s,
+both `summarize` scripts 1 s, biokg download + split check 164 s, the
+20 biokg checkpoints fetched and checksummed 117 s, the ten row-A models
+re-scored on test 40 s (all ten reproduce their logged MRR exactly) —
+about 8 minutes end to end.
+
 `verify.py --ladder sparse` re-scores `checkpoints/sparse_s*.pt` (the
 sparse-shell row-A models re-saved in the dense format by
 `sparse_to_dense.py`, an exact reinterpretation of the real-view table)
 and checks each against its `results/sparse/h24_sparse_s*.log` to 3·10⁻⁴;
 `--ladder dense` does the same for the first ladder. To re-apply a frozen
-blend the member caches must exist (about an hour of CPU per seed for the
-analogy features on biokg); after that `freeze_test.py` /
-`learned_blend.py --freeze` with the same members reproduce the receipts
-exactly.
+blend the member caches must exist. On biokg that is single-threaded
+Python: the shared Jaccard pair takes 44 minutes per split (88 minutes
+once, reused by every seed and row; measured on the same fresh machine),
+and the analogy pair roughly 20 minutes per split per seed with a GPU
+for the cosines. After that `freeze_test.py` / `learned_blend.py
+--freeze` with the same members reproduce the receipts exactly.
 
 ## Reproduce from scratch
 
@@ -194,7 +203,7 @@ biokg, per seed (`biokg/scripts/`):
 
 ```
 scripts/run_campaign_sparse.sh   # row A: train_biokg_comp.py --shell sparse, --eval both (one test read), then sparse_to_dense.py    ~4.5 min/seed on a 5090
-scripts/run_retrieval.sh         # row B: ROW=sparse  -> cache_scores, analogy features, shared jaccard, held-out estimate, one frozen test read   ~40 min/seed, mostly CPU
+scripts/run_retrieval.sh         # row B: ROW=sparse  -> cache_scores, analogy features, shared jaccard, held-out estimate, one frozen test read   ~45 min/seed CPU + 88 min once for jaccard
 scripts/run_distill_sparse.sh    # row C: T=2 students from the ten row-A checkpoints (--eval valid), then the row-B steps with ROW=distT2      ~9 min/seed GPU + ~40 min/seed CPU
 ```
 
