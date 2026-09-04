@@ -1,0 +1,18 @@
+{
+ "members": [
+  "ens10",
+  "analogy_s0_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed",
+  "analogy_s0_t3_aug",
+  "holders_aug",
+  "cn_aa_aug",
+  "cn3_aa_aug"
+ ],
+ "valid_in_sample": 0.7997584347912715,
+ "test_mrr": 0.7429837584495544,
+ "local_groups": 138
+}

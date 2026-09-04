@@ -1,0 +1,11 @@
+norm: z
+members (5): dist_sparse_s5, analogy_dist_sparse_s5, analogy_dist_sparse_s5_t3, jaccard, jaccard_t3
+uniform (z-mean): fit-half 0.8415  held-out 0.8410
+model-only (z-mean): fit-half 0.8282  held-out 0.8268
+global best on fit half: soft20 (0.8467)
+family weights fitted for 12 (family,dir) groups
+
+per-relation recipe: fit-half 0.8525  HELD-OUT 0.8514
+held-out delta vs uniform: +0.0104
+groups with local weights: 6/102; family weights: 91
+local choices: (2, 0): family:global:soft20; (2, 1): family:global:soft20; (3, 0): family:global:soft20; (3, 1): family:global:soft20; (4, 0): family:global:soft20; (4, 1): family:global:soft20; (5, 0): family:global:soft20; (5, 1): family:global:soft20; (6, 0): family:global:soft20; (6, 1): family:global:soft20; (7, 0): family:global:soft20; (7, 1): family:global:soft20; (8, 0): family:global:soft20; (8, 1): family:global:soft20; (9, 0): family:global:soft20; (9, 1): family:global:soft20; (10, 0): family:global:soft20; (10, 1): family:global:soft20; (11, 0): family:global:soft20; (11, 1): family:global:soft20 ...

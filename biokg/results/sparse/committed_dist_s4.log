@@ -1,0 +1,12 @@
+members (5): dist_sparse_s4, analogy_dist_sparse_s4, analogy_dist_sparse_s4_t3, jaccard, jaccard_t3  norm: z
+global weights on full valid: soft20 (0.8457)
+family weights fitted for 12 (family,dir) groups
+groups with local weights: 4/102; family weights: 92
+weights frozen -> runs/frozen_dist_s4.npz
+frozen weights on full valid (in-sample): 0.8517
+
+================= COMMITTED TEST RESULT =================
+official Evaluator test MRR: 0.8506
+hits@1: 0.7939
+hits@3: 0.8913
+hits@10: 0.9525

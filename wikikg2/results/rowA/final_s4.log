@@ -1,0 +1,70 @@
+ogbl-wikikg2 loaded in 29s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 800000, 'batch': 2048, 'neg': 4096, 'k': 8, 'block_size': 64, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': [], 'distill_w': 1.0, 'distill_T': 1.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'rev_frac': 0.75, 'seed': 4, 'save': 'model_wiki_s4.pt', 'eval': 'both', 'eval_only': False, 'probe_every': 100000, 'probe_size': 20000, 'ckpt_every': 100000, 'log_every': 50000, 'device': 'cuda', 'data_root': 'data_ogb'}
+params: 328,842,753 (M=64, table 1.19 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+step 50000/800000  loss 4.534  2.9 ms/step  tau 3.70  (144s)
+step 100000/800000  loss 4.008  2.9 ms/step  tau 4.43  (289s)
+[probe@100000] MRR 0.6532  hits@1 0.5887  hits@3 0.6831  hits@10 0.7765  (n=20,000, 0s)
+step 150000/800000  loss 3.630  2.9 ms/step  tau 4.88  (434s)
+step 200000/800000  loss 3.450  3.3 ms/step  tau 5.32  (598s)
+[probe@200000] MRR 0.6731  hits@1 0.6071  hits@3 0.7043  hits@10 0.7987  (n=20,000, 0s)
+step 250000/800000  loss 3.368  3.4 ms/step  tau 5.74  (771s)
+step 300000/800000  loss 3.198  2.9 ms/step  tau 6.16  (916s)
+[probe@300000] MRR 0.6814  hits@1 0.6161  hits@3 0.7127  hits@10 0.8077  (n=20,000, 0s)
+step 350000/800000  loss 3.039  3.1 ms/step  tau 6.57  (1073s)
+step 400000/800000  loss 2.936  2.8 ms/step  tau 7.06  (1211s)
+[probe@400000] MRR 0.6914  hits@1 0.6259  hits@3 0.7228  hits@10 0.8194  (n=20,000, 0s)
+step 450000/800000  loss 2.755  3.0 ms/step  tau 7.61  (1365s)
+step 500000/800000  loss 2.672  2.9 ms/step  tau 8.22  (1510s)
+[probe@500000] MRR 0.6961  hits@1 0.6310  hits@3 0.7275  hits@10 0.8242  (n=20,000, 0s)
+step 550000/800000  loss 2.708  2.8 ms/step  tau 8.83  (1652s)
+step 600000/800000  loss 2.563  2.8 ms/step  tau 9.66  (1791s)
+[probe@600000] MRR 0.6988  hits@1 0.6340  hits@3 0.7295  hits@10 0.8264  (n=20,000, 0s)
+step 650000/800000  loss 2.512  3.2 ms/step  tau 10.60  (1950s)
+step 700000/800000  loss 2.399  2.8 ms/step  tau 11.74  (2091s)
+[probe@700000] MRR 0.7014  hits@1 0.6361  hits@3 0.7326  hits@10 0.8305  (n=20,000, 0s)
+step 750000/800000  loss 2.388  2.7 ms/step  tau 12.91  (2228s)
+step 800000/800000  loss 2.395  2.8 ms/step  tau 13.29  (2365s)
+[probe@800000] MRR 0.7028  hits@1 0.6377  hits@3 0.7341  hits@10 0.8315  (n=20,000, 0s)
+saved model_wiki_s4.pt  (train 2367s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7029  hits@1 0.6374  hits@3 0.7340  hits@10 0.8324  (n=429,456, 3s)
+[test] MRR 0.6677  hits@1 0.6016  hits@3 0.6963  hits@10 0.7986  (n=598,543, 3s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739
+model_wiki_s4: valid MRR(f16) 0.7027 -> ens_cache/model_wiki_s4.valid.npz
+dir 0: 1,311,380 (rel,target) keys, max holders 1510473, keys over cap 0.6%
+dir 1: 13,629,693 (rel,target) keys, max holders 902, keys over cap 0.0%
+analogy_s4: valid MRR alone 0.4926 (positive has holders on 55% of rows) -> ens_cache/analogy_s4.valid.npz
+analogy_s4_t3: valid MRR alone 0.4947 (positive has holders on 55% of rows) -> ens_cache/analogy_s4_t3.valid.npz
+holders: valid MRR alone 0.4250 (positive has holders on 55% of rows) -> ens_cache/holders.valid.npz
+done in 19s
+model_wiki_s4: test scores cached (MRR not computed) -> ens_cache/model_wiki_s4.test.npz
+dir 0: 1,311,380 (rel,target) keys, max holders 1510473, keys over cap 0.6%
+dir 1: 13,629,693 (rel,target) keys, max holders 902, keys over cap 0.0%
+analogy_s4: test features cached (MRR not computed; positive has holders on 51% of rows) -> ens_cache/analogy_s4.test.npz
+analogy_s4_t3: test features cached (MRR not computed; positive has holders on 51% of rows) -> ens_cache/analogy_s4_t3.test.npz
+holders: test features cached (MRR not computed; positive has holders on 51% of rows) -> ens_cache/holders.test.npz
+done in 20s
+members (8): model_wiki_s4, analogy_s4, analogy_s4_t3, holders, cn, cn_aa, linked, cn3_aa  min_rows=500
+  model_wiki_s4: valid MRR alone 0.7027  (tail 0.9509 head 0.4544)
+  analogy_s4: valid MRR alone 0.4924  (tail 0.8450 head 0.1398)
+  analogy_s4_t3: valid MRR alone 0.4944  (tail 0.8460 head 0.1429)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn: valid MRR alone 0.1396  (tail 0.0743 head 0.2050)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+global choice on fit rows: soft50 (0.7028)
+direction tail choice: soft50 (0.9526)
+direction head choice: soft20 (0.4651)
+groups with local weights: 96/726
+frozen weights on full valid (in-sample): 0.7417
+weights frozen -> results/frozen_s4.npz
+  fallback weights applied to 9,176 rows of unseen (relation, direction) groups
+
+================= COMMITTED TEST RESULT (wikikg2) ==============
+official Evaluator test MRR: 0.6822
+  by direction: tail 0.9411  head 0.4232
+hits@1: 0.6160
+hits@3: 0.7113
+hits@10: 0.8129

@@ -1,0 +1,34 @@
+ogbl-wikikg2 loaded in 29s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 800000, 'batch': 2048, 'neg': 4096, 'k': 8, 'block_size': 64, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': [], 'distill_w': 1.0, 'distill_T': 1.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'rev_frac': 0.75, 'seed': 3, 'save': 'model_wiki_s3.pt', 'eval': 'both', 'eval_only': False, 'probe_every': 100000, 'probe_size': 20000, 'ckpt_every': 100000, 'log_every': 50000, 'device': 'cuda', 'data_root': 'data_ogb'}
+params: 328,842,753 (M=64, table 1.19 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+step 50000/800000  loss 4.710  6.1 ms/step  tau 3.71  (307s)
+step 100000/800000  loss 4.022  6.1 ms/step  tau 4.37  (615s)
+[probe@100000] MRR 0.6537  hits@1 0.5883  hits@3 0.6827  hits@10 0.7792  (n=20,000, 0s)
+step 150000/800000  loss 3.601  4.2 ms/step  tau 4.89  (823s)
+step 200000/800000  loss 3.481  2.8 ms/step  tau 5.27  (963s)
+[probe@200000] MRR 0.6703  hits@1 0.6055  hits@3 0.7004  hits@10 0.7951  (n=20,000, 0s)
+step 250000/800000  loss 3.351  2.9 ms/step  tau 5.73  (1109s)
+step 300000/800000  loss 3.066  2.9 ms/step  tau 6.13  (1252s)
+[probe@300000] MRR 0.6825  hits@1 0.6160  hits@3 0.7138  hits@10 0.8121  (n=20,000, 0s)
+step 350000/800000  loss 3.189  2.8 ms/step  tau 6.58  (1395s)
+step 400000/800000  loss 3.018  2.7 ms/step  tau 7.03  (1531s)
+[probe@400000] MRR 0.6887  hits@1 0.6230  hits@3 0.7192  hits@10 0.8162  (n=20,000, 0s)
+step 450000/800000  loss 2.759  2.7 ms/step  tau 7.60  (1670s)
+step 500000/800000  loss 2.664  2.7 ms/step  tau 8.20  (1807s)
+[probe@500000] MRR 0.6951  hits@1 0.6303  hits@3 0.7254  hits@10 0.8218  (n=20,000, 0s)
+step 550000/800000  loss 2.498  2.7 ms/step  tau 8.88  (1946s)
+step 600000/800000  loss 2.560  2.8 ms/step  tau 9.63  (2086s)
+[probe@600000] MRR 0.6983  hits@1 0.6334  hits@3 0.7280  hits@10 0.8255  (n=20,000, 0s)
+step 650000/800000  loss 2.476  2.8 ms/step  tau 10.62  (2228s)
+step 700000/800000  loss 2.365  2.8 ms/step  tau 11.73  (2367s)
+[probe@700000] MRR 0.7014  hits@1 0.6359  hits@3 0.7319  hits@10 0.8306  (n=20,000, 0s)
+step 750000/800000  loss 2.386  2.7 ms/step  tau 12.91  (2505s)
+step 800000/800000  loss 2.423  2.8 ms/step  tau 13.28  (2644s)
+[probe@800000] MRR 0.7020  hits@1 0.6367  hits@3 0.7325  hits@10 0.8319  (n=20,000, 0s)
+saved model_wiki_s3.pt  (train 2645s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7031  hits@1 0.6373  hits@3 0.7338  hits@10 0.8332  (n=429,456, 2s)
+[test] MRR 0.6683  hits@1 0.6016  hits@3 0.6970  hits@10 0.8004  (n=598,543, 3s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739
+model_wiki_s3: valid MRR(f16) 0.7029 -> ens_cache/model_wiki_s3.valid.npz

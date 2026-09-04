@@ -1,0 +1,22 @@
+ogbl-wikikg2 loaded in 26s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 400000, 'batch': 2048, 'neg': 4096, 'k': 8, 'block_size': 64, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': ['teachers/model_wiki_s0.bf16.pt', 'teachers/model_wiki_s1.bf16.pt', 'teachers/model_wiki_s2.bf16.pt', 'teachers/model_wiki_s3.bf16.pt', 'teachers/model_wiki_s4.bf16.pt', 'teachers/model_wiki_s5.bf16.pt', 'teachers/model_wiki_s6.bf16.pt', 'teachers/model_wiki_s7.bf16.pt', 'teachers/model_wiki_s8.bf16.pt', 'teachers/model_wiki_s9.bf16.pt'], 'distill_w': 1.0, 'distill_T': 2.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'rev_frac': 0.75, 'seed': 1, 'save': 'model_dist_s1.pt', 'eval': 'both', 'eval_only': False, 'probe_every': 100000, 'probe_size': 20000, 'ckpt_every': 100000, 'log_every': 50000, 'device': 'cuda', 'data_root': 'data_ogb'}
+params: 328,842,753 (M=64, table 1.19 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+distill: 10 teachers (bf16 tables), w=1.0, T=2.0
+step 50000/400000  loss 6.444  7.6 ms/step  tau 4.58  (380s)
+step 100000/400000  loss 5.069  7.6 ms/step  tau 5.52  (759s)
+[probe@100000] MRR 0.7008  hits@1 0.6334  hits@3 0.7322  hits@10 0.8327  (n=20,000, 0s)
+step 150000/400000  loss 4.282  13.0 ms/step  tau 6.33  (1411s)
+step 200000/400000  loss 3.871  19.1 ms/step  tau 7.21  (2366s)
+[probe@200000] MRR 0.7133  hits@1 0.6465  hits@3 0.7456  hits@10 0.8443  (n=20,000, 0s)
+step 250000/400000  loss 3.199  19.0 ms/step  tau 8.09  (3319s)
+step 300000/400000  loss 2.972  19.9 ms/step  tau 8.79  (4312s)
+[probe@300000] MRR 0.7163  hits@1 0.6500  hits@3 0.7473  hits@10 0.8484  (n=20,000, 0s)
+step 350000/400000  loss 2.971  16.0 ms/step  tau 9.16  (5115s)
+step 400000/400000  loss 2.994  7.5 ms/step  tau 9.23  (5492s)
+[probe@400000] MRR 0.7182  hits@1 0.6523  hits@3 0.7497  hits@10 0.8495  (n=20,000, 0s)
+saved model_dist_s1.pt  (train 5494s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7186  hits@1 0.6521  hits@3 0.7507  hits@10 0.8509  (n=429,456, 2s)
+[test] MRR 0.6861  hits@1 0.6181  hits@3 0.7167  hits@10 0.8215  (n=598,543, 3s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739

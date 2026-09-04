@@ -1,0 +1,18 @@
+{
+ "members": [
+  "model_wiki_s0",
+  "analogy_s0_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed",
+  "analogy_s0_t3_aug",
+  "holders_aug",
+  "cn_aa_aug",
+  "cn3_aa_aug"
+ ],
+ "valid_in_sample": 0.77995334484121,
+ "test_mrr": 0.7219849228858948,
+ "local_groups": 138
+}

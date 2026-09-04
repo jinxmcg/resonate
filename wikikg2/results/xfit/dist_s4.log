@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/root/wiki/learned_blend.py", line 175, in <module>
+    main()
+  File "/root/wiki/learned_blend.py", line 63, in main
+    Z, rel = load_split(args.members, "valid", args.cache_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/wiki/blend_wiki.py", line 38, in load_split
+    d = np.load(os.path.join(cache_dir, f"{tag}.{split}.npz"))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/wiki/.venv/lib/python3.12/site-packages/numpy/lib/_npyio_impl.py", line 454, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'ens_cache/model_dist_s4.valid.npz'

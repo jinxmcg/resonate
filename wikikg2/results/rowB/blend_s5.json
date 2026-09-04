@@ -1,0 +1,15 @@
+{
+  "members": [
+    "model_wiki_s5",
+    "analogy_s5",
+    "analogy_s5_t3",
+    "holders",
+    "cn",
+    "cn_aa",
+    "linked",
+    "cn3_aa"
+  ],
+  "valid_in_sample": 0.7406242460021972,
+  "test_mrr": 0.6805203557014465,
+  "global": "soft50"
+}

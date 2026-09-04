@@ -1,0 +1,12 @@
+{
+  "members": [
+    "dist_sparse_s4",
+    "analogy_dist_sparse_s4",
+    "analogy_dist_sparse_s4_t3",
+    "jaccard",
+    "jaccard_t3"
+  ],
+  "test_mrr": 0.8506096005439758,
+  "global": "soft20",
+  "local_groups": 4
+}

@@ -1,0 +1,21 @@
+distill: 10 teachers (bf16 tables), w=1.0, T=2.0
+distill: 10 teachers (bf16 tables), w=1.0, T=2.0
+[valid] MRR 0.7190  hits@1 0.6523  hits@3 0.7511  hits@10 0.8516  (n=429,456, 2s)
+[test] MRR 0.6856  hits@1 0.6178  hits@3 0.7159  hits@10 0.8198  (n=598,543, 3s)
+model_dist_s0: valid MRR(f16) 0.7188 -> ens_cache/model_dist_s0.valid.npz
+analogy_d0: valid MRR alone 0.4934 (positive has holders on 55% of rows) -> ens_cache/analogy_d0.valid.npz
+analogy_d0_t3: valid MRR alone 0.4951 (positive has holders on 55% of rows) -> ens_cache/analogy_d0_t3.valid.npz
+holders: valid MRR alone 0.4250 (positive has holders on 55% of rows) -> ens_cache/holders.valid.npz
+analogy_d0_aug: valid MRR alone 0.4947 (positive has holders on 58% of rows) -> ens_cache/analogy_d0_aug.valid.npz
+analogy_d0_t3_aug: valid MRR alone 0.4964 (positive has holders on 58% of rows) -> ens_cache/analogy_d0_t3_aug.valid.npz
+holders_aug: valid MRR alone 0.4250 (positive has holders on 58% of rows) -> ens_cache/holders_aug.valid.npz
+model_dist_s0: test scores cached (MRR not computed) -> ens_cache/model_dist_s0.test.npz
+analogy_d0: test features cached (MRR not computed; positive has holders on 51% of rows) -> ens_cache/analogy_d0.test.npz
+analogy_d0_t3: test features cached (MRR not computed; positive has holders on 51% of rows) -> ens_cache/analogy_d0_t3.test.npz
+holders: test features cached (MRR not computed; positive has holders on 51% of rows) -> ens_cache/holders.test.npz
+analogy_d0_aug: test features cached (MRR not computed; positive has holders on 53% of rows) -> ens_cache/analogy_d0_aug.test.npz
+analogy_d0_t3_aug: test features cached (MRR not computed; positive has holders on 53% of rows) -> ens_cache/analogy_d0_t3_aug.test.npz
+holders_aug: test features cached (MRR not computed; positive has holders on 53% of rows) -> ens_cache/holders_aug.test.npz
+learned freeze: 138 local groups; in-sample valid 0.7878
+official Evaluator test MRR: 0.7322
+  by direction: tail 0.9567  head 0.5077
