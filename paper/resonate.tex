@@ -809,7 +809,8 @@ computed once) and the readout is a real inner product---maximum
 inner-product search over a real $N\times2M$ table. The constant cost
 below is therefore the cost \emph{after} the chain is compiled, and it
 is the model's readout alone: the oracle lookup that labels an answer
-is a separate graph query whose latency we have not timed, and the
+is a separate graph query, timed only in the Hetionet tool (0.4--0.8~ms
+per query on its 47k-node graph) and not on the larger graphs, and the
 retrieval members of Section~\ref{sec:retrieval} need the holder lists
 of a query's candidates at query time; the complete verified-answer
 workflow has not been measured end to end. On DRKG
