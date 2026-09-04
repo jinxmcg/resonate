@@ -832,9 +832,10 @@ self-augmentation of Section~\ref{sec:retrieval} is the same mechanism
 run at scale with a validation-calibrated threshold: 4.18M proposed
 edges whose per-relation precision on held-out validation rows is
 $\ge0.7$, and which raised every downstream row. Fine-tuning 496 held-out
-\emph{treats} edges into a trained DRKG model took 3.7 GPU-minutes,
-absorbed all of them to rank 1 (MRR $0.147\to1.000$) with a worst
-metapath regression of $-0.008$.
+\emph{treats} edges into a trained DRKG model took 1{,}500 steps, 223~s
+of wall-clock (3.7 minutes) on a single laptop GPU, absorbed all of them
+to rank 1 (MRR $0.147\to1.000$) with a worst metapath regression of
+$-0.008$.
 
 \paragraph{Training cost and memory.} A training step touches the rows in
 its batch whatever $N$ is, and the optimiser keeps one float per row.
