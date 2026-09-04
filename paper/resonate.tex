@@ -840,9 +840,11 @@ metapath regression of $-0.008$.
 its batch whatever $N$ is, and the optimiser keeps one float per row.
 \texttt{ogbl-biokg}: 50{,}000 steps in 231~s on one RTX 5090 (18 minutes
 on a GTX 1080 Ti with the dense shell); a student with ten teachers in
-506~s. \texttt{ogbl-wikikg2}: the 329M model trains 800{,}000 steps at
+506~s; the table is 108~MB in fp32 and 54~MB as the fp16 serving table
+(fp16 serving was validated on the biomedical graphs above; bf16
+training was not run on this graph). \texttt{ogbl-wikikg2}: the 329M model trains 800{,}000 steps at
 2.7~ms per step, 36.5 minutes, from a 1.19~GB fp32 table (0.6~GB in
-bf16); a student with ten bf16 teachers resident, 400{,}000 steps at
+bf16, measured at no cost); a student with ten bf16 teachers resident, 400{,}000 steps at
 7.6~ms, 50 minutes; the $k=12$ table (2.68~GB) trained at 3.0~ms per step
 in 15.7~GB of GPU memory, against 64.1~ms for dense Adam. Row-wise Adagrad
 costs nothing measurable on the biomedical graphs either (Hetionet
