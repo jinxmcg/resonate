@@ -30,8 +30,8 @@ being filed from the receipts in the repository.
 
 \begin{abstract}
 We report one knowledge-graph embedding model, one training shell and
-one recipe on two Open Graph Benchmark link-prediction tasks of very
-different shape, with two capacity dials set on validation per graph.
+one recipe on two link-prediction tasks of Stanford's Open Graph
+Benchmark (OGB) of very different shape, with two capacity dials set on validation per graph.
 Entities are unit-norm vectors of $M=k^2$ complex coefficients stored
 through their real view with row-sparse gradients and row-wise Adagrad;
 each relation and direction is a free block-diagonal operator, unitary at
@@ -68,8 +68,8 @@ temperature and block-size curves that fix the dials.
 \section{Introduction}
 
 Knowledge-graph embedding models score a triple $(h,r,t)$ by a function
-of learned vectors. On the two OGB link-prediction tasks studied here
-\citep{hu2020ogb}, the boards are shaped by different things:
+of learned vectors. On the two link-prediction tasks of Stanford's Open
+Graph Benchmark studied here \citep{hu2020ogb}, the boards are shaped by different things:
 \texttt{ogbl-biokg} is a dense, typed biomedical graph with 51 relations
 where the classic bilinear and rotational families (DistMult, ComplEx,
 RotatE) sit near 0.80--0.81 at roughly 188M parameters and the leaders

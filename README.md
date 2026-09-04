@@ -6,8 +6,9 @@
 > Project page: [resonate.page](https://resonate.page). Paper:
 > [`paper/resonate.pdf`](paper/resonate.pdf).
 
-One architecture and one training shell, run on two benchmarks of very
-different shape with two capacity dials set on validation per graph:
+One architecture and one training shell, run on two link-prediction
+benchmarks of Stanford's Open Graph Benchmark (OGB) of very different
+shape, with two capacity dials set on validation per graph:
 
 - **[ogbl-biokg](https://ogb.stanford.edu/docs/linkprop/#ogbl-biokg)** —
   93,773 typed biomedical entities, 51 relations, 4.76M training triples,
