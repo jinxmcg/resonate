@@ -146,6 +146,18 @@ validation: by selection from a fixed list on biokg (`ensemble_weights.py`,
 logistic regression on wikikg2 (`learned_blend.py`, +0.026 held-out,
 because wikikg2's members conflict and need negative weights).
 
+## The claim checker, measured (`wikikg2/claim_check.py`)
+
+Claims as triples, on the wikikg2 test split (598,543 held-out facts, all
+absent from the training graph, so the oracle labels every one
+"unverified"). The C-F student's score separates a true unseen fact from
+a corrupted claim with a random entity with AUROC 0.982 (tail-side claims
+0.997, head-side 0.952); "supported if it ranks first of 501" accepts
+62% of true facts and 0.1% of random false ones. Against the most
+plausible false alternative the separation is weak (AUROC 0.709; 0.347
+on head-side claims). Receipts in `wikikg2/results/h28/`. Text is not
+handled: claims must already be graph triples.
+
 ## Distillation
 
 A fresh model of the same recipe is trained with an added

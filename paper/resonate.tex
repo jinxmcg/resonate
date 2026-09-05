@@ -856,6 +856,24 @@ of wall-clock (3.7 minutes) on a single laptop GPU, absorbed all of them
 to rank 1 (MRR $0.147\to1.000$) with a worst metapath regression of
 $-0.008$.
 
+\paragraph{A claim checker, measured.} The reviewer's question of what
+the labels are worth was answered with a pre-registered measurement on
+the \texttt{ogbl-wikikg2} test split, whose 598{,}543 facts are all
+absent from the training graph, so the oracle calls every one of them
+unverified and only the model's score can separate them from false
+claims. Against a corrupted claim with a random entity, the distilled
+single model's score separates true from false with AUROC 0.982 (0.997
+for tail-side claims, 0.952 for head-side); calling a claim supported
+when it ranks first among the 501 candidates accepts 62\% of true unseen
+facts and 0.1\% of random false ones (rank $\le10$: 82\% and 1.8\%).
+Against the most plausible false alternative, the highest-scoring of the
+500, the separation is weak (AUROC 0.709; 0.933 tail-side, 0.347
+head-side): the checker rejects random errors reliably and cannot
+adjudicate near-miss candidates, and the head direction, where the
+answer is a rare entity, is its weak side. The claims must already be
+graph triples; text has not been run through it.
+(\texttt{wikikg2/claim\_check.py}; the row-A teacher gives 0.977 / 0.686.)
+
 \paragraph{Training cost and memory.} A training step touches the rows in
 its batch whatever $N$ is, and the optimiser keeps one float per row.
 \texttt{ogbl-biokg}: 50{,}000 steps in 231~s on one RTX 5090 (18 minutes
