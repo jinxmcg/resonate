@@ -304,6 +304,11 @@ bf16 table, `to_bf16.py`) and write to `ens_cache/`, `results/`, `logs/`.
 - Row C's ten students share the same ten teachers, so its std reflects
   student-seed variance only. The leave-one-out ensembles share nine of
   ten members pairwise, so their std reflects membership sensitivity only.
+- Rule adopted 2026-09-05, after the compliance review: the test split's
+  contents are loaded only by the committed evaluation call, never for
+  diagnostics or reweighting, and every pre-registration names the splits
+  it reads. The wikikg2 relation-mix analysis that preceded this rule is
+  disclosed under Compliance above.
 - No external data. All members use only the training triples; the
   self-augmented members use the training triples plus edges proposed by
   the model trained on them.
