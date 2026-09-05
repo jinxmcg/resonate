@@ -455,9 +455,10 @@ ensembles, probes and validation sweeps---came to \$52.93 on vast.ai at
 Checkpoints trained on
 one machine re-evaluate on the other to within $3\cdot10^{-4}$ MRR; the
 converted sparse-shell seed 0 re-evaluates through the dense code path to
-its logged test MRR exactly. The biokg analogy features need about 6~GB
-of RAM and 25--40 minutes per split per seed on one CPU core; the wikikg2
-members are GPU-batched and take seconds to minutes per split.
+its logged test MRR exactly. The biokg members are single-threaded Python: the shared Jaccard pair
+takes 44 minutes per split once, the analogy pair about 20 minutes per
+split per seed with a GPU for the cosines and about 6~GB of RAM; the
+wikikg2 members are GPU-batched and take seconds to minutes per split.
 
 \section{Results}
 
@@ -932,7 +933,13 @@ re-evaluates the released checkpoints of either ladder against their
 logs. \texttt{wikikg2/} contains the trainer, the member scripts, the
 learned combiner, the campaign scripts as run across three rented
 machines with the machine-specific paths removed, the receipts of every
-row and the cross-fitted validation logs, and \texttt{summarize\_wiki.py}.
+row and the cross-fitted validation logs, and \texttt{summarize\_wiki.py}. A \texttt{VALIDATE.md} lists the commands a
+reviewer runs without retraining and what they printed on a fresh rented
+machine holding only the repository, the release and the OGB download:
+the statistics recompute from the receipts, all ten released biokg row-A
+models re-score to their logged test MRR, row B seed 0 rebuilt from its
+checkpoint reproduces the shipped receipt to the last digit, and the
+released wikikg2 teacher and student re-score to their logs.
 The releases carry the twenty submitted \texttt{ogbl-biokg} checkpoints
 (row-A models re-saved in the dense format by an exact reinterpretation
 of the real-view table, and the $T=2$ students), the first ladder's

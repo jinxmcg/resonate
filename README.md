@@ -179,6 +179,17 @@ Datasets are downloaded by `ogb` into `<folder>/data_ogb/` on first use
 `PYTHONPATH` to the repository root for the shared modules; run them from
 their folder or via `scripts/`.
 
+## Validation
+
+Everything below has been run on a fresh rented machine holding nothing but
+this repository, its release and the OGB download. [`VALIDATE.md`](VALIDATE.md)
+lists the exact commands, what they printed, and what they cost: the
+statistics recompute from the receipts in a second, the ten released biokg
+row-A models re-score to their logged test MRR (all ten, within 4e-5), row B
+seed 0 rebuilt from its checkpoint reproduces the shipped receipt to the last
+digit (2 h 22 min of single-threaded CPU), and the released wikikg2 teacher
+and student re-score to their logs. No retraining is involved.
+
 ## Verify without retraining
 
 ```
