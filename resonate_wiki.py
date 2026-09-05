@@ -27,13 +27,15 @@ from resonate import ResonatE, cnorm
 class SparseTableResonatE(ResonatE):
     def __init__(self, n_entities, n_relations, k=12, block_size=4,
                  sparse_grad=True, device=None, ent_bias=False,
-                 rel_gain=False, table_dtype=torch.float32):
+                 rel_gain=False, table_dtype=torch.float32,
+                 low_rank=0, low_rank_local=False):
         # build the parent with a 1-row table (the parent allocates
         # its table on CPU; at 2.5M x 144 complex that is a 3 GB
         # detour), then replace it with the real-view table on device
         super().__init__(n_entities=1, n_relations=n_relations, k=k,
                          block=True, block_size=block_size,
-                         ent_bias=False, rel_gain=rel_gain)
+                         ent_bias=False, rel_gain=rel_gain,
+                         low_rank=low_rank, low_rank_local=low_rank_local)
         self.n_entities = n_entities
         self.sparse_grad = sparse_grad
         del self.E

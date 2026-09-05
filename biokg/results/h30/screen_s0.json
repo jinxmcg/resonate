@@ -1,0 +1,91 @@
+{
+  "experiment": "H30",
+  "date": "2026-09-05",
+  "status": "not_promoted",
+  "protocol": "Training-only per-query positive mask; full official validation, both directions; test not loaded",
+  "promotion_rule": "filtered validation MRR must exceed baseline by at least 0.003 to warrant a separate confirmation",
+  "validation_mrr_delta": -0.11133256567370264,
+  "preregistration_sha256_before_results": "ffa806a9d702ce5f038d5c085945e985f3540dcaec1c87f501cdd308a2897306",
+  "code_sha256": {
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "resonate_wiki.py": "ac8ce8763f6f009634d7617755e2bbcc885e96387d54fa5a0af79473c83c6697",
+    "biokg/train_biokg_comp.py": "be3265e50df7640eec75b304de56dffaf7fe793ff90261c455a0bc17a6ca5cd1",
+    "biokg/train_positive_filter.py": "c0d21b5b2973dbdfb06e0eeb8d4ffc551b0b43f43e167b0a9b702a5b4a5eb492",
+    "biokg/test_train_positive_filter.py": "c1c3d134f51e410f748f4bde63ebb5aeedacc583a2fe59a94445123566bca055",
+    "biokg/scripts/run_h30.sh": "bdeef449da15dce429ac4d7d78eaa5974885d79c5ee63e3c091c7467559d45fc"
+  },
+  "recipe": {
+    "seed": 0,
+    "steps": 12500,
+    "k": 12,
+    "block_size": 4,
+    "shell": "sparse",
+    "table_dtype": "fp32",
+    "table_lr": 0.3,
+    "lr": 0.005,
+    "scheduler": "cosine",
+    "batch": 2048,
+    "negatives": 4096,
+    "trajectory_weight": 0.1,
+    "distillation": false,
+    "low_rank": 0,
+    "negative_resampling": false
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce GTX 1080 Ti",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.5.2",
+    "ogb": "1.3.6"
+  },
+  "runs": [
+    {
+      "arm": "baseline",
+      "parameters": 27124129,
+      "validation_mrr": 0.7825889280742061,
+      "validation_hits1": 0.7044773645371609,
+      "validation_hits3": 0.8357440172881647,
+      "validation_hits10": 0.9253005169259482,
+      "training_seconds": 168,
+      "checkpoint_sha256": "10746c92dc099c7a9fc840bcd60aec6fe62337f9cd780e9a1696592cb682559b",
+      "log": "baseline_s0.log",
+      "diagnostic": "../error_analysis/h29_baseline_s0/summary.json",
+      "diagnostic_reuse_reason": "All H30 baseline model tensors verified bitwise equal to H29 baseline"
+    },
+    {
+      "arm": "filtered",
+      "parameters": 27124129,
+      "validation_mrr": 0.6712563624005035,
+      "validation_hits1": 0.569622312537603,
+      "validation_hits3": 0.7348237417580393,
+      "validation_hits10": 0.8653014992080351,
+      "training_seconds": 219,
+      "checkpoint_sha256": "f42bae11a64d708eb2761e9bf7974b2a0b4c8fa911ededc801f68c3afef70509",
+      "log": "filtered_s0.log",
+      "diagnostic": "../error_analysis/h30_filtered_s0/summary.json"
+    }
+  ],
+  "filter": {
+    "train_sha256": "ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b",
+    "index_bytes": 731308118,
+    "index_build_seconds_rounded": 2.0,
+    "masked_entries": 3547038871,
+    "sampled_entries": 104857600000,
+    "masked_fraction": 0.03382719870567322
+  },
+  "verification": {
+    "unit_integration_tests_passed": 19,
+    "masking_tests_in_gpu_environment_passed": 8,
+    "independent_actual_graph_mask_entries_checked": 1253376,
+    "directed_relations_checked": 102,
+    "model_state_keys_match": true,
+    "all_model_tensors_finite": true,
+    "argument_differences": ["save", "filter_train_positives"],
+    "baseline_matches_h29_bitwise": true
+  },
+  "limitations": [
+    "One seed and 12500 steps before distillation; this is not the complete submission pipeline.",
+    "Full masking changes the number of retained candidates; no count-matched resampling was tested.",
+    "Lower masked training loss and increased score scale do not establish the cause of the validation regression.",
+    "No additional hyperparameter sweep, seed search, full-training confirmation, or submission was performed."
+  ]
+}

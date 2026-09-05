@@ -1,0 +1,116 @@
+{
+  "experiment": "H31",
+  "date": "2026-09-05",
+  "status": "hard_mining_not_promoted",
+  "protocol": "Training-only auxiliary candidate selection; original random CE unfiltered; official validation only; test not loaded",
+  "promotion_rule": "topk must exceed both baseline and random control by at least 0.003 validation MRR",
+  "deltas": {
+    "topk_vs_baseline": -0.00196710715497439,
+    "topk_vs_random": -0.005406386183807288,
+    "random_vs_baseline": 0.003439279028832898
+  },
+  "preregistration_sha256_before_results": "4f63cbb22541dc7fc39b922c3375d96ef4bb38bc9dfdc07e0bc577d9609577d3",
+  "code_sha256": {
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "resonate_wiki.py": "ac8ce8763f6f009634d7617755e2bbcc885e96387d54fa5a0af79473c83c6697",
+    "biokg/train_biokg_comp.py": "d905a515faefd669bfdee12c1075a86b902a0fad43b392b5d2dad7d491adbd65",
+    "biokg/train_positive_filter.py": "c0d21b5b2973dbdfb06e0eeb8d4ffc551b0b43f43e167b0a9b702a5b4a5eb492",
+    "biokg/hard_negative.py": "5f5f75cafab4f17898ae75b88d2e001d430e25ef378f1c0686ca57f7f7c5f82e",
+    "biokg/test_hard_negative.py": "f2094e0d141679dc52e5ad3dd8e88ab01b0f0e11e8170532d63abff64ae5efdd",
+    "biokg/scripts/run_h31.sh": "24fa0f0e297528fee99335c5cc50d44db5347119110849367afc8d7dc244e8a9"
+  },
+  "recipe": {
+    "seed": 0,
+    "steps": 12500,
+    "k": 12,
+    "block_size": 4,
+    "shell": "sparse",
+    "table_dtype": "fp32",
+    "table_lr": 0.3,
+    "lr": 0.005,
+    "scheduler": "cosine",
+    "batch": 2048,
+    "candidate_pool": 4096,
+    "auxiliary_count": 64,
+    "auxiliary_weight_max": 0.1,
+    "warmup_steps": 2500,
+    "ramp_steps": 1250,
+    "trajectory_weight": 0.1,
+    "filter_train_positives": false,
+    "distillation": false,
+    "low_rank": 0,
+    "auxiliary_random_rng_seed": 310031,
+    "auxiliary_eligibility": "Distinct candidate IDs excluding known TRAIN positives; base random CE unchanged"
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce GTX 1080 Ti",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.5.2",
+    "ogb": "1.3.6"
+  },
+  "runs": [
+    {
+      "arm": "baseline",
+      "parameters": 27124129,
+      "validation_mrr": 0.7825889280742061,
+      "validation_hits1": 0.7044773645371609,
+      "validation_hits3": 0.8357440172881647,
+      "validation_hits10": 0.9253005169259482,
+      "training_seconds": 165,
+      "checkpoint_sha256": "bbadcca681fa7a37dfb054a9d02fdf3625c44af0d39583a249aad3a02cdbd512",
+      "log": "baseline_s0.log",
+      "diagnostic": "../error_analysis/h29_baseline_s0/summary.json",
+      "diagnostic_reuse_reason": "All model tensors verified bitwise equal to H29 baseline"
+    },
+    {
+      "arm": "random",
+      "parameters": 27124129,
+      "validation_mrr": 0.786028207103039,
+      "validation_hits1": 0.7088730768758518,
+      "validation_hits3": 0.8387768132313397,
+      "validation_hits10": 0.9267094777942856,
+      "training_seconds": 227,
+      "index_build_seconds_rounded": 2.1,
+      "selected_count": 1310720000,
+      "candidate_slots": 1310720000,
+      "checkpoint_sha256": "40e23bb0ff22668acbfba804a0cf0582055ac5f427767cf1de25309d25391958",
+      "log": "random_s0.log",
+      "diagnostic": "../error_analysis/h31_random_s0/summary.json"
+    },
+    {
+      "arm": "topk",
+      "parameters": 27124129,
+      "validation_mrr": 0.7806218209192317,
+      "validation_hits1": 0.7036086588165956,
+      "validation_hits3": 0.8324410937711038,
+      "validation_hits10": 0.9221572142480017,
+      "training_seconds": 228,
+      "index_build_seconds_rounded": 1.9,
+      "selected_count": 1310720000,
+      "candidate_slots": 1310720000,
+      "checkpoint_sha256": "4dae0b5fb9dfda0a5a67148efd37b7df8a934071876ee0984e21690aeae03674",
+      "log": "topk_s0.log",
+      "diagnostic": "../error_analysis/h31_topk_s0/summary.json"
+    }
+  ],
+  "training_index": {
+    "bytes_per_auxiliary_run": 731308118,
+    "train_sha256": "ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b"
+  },
+  "verification": {
+    "unit_integration_tests_passed": 26,
+    "mining_tests_in_gpu_environment_passed": 7,
+    "full_positive_masking_disabled_in_all_arms": true,
+    "model_state_keys_match": true,
+    "all_model_tensors_finite": true,
+    "baseline_matches_h29_bitwise": true,
+    "argument_differences": ["save", "mining_mode"]
+  },
+  "limitations": [
+    "One seed and 12500 steps, before distillation/retrieval.",
+    "Fixed-step comparison, not equal wall-clock budget; auxiliary training costs about 38 percent more time.",
+    "The random-control gain is preliminary and does not establish a hard-mining benefit.",
+    "Incomplete-graph unknown positives can enter either auxiliary pool despite train-positive exclusion.",
+    "No further sweep, seed selection, full-training campaign, or submission was performed."
+  ]
+}

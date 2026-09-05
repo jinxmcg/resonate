@@ -26,6 +26,9 @@ from resonate import ResonatE, cnorm
 from resonate_comp import CompTableResonatE, build_neighbours
 from resonate_wiki import SparseTableResonatE, clip_grad_norm_
 from rowadagrad import RowAdagrad
+from biokg.train_positive_filter import TrainPositiveFilter, mask_negative_logits
+from biokg.hard_negative import mining_weight, select_negatives, mixed_negative_ce
+from biokg.direction_sampling import train_fanout_policy
 
 torch.set_num_threads(4)
 
@@ -43,7 +46,7 @@ def _patch_torch_load():
     torch.load = load_wo
 
 
-def load(root="data_ogb"):
+def load(root="data_ogb", include_test=True):
     _patch_torch_load()
     from ogb.linkproppred import LinkPropPredDataset
     d = LinkPropPredDataset("ogbl-biokg", root=root)
@@ -54,7 +57,13 @@ def load(root="data_ogb"):
     for t in types:
         offset[t] = off
         off += int(num_nodes[t])
-    split = d.get_edge_split()
+    if include_test:
+        split = d.get_edge_split()
+    else:
+        split_dir = os.path.join(d.root, "split", d.meta_info["split"])
+        split = {name: torch.load(os.path.join(split_dir, name + ".pt"),
+                                  weights_only=False)
+                 for name in ("train", "valid")}
     return split, offset, off, types, num_nodes
 
 
@@ -66,7 +75,9 @@ def load_teacher(path, n_ent, n_rel, dev):
                   block=True, block_size=ca.get("block_size", 2),
                   tied_reverse=ca.get("tied_reverse", False),
                   ent_bias=ca.get("ent_bias", False),
-                  rel_gain=ca.get("rel_gain", False)).to(dev)
+                  rel_gain=ca.get("rel_gain", False),
+                  low_rank=ca.get("low_rank", 0),
+                  low_rank_local=ca.get("low_rank_local", False)).to(dev)
     tm.load_state_dict(ck["model"])
     tm.eval()
     for prm in tm.parameters():
@@ -183,9 +194,24 @@ def main():
     p.add_argument("--steps", type=int, default=25000)
     p.add_argument("--batch", type=int, default=2048)
     p.add_argument("--neg", type=int, default=4096)
+    p.add_argument("--filter-train-positives", action="store_true",
+                   help="H30: mask known TRAIN positives per query in sampled CE; "
+                        "plain single-model training only, never changes evaluation")
+    p.add_argument("--mining-mode", choices=["none", "random", "topk"], default="none",
+                   help="H31: auxiliary random-control or hard-negative CE; original CE retained")
+    p.add_argument("--mining-count", type=int, default=64)
+    p.add_argument("--mining-weight", type=float, default=0.1)
+    p.add_argument("--mining-warmup", type=int, default=2500)
+    p.add_argument("--mining-ramp", type=int, default=1250)
+    p.add_argument("--direction-sampling", choices=["uniform", "train-fanout"], default="uniform",
+                   help="H32: fixed TRAIN-only head/tail skew per relation, capped at 2:1")
     p.add_argument("--k", type=int, default=12)
     p.add_argument("--block-size", type=int, default=2,
                    help="relation block size b (bxb blocks; H8a)")
+    p.add_argument("--low-rank", type=int, default=0,
+                   help="rank of the additive U V* relation correction (H29)")
+    p.add_argument("--low-rank-local", action="store_true",
+                   help="equal-parameter control: correction stays within each block")
     p.add_argument("--tied-reverse", action="store_true",
                    help="reverse ops = adjoint of forward blocks "
                         "(half the relation params; H9c)")
@@ -258,9 +284,26 @@ def main():
     args = p.parse_args()
     if args.quick:
         args.steps = 2000
+    if args.low_rank < 0 or (args.low_rank_local and not args.low_rank):
+        p.error("--low-rank must be nonnegative; --low-rank-local requires a positive rank")
+    if args.low_rank and (args.comp or args.compose or args.tied_reverse
+                          or args.peers > 1 or args.aux_rp or args.n3):
+        p.error("low-rank pilot does not support comp/compose/tied-reverse/peers/aux-rp/n3")
+    if args.filter_train_positives and (args.comp or args.compose or args.peers > 1 or args.distill):
+        p.error("training-positive mask pilot does not support comp/compose/peers/distillation")
+    if args.mining_mode != "none":
+        if args.filter_train_positives or args.comp or args.compose or args.peers > 1 or args.distill:
+            p.error("mining pilot does not support full masking/comp/compose/peers/distillation")
+        if not (1 <= args.mining_count <= args.neg and 0 < args.mining_weight <= 1
+                and args.mining_warmup >= 0 and args.mining_ramp >= 1):
+            p.error("invalid mining count/weight/warmup/ramp")
+    if args.direction_sampling != "uniform" and (args.filter_train_positives or args.comp
+            or args.compose or args.peers > 1 or args.distill or args.aux_rp or args.n3):
+        p.error("direction-sampling pilot supports plain single-model CE, optionally with mining")
 
     t0 = time.time()
-    split, offset, n_ent, types, num_nodes = load(args.data_root)
+    split, offset, n_ent, types, num_nodes = load(
+        args.data_root, include_test=args.eval in ("test", "both"))
     tr = split["train"]
     h, r, t = globalize(tr, offset)
     n_rel_base = int(r.max()) + 1
@@ -281,6 +324,24 @@ def main():
         tt, ht = tr["tail_type"][i0], tr["head_type"][i0]
         tail_range[ri] = (offset[tt], offset[tt] + int(num_nodes[tt]))
         head_range[ri] = (offset[ht], offset[ht] + int(num_nodes[ht]))
+
+    direction_policy = None
+    direction_counts = None
+    if args.direction_sampling != "uniform" and not args.eval_only:
+        direction_policy = train_fanout_policy(h, r, t, n_ent, n_rel_base)
+        direction_counts = np.zeros((n_rel_base, 2), dtype=np.int64)  # tail, head
+        print(f"direction sampling: train-fanout, capped at 2:1; "
+              f"train SHA256 {direction_policy['train_sha256']}", flush=True)
+        for row in direction_policy["relations"]:
+            if row["p_tail"] != .5:
+                print(f"  relation {row['relation']}: tail {row['p_tail']:.4f}, "
+                      f"head {row['p_head']:.4f}; train fanout "
+                      f"tail {row['tail_fanout']:.2f}, head {row['head_fanout']:.2f}", flush=True)
+
+    def direction_receipt():
+        if direction_policy is None:
+            return {"mode": "uniform", "train_sha256": None}
+        return {**direction_policy, "batch_counts_tail_head": direction_counts.tolist()}
 
     compose_data = None
     if args.compose > 0:
@@ -314,6 +375,30 @@ def main():
 
     rng = np.random.default_rng(args.seed)
     dev = torch.device(args.device)
+    positive_filter = None
+    if args.filter_train_positives and not args.eval_only:
+        filter_start = time.time()
+        positive_filter = TrainPositiveFilter(h, r, t, n_ent, n_rel_base, dev)
+        print(f"training-only positive mask: {positive_filter.nbytes / 2**20:.1f} MiB, "
+              f"built in {time.time() - filter_start:.1f}s; "
+              f"train SHA256 {positive_filter.train_sha256}", flush=True)
+    masked_count = torch.zeros((), dtype=torch.int64, device=dev) if positive_filter else None
+    sampled_count = 0
+    mining_filter = None
+    mining_generator = None
+    mining_selected = None
+    mining_slots = 0
+    if args.mining_mode != "none" and not args.eval_only:
+        filter_start = time.time()
+        mining_filter = TrainPositiveFilter(h, r, t, n_ent, n_rel_base, dev)
+        mining_generator = torch.Generator(device=dev).manual_seed(args.seed + 310031)
+        mining_selected = torch.zeros((), dtype=torch.int64, device=dev)
+        print(f"auxiliary mining: {args.mining_mode}, count {args.mining_count}, "
+              f"weight {args.mining_weight}, warmup {args.mining_warmup}, ramp {args.mining_ramp}; "
+              f"original random CE unfiltered", flush=True)
+        print(f"mining TRAIN index: {mining_filter.nbytes / 2**20:.1f} MiB, "
+              f"built in {time.time() - filter_start:.1f}s; "
+              f"train SHA256 {mining_filter.train_sha256}", flush=True)
     torch.manual_seed(args.seed)  # before init — seeds the embeddings
     if args.tied_reverse:
         assert args.aux_rp == 0, "tied-reverse+aux-rp not supported"
@@ -335,7 +420,8 @@ def main():
         DT = {"fp32": torch.float32, "fp16": torch.float16, "bf16": torch.bfloat16}
         model = SparseTableResonatE(n_ent, n_rel, k=args.k, block_size=args.block_size,
                                     sparse_grad=True, device=dev, ent_bias=args.ent_bias,
-                                    rel_gain=args.rel_gain, table_dtype=DT[args.table_dtype])
+                                    rel_gain=args.rel_gain, table_dtype=DT[args.table_dtype],
+                                    low_rank=args.low_rank, low_rank_local=args.low_rank_local)
         model.train()
         print(f"sparse shell: row-sparse table grads, RowAdagrad lr {args.table_lr:g}, "
               f"table {args.table_dtype}", flush=True)
@@ -344,8 +430,12 @@ def main():
                     block=True, block_size=args.block_size,
                     tied_reverse=args.tied_reverse,
                     ent_bias=args.ent_bias,
-                    rel_gain=args.rel_gain).to(dev)
+                    rel_gain=args.rel_gain, low_rank=args.low_rank,
+                    low_rank_local=args.low_rank_local).to(dev)
     print(f"params: {model.n_params():,} (M={model.m})", flush=True)
+    if args.low_rank:
+        print(f"relation correction: rank {args.low_rank}, "
+              f"{'within blocks (control)' if args.low_rank_local else 'across blocks'}", flush=True)
     # H18: peer copies share the batch but have their own random init
     # (the RNG has advanced past copy 0's draw); only copy 0 survives
     peers = [model]
@@ -386,29 +476,41 @@ def main():
     if args.eval_only:
         ck = torch.load(args.save, map_location=dev, weights_only=False)
         ca = ck.get("args", {})
-        if (ca.get("k", args.k) != args.k
-                or ca.get("block_size", 2) != args.block_size
-                or ca.get("tied_reverse", False) != args.tied_reverse
-                or ca.get("ent_bias", False) != args.ent_bias
-                or ca.get("rel_gain", False) != args.rel_gain
-                or ca.get("real", False) != args.real):
-            model = ResonatE(n_entities=n_ent, n_relations=n_rel,
-                            k=ca.get("k", args.k), block=True,
-                            block_size=ca.get("block_size", 2),
+        if ca.get("comp", 0):
+            p.error("eval-only needs a plain entity-table checkpoint")
+        kwargs = dict(k=ca.get("k", args.k), block_size=ca.get("block_size", 2),
+                      ent_bias=ca.get("ent_bias", False),
+                      rel_gain=ca.get("rel_gain", False),
+                      low_rank=ca.get("low_rank", 0),
+                      low_rank_local=ca.get("low_rank_local", False))
+        if "E_real" in ck["model"]:
+            model = SparseTableResonatE(n_ent, n_rel, device=dev,
+                                       table_dtype=ck["model"]["E_real"].dtype, **kwargs)
+        else:
+            model = ResonatE(n_ent, n_rel, block=True,
                             tied_reverse=ca.get("tied_reverse", False),
-                            ent_bias=ca.get("ent_bias", False),
-                            rel_gain=ca.get("rel_gain", False),
-
-                            ).to(dev)
-            print(f"eval-only: rebuilt model from checkpoint args "
-                  f"(k={ca.get('k')}, bs={ca.get('block_size', 2)})",
-                  flush=True)
+                            real=ca.get("real", False), **kwargs).to(dev)
+        print(f"eval-only: rebuilt model from checkpoint args "
+              f"(k={kwargs['k']}, bs={kwargs['block_size']}, rank={kwargs['low_rank']})",
+              flush=True)
         model.load_state_dict(ck["model"])
         print(f"loaded {args.save} for eval-only", flush=True)
         args.steps = 0  # empty training loop
     elif os.path.exists(args.save + ".ckpt"):
         ck = torch.load(args.save + ".ckpt", map_location=dev,
                         weights_only=False)
+        if args.direction_sampling != "uniform" or ck.get("direction_sampling", {}).get("mode", "uniform") != "uniform":
+            p.error("H32 direction-sampling pilot requires a fresh run; skew checkpoint resume is unsupported")
+        if args.mining_mode != "none" or ck.get("negative_mining", {}).get("mode", "none") != "none":
+            p.error("H31 mining pilot requires a fresh run; mining checkpoint resume is unsupported")
+        previous_filter = ck.get("train_positive_filter", {})
+        if previous_filter.get("enabled", False) != args.filter_train_positives:
+            p.error("cannot resume with a different training-positive filtering mode")
+        if positive_filter:
+            if previous_filter.get("train_sha256") != positive_filter.train_sha256:
+                p.error("cannot resume with a different training-positive graph")
+            masked_count.fill_(previous_filter["masked_count"])
+            sampled_count = previous_filter["sampled_count"]
         for m, sd in zip(peers, ck.get("peers", [ck["model"]])):
             m.load_state_dict(sd)
         for o, sd in zip(opts, ck["opt"]):
@@ -431,7 +533,9 @@ def main():
         ri = int(rng.choice(n_rel_base, p=rel_w))
         idx = by_rel[ri][rng.integers(0, len(by_rel[ri]),
                                       size=args.batch)]
-        fwd = rng.random() < 0.5
+        fwd = rng.random() < (direction_policy["tail_probabilities"][ri] if direction_policy else .5)
+        if direction_counts is not None:
+            direction_counts[ri, 0 if fwd else 1] += 1
         if fwd:
             src, dst = h[idx], t[idx]
             rel_id, lo_hi = ri, tail_range[ri]
@@ -476,9 +580,25 @@ def main():
                 l_pos = l_pos + model.b[dst_t][:, None]
                 l_neg = l_neg + model.b[negs][None, :]
             logits = torch.cat([l_pos, l_neg], dim=1)
+        if positive_filter is not None:
+            negative_mask = positive_filter.mask(src_t, rel_id, negs)
+            masked_count += negative_mask.sum()
+            sampled_count += negative_mask.numel()
+            logits = mask_negative_logits(logits, negative_mask)
         tau = model.log_tau.exp()
         target = torch.zeros(z.shape[0], dtype=torch.long, device=dev)
-        loss = F.cross_entropy(logits, target)
+        current_mining_weight = (mining_weight(step, args.mining_weight, args.mining_warmup,
+                                               args.mining_ramp) if mining_filter is not None else 0.)
+        if current_mining_weight > 0:
+            known_positive_mask = mining_filter.mask(src_t, rel_id, negs)
+            selected, selected_valid = select_negatives(logits[:, 1:].detach(), negs,
+                                                        known_positive_mask, args.mining_count,
+                                                        args.mining_mode, mining_generator)
+            mining_selected += selected_valid.sum()
+            mining_slots += selected_valid.numel()
+            loss = mixed_negative_ce(logits, selected, selected_valid, current_mining_weight)
+        else:
+            loss = F.cross_entropy(logits, target)
         if len(peers) > 1:
             # every copy: own CE + trajectory term; then, once warmed
             # up, KL to the detached leave-one-out mean of the others'
@@ -553,8 +673,13 @@ def main():
             torch.xpu.synchronize()
             torch.xpu.empty_cache()
         if step % 1000 == 0 or step == args.steps:
+            filter_note = (f"  masked {masked_count.item() / sampled_count:.4%} of sampled entries"
+                           if positive_filter is not None else "")
+            mining_note = (f"  mining w={current_mining_weight:.4f}, "
+                           f"eligible slots {mining_selected.item() / mining_slots:.4%}"
+                           if mining_slots else "")
             print(f"step {step}/{args.steps}  loss {loss.item():.3f}  "
-                  f"({time.time()-t0:.0f}s)", flush=True)
+                  f"({time.time()-t0:.0f}s){filter_note}{mining_note}", flush=True)
         if probe_part is not None and step % args.probe_every == 0:
             eval_split(model, probe_part, offset, n_rel, dev,
                        label=f"probe@{step}")
@@ -562,12 +687,30 @@ def main():
             torch.save({"model": model.state_dict(), "step": step,
                         "peers": [m.state_dict() for m in peers],
                         "opt": [o.state_dict() for o in opts],
-                        "sched": [sc.state_dict() for sc in scheds]}, args.save + ".ckpt")
+                        "sched": [sc.state_dict() for sc in scheds],
+                        "negative_mining": {"mode": args.mining_mode},
+                        "direction_sampling": direction_receipt(),
+                        "train_positive_filter": {
+                            "enabled": positive_filter is not None,
+                            "train_sha256": positive_filter.train_sha256 if positive_filter else None,
+                            "masked_count": masked_count.item() if positive_filter else 0,
+                            "sampled_count": sampled_count}}, args.save + ".ckpt")
 
     if not args.eval_only:
         sd = {k: v for k, v in model.state_dict().items() if k not in ("nb", "ro", "keep")}
         torch.save({"model": sd, "offset": offset,
-                    "n_rel": n_rel, "args": vars(args)}, args.save)
+                    "n_rel": n_rel, "args": vars(args),
+                    "direction_sampling": direction_receipt(),
+                    "negative_mining": {
+                        "mode": args.mining_mode,
+                        "train_sha256": mining_filter.train_sha256 if mining_filter else None,
+                        "selected_count": mining_selected.item() if mining_filter else 0,
+                        "candidate_slots": mining_slots},
+                    "train_positive_filter": {
+                        "enabled": positive_filter is not None,
+                        "train_sha256": positive_filter.train_sha256 if positive_filter else None,
+                        "masked_count": masked_count.item() if positive_filter else 0,
+                        "sampled_count": sampled_count}}, args.save)
         if len(peers) > 1:  # diagnostics only; copy 0 is the model
             torch.save({"peers": [m.state_dict() for m in peers],
                         "args": vars(args)},

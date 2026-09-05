@@ -1,0 +1,22 @@
+ogbl-biokg loaded in 7s: 93,773 entities (disease:10687, drug:10533, function:45085, protein:17499, sideeffect:9969), 51 relations, 4,762,678 train triples
+auxiliary mining: random, count 64, weight 0.1, warmup 2500, ramp 1250; original random CE unfiltered
+mining TRAIN index: 697.4 MiB, built in 2.1s; train SHA256 ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b
+sparse shell: row-sparse table grads, RowAdagrad lr 0.3, table fp32
+params: 27,124,129 (M=144)
+step 1000/12500  loss 8.469  (14s)
+step 2000/12500  loss 5.325  (27s)
+step 3000/12500  loss 7.505  (43s)  mining w=0.0400, eligible slots 100.0000%
+step 4000/12500  loss 4.454  (63s)  mining w=0.1000, eligible slots 100.0000%
+step 5000/12500  loss 4.027  (82s)  mining w=0.1000, eligible slots 100.0000%
+step 6000/12500  loss 4.079  (101s)  mining w=0.1000, eligible slots 100.0000%
+step 7000/12500  loss 3.875  (121s)  mining w=0.1000, eligible slots 100.0000%
+step 8000/12500  loss 4.740  (140s)  mining w=0.1000, eligible slots 100.0000%
+step 9000/12500  loss 5.797  (159s)  mining w=0.1000, eligible slots 100.0000%
+step 10000/12500  loss 3.564  (179s)  mining w=0.1000, eligible slots 100.0000%
+step 11000/12500  loss 3.239  (199s)  mining w=0.1000, eligible slots 100.0000%
+step 12000/12500  loss 4.581  (218s)  mining w=0.1000, eligible slots 100.0000%
+step 12500/12500  loss 4.438  (227s)  mining w=0.1000, eligible slots 100.0000%
+
+=== OGB official evaluation ===
+[valid] MRR 0.7860  hits@1 0.7089  hits@3 0.8388  hits@10 0.9267
+leaderboard context: TransE 0.745, RotatE 0.799, DistMult 0.804, ComplEx 0.810, top ~0.86

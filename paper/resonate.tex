@@ -24,8 +24,9 @@
 \begin{center}\small\itshape
 Preprint, draft of 4 September 2026. Not peer reviewed. Code, logs,
 receipts and checkpoints: \url{https://github.com/jinxmcg/resonate};
-project page: \url{https://resonate.page}. Five leaderboard entries are
-being filed from the receipts in the repository.
+project page: \url{https://resonate.page}. Four leaderboard entries are
+being filed from the receipts in the repository; two further wikikg2
+results are reported but not filed (Section~\ref{sec:protocol}, Compliance).
 \end{center}
 
 \begin{abstract}
@@ -48,13 +49,15 @@ fifth of twelve on the board and the fourth single model, at the
 smallest parameter count on it by $3.5\times$.
 On \texttt{ogbl-wikikg2} (2.5M entities, 535 relations) a 329M-parameter
 model ($k=8$, one dense $64\times64$ block per relation) trains in 36
-minutes on one RTX 5090 and reaches $0.6676\pm0.0010$; with neighbourhood
-and analogy members from the training graph, self-proposed edges, and a
-learned per-relation combiner, the distilled single model reaches
-$0.7320\pm0.0010$, which would be second of twenty-eight and the best
-entry without entity text; a ten-seed ensemble under the same combiner
-reaches $0.7426\pm0.0002$ (leave-one-out), above the current first
-entry.
+minutes on one RTX 5090 and reaches $0.6676\pm0.0010$; distilled from
+ten seeds at temperature 2 the single model reaches $0.6855\pm0.0008$
+alone, the entry we file. With neighbourhood and analogy members from the
+training graph, self-proposed edges and a learned per-relation combiner
+it reaches $0.7320\pm0.0010$, and a ten-seed ensemble under the same
+combiner $0.7426\pm0.0002$ (leave-one-out), above the current first
+entry; we report both with receipts but do not file them, because the
+combiner is fit by gradient descent on validation labels, which the
+leaderboard rule excludes.
 The sparse shell was built for the large graph, brought back to the small
 one under a pre-registered bar, and won on every seed ($+0.0040$); the
 temperature was found on the large graph and won on the small one the
@@ -107,7 +110,7 @@ on the large graph, $T=2$ transferred everything, and $T=2$ then improved
 the small graph too. The rows submitted to both boards are the ones that
 came out of this loop; the first ladder is kept as history.
 
-Our contributions are the five ten-run results, the two capacity dials
+Our contributions are the five ten-run results (four filed), the two capacity dials
 and the measured reason they differ between the graphs, the retrieval
 members and their two blends, the temperature curve, and a fully
 scripted reproduction path with receipts and released checkpoints for
@@ -418,6 +421,32 @@ no model: 0.6723). Each submitted \texttt{ogbl-wikikg2} run---the ten
 students' own final evaluations, the ten C-F blends, the ten leave-one-out
 ensembles and the full ensemble---was read exactly once.
 
+\paragraph{Compliance.}
+The OGB leaderboard rule reserves the validation set for ``standard
+hyper-parameter tuning (not allowed: gradient-based search, use as model
+input)'' and the test set for final evaluation. The per-relation blend
+of \texttt{ogbl-biokg} rows B and C is a \emph{selection} among a fixed
+list of at most nine candidate weight vectors per group by validation
+MRR, which we read as hyper-parameter tuning; those rows are filed. The
+\texttt{ogbl-wikikg2} learned combiner (\texttt{learned\_blend.py}) fits
+about 1{,}500 per-relation weights by Adam on a cross-entropy loss whose
+labels are the validation answers, then refits on the full validation
+split and applies the weights to test: that is gradient-based search on
+validation labels, and rows F, C-F and the ensemble, which depend on it,
+are therefore reported with their receipts but not filed. Row B+'s
+selection blend is also not filed, for the second reason below. What we
+file for \texttt{ogbl-wikikg2} is the distilled single model alone,
+$0.6855\pm0.0008$ over its ten students' own test evaluations, whose
+recipe was tuned on validation only. Second, during \texttt{ogbl-wikikg2}
+development the test split's relation mix (the query relations, not the
+answers) was used to explain the validation--test gap, and a
+validation number reweighted to that mix was used as a development
+signal afterwards, including for the blend guard change from 4{,}000 to
+500 rows that every later blend row inherits. No test label was used,
+and the guard sweep itself was run on validation halves, but the
+decision was informed by test-set statistics; we disclose it here and
+in the research log rather than claim those rows as clean.
+
 \paragraph{Validation numbers.}
 For rows whose weights are fit on the full validation split we report the
 in-sample value and the cross-fitted estimate of the same procedure. On
@@ -555,9 +584,9 @@ A. single model & $0.6676\pm0.0010$ & $0.7030\pm0.0009$ & --- \\
 B. A + 8 members, frozen blend & $0.6820\pm0.0014$ & 0.7413 & --- \\
 B+. + self-augmented members & $0.6866\pm0.0015$ & 0.7467 & --- \\
 F. A + 10 members + learned combiner & $0.7222\pm0.0010$ & 0.7800 & 0.779 \\
-\quad student alone ($T=2$) & $0.6855\pm0.0008$ & 0.7190 & --- \\
-C-F. distilled ($T=2$) + members + combiner & $\mathbf{0.7320\pm0.0010}$ & 0.7880 & 0.787 \\
-ensemble of 10 seeds + members + combiner & $\mathbf{0.7426\pm0.0002}$ (LOO) & 0.7994 & 0.7992 \\
+\quad student alone ($T=2$), \textbf{filed} & $\mathbf{0.6855\pm0.0008}$ & 0.7190 & --- \\
+C-F. distilled ($T=2$) + members + combiner (not filed) & $0.7320\pm0.0010$ & 0.7880 & 0.787 \\
+ensemble of 10 seeds + members + combiner (not filed) & $0.7426\pm0.0002$ (LOO) & 0.7994 & 0.7992 \\
 \quad full ten-seed ensemble, one read & 0.7430 & 0.7998 & \\
 \bottomrule
 \end{tabular}
@@ -567,11 +596,13 @@ Table~\ref{tab:wiki} gives the ladder. A single 329M model trained in 36
 minutes reaches 0.6676; the members and the learned combiner add
 $+0.055$; the $T=2$ student adds $+0.010$ more; the ten-seed ensemble
 under the same combiner $+0.011$ beyond that. Table~\ref{tab:wboard}
-places the two submitted rows against the public board's top entries:
-the ensemble would be first and is also the largest entry on the board
-(ten tables, 3.29B parameters); the single model C-F would be second,
-above the best entry that uses entity text and above the best single
-model, at a mid-table parameter count.
+places the rows against the public board's top entries. The filed entry,
+the distilled single model alone at 0.6855, would sit between TripleRE +
+NodePiece (0.6866) and InterHT (0.6779), eleventh of twenty-eight.
+The two combiner rows are shown for what they measure and are not filed
+(Section~\ref{sec:protocol}): the ensemble would be first and is also
+the largest entry on the board (ten tables, 3.29B parameters); the
+single model C-F would be second.
 
 \begin{table}[t]
 \centering
@@ -584,9 +615,9 @@ where the submitted rows sit.}
 \toprule
  & method & test MRR & params \\
 \midrule
-  & \textbf{ResonatE ensemble $\times10$ + retrieval} & $\mathbf{0.7426}$ & \textbf{3.29B} \\
+  & ResonatE ensemble $\times10$ + retrieval (not filed) & 0.7426 & 3.29B \\
 1 & RelEns \citep{yue2023relens} (ensemble) & 0.7392 & 2.18B \\
-  & \textbf{ResonatE C-F: distilled 329M + retrieval} & $\mathbf{0.7320}$ & \textbf{329M} \\
+  & ResonatE C-F: distilled 329M + retrieval (not filed) & 0.7320 & 329M \\
 2 & StarGraph + TripleRE + Text \citep{li2022stargraph} & 0.7305 & 1.93B \\
 3 & InterHT+ \citep{yue2022interht} & 0.7293 & 156M \\
 4 & StarGraph + TripleRE \citep{li2022stargraph} & 0.7286 & 93M \\
@@ -594,6 +625,10 @@ where the submitted rows sit.}
 6 & StarGraph + TripleRE (2022) & 0.7201 & 87M \\
 7 & CompoundE3D \citep{ge2023compounde3d} & 0.7006 & 751M \\
 8 & TranS \citep{zhang2022trans} & 0.6939 & 38M \\
+9 & TranS (2022) & 0.6882 & 19M \\
+10 & TripleRE + NodePiece & 0.6866 & 36M \\
+  & \textbf{ResonatE: distilled 329M, alone (filed)} & $\mathbf{0.6855}$ & \textbf{329M} \\
+11 & InterHT & 0.6779 & 19M \\
 14 & ComplEx-RP (50-dim) \citep{chen2021relation} & 0.6392 & 250M \\
 23 & ComplEx (250-dim) & 0.4027 & 1.25B \\
 \bottomrule

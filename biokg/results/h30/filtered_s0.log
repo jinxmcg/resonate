@@ -1,0 +1,21 @@
+ogbl-biokg loaded in 7s: 93,773 entities (disease:10687, drug:10533, function:45085, protein:17499, sideeffect:9969), 51 relations, 4,762,678 train triples
+training-only positive mask: 697.4 MiB, built in 2.0s; train SHA256 ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b
+sparse shell: row-sparse table grads, RowAdagrad lr 0.3, table fp32
+params: 27,124,129 (M=144)
+step 1000/12500  loss 7.699  (18s)  masked 3.4188% of sampled entries
+step 2000/12500  loss 5.394  (36s)  masked 3.4214% of sampled entries
+step 3000/12500  loss 7.799  (54s)  masked 3.3385% of sampled entries
+step 4000/12500  loss 1.674  (71s)  masked 3.3594% of sampled entries
+step 5000/12500  loss 1.199  (89s)  masked 3.3588% of sampled entries
+step 6000/12500  loss 1.068  (107s)  masked 3.3532% of sampled entries
+step 7000/12500  loss 0.847  (125s)  masked 3.3650% of sampled entries
+step 8000/12500  loss 2.346  (142s)  masked 3.3767% of sampled entries
+step 9000/12500  loss 1.508  (159s)  masked 3.3856% of sampled entries
+step 10000/12500  loss 0.564  (176s)  masked 3.3879% of sampled entries
+step 11000/12500  loss 0.676  (193s)  masked 3.3802% of sampled entries
+step 12000/12500  loss 1.979  (211s)  masked 3.3938% of sampled entries
+step 12500/12500  loss 2.382  (219s)  masked 3.3827% of sampled entries
+
+=== OGB official evaluation ===
+[valid] MRR 0.6713  hits@1 0.5696  hits@3 0.7348  hits@10 0.8653
+leaderboard context: TransE 0.745, RotatE 0.799, DistMult 0.804, ComplEx 0.810, top ~0.86

@@ -41,10 +41,15 @@ class ResonatE(nn.Module):
                  k: int = 8, dense: bool = False, block: bool = False,
                  unitary: bool = False, block_size: int = 2,
                  tied_reverse: bool = False, ent_bias: bool = False,
-                 rel_gain: bool = False, real: bool = False):
+                 rel_gain: bool = False, real: bool = False,
+                 low_rank: int = 0, low_rank_local: bool = False):
         super().__init__()
         assert not (dense and block)
         assert not (real and (unitary or dense)), "real: block/diag only"
+        if low_rank < 0 or (low_rank and (not block or tied_reverse)):
+            raise ValueError("low_rank requires untied block operators and a nonnegative rank")
+        if low_rank_local and not low_rank:
+            raise ValueError("low_rank_local requires a positive low_rank")
         # unitary: phase-only relation params (H = e^{i.theta} always,
         # instead of free complex init'd on the unit circle). Diagonal
         # variant only — mechanism test for the depth-ceiling
@@ -58,6 +63,8 @@ class ResonatE(nn.Module):
         self.dense = dense
         self.block = block
         self.real = real
+        self.low_rank = low_rank
+        self.low_rank_local = low_rank_local
         # width of the state vector: M complex, or 2M real (H22)
         width = 2 * self.m if real else self.m
         cdt = torch.float if real else torch.cfloat
@@ -113,6 +120,23 @@ class ResonatE(nn.Module):
         self.gain = nn.Parameter(torch.zeros(n_relations, width)) \
             if rel_gain else None
 
+        # H29: block operator plus U V*. The local control uses the
+        # same factor shapes/parameter count, confined to each block.
+        # Only V starts at zero: the correction is exactly zero but V
+        # can learn on the first step. Preserve the RNG stream so the
+        # sparse subclass draws identical entity rows in every arm.
+        self.lr_u = self.lr_v = None
+        if low_rank:
+            with torch.random.fork_rng(devices=[]):
+                fan_in = block_size if low_rank_local else width
+                u = torch.randn(n_relations, width, low_rank, dtype=cdt)
+                u = u / math.sqrt(fan_in)
+            self.lr_u = nn.Parameter(u)
+            self.lr_v = nn.Parameter(torch.zeros_like(u))
+
+    def rows(self, idx: torch.Tensor) -> torch.Tensor:
+        return self.E[idx]
+
     def embed(self, idx: torch.Tensor) -> torch.Tensor:
         return cnorm(self.E[idx])
 
@@ -126,6 +150,7 @@ class ResonatE(nn.Module):
 
     def hop(self, z: torch.Tensor, r: torch.Tensor) -> torch.Tensor:
         """One hop: apply relation r's transfer function, renormalize."""
+        source = z
         if self.unitary:
             th = self.theta[r]
             return cnorm(torch.polar(torch.ones_like(th), th) * z)
@@ -145,6 +170,19 @@ class ResonatE(nn.Module):
             z = torch.einsum('bkij,bkj->bki', h, zb).reshape(z.shape[0], -1)
         else:
             z = h * z
+        if self.low_rank:
+            u, v = self.lr_u[r], self.lr_v[r]
+            if self.low_rank_local:
+                shape = (len(source), -1, self.block_size, self.low_rank)
+                u, v = u.reshape(shape), v.reshape(shape)
+                x = source.reshape(len(source), -1, self.block_size)
+                hidden = torch.einsum('bkir,bki->bkr', v.conj(), x)
+                correction = torch.einsum('bkir,bkr->bki', u, hidden)
+                correction = correction.reshape_as(source)
+            else:
+                hidden = torch.einsum('bmr,bm->br', v.conj(), source)
+                correction = torch.einsum('bmr,br->bm', u, hidden)
+            z = z + correction
         return cnorm(z)
 
     def readout(self, z: torch.Tensor, r=None) -> torch.Tensor:

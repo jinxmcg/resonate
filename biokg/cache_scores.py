@@ -83,7 +83,9 @@ def main():
                          block_size=ca.get("block_size", 2),
                          tied_reverse=ca.get("tied_reverse", False),
                          ent_bias=ca.get("ent_bias", False),
-                         rel_gain=ca.get("rel_gain", False)).to(dev)
+                         rel_gain=ca.get("rel_gain", False),
+                         low_rank=ca.get("low_rank", 0),
+                         low_rank_local=ca.get("low_rank_local", False)).to(dev)
         model.load_state_dict(ck["model"])
         sp, sn, rel = score(model, part, offset, ck["n_rel"], dev)
         np.savez_compressed(out, sp=sp, sn=sn, rel=rel)

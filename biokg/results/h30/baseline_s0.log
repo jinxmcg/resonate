@@ -1,0 +1,20 @@
+ogbl-biokg loaded in 6s: 93,773 entities (disease:10687, drug:10533, function:45085, protein:17499, sideeffect:9969), 51 relations, 4,762,678 train triples
+sparse shell: row-sparse table grads, RowAdagrad lr 0.3, table fp32
+params: 27,124,129 (M=144)
+step 1000/12500  loss 8.469  (14s)
+step 2000/12500  loss 5.325  (28s)
+step 3000/12500  loss 7.687  (41s)
+step 4000/12500  loss 4.843  (55s)
+step 5000/12500  loss 4.437  (68s)
+step 6000/12500  loss 4.448  (82s)
+step 7000/12500  loss 4.268  (95s)
+step 8000/12500  loss 5.201  (108s)
+step 9000/12500  loss 6.285  (121s)
+step 10000/12500  loss 3.934  (134s)
+step 11000/12500  loss 3.572  (148s)
+step 12000/12500  loss 5.036  (161s)
+step 12500/12500  loss 4.848  (168s)
+
+=== OGB official evaluation ===
+[valid] MRR 0.7826  hits@1 0.7045  hits@3 0.8357  hits@10 0.9253
+leaderboard context: TransE 0.745, RotatE 0.799, DistMult 0.804, ComplEx 0.810, top ~0.86

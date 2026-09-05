@@ -76,7 +76,9 @@ def main():
                      block=True, block_size=ca.get("block_size", 2),
                      tied_reverse=ca.get("tied_reverse", False),
                      ent_bias=ca.get("ent_bias", False),
-                     rel_gain=ca.get("rel_gain", False)).to(dev)
+                     rel_gain=ca.get("rel_gain", False),
+                     low_rank=ca.get("low_rank", 0),
+                     low_rank_local=ca.get("low_rank_local", False)).to(dev)
         m.load_state_dict(ck["model"])
         with torch.no_grad():
             E = m.E / m.E.abs().pow(2).sum(-1, keepdim=True).sqrt()

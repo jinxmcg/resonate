@@ -1,0 +1,96 @@
+{
+  "experiment": "H29",
+  "date": "2026-09-05",
+  "status": "not_promoted",
+  "evaluation": "Official OGB Evaluator; validation only, both directions",
+  "metric_precision": "Metrics transcribed from logs rounded to four decimal places; no new test evaluation",
+  "recipe": {
+    "k": 12,
+    "block_size": 4,
+    "shell": "sparse",
+    "table_dtype": "fp32",
+    "table_lr": 0.3,
+    "lr": 0.005,
+    "scheduler": "cosine",
+    "batch": 2048,
+    "negatives": 4096,
+    "trajectory_weight": 0.1,
+    "distillation": false
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce GTX 1080 Ti",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.5.2",
+    "ogb": "1.3.6"
+  },
+  "code_sha256": {
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "resonate_wiki.py": "ac8ce8763f6f009634d7617755e2bbcc885e96387d54fa5a0af79473c83c6697",
+    "biokg/train_biokg_comp.py": "a4b8aecc13b666e53fddeb63bdc462d0423b5c30c2a67b42ee6d5539c3517d6b",
+    "biokg/scripts/run_h29.sh": "d7753e136a0f77edfd44f40b00b15b7f27048edfb1e6a57bee7e741839283b9e"
+  },
+  "promotion_rule": "global4 validation MRR must exceed both baseline and local4 by at least 0.003",
+  "runs": [
+    {
+      "arm": "baseline",
+      "seed": 0,
+      "steps": 12500,
+      "real_parameters": 27124129,
+      "validation_mrr": 0.7826,
+      "validation_hits_at_1": 0.7045,
+      "validation_hits_at_3": 0.8357,
+      "validation_hits_at_10": 0.9253,
+      "training_seconds": 165,
+      "log": "baseline_s0.log"
+    },
+    {
+      "arm": "global4",
+      "seed": 0,
+      "steps": 12500,
+      "real_parameters": 27359137,
+      "validation_mrr": 0.7628,
+      "validation_hits_at_1": 0.681,
+      "validation_hits_at_3": 0.8159,
+      "validation_hits_at_10": 0.9161,
+      "training_seconds": 224,
+      "log": "global4_s0.log"
+    },
+    {
+      "arm": "local4",
+      "seed": 0,
+      "steps": 12500,
+      "real_parameters": 27359137,
+      "validation_mrr": 0.7832,
+      "validation_hits_at_1": 0.7048,
+      "validation_hits_at_3": 0.8373,
+      "validation_hits_at_10": 0.926,
+      "training_seconds": 240,
+      "log": "local4_s0.log"
+    }
+  ],
+  "diagnostics": {
+    "global4": {
+      "correction_to_block_frobenius_norm_min_median_max": [
+        0,
+        1.6853,
+        3.2874
+      ],
+      "nonzero_corrections": 92,
+      "median_off_block_squared_norm_fraction_nonzero_only": 0.9709
+    },
+    "local4": {
+      "correction_to_block_frobenius_norm_min_median_max": [
+        0,
+        1.207,
+        1.7358
+      ],
+      "nonzero_corrections": 92,
+      "median_off_block_squared_norm_fraction_nonzero_only": 0
+    }
+  },
+  "limitations": [
+    "One seed and 12500 steps before distillation.",
+    "Factor initialization scales use their respective fan-in; this is a parameter-count control, not identical optimization dynamics.",
+    "Operator norm diagnostics do not establish the cause of the validation decrease."
+  ]
+}

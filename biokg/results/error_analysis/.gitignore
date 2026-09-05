@@ -1,0 +1,3 @@
+# Regenerable per-query records stay local; retain summaries and methodology.
+*/queries.npz
+*/queries.csv.gz

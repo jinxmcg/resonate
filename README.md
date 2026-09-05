@@ -1,8 +1,9 @@
 # ResonatE: Row-Sparse Knowledge-Graph Embeddings with Composable Relation Operators
 
 > **Preprint / draft (4 September 2026), not peer reviewed.** The results
-> below are self-reported; the OGB leaderboard submissions (five entries,
-> listed at the end) are being filed from the receipts in this repository.
+> below are self-reported; four OGB leaderboard entries (listed at the end)
+> are being filed from the receipts in this repository; two wikikg2 results
+> are reported but not filed (see Compliance).
 > Project page: [resonate.page](https://resonate.page). Paper:
 > [`paper/resonate.pdf`](paper/resonate.pdf).
 
@@ -62,20 +63,34 @@ ladder is submitted.
 | A. single model | 0.6676 ± 0.0010 | 0.7030 ± 0.0009 | 328,842,753 |
 | B. A + 8 retrieval members, frozen blend | 0.6820 ± 0.0014 | — / 0.7413 | 328,842,753 |
 | B+. + self-augmented members | 0.6866 ± 0.0015 | — / 0.7467 | 328,842,753 |
-| F. A + 10 members + learned combiner | 0.7222 ± 0.0010 | 0.779 / 0.7800 | 328,842,753 |
-| C-F. distilled (T=2) + members + learned combiner | **0.7320 ± 0.0010** | 0.787 / 0.7880 | 328,842,753 |
-| ensemble of 10 seeds + members + learned combiner | **0.7426 ± 0.0002** (leave-one-out, n=10; full ten-seed 0.7430) | 0.7992 / 0.7998 | 10 × 328.8M |
+| distilled (T=2), alone — **filed** | **0.6855 ± 0.0008** | 0.7190 | 328,842,753 |
+| F. A + 10 members + learned combiner — not filed | 0.7222 ± 0.0010 | 0.779 / 0.7800 | 328,842,753 |
+| C-F. distilled (T=2) + members + learned combiner — not filed | 0.7320 ± 0.0010 | 0.787 / 0.7880 | 328,842,753 |
+| ensemble of 10 seeds + members + learned combiner — not filed | 0.7426 ± 0.0002 (leave-one-out, n=10; full ten-seed 0.7430) | 0.7992 / 0.7998 | 10 × 328.8M |
 
 `python wikikg2/summarize_wiki.py` prints this from `wikikg2/results/`.
-The distilled model alone scores 0.6855 ± 0.0008 on test (0.7190 on
-validation). The public board as of 2026-09-04 (28 entries): RelEns 0.7392
+
+**Compliance.** OGB's rule reserves the validation set for "standard
+hyper-parameter tuning (not allowed: gradient-based search, use as model
+input)". The learned combiner (`learned_blend.py`) fits ~1,500 per-relation
+weights by Adam on validation labels, so rows F, C-F and the ensemble are
+reported with their receipts but **not filed**. During wikikg2 development the
+test split's relation mix (query relations, not answers) was also used to
+explain the validation–test gap and a test-mix-weighted validation number
+was used as a development signal, including for the blend guard (4,000 →
+500 rows) that every later blend row inherits; no test label was used, and
+it is disclosed here and in the paper. What is filed for wikikg2 is the
+distilled single model alone, 0.6855 ± 0.0008, whose recipe was tuned on
+validation only. The biokg blends are selections among a fixed candidate
+list per relation group (hyperparameter tuning, not gradient search) and
+are filed. The public board as of 2026-09-04 (28 entries): RelEns 0.7392
 (2.18B params, ensemble), StarGraph + TripleRE + Text 0.7305 (1.93B, uses
 entity text), InterHT+ 0.7293 (156M), StarGraph + TripleRE 0.7286 (93M),
 InterHT+ 256-dim 0.7257 (148M), StarGraph + TripleRE 0.7201 (87M),
-CompoundE3D 0.7006 (751M), TranS 0.6939 (38M). The ensemble row would be
-1st; C-F would be 2nd and the best single model, without text. The
-ensemble is also the largest entry on the board (3.29B); the single model
-sits mid-table in size.
+CompoundE3D 0.7006 (751M), TranS 0.6939 (38M), TripleRE + NodePiece 0.6866,
+InterHT 0.6779. The filed single model (0.6855) would be 11th. The two
+combiner rows, which are not filed, would have been 1st (the ensemble, also
+the largest entry at 3.29B) and 2nd.
 
 The ensemble entry's mean and std are over the ten leave-one-out
 ensembles (each of 9 seeds, each read once); the full ten-seed ensemble
@@ -341,8 +356,10 @@ checkpoint (their receipts and logs are in `results/rowCF/`).
 | ogbl-biokg | ResonatE (single model) | 0.8158 ± 0.0006 | 0.8164 ± 0.0006 | 27.1M |
 | ogbl-biokg | ResonatE + retrieval features | 0.8463 ± 0.0004 | 0.8465 ± 0.0004 (held-out) | 27.1M |
 | ogbl-biokg | ResonatE distilled + retrieval features | 0.8528 ± 0.0002 | 0.8532 ± 0.0003 (held-out) | 27.1M |
-| ogbl-wikikg2 | ResonatE distilled + retrieval members + learned combiner (self-augmented graph) | 0.7320 ± 0.0010 | 0.787 (held-out) | 328.8M |
-| ogbl-wikikg2 | ResonatE ×10 ensemble + retrieval members + learned combiner (self-augmented graph) | 0.7426 ± 0.0002 | 0.7992 (held-out) | 3.29B |
+| ogbl-wikikg2 | ResonatE distilled single model (T=2 from ten seeds) | 0.6855 ± 0.0008 | 0.7190 ± 0.0004 | 328.8M |
+
+Not filed (combiner fit on validation labels; see Compliance above): wikikg2
+C-F 0.7320 ± 0.0010 and the ensemble 0.7426 ± 0.0002.
 
 No external data on either board. One RTX 5090 per run.
 
