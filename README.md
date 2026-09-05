@@ -183,7 +183,13 @@ repository, the release and the OGB download: clone + `uv sync` 129 s,
 both `summarize` scripts 1 s, biokg download + split check 164 s, the
 20 biokg checkpoints fetched and checksummed 117 s, the ten row-A models
 re-scored on test 40 s (all ten reproduce their logged MRR exactly) —
-about 8 minutes end to end.
+about 8 minutes end to end. On a second fresh machine (slower network)
+the same steps took 55 minutes, then the optional third tier: row B seed
+0 re-derived from its checkpoint (Jaccard + analogy features, held-out
+estimate, one frozen test read) reproduced the shipped receipt to the
+last digit (test 0.8460542559623718, held-out 0.8461) in 2 h 22 min of
+CPU, and the released wikikg2 teacher 0 and student 5 (bf16 tables)
+re-scored on test gave 0.6678 and 0.6873, identical to their logs.
 
 `verify.py --ladder sparse` re-scores `checkpoints/sparse_s*.pt` (the
 sparse-shell row-A models re-saved in the dense format by
