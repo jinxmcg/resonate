@@ -103,6 +103,24 @@ every seed where it was computed (the ensemble's one fit, seven of ten
 row-F seeds, six C-F seeds whose member caches survived; the machine was
 released before the rest).
 
+### STaRK-Prime (separate repository: [jinxmcg/resonate-stark](https://github.com/jinxmcg/resonate-stark))
+
+Questions in words over PrimeKG (129,375 nodes, 8.1M edges), scored on the whole node set. The same
+architecture, trained on the graph's edges and then jointly on the training questions, answers a
+question from its text with the readout that scores a graph query; the submitted pipeline runs no
+language model at query time. Committed reads (one per split, second read overall; the first read,
+28.7 / 28.2 / 20.4 Hit@1, is reported alongside):
+
+| split | Hit@1 | Hit@5 | R@20 | MRR | best published row (per column) |
+|---|---|---|---|---|---|
+| Synthesized (full) | 41.8 | 68.3 | 74.8 | 53.7 | 20.1 / 39.9 / 42.2 / 29.2 |
+| Synthesized (10%) | 41.8 | 71.1 | 75.9 | 54.3 | 18.3 / 37.3 / 41.1 / 26.6 |
+| Human-generated | 30.6 | 53.1 | 60.6 | 41.7 | 33.0 / 51.4 / 53.3 / 41.0 |
+
+Why it matters for this paper, and what it does not show, is one paragraph in the paper's
+"One table for everything" section; every number, ablation and pre-registration is in that
+repository's `PLAN_PRIME.md`.
+
 ## The model (`resonate.py`, `resonate_wiki.py`, `rowadagrad.py`)
 
 An entity is a vector of M = k² complex coefficients; a query entity is

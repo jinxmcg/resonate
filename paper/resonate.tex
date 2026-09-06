@@ -834,8 +834,8 @@ when the relations form a group with a low-dimensional representation,
 and not for arbitrary permutations; whether the relations of a real
 graph are closer to the former or the latter is not measured. Both
 mixed-relation experiments were pre-registered after a first external
-review asked for them. Mapping natural-language questions onto chains of
-relation operators is outside this report.
+review asked for them. Mapping natural-language questions onto the
+table is the subject of the last paragraph of this section.
 
 \paragraph{Latency, flat in depth, and a compiled index.} Because the
 per-hop renormalisation is a scalar, a chain of relation operators
@@ -930,6 +930,54 @@ layout \citep{subramanya2019diskann}) and roughly 7 GPU-hours for 20
 epochs of 500M edges on one 5090-class card; that remains a projection,
 and none of it has been run.
 
+\paragraph{Language into the table (STaRK-Prime).} STaRK
+\citep{wu2024stark} asks written questions over PrimeKG (129{,}375
+nodes, 18 relations, 8.1M edges) and scores the ranked entities: Hit@1,
+Hit@5, Recall@20 and MRR over the whole node set, on a synthesized test
+split (2{,}801 questions, and a 280-question subset) and 98 human-written
+questions. This probe lives in a separate repository
+(\url{https://github.com/jinxmcg/resonate-stark}) with its own
+pre-registrations and reads; it is reported here for what it says about
+the table. The same architecture ($k=12$, $4\times4$ blocks, the sparse
+shell) was trained on the graph's edges (held-out link MRR 0.557) and
+then continued on edges and 12{,}324 training questions together, a
+question entering as a vector from a small head on a fine-tuned 110M
+text encoder and scored by the same readout $\mathrm{Re}\langle z,
+E_t\rangle$ that scores a graph query. The table got better at links
+(0.568, three seeds, s.d.\ 0.001) and answers a question from its text
+alone at Hit@1 26.7$\pm$0.2 on synthesized wording and 25.7$\pm$0.4 on
+human-style paraphrases (validation; the paraphrases are written by a
+local 7B model from the question text only and stand in for the
+human set, which was never opened during development). A learned
+three-headed parser (answer type; anchor entities by nearest neighbour
+in the table; relation operators), trained in four minutes on weak
+labels derived by walking the graph, reads questions into the model's
+query space at 25.6$\pm$0.6 / 22.3$\pm$0.4 Hit@1 on the graph path,
+against 24.9 / 20.9 for a hand-written parser backed by the 7B model.
+With the same parser and anchors, the exact adjacency walk alone scores
+18.9, the model's composed operators alone 19.0 and both 24.9: the walk
+says which candidates are graph-supported and the model says in what
+order. The submitted system runs no language model at query time
+(parser head, walk, model, a fine-tuned text ranker, the table's own
+language readout, a logistic reranker fit on train with out-of-fold
+features); with the 7B parser instead it is two Hit@1 points higher on
+validation, and both are reported. Committed reads, one per split after
+a dry run that reproduced the validation number to four decimals:
+synthesized 41.8 / 68.3 / 74.8 / 53.7, the 10\% subset 41.8 / 71.1 /
+75.9 / 54.3, human-written 30.6 / 53.1 / 60.6 / 41.7 (Hit@1 / Hit@5 /
+Recall@20 / MRR), against the best published rows of 20.1 / 39.9 / 42.2
+/ 29.2, 18.3 / 37.3 / 41.1 / 26.6 and 33.0 / 51.4 / 53.3 / 41.0. These
+were our second reads of the test splits; the first, with a
+hand-written parser and an off-the-shelf embedder, gave 28.7 / 28.2 /
+20.4 Hit@1 and is reported alongside. What this does and does not show:
+the leaderboard margin on synthesized questions comes largely from
+ordinary pipeline work (a fine-tuned embedder, a reranker); what is the
+model's own is that one table, one readout, serves link prediction, the
+oracle and language questions, with a sensitivity to phrasing under one
+point, and that a 26-point standalone answerer from a question is its
+recall ceiling ($\approx$36 Recall@20), since a single readout has no
+exact AND over constraints---the walk supplies that.
+
 \section{Limitations and disclosures}
 
 The blend weights of the retrieval rows are selected or fit on the full
@@ -952,7 +1000,13 @@ listed in Section~\ref{sec:protocol}, including the three runs of a
 non-submitted row that were read twice. Training is seeded but CUDA
 kernels are not bit-deterministic, so a retrained checkpoint reproduces
 its MRR to seed-level noise rather than bit-for-bit; the blend stage is
-exact. No external data was used on either board.
+exact. No external data was used on either board. On STaRK-Prime the
+test splits were read twice in total (both reads reported), the
+human-written set never served development, a 7B instruction model was
+used offline for paraphrases and weak labels only, and the same
+joint-training recipe has not been run on another embedding family, so
+``one table serves both'' is shown for this model and untested for
+others.
 
 \section{Reproducibility}
 
