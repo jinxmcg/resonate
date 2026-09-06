@@ -31,12 +31,12 @@ results are reported but not filed (Section~\ref{sec:protocol}, Compliance).
 
 \begin{abstract}
 How much functionality can be compiled into one knowledge-graph
-embedding table? We take a small representation---a unit-norm complex
-table with block-diagonal relation operators, called ResonatE here and
+embedding? We take a small representation---a unit-norm complex
+embedding matrix with block-diagonal relation operators, called ResonatE here and
 used as the experimental vehicle rather than the claim---and measure
 what it serves on three Stanford leaderboards and beyond them, with
 ten seeds, one test read per run, and pre-registered bars.
-\emph{Prediction.} On \texttt{ogbl-biokg} the bare 27M-parameter table
+\emph{Prediction.} On \texttt{ogbl-biokg} the bare 27M-parameter embedding
 scores test MRR $0.8158\pm0.0006$, above the official 188M-parameter
 baselines; label-free retrieval members read from the training graph add
 0.031 and training-time distillation from ten seeds at temperature 2 adds
@@ -53,7 +53,7 @@ every depth (0.08--0.11~ms, depth 1--6, on a 97k-node graph), an fp16
 index over the table is the whole deployable, and every answer is
 labelled graph-supported or unverified by an exact oracle.
 \emph{Retrieval from language.} On STaRK-Prime, questions in words over
-PrimeKG, the same table continued on edges and training questions
+PrimeKG, the same embedding continued on edges and training questions
 answers a question from its text with the readout that scores a graph
 query (Hit@1 $26.7\pm0.2$, phrasing gap under one point) while its link
 MRR rises; with a learned parser head, an exact adjacency walk, a
@@ -61,16 +61,16 @@ fine-tuned text ranker and a logistic reranker, and no generative model
 at query time, it reaches 41.8~/~68.3~/~74.8~/~53.7 (Hit@1, Hit@5,
 Recall@20, MRR) on the synthesized test split, twice the best published
 row, and 30.6~/~53.1~/~60.6~/~41.7 on 98 human-written questions. A
-RotatE table of the same width and near-equal link MRR takes the
+RotatE embedding of the same width and near-equal link MRR takes the
 identical language projection at 15.8 against 19.7 Hit@1 frozen and 21.2
 against 26.9 jointly: equal link prediction does not imply equal
 usefulness for language.
 \emph{What did not compile.} Two pre-registered attempts to give the
-table an intersection operator failed; real and complex operators tie;
+representation an intersection operator failed; real and complex operators tie;
 block size is flat; a learned combiner that would top the wikikg2 board
 is reported and not filed because it is fit on validation labels.
 The observation the evidence supports is that a knowledge representation
-can be more than a link-prediction model: the same compact table
+can be more than a link-prediction model: the same compact representation
 supports prediction, direct access and language-conditioned retrieval
 without a generative model in the inference path. Code, receipts,
 checkpoints and every development test read are released.
@@ -80,8 +80,8 @@ checkpoints and every development test read are released.
 
 A knowledge-graph embedding is usually judged by one number: how well it
 ranks the missing tail of a held-out triple. This report asks a wider
-question of one such model. Given a small table of entity vectors and a
-set of relation operators, how much can be served from that table alone:
+question of one such model. Given a small embedding of entity vectors and a
+set of relation operators, how much can be served from that representation alone:
 prediction of edges the graph does not contain, multi-hop access at a
 cost that does not grow with the chain, and retrieval from questions
 written in words, without a generative model between the question and
@@ -99,13 +99,13 @@ pre-registered protocol (Section~\ref{sec:protocol}), make the case:
 \begin{enumerate}
 \item \emph{The representation works for graph knowledge.} On
 Stanford's \texttt{ogbl-biokg} \citep{hu2020ogb} the bare 27.1M-parameter
-table scores test MRR $0.8158\pm0.0006$, above the official
+embedding scores test MRR $0.8158\pm0.0006$, above the official
 188M-parameter DistMult, ComplEx and RotatE baselines; with label-free
 retrieval members read from the training graph and training-time
 distillation from ten seeds it reaches $0.8528\pm0.0002$, fifth of
 twelve on the board and the smallest entry on it by $3.5\times$. On
 \texttt{ogbl-wikikg2} (2.5M entities) a row-sparse shell trains the
-table in 36 minutes on one GPU and the distilled single model reaches
+embedding in 36 minutes on one GPU and the distilled single model reaches
 $0.6855\pm0.0008$, competitive with the strong single models; it is not
 compact there, and we say so (Section~\ref{sec:results}).
 \item \emph{Missing links are predicted, not stored.} Test MRR is
@@ -118,12 +118,12 @@ raised every downstream row (Section~\ref{sec:beyond}).
 compiles to one operator, so a multi-hop question is one inner-product
 search: 0.08--0.11~ms at every depth 1--6 on a 97k-node graph, against
 exact traversal that grows with fan-out; an fp16 HNSW index over the
-table (recall@10 0.993--0.994) is the whole deployable; every answer is
+embedding (recall@10 0.993--0.994) is the whole deployable; every answer is
 labelled graph-supported or unverified by an exact oracle
-(Section~\ref{sec:beyond}). The readout is linear in the table or
+(Section~\ref{sec:beyond}). The readout is linear in the number of entities or
 sublinear through the index; what is constant is the cost in depth.
 \item \emph{Retrieval from language without a generative model.} On
-STaRK-Prime \citep{wu2024stark} the same table, continued on edges and
+STaRK-Prime \citep{wu2024stark} the same embedding, continued on edges and
 training questions, answers a written question with the readout that
 scores a graph query ($26.7\pm0.2$ Hit@1 from the text alone, phrasing
 gap under one point) and its link MRR rises while it learns; a pipeline
@@ -133,12 +133,12 @@ reaches 41.8 Hit@1 on the synthesized test split, twice the best
 published row, and 30.6 on 98 human-written questions
 (Section~\ref{sec:beyond}).
 \item \emph{Equal link prediction does not imply equal usefulness for
-language.} A RotatE table of the same width, trained on the same graph
+language.} A RotatE embedding of the same width, trained on the same graph
 under the same regime and tuned to near-equal link MRR, takes the
 identical language projection at 15.8 against 19.7 Hit@1 frozen and 21.2
 against 26.9 when trained jointly (one seed each, stated as such).
 \item \emph{What did not compile.} Two pre-registered attempts to give
-the table an intersection operator, one at query time and one by
+the representation an intersection operator, one at query time and one by
 training on conjunctions, did not beat a plain sum of constraint scores;
 real and complex operators tie; block size is flat above $4\times4$; a
 learned combiner that would top the wikikg2 board is reported and not
@@ -156,7 +156,7 @@ faster per step at identical quality, then brought back to the small
 graph under a pre-registered bar, where it beat the dense ladder on every
 seed ($+0.0040$); the distillation temperature found on the large graph
 ($T=2$) improved the small one the same way ($+0.0019$); and the same
-table, shell and recipe went to the language benchmark unchanged. The
+representation, shell and recipe went to the language benchmark unchanged. The
 leaderboard positions are validation that the representation is not a
 toy; the paper's subject is what it serves.
 
@@ -846,7 +846,7 @@ official language, which is exactly the two-hop path member.
 \label{sec:beyond}
 
 The boards are one-hop scores. This section measures what else the same
-table serves, in the order of the introduction: prediction of edges the
+representation serves, in the order of the introduction: prediction of edges the
 graph does not contain, access at a cost flat in depth, and retrieval
 from questions in words.
 
@@ -1079,7 +1079,7 @@ than a RotatE table under the same recipe, not that only it can.
 
 \section{Conclusion}
 
-One small table of entity vectors with block-diagonal relation
+One small embedding of entity vectors with block-diagonal relation
 operators, trained on edges, serves more than the link-prediction score
 it is usually judged by. It predicts edges the graph does not contain,
 separating true unseen facts from random false ones reliably and from
@@ -1088,9 +1088,9 @@ depth, from an index that is the whole deployable; and, continued on
 training questions, it answers questions written in words with the
 same readout, at competitive leaderboard positions on three Stanford
 benchmarks with no generative model in the inference path. Equal link
-prediction did not imply equal usefulness for language: a RotatE table
+prediction did not imply equal usefulness for language: a RotatE embedding
 of the same width and near-equal link MRR took the same projection
-worse. What the table did not learn to do, under two pre-registered
+worse. What the representation did not learn to do, under two pre-registered
 attempts, is intersect constraints on its own; the exact walk still
 supplies that. The observation the evidence supports is modest and, we
 think, useful: a knowledge representation can be more than a
