@@ -984,7 +984,14 @@ model's own is that one table, one readout, serves link prediction, the
 oracle and language questions, with a sensitivity to phrasing under one
 point, and that a 26-point standalone answerer from a question is its
 recall ceiling ($\approx$36 Recall@20), since a single readout has no
-exact AND over constraints---the walk supplies that.
+exact AND over constraints---the walk supplies that. Bolting an AND onto
+the readout at query time does not help: over the parsed constraints,
+min, soft-min, a product of per-constraint probabilities and a soft
+count of satisfied constraints all score below the plain sum on
+validation (13.3--16.5 against 19.0 Hit@1, model alone), because the
+single-hop table was never trained on conjunctions and the parsed
+constraint set is noisy; training on sampled conjunctive queries is the
+untested next step.
 
 \section{Limitations and disclosures}
 
