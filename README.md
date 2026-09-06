@@ -2,7 +2,7 @@
 
 > **Preprint / draft (4 September 2026), not peer reviewed.** The results
 > below are self-reported; four OGB leaderboard entries (listed at the end)
-> are being filed from the receipts in this repository; two wikikg2 results
+> are in process of submission from the receipts in this repository; two wikikg2 results
 > are reported but not filed (see Compliance).
 > Project page: [resonate.page](https://resonate.page). Paper:
 > [`paper/resonate.pdf`](paper/resonate.pdf).
