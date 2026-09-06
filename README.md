@@ -1,4 +1,6 @@
-# ResonatE: Row-Sparse Knowledge-Graph Embeddings with Composable Relation Operators
+# Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access
+
+*(the ResonatE repository; the model is the experimental vehicle, the properties measured are the result)*
 
 > **Preprint / draft (4 September 2026), not peer reviewed.** The results
 > below are self-reported; four OGB leaderboard entries (listed at the end)

@@ -15,14 +15,14 @@
 \newcommand{\cnorm}{\operatorname{cnorm}}
 \newcommand{\Rel}{\operatorname{Re}}
 
-\title{ResonatE: Row-Sparse Knowledge-Graph Embeddings\\ with Composable Relation Operators}
+\title{Beyond Link Prediction: Compact Knowledge Representations\\ for Prediction, Retrieval, and Direct Access}
 \author{Cristian Malaia\\ \texttt{cristian.malaia@gmail.com} \and Claude Fable 5\\ Anthropic}
 \date{September 2026}
 
 \begin{document}
 \maketitle
 \begin{center}\small\itshape
-Preprint, draft of 4 September 2026. Not peer reviewed. Code, logs,
+Preprint, draft of 6 September 2026. Not peer reviewed. Code, logs,
 receipts and checkpoints: \url{https://github.com/jinxmcg/resonate};
 project page: \url{https://resonate.page}. Four leaderboard entries are
 in process of submission from the receipts in the repository; two further wikikg2
@@ -30,92 +30,135 @@ results are reported but not filed (Section~\ref{sec:protocol}, Compliance).
 \end{center}
 
 \begin{abstract}
-We report one knowledge-graph embedding model, one training shell and
-one recipe on two link-prediction tasks of Stanford's Open Graph
-Benchmark (OGB) of very different shape, with two capacity dials set on validation per graph.
-Entities are unit-norm vectors of $M=k^2$ complex coefficients stored
-through their real view with row-sparse gradients and row-wise Adagrad;
-each relation and direction is a free block-diagonal operator, unitary at
-initialisation; a hop applies the operator and renormalises; the score
-is an inner product against the raw target row. Every number below is
-the mean and unbiased standard deviation over ten seeds with one test
-read per seed under the official Evaluator.
-On \texttt{ogbl-biokg} (93k typed entities, 51 relations) a 27.1M-parameter
-model ($k=12$, $4\times4$ blocks) reaches test MRR $0.8158\pm0.0006$;
-with four label-free retrieval features read from the training graph and
-blended per relation on validation, $0.8463\pm0.0004$; distilled at
-training time from the ten seeds at temperature 2, $0.8528\pm0.0002$,
-fifth of twelve on the board and the fourth single model, at the
-smallest parameter count on it by $3.5\times$.
-On \texttt{ogbl-wikikg2} (2.5M entities, 535 relations) a 329M-parameter
-model ($k=8$, one dense $64\times64$ block per relation) trains in 36
-minutes on one RTX 5090 and reaches $0.6676\pm0.0010$; distilled from
-ten seeds at temperature 2 the single model reaches $0.6855\pm0.0008$
-alone, the entry we file. With neighbourhood and analogy members from the
-training graph, self-proposed edges and a learned per-relation combiner
-it reaches $0.7320\pm0.0010$, and a ten-seed ensemble under the same
-combiner $0.7426\pm0.0002$ (leave-one-out), above the current first
-entry; we report both with receipts but do not file them, because the
-combiner is fit by gradient descent on validation labels, which the
-leaderboard rule excludes.
-The sparse shell was built for the large graph, brought back to the small
-one under a pre-registered bar, and won on every seed ($+0.0040$); the
-temperature was found on the large graph and won on the small one the
-same way ($+0.0019$). The same table serves training, scoring, the
-retrieval members, a compiled index whose multi-hop query cost is flat
-in depth, and the model's own edge proposals. We report every
-development test read, the two runs that were read twice, and the
-temperature and block-size curves that fix the dials.
+How much functionality can be compiled into one knowledge-graph
+embedding table? We take a small representation---a unit-norm complex
+table with block-diagonal relation operators, called ResonatE here and
+used as the experimental vehicle rather than the claim---and measure
+what it serves on three Stanford leaderboards and beyond them, with
+ten seeds, one test read per run, and pre-registered bars.
+\emph{Prediction.} On \texttt{ogbl-biokg} the bare 27M-parameter table
+scores test MRR $0.8158\pm0.0006$, above the official 188M-parameter
+baselines; label-free retrieval members read from the training graph add
+0.031 and training-time distillation from ten seeds at temperature 2 adds
+0.007, to $0.8528\pm0.0002$, fifth on the board at the smallest size on
+it by $3.5\times$. On \texttt{ogbl-wikikg2} a row-sparse training shell
+fits 2.5M entities in 36 minutes on one GPU; the distilled single model
+reaches $0.6855\pm0.0008$, competitive with the strong single models and
+not compact there (329M parameters). Unseen edges are predicted, not
+stored: a held-out fact is separated from a random false one at AUROC
+0.98 and from the most plausible false alternative at 0.71.
+\emph{Direct access.} A chain of relation operators compiles to one
+operator, so a multi-hop question costs one inner-product search at
+every depth (0.08--0.11~ms, depth 1--6, on a 97k-node graph), an fp16
+index over the table is the whole deployable, and every answer is
+labelled graph-supported or unverified by an exact oracle.
+\emph{Retrieval from language.} On STaRK-Prime, questions in words over
+PrimeKG, the same table continued on edges and training questions
+answers a question from its text with the readout that scores a graph
+query (Hit@1 $26.7\pm0.2$, phrasing gap under one point) while its link
+MRR rises; with a learned parser head, an exact adjacency walk, a
+fine-tuned text ranker and a logistic reranker, and no generative model
+at query time, it reaches 41.8~/~68.3~/~74.8~/~53.7 (Hit@1, Hit@5,
+Recall@20, MRR) on the synthesized test split, twice the best published
+row, and 30.6~/~53.1~/~60.6~/~41.7 on 98 human-written questions. A
+RotatE table of the same width and near-equal link MRR takes the
+identical language projection at 15.8 against 19.7 Hit@1 frozen and 21.2
+against 26.9 jointly: equal link prediction does not imply equal
+usefulness for language.
+\emph{What did not compile.} Two pre-registered attempts to give the
+table an intersection operator failed; real and complex operators tie;
+block size is flat; a learned combiner that would top the wikikg2 board
+is reported and not filed because it is fit on validation labels.
+The observation the evidence supports is that a knowledge representation
+can be more than a link-prediction model: the same compact table
+supports prediction, direct access and language-conditioned retrieval
+without a generative model in the inference path. Code, receipts,
+checkpoints and every development test read are released.
 \end{abstract}
 
 \section{Introduction}
 
-Knowledge-graph embedding models score a triple $(h,r,t)$ by a function
-of learned vectors. On the two link-prediction tasks of Stanford's Open
-Graph Benchmark studied here \citep{hu2020ogb}, the boards are shaped by different things:
-\texttt{ogbl-biokg} is a dense, typed biomedical graph with 51 relations
-where the classic bilinear and rotational families (DistMult, ComplEx,
-RotatE) sit near 0.80--0.81 at roughly 188M parameters and the leaders
-reach 0.85--0.86 through learned scoring functions, auxiliary objectives
-or relation-aware ensembles \citep{ogbl_biokg_leaderboard};
-\texttt{ogbl-wikikg2} is a sparse 2.5M-entity Wikidata subset with 535
-relations and uniform negatives, where the leaders are node-association
-encoders and ensembles at 0.72--0.74 \citep{ogbl_wikikg2_leaderboard},
-and a single 250-dimensional ComplEx scores 0.40.
+A knowledge-graph embedding is usually judged by one number: how well it
+ranks the missing tail of a held-out triple. This report asks a wider
+question of one such model. Given a small table of entity vectors and a
+set of relation operators, how much can be served from that table alone:
+prediction of edges the graph does not contain, multi-hop access at a
+cost that does not grow with the chain, and retrieval from questions
+written in words, without a generative model between the question and
+the answer?
 
-This report describes one model on both. ResonatE was designed for
-multi-hop reasoning: an entity is a unit-norm vector, a relation is a
-linear operator, a hop is ``apply the operator and renormalise'', and a
-chain of hops is a chain of operators. The benchmarks are single-edge
-tasks, so only the one-hop score matters for the boards, but the design
-leaves marks on the results: renormalisation after every hop makes the
-usual N3 regulariser redundant, exact operator composition makes path
-training redundant, type-grouped batches make a relation-prediction loss
-redundant---each verified negatively on \texttt{ogbl-biokg}
-(Section~\ref{sec:negative})---and the compiled operator chain gives
-multi-hop queries a latency that is flat in depth (Section~\ref{sec:beyond}).
+The vehicle is ResonatE: an entity is a unit-norm vector of $M=k^2$
+complex coefficients, a relation and direction is a free block-diagonal
+operator, unitary at initialisation, a hop applies the operator and
+renormalises, and the score of a triple is an inner product against the
+raw target row (Section~\ref{sec:model}). The operator family is close to
+existing ones and is not the claim; it is the thing measured. Six pieces
+of evidence, each with ten seeds and one test read per run under a
+pre-registered protocol (Section~\ref{sec:protocol}), make the case:
 
-The path from one board to the other is the substance of this report.
-The first \texttt{ogbl-biokg} ladder was trained with dense Adam on the
-entity table and published as a preprint on 3 September 2026
-($0.8118 / 0.8425 / 0.8505$). Scaling that shell to 2.5M entities is
-where it stops: Adam streams the whole table and two moments every step.
-The shell was rebuilt for \texttt{ogbl-wikikg2} around a real-view table
-with row-sparse gradients and row-wise Adagrad
-\citep{duchi2011adagrad,lerer2019pbg} ($21\times$ faster per step,
-identical quality), then brought back to \texttt{ogbl-biokg} under a
-pre-registered bar, where it beat the dense ladder on every seed. The
-same happened to the distillation temperature: $T=1$ transferred nothing
-on the large graph, $T=2$ transferred everything, and $T=2$ then improved
-the small graph too. The rows submitted to both boards are the ones that
-came out of this loop; the first ladder is kept as history.
+\begin{enumerate}
+\item \emph{The representation works for graph knowledge.} On
+Stanford's \texttt{ogbl-biokg} \citep{hu2020ogb} the bare 27.1M-parameter
+table scores test MRR $0.8158\pm0.0006$, above the official
+188M-parameter DistMult, ComplEx and RotatE baselines; with label-free
+retrieval members read from the training graph and training-time
+distillation from ten seeds it reaches $0.8528\pm0.0002$, fifth of
+twelve on the board and the smallest entry on it by $3.5\times$. On
+\texttt{ogbl-wikikg2} (2.5M entities) a row-sparse shell trains the
+table in 36 minutes on one GPU and the distilled single model reaches
+$0.6855\pm0.0008$, competitive with the strong single models; it is not
+compact there, and we say so (Section~\ref{sec:results}).
+\item \emph{Missing links are predicted, not stored.} Test MRR is
+already that measurement; in addition, on 598k held-out Wikidata facts
+the model's score separates a true unseen fact from a random false one at
+AUROC 0.98 and from the most plausible false alternative at 0.71, and
+4.18M self-proposed edges at validation-calibrated precision $\ge0.7$
+raised every downstream row (Section~\ref{sec:beyond}).
+\item \emph{Direct access at a cost flat in depth.} A chain of operators
+compiles to one operator, so a multi-hop question is one inner-product
+search: 0.08--0.11~ms at every depth 1--6 on a 97k-node graph, against
+exact traversal that grows with fan-out; an fp16 HNSW index over the
+table (recall@10 0.993--0.994) is the whole deployable; every answer is
+labelled graph-supported or unverified by an exact oracle
+(Section~\ref{sec:beyond}). The readout is linear in the table or
+sublinear through the index; what is constant is the cost in depth.
+\item \emph{Retrieval from language without a generative model.} On
+STaRK-Prime \citep{wu2024stark} the same table, continued on edges and
+training questions, answers a written question with the readout that
+scores a graph query ($26.7\pm0.2$ Hit@1 from the text alone, phrasing
+gap under one point) and its link MRR rises while it learns; a pipeline
+of a learned parser head, an exact adjacency walk, a fine-tuned text
+ranker and a logistic reranker, with no generative model at query time,
+reaches 41.8 Hit@1 on the synthesized test split, twice the best
+published row, and 30.6 on 98 human-written questions
+(Section~\ref{sec:beyond}).
+\item \emph{Equal link prediction does not imply equal usefulness for
+language.} A RotatE table of the same width, trained on the same graph
+under the same regime and tuned to near-equal link MRR, takes the
+identical language projection at 15.8 against 19.7 Hit@1 frozen and 21.2
+against 26.9 when trained jointly (one seed each, stated as such).
+\item \emph{What did not compile.} Two pre-registered attempts to give
+the table an intersection operator, one at query time and one by
+training on conjunctions, did not beat a plain sum of constraint scores;
+real and complex operators tie; block size is flat above $4\times4$; a
+learned combiner that would top the wikikg2 board is reported and not
+filed because it is fit on validation labels
+(Sections~\ref{sec:negative} and \ref{sec:beyond}).
+\end{enumerate}
 
-Our contributions are the five ten-run results (four filed), the two capacity dials
-and the measured reason they differ between the graphs, the retrieval
-members and their two blends, the temperature curve, and a fully
-scripted reproduction path with receipts and released checkpoints for
-both boards. The operator family itself is not a contribution; the next
-paragraph places it.
+The path between the boards is part of the evidence. The first
+\texttt{ogbl-biokg} ladder was trained with dense Adam on the table
+($0.8118/0.8425/0.8505$, published 3 September 2026). Scaling that shell
+to 2.5M entities is where it stops, so it was rebuilt for
+\texttt{ogbl-wikikg2} around a real-view table with row-sparse gradients
+and row-wise Adagrad \citep{duchi2011adagrad,lerer2019pbg}, $21\times$
+faster per step at identical quality, then brought back to the small
+graph under a pre-registered bar, where it beat the dense ladder on every
+seed ($+0.0040$); the distillation temperature found on the large graph
+($T=2$) improved the small one the same way ($+0.0019$); and the same
+table, shell and recipe went to the language benchmark unchanged. The
+leaderboard positions are validation that the representation is not a
+toy; the paper's subject is what it serves.
 
 \paragraph{Relation to prior operator families.}
 Representing a relation as a rotation or a small orthogonal block, so
@@ -490,6 +533,7 @@ split per seed with a GPU for the cosines and about 6~GB of RAM; the
 wikikg2 members are GPU-batched and take seconds to minutes per split.
 
 \section{Results}
+\label{sec:results}
 
 \subsection{\texttt{ogbl-biokg}}
 
@@ -729,7 +773,7 @@ below $T=2$. Two things did not: the learned combiner ($\le+0.0007$ on
 biokg, whose members never conflict) and two-hop members (no change on a
 dense typed graph).
 
-\subsection{What did not work}
+\subsection{What did not compile}
 \label{sec:negative}
 
 Two patterns account for the rejected \texttt{ogbl-biokg} levers
@@ -798,11 +842,13 @@ and the members that help most are the ones that answer ``who speaks
 language X'' through person $\to$ citizenship $\to$ country $\to$
 official language, which is exactly the two-hop path member.
 
-\section{One table for everything}
+\section{Beyond the boards: missing links, direct access, language}
 \label{sec:beyond}
 
-The boards are one-hop scores; the architecture was built for chains,
-and the same table is used, unchanged, for the things below.
+The boards are one-hop scores. This section measures what else the same
+table serves, in the order of the introduction: prediction of edges the
+graph does not contain, access at a cost flat in depth, and retrieval
+from questions in words.
 
 \paragraph{Depth.} On synthetic worlds with exact ground truth at every
 depth, models trained only on chains of depth $\le4$ ($k=8$, 25k steps,
@@ -1030,6 +1076,26 @@ distance readout); trained jointly on edges and questions, 21.2 against
 RotatE showed a two-fold gap and is retracted in the probe's record. The
 allowed statement is that this table takes a language projection better
 than a RotatE table under the same recipe, not that only it can.
+
+\section{Conclusion}
+
+One small table of entity vectors with block-diagonal relation
+operators, trained on edges, serves more than the link-prediction score
+it is usually judged by. It predicts edges the graph does not contain,
+separating true unseen facts from random false ones reliably and from
+near-misses weakly; it answers multi-hop questions at a cost flat in
+depth, from an index that is the whole deployable; and, continued on
+training questions, it answers questions written in words with the
+same readout, at competitive leaderboard positions on three Stanford
+benchmarks with no generative model in the inference path. Equal link
+prediction did not imply equal usefulness for language: a RotatE table
+of the same width and near-equal link MRR took the same projection
+worse. What the table did not learn to do, under two pre-registered
+attempts, is intersect constraints on its own; the exact walk still
+supplies that. The observation the evidence supports is modest and, we
+think, useful: a knowledge representation can be more than a
+link-prediction model, and which functions it supports is a property to
+measure, not to assume.
 
 \section{Reproducibility}
 
