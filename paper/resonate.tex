@@ -1011,10 +1011,18 @@ its MRR to seed-level noise rather than bit-for-bit; the blend stage is
 exact. No external data was used on either board. On STaRK-Prime the
 test splits were read twice in total (both reads reported), the
 human-written set never served development, a 7B instruction model was
-used offline for paraphrases and weak labels only, and the same
-joint-training recipe has not been run on another embedding family, so
-``one table serves both'' is shown for this model and untested for
-others.
+used offline for paraphrases and weak labels only. A reviewer's control
+was run: RotatE (its $L_2$ variant) trained on the same graph at the same
+width (288 numbers per entity) under the same regime and tuned by
+held-out link MRR only (0.549 against 0.557), with the identical
+projector on top. Frozen, its table takes the projection at Hit@1 15.8
+against 19.7 (inner-product readout on both; 15.5 with RotatE's own
+distance readout); trained jointly on edges and questions, 21.2 against
+26.9, and joint training raised RotatE's link MRR by 0.003 against
+0.013 here. One seed each, one dataset; a first pass with an untuned
+RotatE showed a two-fold gap and is retracted in the probe's record. The
+allowed statement is that this table takes a language projection better
+than a RotatE table under the same recipe, not that only it can.
 
 \section{Reproducibility}
 
