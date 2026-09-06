@@ -957,11 +957,19 @@ against 24.9 / 20.9 for a hand-written parser backed by the 7B model.
 With the same parser and anchors, the exact adjacency walk alone scores
 18.9, the model's composed operators alone 19.0 and both 24.9: the walk
 says which candidates are graph-supported and the model says in what
-order. The submitted system runs no language model at query time
-(parser head, walk, model, a fine-tuned text ranker, the table's own
-language readout, a logistic reranker fit on train with out-of-fold
-features); with the 7B parser instead it is two Hit@1 points higher on
-validation, and both are reported. Committed reads, one per split after
+order. The submitted system runs no generative language model at query time;
+what does run is two 110M transformer encoders (the fine-tuned text
+ranker, and the encoder under the parser head and the table readout),
+the adjacency walk, the model and a logistic reranker fit on train with
+out-of-fold features, at 32~ms median (49~ms p90) per question at batch size one on one
+RTX 5090 in 1.9~GB of GPU memory (measured in the probe's repository). With the 7B parser instead it
+is two Hit@1 points higher on validation, and both are reported. The
+published rows it is compared with are the leaderboard's own; their
+training regimes differ (some are fine-tuned on the STaRK train split,
+some are zero-shot embedders, some call a large model at query time)
+and the human set has 98 questions, so its 95\% bootstrap intervals
+are wide (reported in the repository) and no superiority claim is made
+on it beyond what those intervals allow. Committed reads, one per split after
 a dry run that reproduced the validation number to four decimals:
 synthesized 41.8 / 68.3 / 74.8 / 53.7, the 10\% subset 41.8 / 71.1 /
 75.9 / 54.3, human-written 30.6 / 53.1 / 60.6 / 41.7 (Hit@1 / Hit@5 /
