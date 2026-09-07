@@ -16,17 +16,20 @@
 \newcommand{\Rel}{\operatorname{Re}}
 
 \title{Beyond Link Prediction: Compact Knowledge Representations\\ for Prediction, Retrieval, and Direct Access}
-\author{Cristian Malaia\\ \texttt{cristian.malaia@gmail.com} \and Claude Fable 5\\ Anthropic}
+\author{Cristian Malaia\\ \texttt{cristian.malaia@gmail.com}}
 \date{September 2026}
 
 \begin{document}
 \maketitle
 \begin{center}\small\itshape
-Preprint, draft of 6 September 2026. Not peer reviewed. Code, logs,
-receipts and checkpoints: \url{https://github.com/jinxmcg/resonate};
-project page: \url{https://resonate.page}. Four leaderboard entries are
-in process of submission from the receipts in the repository; two further wikikg2
-results are reported but not filed (Section~\ref{sec:protocol}, Compliance).
+Preprint, draft of 7 September 2026. Not peer reviewed. Preliminary
+results of research in progress: every number is self-reported from our
+own runs of the official evaluators, and nothing has been filed on a
+leaderboard yet, for that reason. Code, logs, receipts and checkpoints:
+\url{https://github.com/jinxmcg/resonate}; project page:
+\url{https://resonate.page}. Written with Claude Fable 5 (Anthropic) as
+pair programmer; the claims are the author's responsibility. Two wikikg2
+results are excluded from any filing (Section~\ref{sec:protocol}, Compliance).
 \end{center}
 
 \begin{abstract}
@@ -34,14 +37,15 @@ How much functionality can be compiled into one knowledge-graph
 embedding? We take a small representation---a unit-norm complex
 embedding matrix with block-diagonal relation operators, called ResonatE here and
 used as the experimental vehicle rather than the claim---and measure
-what it serves on three Stanford leaderboards and beyond them, with
-ten seeds, one test read per run, and pre-registered bars.
+what it serves on three Stanford leaderboard tasks and beyond them, on
+the OGB boards with ten seeds, one test read per run, and
+pre-registered bars.
 \emph{Prediction.} On \texttt{ogbl-biokg} the bare 27M-parameter embedding
 scores test MRR $0.8158\pm0.0006$, above the official 188M-parameter
 baselines; label-free retrieval members read from the training graph add
 0.031 and training-time distillation from ten seeds at temperature 2 adds
-0.007, to $0.8528\pm0.0002$, fifth on the board at the smallest size on
-it by $3.5\times$. On \texttt{ogbl-wikikg2} a row-sparse training shell
+0.007, to $0.8528\pm0.0002$, which would place fifth on the current
+board at the smallest size on it by $3.5\times$. On \texttt{ogbl-wikikg2} a row-sparse training shell
 fits 2.5M entities in 36 minutes on one GPU; the distilled single model
 reaches $0.6855\pm0.0008$, competitive with the strong single models and
 not compact there (329M parameters). Unseen edges are predicted, not
@@ -57,10 +61,13 @@ PrimeKG, the same embedding continued on edges and training questions
 answers a question from its text with the readout that scores a graph
 query (Hit@1 $26.7\pm0.2$, phrasing gap under one point) while its link
 MRR rises; with a learned parser head, an exact adjacency walk, a
-fine-tuned text ranker and a logistic reranker, and no generative model
-at query time, it reaches 41.8~/~68.3~/~74.8~/~53.7 (Hit@1, Hit@5,
-Recall@20, MRR) on the synthesized test split, twice the best published
-row, and 30.6~/~53.1~/~60.6~/~41.7 on 98 human-written questions. A
+fine-tuned text ranker and a logistic reranker (two pretrained 110M
+encoders with learned heads around the table, 404M parameters in all),
+and no generative model at query time, it reaches 43.1~/~68.8~/~75.5~/~54.7
+(Hit@1, Hit@5, Recall@20, MRR) on the synthesized test split, twice the
+best published row, and 28.6~/~53.1~/~61.9~/~40.7 on 98 human-written
+questions (the third of four disclosed reads, chosen by a rule fixed
+before the fourth). A
 RotatE embedding of the same width and near-equal link MRR takes the
 identical language projection at 15.8 against 19.7 Hit@1 frozen and 21.2
 against 26.9 jointly: equal link prediction does not imply equal
@@ -71,7 +78,8 @@ block size is flat; a learned combiner that would top the wikikg2 board
 is reported and not filed because it is fit on validation labels.
 The observation the evidence supports is that a knowledge representation
 can be more than a link-prediction model: the same compact representation
-supports prediction, direct access and language-conditioned retrieval
+supports prediction, direct access and, through a separately trained
+pipeline of pretrained encoders around it, language-conditioned retrieval
 without a generative model in the inference path. Code, receipts,
 checkpoints and every development test read are released.
 \end{abstract}
@@ -93,8 +101,10 @@ operator, unitary at initialisation, a hop applies the operator and
 renormalises, and the score of a triple is an inner product against the
 raw target row (Section~\ref{sec:model}). The operator family is close to
 existing ones and is not the claim; it is the thing measured. Six pieces
-of evidence, each with ten seeds and one test read per run under a
-pre-registered protocol (Section~\ref{sec:protocol}), make the case:
+of evidence, the OGB ones with ten seeds and one test read per run under
+a pre-registered protocol (Section~\ref{sec:protocol}), the STaRK probe
+and the control with the seed counts stated where they appear, make the
+case:
 
 \begin{enumerate}
 \item \emph{The representation works for graph knowledge.} On
@@ -102,8 +112,9 @@ Stanford's \texttt{ogbl-biokg} \citep{hu2020ogb} the bare 27.1M-parameter
 embedding scores test MRR $0.8158\pm0.0006$, above the official
 188M-parameter DistMult, ComplEx and RotatE baselines; with label-free
 retrieval members read from the training graph and training-time
-distillation from ten seeds it reaches $0.8528\pm0.0002$, fifth of
-twelve on the board and the smallest entry on it by $3.5\times$. On
+distillation from ten seeds it reaches $0.8528\pm0.0002$, which would
+place fifth of twelve on the current board as the smallest entry on it by
+$3.5\times$. On
 \texttt{ogbl-wikikg2} (2.5M entities) a row-sparse shell trains the
 embedding in 36 minutes on one GPU and the distilled single model reaches
 $0.6855\pm0.0008$, competitive with the strong single models; it is not
@@ -128,10 +139,11 @@ training questions, answers a written question with the readout that
 scores a graph query ($26.7\pm0.2$ Hit@1 from the text alone, phrasing
 gap under one point) and its link MRR rises while it learns; a pipeline
 of a learned parser head, an exact adjacency walk, a fine-tuned text
-ranker and a logistic reranker, with no generative model at query time,
-reaches 41.8 Hit@1 on the synthesized test split, twice the best
-published row, and 30.6 on 98 human-written questions
-(Section~\ref{sec:beyond}).
+ranker and a logistic reranker (two pretrained 110M encoders with
+learned heads around the 37M table, 404M parameters in all), with no
+generative model at query time, reaches 43.1 Hit@1 on the synthesized
+test split, twice the best published row, and 28.6 on 98 human-written
+questions (Section~\ref{sec:beyond}).
 \item \emph{Equal link prediction does not imply equal usefulness for
 language.} A RotatE embedding of the same width, trained on the same graph
 under the same regime and tuned to near-equal link MRR, takes the
@@ -456,11 +468,11 @@ On \texttt{ogbl-wikikg2}, all seed 0 unless noted: two gap diagnostics
 blend guard of 4{,}000 rows on seeds 0, 1 and 5 (0.6785 / 0.6795 /
 0.6791), \textbf{re-read} after the guard was lowered to 500 on validation
 (0.6830 / 0.6848 / 0.6805)---the only runs in this report read twice, and
-row B is not a submitted entry; $T=1$ student pilots, seeds 2 and 0
+row B is not an entry to be filed; $T=1$ student pilots, seeds 2 and 0
 (0.6669 / 0.6672); the ten-seed ensemble with six frozen members (row E,
 0.7129) and with augmented and typed members (E+, 0.7164); and a
 members-only diagnostic (eight shared members under the learned combiner,
-no model: 0.6723). Each submitted \texttt{ogbl-wikikg2} run---the ten
+no model: 0.6723). Each \texttt{ogbl-wikikg2} run of the ladder---the ten
 students' own final evaluations, the ten C-F blends, the ten leave-one-out
 ensembles and the full ensemble---was read exactly once.
 
@@ -470,7 +482,7 @@ hyper-parameter tuning (not allowed: gradient-based search, use as model
 input)'' and the test set for final evaluation. The per-relation blend
 of \texttt{ogbl-biokg} rows B and C is a \emph{selection} among a fixed
 list of at most nine candidate weight vectors per group by validation
-MRR, which we read as hyper-parameter tuning; those rows are filed. The
+MRR, which we read as hyper-parameter tuning; those rows are eligible for filing. The
 \texttt{ogbl-wikikg2} learned combiner (\texttt{learned\_blend.py}) fits
 about 1{,}500 per-relation weights by Adam on a cross-entropy loss whose
 labels are the validation answers, then refits on the full validation
@@ -499,7 +511,7 @@ in-sample (ensemble 0.7998 vs 0.7992 held-out; C-F 0.7880 vs 0.787 over
 the six seeds whose member caches survived; row F 0.7800 vs 0.779 over
 seven seeds), and
 the self-augmentation thresholds are themselves calibrated on validation,
-so the held-out figures are the ones filed. The validation--test gap on
+so the held-out figures are the ones to be filed. The validation--test gap on
 \texttt{ogbl-wikikg2} (0.70 vs 0.67 for a single model) is a relation
 shift, not a fit: ``languages spoken'' is 0.4\% of validation queries and
 21.5\% of test, ``native language'' 0.1\% and 7.4\%; reweighting
@@ -539,7 +551,7 @@ wikikg2 members are GPU-batched and take seconds to minutes per split.
 
 \begin{table}[t]
 \centering
-\caption{\texttt{ogbl-biokg}, the submitted (sparse-shell) ladder and the
+\caption{\texttt{ogbl-biokg}, the sparse-shell ladder (to be filed) and the
 first (dense-Adam) ladder. Ten runs per row, one test read per run.
 ``held-out'' is the blend procedure fit on half of validation and
 measured on the other half; ``valid'' is the in-sample value. Every row
@@ -551,7 +563,7 @@ has 27{,}124{,}129 parameters.}
 \toprule
  & test MRR & valid MRR & held-out & hits@1 & hits@3 & hits@10 \\
 \midrule
-\multicolumn{7}{l}{\emph{sparse shell (in process of submission)}} \\
+\multicolumn{7}{l}{\emph{sparse shell (to be filed; not yet filed)}} \\
 A. single model & $0.8158\pm0.0006$ & $0.8164\pm0.0006$ & --- & 0.746 & 0.866 & 0.941 \\
 B. A + retrieval features & $0.8463\pm0.0004$ & $0.8472\pm0.0004$ & $0.8465\pm0.0004$ & 0.788 & 0.888 & 0.952 \\
 C. distilled ($T=2$) + retrieval & $\mathbf{0.8528\pm0.0002}$ & $0.8537\pm0.0002$ & $0.8532\pm0.0003$ & 0.796 & 0.893 & 0.954 \\
@@ -565,7 +577,7 @@ C. distilled ($T=1$) + retrieval & $0.8505\pm0.0004$ & $0.8515\pm0.0004$ & $0.85
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:biokg} gives the submitted ladder above the first one. The
+Table~\ref{tab:biokg} gives the sparse-shell ladder above the first one. The
 three clusters of ten do not overlap and each step ($+0.031$, $+0.007$)
 is an order of magnitude larger than the seed noise; the held-out
 estimate is within 0.0007 of test on every one of the twenty blend runs.
@@ -581,7 +593,7 @@ $3.5\times$.
 \begin{table}[t]
 \centering
 \caption{Public leaderboard for \texttt{ogbl-biokg} as fetched on
-2026-09-04 \citep{ogbl_biokg_leaderboard}, and where the submitted rows
+2026-09-04 \citep{ogbl_biokg_leaderboard}, and where our rows
 sit.}
 \label{tab:board}
 \small
@@ -628,7 +640,7 @@ A. single model & $0.6676\pm0.0010$ & $0.7030\pm0.0009$ & --- \\
 B. A + 8 members, frozen blend & $0.6820\pm0.0014$ & 0.7413 & --- \\
 B+. + self-augmented members & $0.6866\pm0.0015$ & 0.7467 & --- \\
 F. A + 10 members + learned combiner & $0.7222\pm0.0010$ & 0.7800 & 0.779 \\
-\quad student alone ($T=2$), \textbf{filed} & $\mathbf{0.6855\pm0.0008}$ & 0.7190 & --- \\
+\quad student alone ($T=2$), \textbf{to be filed} & $\mathbf{0.6855\pm0.0008}$ & 0.7190 & --- \\
 C-F. distilled ($T=2$) + members + combiner (not filed) & $0.7320\pm0.0010$ & 0.7880 & 0.787 \\
 ensemble of 10 seeds + members + combiner (not filed) & $0.7426\pm0.0002$ (LOO) & 0.7994 & 0.7992 \\
 \quad full ten-seed ensemble, one read & 0.7430 & 0.7998 & \\
@@ -640,7 +652,7 @@ Table~\ref{tab:wiki} gives the ladder. A single 329M model trained in 36
 minutes reaches 0.6676; the members and the learned combiner add
 $+0.055$; the $T=2$ student adds $+0.010$ more; the ten-seed ensemble
 under the same combiner $+0.011$ beyond that. Table~\ref{tab:wboard}
-places the rows against the public board's top entries. The filed entry,
+places the rows against the public board's top entries. The entry to be filed,
 the distilled single model alone at 0.6855, would sit between TripleRE +
 NodePiece (0.6866) and InterHT (0.6779), eleventh of twenty-eight.
 The two combiner rows are shown for what they measure and are not filed
@@ -652,7 +664,7 @@ single model C-F would be second.
 \centering
 \caption{Top of the public leaderboard for \texttt{ogbl-wikikg2} as
 fetched on 2026-09-04 \citep{ogbl_wikikg2_leaderboard} (28 entries), and
-where the submitted rows sit.}
+where our rows sit.}
 \label{tab:wboard}
 \small
 \begin{tabular}{llcc}
@@ -671,7 +683,7 @@ where the submitted rows sit.}
 8 & TranS \citep{zhang2022trans} & 0.6939 & 38M \\
 9 & TranS (2022) & 0.6882 & 19M \\
 10 & TripleRE + NodePiece & 0.6866 & 36M \\
-  & \textbf{ResonatE: distilled 329M, alone (filed)} & $\mathbf{0.6855}$ & \textbf{329M} \\
+  & \textbf{ResonatE: distilled 329M, alone (to be filed)} & $\mathbf{0.6855}$ & \textbf{329M} \\
 11 & InterHT & 0.6779 & 19M \\
 14 & ComplEx-RP (50-dim) \citep{chen2021relation} & 0.6392 & 250M \\
 23 & ComplEx (250-dim) & 0.4027 & 1.25B \\
@@ -1003,7 +1015,7 @@ against 24.9 / 20.9 for a hand-written parser backed by the 7B model.
 With the same parser and anchors, the exact adjacency walk alone scores
 18.9, the model's composed operators alone 19.0 and both 24.9: the walk
 says which candidates are graph-supported and the model says in what
-order. The submitted system runs no generative language model at query time;
+order. The reference system (P3 in the probe's record) runs no generative language model at query time;
 what does run is two 110M transformer encoders (the fine-tuned text
 ranker, and the encoder under the parser head and the table readout),
 the adjacency walk, the model and a logistic reranker fit on train with
@@ -1015,15 +1027,28 @@ training regimes differ (some are fine-tuned on the STaRK train split,
 some are zero-shot embedders, some call a large model at query time)
 and the human set has 98 questions, so its 95\% bootstrap intervals
 are wide (reported in the repository) and no superiority claim is made
-on it beyond what those intervals allow. Committed reads, one per split after
-a dry run that reproduced the validation number to four decimals:
-synthesized 41.8 / 68.3 / 74.8 / 53.7, the 10\% subset 41.8 / 71.1 /
-75.9 / 54.3, human-written 30.6 / 53.1 / 60.6 / 41.7 (Hit@1 / Hit@5 /
-Recall@20 / MRR), against the best published rows of 20.1 / 39.9 / 42.2
-/ 29.2, 18.3 / 37.3 / 41.1 / 26.6 and 33.0 / 51.4 / 53.3 / 41.0. These
-were our second reads of the test splits; the first, with a
-hand-written parser and an off-the-shelf embedder, gave 28.7 / 28.2 /
-20.4 Hit@1 and is reported alongside. What this does and does not show:
+on it beyond what those intervals allow. Committed reads, each one frozen
+pipeline run once per split after a dry run that reproduced the
+validation number to four decimals. The reference read (P3): synthesized
+43.1 / 68.8 / 75.5 / 54.7, the 10\% subset 41.8 / 72.5 / 77.8 / 54.3,
+human-written 28.6 / 53.1 / 61.9 / 40.7 (Hit@1 / Hit@5 / Recall@20 /
+MRR), against the best published rows of 20.1 / 39.9 / 42.2 / 29.2, 18.3
+/ 37.3 / 41.1 / 26.6 and 33.0 / 51.4 / 53.3 / 41.0. The test splits were
+read four times in all and every read is disclosed (Hit@1 on the
+synthesized / 10\% / human splits): P1, a hand-written parser and an
+off-the-shelf embedder, 28.7 / 28.2 / 20.4; P2, the pipeline above,
+41.8 / 41.8 / 30.6; P3, P2 plus one correctness fix (gene symbols
+shorter than four characters were never matched by the parser), 43.1 /
+41.8 / 28.6; P4, P3 plus a learned selector over four readings of each
+question, 43.7 / 41.8 / 25.5. P3 is the reference by a rule fixed
+before P4 was read: the system put forward is the best model and
+architecture, not the best score, so a correctness fix stays and a
+selector fit to the synthesized templates, which cost five of the 98
+human questions, goes. On 98 questions the differences among P2, P3 and
+P4 are two to five questions, inside the noise. A fifth candidate,
+letting the question vector disambiguate same-name entities before the
+walk (latent-confirmed anchors), lost 1--7 Hit@1 at every threshold on
+training questions and was dropped without a read. What this does and does not show:
 the leaderboard margin on synthesized questions comes largely from
 ordinary pipeline work (a fine-tuned embedder, a reranker); what is the
 model's own is that one table, one readout, serves link prediction, the
@@ -1036,8 +1061,10 @@ min, soft-min, a product of per-constraint probabilities and a soft
 count of satisfied constraints all score below the plain sum on
 validation (13.3--16.5 against 19.0 Hit@1, model alone), because the
 single-hop table was never trained on conjunctions and the parsed
-constraint set is noisy; training on sampled conjunctive queries is the
-untested next step.
+constraint set is noisy. Training the table on 30{,}000 sampled
+conjunctions (pre-registered) doubled its scores on held-out
+conjunctions, but on real questions the plain sum still won; the exact
+walk remains the intersection operator (Section~\ref{sec:negative}).
 
 \section{Limitations and disclosures}
 
@@ -1058,12 +1085,12 @@ ensembles share nine members pairwise. The wikikg2 ensemble entry is ten
 row needs the holder lists of a query's candidates---cheap, but a graph
 lookup the pure embedding does not need. Every development test read is
 listed in Section~\ref{sec:protocol}, including the three runs of a
-non-submitted row that were read twice. Training is seeded but CUDA
+row not to be filed that were read twice. Training is seeded but CUDA
 kernels are not bit-deterministic, so a retrained checkpoint reproduces
 its MRR to seed-level noise rather than bit-for-bit; the blend stage is
 exact. No external data was used on either board. On STaRK-Prime the
-test splits were read twice in total (both reads reported), the
-human-written set never served development, a 7B instruction model was
+test splits were read four times in total (all four reported above),
+the human-written set never served development, a 7B instruction model was
 used offline for paraphrases and weak labels only. A reviewer's control
 was run: RotatE (its $L_2$ variant) trained on the same graph at the same
 width (288 numbers per entity) under the same regime and tuned by
@@ -1086,8 +1113,10 @@ separating true unseen facts from random false ones reliably and from
 near-misses weakly; it answers multi-hop questions at a cost flat in
 depth, from an index that is the whole deployable; and, continued on
 training questions, it answers questions written in words with the
-same readout, at competitive leaderboard positions on three Stanford
-benchmarks with no generative model in the inference path. Equal link
+same readout, inside a separately trained pipeline of pretrained
+encoders, a graph walk and a reranker, at self-reported positions that
+would be competitive on three Stanford leaderboards, with no generative
+model in the inference path. Equal link
 prediction did not imply equal usefulness for language: a RotatE embedding
 of the same width and near-equal link MRR took the same projection
 worse. What the representation did not learn to do, under two pre-registered
@@ -1103,7 +1132,7 @@ The repository \url{https://github.com/jinxmcg/resonate} holds the shared
 model code at its root (\texttt{resonate.py}, the sparse shell
 \texttt{resonate\_wiki.py}, \texttt{rowadagrad.py}) and one folder per
 board. \texttt{biokg/} contains both ladders' trainers, the member and
-blend scripts, the receipts of the submitted ladder
+blend scripts, the receipts of the sparse-shell ladder
 (\texttt{results/sparse}) and of the first (\texttt{results/dense}), a
 \texttt{summarize.py} that recomputes every biokg statistic in this report
 from either, and a \texttt{verify.py} that asserts split disjointness and
@@ -1118,7 +1147,7 @@ the statistics recompute from the receipts, all ten released biokg row-A
 models re-score to their logged test MRR, row B seed 0 rebuilt from its
 checkpoint reproduces the shipped receipt to the last digit, and the
 released wikikg2 teacher and student re-score to their logs.
-The releases carry the twenty submitted \texttt{ogbl-biokg} checkpoints
+The releases carry the twenty sparse-shell \texttt{ogbl-biokg} checkpoints
 (row-A models re-saved in the dense format by an exact reinterpretation
 of the real-view table, and the $T=2$ students), the first ladder's
 twenty, and \texttt{ogbl-wikikg2}'s ten teachers and seven surviving
