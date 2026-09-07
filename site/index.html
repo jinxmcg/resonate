@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ResonatE — one compact representation, multiple knowledge operations</title>
+<meta content="A research knowledge-graph representation measured for link prediction, missing-link completion, direct graph access and, with a separately trained retrieval pipeline around it, natural-language questions without an LLM at query time. Three Stanford leaderboard tasks, self-reported, controls, negative results, receipts." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;450;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="design.css" rel="stylesheet"/></head>
+<body><a class="skip" href="#found">Skip to research</a>
+<div class="topbar"><div class="wrap">
+<span class="brand">RESONATE / RESEARCH</span>
+<span class="spacer"></span>
+<nav aria-label="Main navigation"><a href="#found">Findings</a><a href="#evidence">Evidence</a><a href="#examples">Examples</a><a href="#control">Control</a><a href="#how">How</a><a href="#limits">Limits</a><a href="#paper">Paper</a></nav><a aria-label="ResonatE on GitHub" class="github-link" href="https://github.com/jinxmcg/resonate"><img alt="" height="20" src="assets/github.svg" width="20"/><span>GitHub</span></a></div></div><div aria-label="Research status" class="notice top-disclaimer" role="note"><div class="wrap"><b>Preliminary results</b>This is research in progress, updated as it moves (last change 7 September 2026). Every number here is self-reported from our own runs of the official evaluators; nothing has been filed on a leaderboard yet, for that reason. The experiments still open are listed under Limits and in the research record. Results can be reproduced and checked using the code, released model weights, evaluation scripts and result logs in our <a href="https://github.com/jinxmcg/resonate">OGB</a> and <a href="https://github.com/jinxmcg/resonate-stark">STaRK repositories</a>. See the <a href="https://github.com/jinxmcg/resonate/blob/main/VALIDATE.md">reproduction guide</a> for available checkpoints and coverage.</div></div>
+<section class="hero"><div class="wrap"><div class="hero-grid"><div class="hero-copy"><p class="eyebrow">Independent research / 2026</p><h1>A structure<br/>for knowledge.</h1><p class="intro">A research graph representation, measured for link prediction and missing-fact prediction, for multi-hop graph queries whose cost is O(1) in depth, and, with a separately trained retrieval pipeline around it, for natural-language questions with no generative model at query time.</p><a class="text-link" href="#found">Explore the research <span aria-hidden="true">↗</span></a><div class="hero-meta"><span>RESONATE</span><span>RESEARCH PREVIEW · NOTHING FILED</span></div></div><figure class="hero-art"><img alt="Conceptual sculpture of layered ceramic plates above a limestone cube" height="1280" src="assets/representation.webp" width="1024"/><figcaption>Representation / a conceptual study</figcaption></figure></div><div class="stats">
+<div class="stat"><div class="stat-label">BioKG / test MRR</div><div class="n">0.8528</div><div class="stat-detail">ogbl-biokg test MRR, from 27M parameters; would sit 5th of 12 on the current board, 3.5× smaller than its smallest entry</div></div>
+<div class="stat"><div class="stat-label">WikiKG2 / test MRR</div><div class="n">0.6855</div><div class="stat-detail">ogbl-wikikg2 test MRR, one 329M model trained in 36 min on one GPU</div></div>
+<div class="stat"><div class="stat-label">STaRK-Prime / P3 Hit@1 (%)</div><div class="n">43.1</div><div class="stat-detail">STaRK-Prime Hit@1 on the synthesized test split (P3, self-reported), twice the best published row, no generative model at query time</div></div>
+<div class="stat"><div class="stat-label">STaRK / P2 median latency</div><div class="n">32 ms</div><div class="stat-detail">per natural-language question through the whole pipeline on one RTX 5090; compiled multi-hop graph queries, table only, 0.08–0.11 ms at every depth 1–6</div></div>
+</div><details class="research-note"><summary>About these preliminary results</summary><p class="small">The OGB rows are means of ten seeds with one test read per run, under the official evaluator, with the expected range written down before the read. The STaRK rows are one frozen pipeline read once per split; four such reads happened over the project and all four are listed below. The RotatE control is one seed. Nothing has been filed on any leaderboard yet: every number on this page is self-reported.</p></details></div></section>
+<section id="found"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">01 / What we found</p><h2>One representation supports several operations</h2></div><p>We trained the representation to predict links. Then we measured what else it could do. The graph operations use the link-trained representation as it is. Language did need more: the representation was continued on edges and training questions together, and a separately trained retrieval pipeline was built around it.</p></header>
+<figure class="diagram"><svg aria-label="One embedding feeds four operations: link prediction, missing-link completion, direct access, natural-language retrieval; language enters through pretrained encoders with learned heads, no LLM" role="img" viewbox="0 0 860 300">
+<defs><marker id="arr" markerheight="8" markerwidth="8" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"></path></marker></defs>
+<g class="node"><rect height="64" rx="0" width="170" x="20" y="118"></rect><text class="nt" text-anchor="middle" x="105" y="145">Knowledge graph</text><text class="ns" text-anchor="middle" x="105" y="166">edges, typed entities</text></g>
+<path class="edge" d="M190 150 H250"></path>
+<g class="node core"><rect height="88" rx="0" width="200" x="252" y="106"></rect><text class="nt" text-anchor="middle" x="352" y="138">ResonatE embedding</text><text class="ns" text-anchor="middle" x="352" y="158">unit-norm entity vectors</text><text class="ns" text-anchor="middle" x="352" y="176">+ block relation operators</text></g>
+<path class="edge" d="M452 150 C500 150 500 40 540 40"></path>
+<path class="edge" d="M452 150 C500 150 500 113 540 113"></path>
+<path class="edge" d="M452 150 C500 150 500 186 540 186"></path>
+<path class="edge" d="M452 150 C500 150 500 259 540 259"></path>
+<g class="node out"><rect height="52" rx="0" width="298" x="542" y="14"></rect><text class="nt" x="556" y="35">Link prediction</text><text class="ns" x="556" y="53">three Stanford leaderboards</text></g>
+<g class="node out"><rect height="52" rx="0" width="298" x="542" y="87"></rect><text class="nt" x="556" y="108">Missing-link completion</text><text class="ns" x="556" y="126">AUROC 0.98 against random false claims</text></g>
+<g class="node out"><rect height="52" rx="0" width="298" x="542" y="160"></rect><text class="nt" x="556" y="181">Direct access</text><text class="ns" x="556" y="199">cost O(1) in depth · the index is the deployable</text></g>
+<g class="node out"><rect height="52" rx="0" width="298" x="542" y="233"></rect><text class="nt" x="556" y="254">Natural-language retrieval</text><text class="ns" x="556" y="272">no generative model at query time</text></g>
+<g class="node proj"><rect height="46" rx="0" width="200" x="252" y="236"></rect><text class="nt" text-anchor="middle" x="352" y="255">110M encoder + learned head</text><text class="ns" text-anchor="middle" x="352" y="272">question text → the same space</text></g>
+<path class="edge" d="M452 259 H540"></path>
+</svg><figcaption>One representation, trained on edges, serves the three graph operations as it is. For language it is continued on edges and questions, and a question reaches it through a pretrained 110M text encoder with a learned head, inside a separately trained pipeline; nothing generative sits between the question and the answer.</figcaption></figure>
+<div class="finding"><b>The surprise</b>The same learned representation turned out to be useful for more than the task it was trained for. Once continued on questions, it answers written questions with the same readout that scores a graph edge, and it got better at links while learning to do so.</div>
+<p class="plain">In plain words: we taught a compact model to guess which facts are missing from a medical knowledge graph. It then turned out to also answer questions typed in English, and to answer long chained questions as fast as short ones, without a chatbot anywhere in the loop.</p>
+</div></section>
+<section id="evidence"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">02 / Evidence</p><h2>Three benchmarks, three findings</h2></div><p>Stanford's Open Graph Benchmark link-prediction task, scored by the official Evaluator: the true answer is ranked among 500 sampled alternatives per query, so MRR is a rank statistic, not a percentage of questions answered.</p></header>
+<article class="benchmark"><h3 class="bench"><small>Stanford OGB leaderboard · ogbl-biokg</small>Biomedical graph — 93,773 entities, 51 relations</h3>
+<figure><svg aria-label="BioKG test MRR comparison" height="440" id="boardsvg" role="img" width="780"></svg>
+<figcaption>Test MRR on the live board (fetched 2026-09-04) with the three ResonatE rows. The four bottom rows are the official OGB baselines at 188M parameters each.</figcaption></figure>
+<div class="tablewrap"><table>
+<thead><tr><th>ResonatE row (ten seeds, one test read each)</th><th class="num">test MRR</th><th class="num">params</th><th>status</th></tr></thead>
+<tbody>
+<tr class="ours"><td>A. single model</td><td class="num">0.8158 ± 0.0006</td><td class="num">27.1M</td><td class="nw">self-reported, not yet filed</td></tr>
+<tr class="ours"><td>B. + four label-free retrieval members read from the training graph</td><td class="num">0.8463 ± 0.0004</td><td class="num">27.1M</td><td class="nw">self-reported, not yet filed</td></tr>
+<tr class="ours"><td>C. + distilled at training time from ten seeds (T=2)</td><td class="num">0.8528 ± 0.0002</td><td class="num">27.1M</td><td class="nw">self-reported, not yet filed</td></tr>
+</tbody></table></div>
+<div class="finding"><b>Finding</b>Competitive performance from a compact representation. The bare model beats the official RotatE, ComplEx and DistMult baselines (0.7989, 0.8095, 0.8043) at a seventh of their parameters; the recipe adds 0.037 on top.</div>
+</article><article class="benchmark"><h3 class="bench"><small>Stanford OGB leaderboard · ogbl-wikikg2</small>Wikidata subset — 2,500,604 entities, 535 relations</h3>
+<p>Same architecture, one dial changed on validation (k=8 with one dense 64×64 block per relation instead of k=12 with 4×4 blocks). A row-sparse training shell trains the 329M-parameter model in 36 minutes on one RTX 5090.</p>
+<figure><svg aria-label="WikiKG2 test MRR comparison" height="330" id="wboardsvg" role="img" width="780"></svg>
+<figcaption>Test MRR on the live board (top eight of 28 plus lower rows) with the ResonatE rows. Only the distilled single model is eligible to be filed; none is filed yet.</figcaption></figure>
+<div class="tablewrap"><table>
+<thead><tr><th>ResonatE row</th><th class="num">test MRR</th><th>status</th></tr></thead>
+<tbody>
+<tr class="ours"><td>A. single model</td><td class="num">0.6676 ± 0.0010</td><td>reported</td></tr>
+<tr class="ours"><td>distilled single model (T=2, ten teachers)</td><td class="num">0.6855 ± 0.0008</td><td>self-reported, <b>not yet filed</b></td></tr>
+<tr class="ours"><td>+ retrieval members + learned per-relation combiner</td><td class="num">0.7320 ± 0.0010</td><td>reported, <b>not filed</b>: the combiner is fit by gradient descent on validation labels, which the OGB rule excludes</td></tr>
+<tr class="ours"><td>ten-seed ensemble + members + combiner (leave-one-out)</td><td class="num">0.7426 ± 0.0002</td><td>reported, <b>not filed</b>, same reason; would sit above the current first entry</td></tr>
+</tbody></table></div>
+<div class="finding"><b>Finding</b>The architecture generalises to a very different graph. It is not compact here: the entity table dominates, and a 36M-parameter entry (TripleRE + NodePiece, 0.6866) scores the same as our 329M model. We say so.</div>
+</article><article class="benchmark"><h3 class="bench" id="stark"><small>Stanford STaRK leaderboard · Prime</small>Questions in words over PrimeKG — 129,375 entities, 18 relations</h3>
+<p>Stanford's STaRK benchmark asks written questions ("Which drugs target GCK and are indicated for diabetes?", or a researcher's own phrasing) and scores the ranked entities over the whole graph: Hit@1, Hit@5, Recall@20, MRR. Every strong published row calls GPT-4 or Claude at query time.</p>
+<figure class="diagram"><svg aria-label="STaRK pipeline: a question goes to a learned parser head, then to four sources (exact walk, ResonatE operators, fine-tuned text ranker, ResonatE readout from the question), fused and reranked into ranked entities; no generative LLM" role="img" viewbox="0 0 860 330">
+<g class="node"><rect height="56" rx="0" width="150" x="20" y="126"></rect><text class="nt" text-anchor="middle" x="95" y="150">Question in words</text><text class="ns" text-anchor="middle" x="95" y="169">any phrasing</text></g>
+<path class="edge" d="M170 154 H222"></path>
+<g class="node proj"><rect height="72" rx="0" width="170" x="224" y="118"></rect><text class="nt" text-anchor="middle" x="309" y="143">Learned parser head</text><text class="ns" text-anchor="middle" x="309" y="161">answer type · anchors ·</text><text class="ns" text-anchor="middle" x="309" y="178">relation operators</text></g>
+<path class="edge" d="M394 154 C430 154 430 44 462 44"></path>
+<path class="edge" d="M394 154 C430 154 430 117 462 117"></path>
+<path class="edge" d="M394 154 C430 154 430 190 462 190"></path>
+<path class="edge" d="M394 154 C430 154 430 263 462 263"></path>
+<g class="node"><rect height="40" rx="0" width="220" x="464" y="24"></rect><text class="nt" x="474" y="42">Exact adjacency walk</text><text class="ns" x="474" y="57">which candidates are graph-supported</text></g>
+<g class="node core"><rect height="40" rx="0" width="220" x="464" y="97"></rect><text class="nt" x="474" y="115">ResonatE operators</text><text class="ns" x="474" y="130">in what order</text></g>
+<g class="node"><rect height="40" rx="0" width="220" x="464" y="170"></rect><text class="nt" x="474" y="188">Fine-tuned text ranker</text><text class="ns" x="474" y="203">110M encoder over node text</text></g>
+<g class="node core"><rect height="40" rx="0" width="220" x="464" y="243"></rect><text class="nt" x="474" y="261">ResonatE readout</text><text class="ns" x="474" y="276">from the question itself</text></g>
+<path class="edge" d="M684 44 C716 44 716 154 748 154"></path>
+<path class="edge" d="M684 117 C716 117 716 154 748 154"></path>
+<path class="edge" d="M684 190 C716 190 716 154 748 154"></path>
+<path class="edge" d="M684 263 C716 263 716 154 748 154"></path>
+<g class="node out"><rect height="72" rx="0" width="92" x="750" y="118"></rect><text class="nt" text-anchor="middle" x="796" y="145">Fuse +</text><text class="nt" text-anchor="middle" x="796" y="162">rerank</text><text class="ns" text-anchor="middle" x="796" y="180">→ entities</text></g>
+<text class="ns" text-anchor="middle" x="430" y="318">no generative LLM anywhere · 32 ms per question at batch size 1 · 1.9 GB of GPU memory · every stage measured</text>
+</svg><figcaption>The reference pipeline (P3, not yet filed). The two ResonatE stages are the representation's own operations; the rest is a walk over the graph, two pretrained 110M text encoders with learned heads, and a logistic reranker. Parameters at query time: graph table + operators 37.3M, joint table + operators 37.3M, parser encoder + heads 110.2M, question encoder + head 109.7M, text ranker 109.5M, 404M in all, of which 330M are pretrained encoders fine-tuned here.</figcaption></figure>
+<div aria-label="STaRK-Prime splits" class="tabs" role="tablist">
+<button aria-controls="tab-full" aria-selected="true" id="tabbtn-full" role="tab">Synthesized (full)</button>
+<button aria-controls="tab-ten" aria-selected="false" id="tabbtn-ten" role="tab">Synthesized (10%)</button>
+<button aria-controls="tab-human" aria-selected="false" id="tabbtn-human" role="tab">Human-generated</button>
+</div>
+<div aria-labelledby="tabbtn-full" id="tab-full" role="tabpanel">
+<figure><svg aria-label="STaRK full synthesized Hit at one" height="400" id="starksvg1" role="img" width="780"></svg><figcaption>Synthesized (full), 2,801 questions: Hit@1 for every row on the Stanford STaRK leaderboard (fetched from the leaderboard's source on 2026-09-06), sorted by Hit@1, MRR after the dot. The rows are Stanford's own; no community entry exists for Prime.</figcaption></figure>
+</div>
+<div aria-labelledby="tabbtn-ten" hidden="" id="tab-ten" role="tabpanel">
+<figure><svg aria-label="STaRK ten percent synthesized Hit at one" height="400" id="starksvg2" role="img" width="780"></svg><figcaption>Synthesized (10%), 280 questions.</figcaption></figure>
+</div>
+<div aria-labelledby="tabbtn-human" hidden="" id="tab-human" role="tabpanel">
+<figure><svg aria-label="STaRK human questions Hit at one" height="420" id="starksvg3" role="img" width="780"></svg><figcaption>Human-generated, 98 questions. Sorted by Hit@1, so AvaTaR is first by about four questions and ResonatE is tied at 28.6 with the two LLM rerankers; on Hit@5 and Recall@20 ResonatE is ahead of every row, on MRR it is level with AvaTaR. On 98 questions a 95% bootstrap interval on Hit@1 is about 18 points wide (measured on our P2 read: [21.4, 39.8]).</figcaption></figure>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th>split</th><th class="num">ResonatE (no llm), P3</th><th class="num">best published row, per column</th></tr></thead>
+<tbody>
+<tr class="ours"><td>Synthesized (full, 2,801)</td><td class="num">43.1 / 68.8 / 75.5 / 54.7</td><td class="num">20.1 / 39.9 / 42.2 / 29.2</td></tr>
+<tr class="ours"><td>Synthesized (10%, 280)</td><td class="num">41.8 / 72.5 / 77.8 / 54.3</td><td class="num">18.3 / 37.3 / 41.1 / 26.6</td></tr>
+<tr class="ours"><td>Human-generated (98)</td><td class="num">28.6 / 53.1 / 61.9 / 40.7</td><td class="num">33.0 / 51.4 / 53.3 / 41.0 (AvaTaR, gpt-4-turbo)</td></tr>
+</tbody></table></div>
+<p class="small">Hit@1 / Hit@5 / Recall@20 / MRR. Each read is one frozen pipeline run once per split after a dry run reproduced the validation number to four decimals. All four reads, Hit@1 on test / test-0.1 / human: P1, hand-written parser and off-the-shelf embedder, 28.7 / 28.2 / 20.4. P2, learned parser, fine-tuned ranker, joint table, out-of-fold reranker, 41.8 / 41.8 / 30.6. <b>P3, P2 plus one correctness fix</b> (gene symbols shorter than four characters were never matched), 43.1 / 41.8 / 28.6: the reference system. P4, P3 plus a learned selector over four readings of each question, 43.7 / 41.8 / 25.5: rejected, because the selector is a bolt fit to the synthesized templates and it cost five human questions. The rule we chose before P4 was read: publish the best model and architecture, not the best score, so a bug fix stays and a dataset-specific selector goes. On 98 human questions the differences among P2, P3 and P4 are two to five questions, inside the noise.</p>
+<div class="finding"><b>Finding</b>The same representation can be reached from language through a pretrained encoder with a learned head. Continued on edges and training questions, it answers a question from the text alone at 26.7 ± 0.2 Hit@1 (three seeds), its sensitivity to phrasing is under one point, and its link MRR rose from 0.557 to 0.568 while it learned. The pipeline around it runs no generative model.</div>
+<p class="plain">In plain words: nobody types a database query. You type the question, a learned reader (a pretrained encoder with three small heads) turns it into "which thing, which relation", the graph and the model answer, and no chatbot is consulted.</p>
+</article></div></section>
+<section id="examples"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">03 / Examples</p><h2>What the queries look like</h2></div><p>Four kinds of use, each with real, unedited output. The oracle labels are the graph's: <b>[ok]</b> means a supporting path exists in the training graph, which can itself be incomplete, outdated or wrong; <b>[NOVEL]</b> means the graph holds no such edge, an unverified prediction and not a discovery. How much a [NOVEL] answer is worth is measured, not assumed: on 598,543 held-out Wikidata facts the model's score separates a true unseen fact from a random false claim at AUROC 0.98, and from the most plausible false alternative at 0.71.</p></header>
+<details class="example"><summary>1. Drug repurposing queries (Hetionet, 2026-09-01)</summary>
+<p>Ask what else a drug might treat. The model ranks every disease against Metformin in about 3 ms, the oracle labels each answer in under 1 ms, and every [NOVEL] answer carries analogy evidence: the most similar drugs that already have that edge.</p>
+<pre class="term"><code><span class="cmd">$ uv run python query.py Metformin CtD -k 8</span>          <span class="dim"># CtD = Compound-treats-Disease</span>
+  #    score  oracle   entity
+  1    13.26  <span class="novf">[NOVEL]</span>  obesity                     <span class="dim">↳ analogy: Phendimetrazine (0.48), Cimetidine (0.47), Benzphetamine (0.46)</span>
+  2    12.94  <span class="okf">[ok]</span>     type 2 diabetes mellitus
+  3    12.87  <span class="okf">[ok]</span>     metabolic syndrome X
+  4    12.80  <span class="okf">[ok]</span>     polycystic ovary syndrome
+  5    11.86  <span class="novf">[NOVEL]</span>  hypertension                <span class="dim">↳ analogy: Reserpine (0.47), Fosinopril (0.45), Carvedilol (0.45)</span>
+  6    10.39  <span class="novf">[NOVEL]</span>  type 1 diabetes mellitus    <span class="dim">↳ analogy: Ramipril (0.41)</span>
+  7    10.22  <span class="novf">[NOVEL]</span>  coronary artery disease     <span class="dim">↳ analogy: Atorvastatin (0.43), Losartan (0.42), Pitavastatin (0.41)</span>
+  8    10.07  <span class="novf">[NOVEL]</span>  hematologic cancer          <span class="dim">↳ analogy: Doxorubicin (0.43), Methotrexate (0.40), Epirubicin (0.39)</span>
+<span class="dim">3/8 oracle-verified, 5 flagged [NOVEL] by our oracle · exact-answer set |valid| = 3 · model 3.42 ms · oracle 0.44 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python query.py Ibuprofen CbG.~DaG -k 6</span>      <span class="dim"># binds gene → gene linked to disease (two hops)</span>
+  1    12.24  <span class="okf">[ok]</span>     hypertension
+  2    11.68  <span class="okf">[ok]</span>     prostate cancer
+  3    11.56  <span class="okf">[ok]</span>     breast cancer
+  4    11.51  <span class="okf">[ok]</span>     obesity
+  5    11.46  <span class="okf">[ok]</span>     epilepsy syndrome
+  6    11.43  <span class="okf">[ok]</span>     hematologic cancer
+<span class="dim">6/6 oracle-verified · model 3.50 ms · oracle 0.71 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python query.py Metformin CbG.GiG.~DaG -k 5</span>  <span class="dim"># three hops through gene interactions, same cost</span>
+  1    11.61  <span class="okf">[ok]</span>     hematologic cancer
+  2    11.56  <span class="okf">[ok]</span>     lung cancer
+  3    11.41  <span class="okf">[ok]</span>     breast cancer
+  4    11.35  <span class="okf">[ok]</span>     epilepsy syndrome
+  5    11.19  <span class="okf">[ok]</span>     hypertension
+<span class="dim">5/5 oracle-verified · model 3.56 ms · oracle 0.79 ms</span></code></pre>
+<p class="small">On the trained metapath libraries the top answer is oracle-verified 94.6–100% of the time across all ten DRKG paths and 99–100% on all eight Hetionet paths. On DRKG's 496 held-out <i>treats</i> edges the model ranks the true disease 4.0× better than a popularity baseline. The analogy evidence is measured, not decorative: on the benchmark's rarest side effects it alone outperforms the full embedding.</p>
+</details><details class="example"><summary>2. Absorbing new knowledge in minutes (DRKG)</summary>
+<p>Knowledge graphs go stale and retraining is the usual price. Fine-tuning the 496 held-out <i>treats</i> edges into a trained model took 1,500 steps, 223 seconds of wall-clock on a single laptop GPU, and absorbed all of them to rank 1 (MRR 0.147 → 1.000), with a worst regression elsewhere of −0.008. That closes a loop: the model proposes a [NOVEL] edge, a caller corroborates it against literature, a minutes-long fine-tune absorbs it.</p>
+</details><details class="example"><summary>3. Wikidata lookup and completion (ogbl-wikikg2, 2026-09-03)</summary>
+<p>The same tool on the 2.5M-entity graph: an exact readout over all rows in about 33 ms per query on the GPU, Python and top-k dominated (the readout itself is 2.4–3.3 ms; the fp16 HNSW index answers in 2.2 ms on CPU). Run against an early 200k-step checkpoint with a per-entity bias term, not the final model; transcript verbatim, scores omitted for width. The third block is included because it shows the failure mode: confident, plausible, wrong proposals.</p>
+<pre class="term"><code><span class="cmd">$ uv run python query_wiki.py Q42 ~P50 -k 10</span>       <span class="dim"># Douglas Adams, reverse of "author": his works · oracle: 13 reachable</span>
+   1  <span class="okf">[ok]</span>     The Restaurant at the End of the Universe
+   2  <span class="okf">[ok]</span>     Douglas Adams's Guide to The Hitchhiker's…
+   3  <span class="okf">[ok]</span>     So Long and Thanks for All the Fish
+   4  <span class="okf">[ok]</span>     The Salmon of Doubt
+   5  <span class="okf">[ok]</span>     The Long Dark Tea-Time of the Soul
+   6  <span class="okf">[ok]</span>     The Meaning of Liff
+   7  <span class="okf">[ok]</span>     Last Chance to See
+   8  <span class="okf">[ok]</span>     Life the Universe and Everything
+   9  <span class="okf">[ok]</span>     Dirk Gently's Holistic Detective Agency
+  10  <span class="okf">[ok]</span>     Mostly Harmless
+<span class="dim">10/10 oracle-verified · ~33 ms per query end to end on the GPU (the exact readout over 2.5M rows is 2.4–3.3 ms; the rest is Python and top-k)</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python query_wiki.py Q42 P800 -k 10</span>       <span class="dim"># notable work · oracle: 2 reachable</span>
+   1  <span class="novf">[NOVEL]</span>  Last Chance to See
+   2  <span class="novf">[NOVEL]</span>  The Restaurant at the End of the Universe
+   3  <span class="novf">[NOVEL]</span>  Douglas Adams's Guide to The Hitchhiker's…
+   4  <span class="okf">[ok]</span>     Dirk Gently's Holistic Detective Agency
+   5  <span class="novf">[NOVEL]</span>  Mostly Harmless
+   6  <span class="novf">[NOVEL]</span>  Dirk Gently
+   7  <span class="novf">[NOVEL]</span>  The Long Dark Tea-Time of the Soul
+   8  <span class="novf">[NOVEL]</span>  So Long and Thanks for All the Fish
+   9  <span class="novf">[NOVEL]</span>  The Hitchhiker's Guide to the Galaxy
+  10  <span class="novf">[NOVEL]</span>  The Hitchhiker's Guide to the Galaxy (Q3107329, a second item with the same label)
+<span class="dim">our oracle flagged 9 of 10 as [NOVEL], unverified by the graph; they are real Adams works or adaptations that the benchmark graph does not hold under this relation · ~33 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python query_wiki.py Q42 P69 -k 10</span>        <span class="dim"># educated at · oracle: 2 reachable</span>
+   1  <span class="okf">[ok]</span>     University of Cambridge
+   2  <span class="okf">[ok]</span>     St John's College
+   3  <span class="novf">[NOVEL]</span>  Harvard University
+   4  <span class="novf">[NOVEL]</span>  Trinity College
+   5  <span class="novf">[NOVEL]</span>  University of York
+   6  <span class="novf">[NOVEL]</span>  University of Oxford
+   7  <span class="novf">[NOVEL]</span>  University College London
+   8  <span class="novf">[NOVEL]</span>  Pembroke College
+   9  <span class="novf">[NOVEL]</span>  Royal Academy of Dramatic Art
+  10  <span class="novf">[NOVEL]</span>  University of Manchester
+<span class="dim">our oracle flagged 8 of 10 as [NOVEL] · ~33 ms · the two known edges rank 1 and 2. The flagged proposals are WRONG: Adams was not educated at any of these eight. Measured on the 598,543 held-out wikikg2 facts, the model's score separates a true unseen fact from a random false claim at AUROC 0.98, but from the most plausible false alternative at only 0.71 — these universities are the 0.71 kind, and the [NOVEL] flag is what keeps them from being read as facts</span></code></pre>
+</details><details class="example"><summary>4. Questions in words, no language model in the loop (STaRK-Prime)</summary>
+<p>Free-form questions typed into <code>ask.py</code>, the pipeline from the command line, on jinx's GTX 1080 Ti, warm (the same stages take 32 ms on an RTX 5090). There is no ground truth here; the flags are the graph's. The first line of each answer is what the parser read. <b>[ok]</b> means the entity is reached by the exact walk from the anchors it read; <b>[--]</b> means it is not graph-supported from what was read and came from the text ranker or the question readout. Nine questions, chosen to show both what works and what does not. The first eight were recorded with the P2 parser; the P3 fix changes only how two- and three-letter gene symbols are matched, and the ninth question, which turns on exactly that, was re-run under P3.</p>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "Which drugs are used to treat Parkinson disease and also carry a risk of hallucinations?"</span>
+  read: answer type = drug · anchors = Parkinson disease (disease), Hallucinations (effect/phenotype)
+   1  <span class="okf">[ok]</span>  Selegiline
+   2  <span class="okf">[ok]</span>  Apomorphine
+   3  <span class="okf">[ok]</span>  Pramipexole
+   4  <span class="okf">[ok]</span>  Ropinirole
+   5  <span class="okf">[ok]</span>  Entacapone
+<span class="dim">5/5 graph-supported · two constraints, both read, intersected by the walk · 291 ms as the first question of the session (warm-up), about 100 ms after</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "shared gene targets of diethylstilbestrol and levothyroxine?"</span>
+  read: answer type = gene/protein · anchors = Diethylstilbestrol (drug), Levothyroxine (drug)
+   1  <span class="okf">[ok]</span>  TTR
+   2  <span class="okf">[ok]</span>  SERPINA7
+   3  <span class="okf">[ok]</span>  SHBG
+   4  <span class="okf">[ok]</span>  THRB
+   5  <span class="okf">[ok]</span>  SLC7A5
+<span class="dim">5/5 graph-supported · parse 17 ms · walk+model 73 ms · text 10 ms · readout 7 ms · rerank 1 ms · total 109 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "which pathways involve the BRCA1 protein"</span>
+  read: answer type = pathway · anchors = BRCA1 (gene/protein)
+   1  <span class="okf">[ok]</span>  Defective DNA double strand break response due to BRCA1 loss of function
+   2  <span class="okf">[ok]</span>  Homologous DNA Pairing and Strand Exchange
+   3  <span class="okf">[ok]</span>  G2/M DNA damage checkpoint
+   4  <span class="okf">[ok]</span>  Meiotic recombination
+   5  <span class="okf">[ok]</span>  Defective DNA double strand break response due to BARD1 loss of function
+<span class="dim">5/5 graph-supported · total 68 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "diseases associated with the CFTR gene"</span>
+  read: answer type = disease · anchors = CFTR (gene/protein), cystic fibrosis (disease)
+   1  <span class="okf">[ok]</span>  cystic fibrosis
+   2  <span class="okf">[ok]</span>  congenital bilateral aplasia of vas deferens from CFTR mutation
+   3  <span class="okf">[ok]</span>  congenital bilateral absence of vas deferens
+   4  <span class="okf">[ok]</span>  polycystic kidney disease
+   5  <span class="okf">[ok]</span>  bronchiectasis with or without elevated sweat chloride
+<span class="dim">5/5 graph-supported · total 70 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "genes linked to Noonan syndrome that are expressed in the dorsolateral prefrontal cortex"</span>
+  read: answer type = gene/protein · anchors = dorsolateral prefrontal cortex (anatomy), Noonan syndrome (disease)
+   1  <span class="okf">[ok]</span>  BRAF
+   2  <span class="okf">[ok]</span>  SOS2
+   3  <span class="okf">[ok]</span>  MAGEL2
+   4  <span class="okf">[ok]</span>  NDN
+   5  <span class="okf">[ok]</span>  SHOC2
+<span class="dim">5/5 graph-supported · total 82 ms</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "which proteins interact with TP53 and are targeted by an approved drug"</span>
+  read: answer type = gene/protein · anchors = TP53 (gene/protein) · relation hints = ppi
+   1  <span class="okf">[ok]</span>  MDM4
+   2  <span class="okf">[ok]</span>  MDM2
+   3  <span class="okf">[ok]</span>  AKT1
+   4  <span class="okf">[ok]</span>  TP63
+   5  <span class="novf">[--]</span>  TP53
+<span class="dim">4/5 graph-supported · total 71 ms · the second constraint (targeted by an approved drug) was read as a hint only; TP53 itself is returned at rank 5, unsupported, by the text ranker</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "what conditions is metformin used for"</span>
+  read: answer type = disease · anchors = Metformin (drug)
+   1  <span class="okf">[ok]</span>  diabetes mellitus
+   2  <span class="okf">[ok]</span>  hemoglobinopathy
+   3  <span class="okf">[ok]</span>  hypoglycemia
+   4  <span class="okf">[ok]</span>  type 2 diabetes mellitus
+   5  <span class="okf">[ok]</span>  gestational diabetes
+<span class="dim">5/5 graph-supported · total 72 ms · hemoglobinopathy and hypoglycemia are supported through Metformin's contraindication edges: the walk found them, the question did not ask for them, and no stage removed them</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py "rare genetic disorders that present with hearing loss and kidney problems"</span>
+  read: answer type = disease · anchors = kidney (anatomy) · relation hints = expression present
+   1  <span class="novf">[--]</span>  deafness, autosomal recessive
+   2  <span class="novf">[--]</span>  retinitis pigmentosa-hearing loss-premature aging-short stature-facial dysmorphism syndrome
+   3  <span class="novf">[--]</span>  nephropathy, progressive, with deafness
+   4  <span class="novf">[--]</span>  Alport syndrome
+   5  <span class="novf">[--]</span>  autosomal recessive Alport syndrome
+<span class="dim">0/5 graph-supported · total 95 ms · the parser read only kidney, so the walk had nothing to intersect; Alport syndrome and progressive nephropathy with deafness are the text ranker's and the readout's answers, plausible and unverified. This is what the flag is for</span></code></pre>
+<pre class="term"><code><span class="cmd">$ uv run python ask.py --parser models/lp_p3.pt "Which drugs target GCK and are indicated for diabetes?"</span>
+  read: answer type = drug · anchors = GCK (gene/protein) · relation hints = target
+   1  <span class="okf">[ok]</span>  Beta-D-Glucose
+   2  <span class="okf">[ok]</span>  3-[(4-fluorophenyl)sulfanyl]-N-(4-methyl-1,3-thiazol-2-yl)-6-[(4-methyl-4H-1,2,4-triazol-3-yl)sulfanyl]pyridine-2-carboxamide
+   3  <span class="okf">[ok]</span>  2-(methylamino)-N-(4-methyl-1,3-thiazol-2-yl)-5-[(4-methyl-4H-1,2,4-triazol-3-yl)sulfanyl]benzamide
+   4  <span class="okf">[ok]</span>  2-AMINO-4-FLUORO-5-[(1-METHYL-1H-IMIDAZOL-2-YL)SULFANYL]-N-(1,3-THIAZOL-2-YL)BENZAMIDE
+   5  <span class="novf">[--]</span>  Insulin glargine
+<span class="dim">4/5 graph-supported · parse 7.7 ms · walk+model 30.1 ms · text 6.9 ms · readout 7.4 ms · rerank 0.5 ms · total 52.6 ms · under P2 this question anchored nothing (three-letter symbols were skipped) and returned the text ranker's antidiabetics, all unsupported; under P3, GCK is anchored and the four supported answers are glucokinase ligands from the graph. The second constraint (indicated for diabetes) was read as a hint only, so nothing enforced it; Insulin glargine at rank 5 is the text ranker's, unsupported</span></code></pre>
+<p class="small">Every stage of these answers runs without a generative model: a learned parser head reads the question, the graph walk and the ResonatE operators propose and order candidates, a text ranker and the question readout add theirs, a logistic reranker combines them. Where it fails, it fails on reading, as in the eighth example and in the P2 version of the ninth, not on the facts; the flag says which answers rest on the graph and which on plausibility.</p>
+</details></div></section>
+<section id="control"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">04 / The controlled experiment</p><h2>Is it just any good embedding?</h2></div><p>Maybe any similarly accurate knowledge-graph embedding would take the language projection equally well. We tested that: RotatE trained on the same graph at the same width (288 numbers per entity), under the same regime, tuned by held-out link quality only, and the identical projector trained on top of both.</p></header>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th class="num">link MRR</th><th class="num">frozen, STaRK Hit@1</th><th class="num">joint, STaRK Hit@1</th><th class="num">link MRR after joint</th></tr></thead>
+<tbody>
+<tr class="ours"><td>ResonatE</td><td class="num">0.557</td><td class="num">19.7</td><td class="num">26.9</td><td class="num">0.570</td></tr>
+<tr><td>tuned RotatE (inner-product readout)</td><td class="num">0.549</td><td class="num">15.8</td><td class="num">21.2</td><td class="num">0.552</td></tr>
+<tr><td>tuned RotatE (its own distance readout)</td><td class="num">0.549</td><td class="num">15.5</td><td class="num">16.7</td><td class="num">0.550</td></tr>
+</tbody></table></div>
+<div class="finding"><b>Finding</b>Nearly equal link-prediction quality did not produce equal downstream retrieval. The ResonatE table took the same projection 4 points better frozen and 6 points better jointly, and joint training raised its link quality four times as much.</div>
+<p class="small">Caveats, stated with the result: one seed each, one dataset, RotatE's L2 variant, the same training recipe for both. Our first pass used an untuned RotatE and showed a two-fold gap; that number is retracted in the record and the tuned one stands. We do not claim to know why the difference exists.</p>
+</div></section>
+<section id="how"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">05 / What produced these results</p><h2>The architecture</h2></div></header>
+<div class="two">
+<div>
+<h3>The representation</h3>
+<p>Each entity is a unit-norm vector of k² complex numbers: k=12 (144 numbers) on biokg and PrimeKG, k=8 (64) on wikikg2. Each relation and direction is a block-diagonal operator, unitary at initialisation and free afterwards: 36 blocks of 4×4 on biokg, one dense 64×64 block on wikikg2. A hop applies the operator and renormalises. The score of a triple is an inner product against the raw target row.</p>
+<p>Because the per-hop renormalisation is a scalar, a chain of operators compiles into one operator, and a multi-hop question is one inner-product search over the entity rows. That is what "O(1) in depth" means: the readout is linear in the number of entities, or sublinear through an fp16 HNSW index (recall@10 0.993–0.994); the cost in chain depth is constant.</p>
+</div>
+<div>
+<h3>The training shell and the recipe</h3>
+<p>The entity table is stored through its real view and read with a sparse lookup, so a step touches only the rows in the batch and the optimiser keeps one number per row (row-wise Adagrad): 21× faster per step than dense Adam at identical quality, 2.5M entities in 36 minutes on one GPU.</p>
+<p>The recipe, each lever measured with ten seeds: label-free retrieval members read from the training graph (+0.031 on biokg), distillation at training time from ten seeds at temperature 2 (+0.007), two capacity dials set on validation, and for language a fine-tuned text ranker, a learned parser head and a logistic reranker fit on train with out-of-fold features.</p>
+<p>Total rented compute for the two OGB boards: $52.93, every RTX 5090 hour over three days at $0.60 per hour. The STaRK pipeline's own training is about an hour on one RTX 5090: the table (50k steps, ~4 min), its continuation on edges and questions (~5 min), the text-ranker fine-tune (~2 min), the parser head (~4 min), the reranker (seconds), and five out-of-fold refits of the continued table and parser head for honest reranker features. The offline 7B augmentation (paraphrases of the training questions, weak labels for the parser) is on top of that.</p>
+</div>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th class="nw">graph</th><th class="num">entities</th><th class="num">params</th><th class="nw">dial</th><th class="num">training (one RTX 5090)</th><th class="num">GPU memory</th><th class="num">serving (fp16)</th></tr></thead>
+<tbody>
+<tr><td class="nw">ogbl-biokg</td><td class="num">93,773</td><td class="num">27.1M</td><td class="nw">k=12, 4×4 blocks</td><td class="num">50k steps in 231 s</td><td class="num">0.7 GB</td><td class="num">54 MB</td></tr>
+<tr><td class="nw">ogbl-wikikg2</td><td class="num">2,500,604</td><td class="num">328.8M</td><td class="nw">k=8, dense 64×64</td><td class="num">800k steps in 36.5 min</td><td class="num">3.0 GB</td><td class="num">0.6 GB</td></tr>
+<tr><td class="nw">PrimeKG (STaRK)</td><td class="num">129,375</td><td class="num">37.3M<br/><span style="font-family:Spectral,Georgia,serif;font-size:.8rem;color:var(--muted)">(404M for the whole language pipeline)</span></td><td class="nw">k=12, 4×4 blocks</td><td class="num">50k steps in ~4 min</td><td class="num">8.5 GB</td><td class="num">75 MB</td></tr>
+</tbody></table></div>
+<p class="small">GPU memory is the peak allocated by PyTorch during training steps (row-sparse shell, measured over a 300-step run of each recipe). PrimeKG's figure is the largest because its recipe scores 2,048 queries against 4,096 shared negatives per step over 144 complex dimensions; wikikg2 uses 64. Serving needs only the fp16 table: 54 MB, 0.6 GB and 75 MB; the fp16 HNSW index on wikikg2 is 1.98 GB. The STaRK pipeline at query time holds 1.9 GB in total, most of it the three 110M text encoders (parser, question readout, text ranker); the two 37M tables are a tenth of its 404M parameters.</p>
+</div></section>
+<section id="limits"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">06 / What we can and cannot conclude</p><h2>Observed, and not established</h2></div></header>
+<div class="two">
+<div>
+<h3>Observed</h3>
+<ul>
+<li>Strong link prediction on two OGB boards, top of the synthesized STaRK splits.</li>
+<li>A compact representation on biokg: 27M parameters, above the 188M official baselines.</li>
+<li>Missing-link completion: true unseen facts separated from random false ones at AUROC 0.98, from the most plausible false alternative at 0.71; 496 new facts absorbed to rank 1 in 223 s on a laptop GPU.</li>
+<li>Direct access to the graph, O(1) in depth: compiled chains at 0.08–0.11 ms for depth 1–6; for these graph queries the fp16 table or index is the whole deployable; an exact oracle labels every answer graph-supported or unverified. This describes the graph operations, not the language pipeline.</li>
+<li>Natural-language retrieval with no generative model at query time, through a separately trained pipeline around the representation: two pretrained 110M encoders with learned heads, a text ranker, a graph walk and a logistic reranker.</li>
+<li>Better STaRK transfer than the tested, tuned RotatE control.</li>
+</ul>
+</div>
+<div>
+<h3>Not established</h3>
+<ul>
+<li>A new geometry. The operator family is close to existing ones and is not the claim.</li>
+<li>Why ResonatE transfers to language better than the control.</li>
+<li>That the language pipeline and the representation form one model. They do not: the pipeline is a separate stack trained around the table. A shared encoder for both is an untested proposal.</li>
+<li>Universality across graphs and tasks: three graphs, one seed on the control.</li>
+<li>That LLMs are unnecessary for arbitrary knowledge reasoning. This is retrieval over one graph.</li>
+<li>That the architecture is optimal, or compact on large graphs: on wikikg2 it is not.</li>
+<li>An intersection operator. "Drugs that target X <i>and</i> treat Y" still needs the exact graph walk; two pre-registered attempts to put the AND into the representation failed.</li>
+</ul>
+</div>
+</div>
+<p class="plain">In plain words: we know what it does because we measured it. We do not yet know why it does some of it better than a standard alternative, and we do not claim it can reason.</p>
+</div></section>
+<section id="paper"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">07 / Paper · code · checkpoints · experiments · reproduce</p><h2>Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access</h2></div><p>Preprint, draft of 6 September 2026, not peer reviewed. Cristian Malaia, with Claude Fable 5 (Anthropic) as pair programmer. Every number on this page is in the paper with its receipt.</p></header>
+<div class="links">
+<a href="https://github.com/jinxmcg/resonate/blob/main/paper/resonate.pdf">Paper (PDF)</a>
+<a href="https://github.com/jinxmcg/resonate">Code and checkpoints (OGB)</a>
+<a href="https://github.com/jinxmcg/resonate-stark">Code and weights (STaRK)</a>
+<a href="https://github.com/jinxmcg/resonate/blob/main/VALIDATE.md">Reproduce on a fresh machine</a>
+<a href="https://github.com/jinxmcg/resonate-stark/blob/main/PLAN_PRIME.md">Every STaRK experiment, in order</a>
+</div>
+<h3>Negative results, changed hypotheses, corrections</h3>
+<ul>
+<li><b>RotatE control, first pass retracted.</b> An untuned RotatE showed a two-fold gap on the language projection; tuning it by link quality closed most of that. The tuned gap of 4–6 Hit@1 is what we report.</li>
+<li><b>Two failed attempts at an AND.</b> A query-time intersection readout (min, soft-min, product, soft count) scored below a plain sum; training the representation on 30,000 sampled conjunctions doubled its scores on held-out conjunctions but the sum still won. Both were pre-registered with predictions that turned out wrong on the level.</li>
+<li><b>Real versus complex operators: no difference</b> (0.7923 vs 0.7897 on the validation screen). <b>Block size: flat</b> above 4×4. Fourteen rejected levers are documented in the paper.</li>
+<li><b>STaRK: a higher-scoring read rejected, and three levers dropped.</b> P4 added a learned selector over four readings of each question and scored 43.7 on the synthesized test split against P3's 43.1, but lost five of 98 human questions; it is a bolt fit to the synthesized templates and was rejected. Three further pre-registered levers stayed on validation or train and were dropped: alias matching for symbols (−0.2), a text ranker fine-tuned with terse paraphrases (no gain over three seeds), and P5, latent-confirmed anchors that let the question vector disambiguate same-name entities, which lost 1 to 7 Hit@1 at every threshold on train and never reached validation.</li>
+<li><b>Two wikikg2 rows not filed.</b> The learned combiner is fit on validation labels; OGB's rule excludes that. Reported with receipts, not entered.</li>
+<li><b>Every development test read is listed</b>, including the three runs of a non-submitted row read twice and the four reads of the STaRK test splits (P1 to P4, all in the table above).</li>
+</ul>
+<p class="plain">The whole story in one paragraph: we built a compact knowledge representation to predict links. It performed well. We then found that the same representation supports direct access as it is, and natural-language retrieval once continued on questions and wrapped in a separately trained pipeline of pretrained encoders, a graph walk and a reranker. We ran a control to see whether that property was generic, and it was not entirely. We do not yet claim to know why.</p>
+</div></section>
+<footer><div class="wrap">
+  ResonatE · <a href="https://github.com/jinxmcg/resonate">github.com/jinxmcg/resonate</a> · <a href="https://github.com/jinxmcg/resonate-stark">github.com/jinxmcg/resonate-stark</a> · MIT license · leaderboard numbers as fetched from the live boards on 2026-09-04 (OGB) and 2026-09-06 (STaRK).
+</div></footer>
+<script>
+(function(){
+  function el(p,t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function drawBoard(id,rows,max,fmt){
+    fmt=fmt||function(v){return v.toFixed(4);};
+    var svg=document.getElementById(id); if(!svg) return;
+    var W=980,L=360,R=185,T=16,rh=18,gap=16;
+    var H=T+rows.length*(rh+gap)+4; svg.setAttribute('height',H); svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width','100%');
+    rows.forEach(function(r,i){
+      var y=T+i*(rh+gap);
+      el(svg,'text',{x:L-8,y:y+rh-7,'text-anchor':'end',style:r[3]?'font-weight:600':''},r[0]);
+      el(svg,'rect',{x:L,y:y,width:(W-L-R)*(r[1]/max),height:rh,rx:0,class:'bar'+(r[3]?' ours':'')});
+      el(svg,'text',{x:L+(W-L-R)*(r[1]/max)+6,y:y+rh-7,'text-anchor':'start'},fmt(r[1])+(r[2]?' · '+r[2]:''));
+    });
+  }
+  drawBoard('boardsvg',[
+      ['RelEns (ensemble)',.9618,'849M',0],
+      ['ComplEx²',.8583,'188M',0],
+      ['UniBi',.8550,'182M',0],
+      ['AutoBLM-KGBench',.8536,'192M',0],
+      ['ResonatE 27M distilled + retrieval',.8528,'27M',1],
+      ['ComplEx-RP',.8492,'188M',0],
+      ['ResonatE 27M + retrieval',.8463,'27M',1],
+      ['TripleRE',.8348,'470M',0],
+      ['AutoSF',.8309,'94M',0],
+      ['PairRE',.8164,'188M',0],
+      ['ResonatE 27M (single)',.8158,'27M',1],
+      ['ComplEx',.8095,'188M',0],
+      ['DistMult',.8043,'188M',0],
+      ['RotatE',.7989,'188M',0],
+      ['TransE',.7452,'188M',0]], 1.0);
+  drawBoard('wboardsvg',[
+      ['ResonatE ×10 + retrieval + combiner (not filed)',.7426,'3.29B',1],
+      ['RelEns (ensemble)',.7392,'2.18B',0],
+      ['ResonatE distilled + retrieval + combiner (not filed)',.7320,'329M',1],
+      ['StarGraph + TripleRE + Text',.7305,'1.93B',0],
+      ['InterHT+',.7293,'156M',0],
+      ['StarGraph + TripleRE',.7286,'93M',0],
+      ['InterHT+ (256-dim)',.7257,'148M',0],
+      ['StarGraph + TripleRE (2022)',.7201,'87M',0],
+      ['CompoundE3D',.7006,'751M',0],
+      ['TranS',.6939,'38M',0],
+      ['TripleRE + NodePiece',.6866,'36M',0],
+      ['ResonatE distilled, alone (not yet filed)',.6855,'329M',1],
+      ['ComplEx-RP (50-dim)',.6392,'250M',0]], 0.80);
+  var h1=function(v){return v.toFixed(2);};
+  function sortDesc(rows){return rows.slice().sort(function(a,b){return b[1]-a[1];});}
+  drawBoard('starksvg1', sortDesc([
+      ['ResonatE (no llm)',43.09,'MRR 54.73',1],
+      ['AvaTaR (gpt-4-turbo)',20.10,'MRR 29.18',0],
+      ['AvaTaR (claude-3-opus)',18.44,'MRR 26.73',0],
+      ['GritLM-7b',15.57,'MRR 24.11',0],
+      ['multi-ada-002',15.10,'MRR 23.49',0],
+      ['BM25',12.75,'MRR 19.84',0],
+      ['ada-002',12.63,'MRR 21.41',0],
+      ['ColBERTv2',11.75,'MRR 17.39',0],
+      ['voyage-l2-instruct',10.85,'MRR 19.99',0],
+      ['LLM2Vec',10.10,'MRR 16.12',0],
+      ['QAGNN (roberta)',8.85,'MRR 14.73',0],
+      ['ANCE (roberta)',6.53,'MRR 11.05',0],
+      ['DPR (roberta)',4.46,'MRR 12.38',0]]), 50, h1);
+  drawBoard('starksvg2', sortDesc([
+      ['ResonatE (no llm)',41.79,'MRR 54.34',1],
+      ['GPT4 Reranker',18.28,'MRR 26.55',0],
+      ['Claude3 Reranker',17.79,'MRR 26.27',0],
+      ['GritLM-7b',16.79,'MRR 24.99',0],
+      ['ada-002',15.36,'MRR 23.50',0],
+      ['multi-ada-002',15.36,'MRR 23.70',0],
+      ['ColBERTv2',15.00,'MRR 19.98',0],
+      ['BM25',13.93,'MRR 21.68',0],
+      ['voyage-l2-instruct',12.14,'MRR 21.23',0],
+      ['LLM2Vec',9.29,'MRR 15.00',0],
+      ['QAGNN (roberta)',7.14,'MRR 16.27',0],
+      ['ANCE (roberta)',6.78,'MRR 11.42',0],
+      ['DPR (roberta)',5.00,'MRR 13.50',0]]), 50, h1);
+  drawBoard('starksvg3', sortDesc([
+      ['AvaTaR (gpt-4-turbo)',33.03,'MRR 41.00',0],
+      ['ResonatE (no llm)',28.57,'MRR 40.67',1],
+      ['Claude3 Reranker',28.57,'MRR 36.32',0],
+      ['GPT4 Reranker',28.57,'MRR 34.82',0],
+      ['GritLM-7b',25.51,'MRR 34.28',0],
+      ['multi-ada-002',24.49,'MRR 32.98',0],
+      ['BM25',22.45,'MRR 30.37',0],
+      ['ada-002',17.35,'MRR 26.35',0],
+      ['voyage-l2-instruct',16.33,'MRR 24.33',0],
+      ['ColBERTv2',15.31,'MRR 19.67',0],
+      ['LLM2Vec',9.18,'MRR 15.24',0],
+      ['ANCE (roberta)',7.14,'MRR 10.07',0],
+      ['QAGNN (roberta)',6.12,'MRR 9.39',0],
+      ['DPR (roberta)',2.04,'MRR 7.05',0]]), 50, h1);
+  document.querySelectorAll('.tabs [role="tab"]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var list=b.parentNode;
+      list.querySelectorAll('[role="tab"]').forEach(function(x){x.setAttribute('aria-selected','false'); document.getElementById(x.getAttribute('aria-controls')).hidden=true;});
+      b.setAttribute('aria-selected','true'); document.getElementById(b.getAttribute('aria-controls')).hidden=false;
+    });
+  });
+})();
+</script>
+</body>
+</html>
