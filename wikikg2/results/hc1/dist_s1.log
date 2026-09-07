@@ -1,0 +1,31 @@
+holdout: 484,044 rows x 2 directions; members (7):
+          model_fit97_s0: holdout MRR alone 0.6639 (tail 0.9650 head 0.3628)
+           analogy_f0_t3: holdout MRR alone 0.5394 (tail 0.9310 head 0.1478)
+                 holders: holdout MRR alone 0.4725 (tail 0.8808 head 0.0643)
+                   cn_aa: holdout MRR alone 0.1283 (tail 0.0951 head 0.1615)
+                  linked: holdout MRR alone 0.0020 (tail 0.0020 head 0.0020)
+                  cn3_aa: holdout MRR alone 0.4991 (tail 0.7110 head 0.2873)
+                   typed: holdout MRR alone 0.2710 (tail 0.3507 head 0.1913)
+guard   250: holdout cross-fit 0.8028 (folds 0.8030 0.8027)
+guard   500: holdout cross-fit 0.8018 (folds 0.8021 0.8015)
+guard  1000: holdout cross-fit 0.7998 (folds 0.8000 0.7995)
+guard  2000: holdout cross-fit 0.7990 (folds 0.7993 0.7987)
+holdout fit: guard 250, 192 local groups, in-sample holdout MRR 0.8039
+holdout global/dir weights:
+  tail: model_fit97_s0=+1.839 analogy_f0_t3=-0.137 holders=+0.256 cn_aa=+0.039 linked=-0.313 cn3_aa=+0.067 typed=+0.099
+  head: model_fit97_s0=+2.456 analogy_f0_t3=-0.237 holders=-0.271 cn_aa=-0.029 linked=-4.038 cn3_aa=+0.154 typed=+0.059
+
+HOLDOUT-FIT combiner on FULL validation (official Evaluator): MRR 0.6967  hits@1 0.6216 hits@3 0.7400 hits@10 0.8431  (tail 0.9418 head 0.4516; 860 rows on direction fallback)
+
+on the held-out half of validation (seed 0, 214,447 triples):
+  row                                                        MRR    tail    head
+  model alone                                             0.7186  0.9616  0.4755
+  selection blend (fit other half)                        0.7542  0.9664  0.5421
+  learned combiner (fit other half, validation labels)    0.7826  0.9704  0.5949
+  HOLDOUT-FIT combiner (no validation fit)                0.6970  0.9416  0.4525
+
+GATE: combiner gain over selection +0.0284; holdout-fit keeps -201% of it; bar 0.7684 -> FAIL
+validation-fit global/dir weights (for comparison, not used):
+  tail: model_dist_s1.bf16=+1.736 analogy_d1_t3=+0.200 holders=-0.029 cn_aa=+0.152 linked=+0.271 cn3_aa=+0.060 typed=+0.108
+  head: model_dist_s1.bf16=+1.704 analogy_d1_t3=+0.244 holders=-0.317 cn_aa=+0.054 linked=+0.123 cn3_aa=-0.016 typed=+0.159
+HC1_DONE dist_s1

@@ -47,6 +47,10 @@ def main():
     p.add_argument("--data-root", default="data_ogb")
     p.add_argument("--cutoff", type=int, default=CUTOFF)
     p.add_argument("--seed", type=int, default=SEED)
+    p.add_argument("--grouping", choices=["pair", "row"], default="pair",
+                   help="pair: every TRAIN row of a reserved pair is held out together (HC1); "
+                        "row: rows are bucketed independently, other rows on the same pair stay in fit (HC2: "
+                        "validation and test pairs are already linked in TRAIN 9-12%% of the time; a pair holdout is 0%%)")
     args = p.parse_args()
     if os.environ.get("WIKI_HOLDOUT"):
         raise SystemExit("unset WIKI_HOLDOUT: this script reads the official TRAIN")
@@ -58,7 +62,10 @@ def main():
     digest = hashlib.sha256(np.concatenate([h, r, t]).tobytes()).hexdigest()
     assert n_ent * n_ent < np.iinfo(np.int64).max
     keys = pair_keys(h, t, n_ent)
-    b = buckets(keys, args.seed)
+    if args.grouping == "pair":
+        b = buckets(keys, args.seed)
+    else:   # row-level: hash the row index, so the same pair can sit on both sides
+        b = buckets(np.arange(n, dtype=np.int64), args.seed)
     hold = b >= args.cutoff
     R = int(r.max()) + 1
     n_all = np.bincount(r, minlength=R)
@@ -76,7 +83,8 @@ def main():
     hold_rows = np.flatnonzero(hold)
     # audit
     assert len(fit_rows) + len(hold_rows) == n
-    assert not np.intersect1d(np.unique(keys[fit_rows]), np.unique(keys[hold_rows])).size
+    pair_disjoint = not np.intersect1d(np.unique(keys[fit_rows]), np.unique(keys[hold_rows])).size
+    assert pair_disjoint or args.grouping == "row"
     assert n_all[R - 1] > 0 and (r[fit_rows] == R - 1).any(), "max relation must stay in fit"
     N = len(hold_rows)
     rng = np.random.default_rng(args.seed)
@@ -100,14 +108,15 @@ def main():
                      relations_present=int((n_hold > 0).sum()),
                      rows_with_endpoint_absent_from_fit=int(cold.sum()),
                      self_link_rows=int((hh == tt).sum())),
-        relations_kept_entirely_in_fit=kept_back,
-        pair_disjoint=True, rows_partitioned=True,
+        relations_kept_entirely_in_fit=kept_back, grouping=args.grouping,
+        pair_disjoint=bool(pair_disjoint), rows_partitioned=True,
+        holdout_rows_whose_pair_is_linked_in_fit=int(np.isin(keys[hold_rows], np.unique(keys[fit_rows])).sum()),
         per_relation={str(i): dict(fit=int(n_fit_rel[i]), holdout=int(n_hold[i] if not vanish[i] else 0))
                       for i in range(R)},
         built=time.strftime("%Y-%m-%dT%H:%M:%S"), seconds=round(time.time() - t0, 1))
     np.savez(args.out, fit_rows=fit_rows, holdout_rows=hold_rows, head_neg=head_neg, tail_neg=tail_neg,
              train_sha256=np.array(digest), seed=np.array(args.seed), cutoff=np.array(args.cutoff),
-             n_train=np.array(n))
+             n_train=np.array(n), grouping=np.array(args.grouping))
     with open(os.path.splitext(args.out)[0] + ".json", "w") as f:
         json.dump(summary, f, indent=1)
     s = dict(summary); s.pop("per_relation")

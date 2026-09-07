@@ -1,0 +1,83 @@
+{
+ "fit_members": [
+  "model_fit97_s0",
+  "analogy_f0_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed"
+ ],
+ "apply_members": [
+  "model_wiki_s0.bf16",
+  "analogy_s0_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed"
+ ],
+ "seed": 0,
+ "holdout_alone": {
+  "model_fit97_s0": 0.6638897797862747,
+  "analogy_f0_t3": 0.5393697353908711,
+  "holders": 0.4725373882804992,
+  "cn_aa": 0.1282759447766158,
+  "linked": 0.0019960079840319364,
+  "cn3_aa": 0.4991453762935676,
+  "typed": 0.27099637683033984
+ },
+ "guard_sweep": {
+  "250": [
+   0.8030020072815695,
+   0.802671115283119
+  ],
+  "500": [
+   0.8021342269682933,
+   0.801531317394669
+  ],
+  "1000": [
+   0.8000446180914914,
+   0.7994794170869122
+  ],
+  "2000": [
+   0.7992721567316058,
+   0.7986661284879887
+  ]
+ },
+ "min_rows": 250,
+ "holdout_in_sample": 0.80387607896137,
+ "local_groups": 192,
+ "valid_full": {
+  "mrr": 0.687375545501709,
+  "hits@1": 0.6136053800582886,
+  "hits@3": 0.7290642261505127,
+  "hits@10": 0.8302550315856934,
+  "tail": 0.9384704735711983,
+  "head": 0.43624917782989153,
+  "fallback_rows": 860
+ },
+ "valid_alone": {
+  "model_wiki_s0.bf16": 0.7038353839766569,
+  "analogy_s0_t3": 0.4954358044273827,
+  "holders": 0.4250369304396891,
+  "cn_aa": 0.1643246651168084,
+  "linked": 0.09211651682609483,
+  "cn3_aa": 0.36193913036167263,
+  "typed": 0.3699341891430547
+ },
+ "valid_half": {
+  "model alone": 0.7042124324182941,
+  "selection blend (fit other half)": 0.7449792977793455,
+  "learned combiner (fit other half, validation labels)": 0.7739906128717777,
+  "HOLDOUT-FIT combiner (no validation fit)": 0.6875877610434606
+ },
+ "gate": {
+  "selection": 0.7449792977793455,
+  "learned_xfit": 0.7739906128717777,
+  "holdout_fit": 0.6875877610434606,
+  "bar": 0.7594849553255616,
+  "fraction_of_gain_kept": -1.9782466445602689,
+  "pass": false
+ }
+}

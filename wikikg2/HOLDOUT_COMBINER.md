@@ -77,3 +77,48 @@ One 5090 at $0.404/h (box 50207787): teacher ~40 min, members ~30 min
 concurrent, retrieval ~20 min after the teacher; ~1.5 h. The 1080 Ti on jinx
 scores the released student/teacher on validation (fp32 tables) and runs the
 fit + report.
+
+## HC1 RESULT (2026-09-08, box 50209059, 5090): FAIL on the student
+
+Fit world as registered: teacher `model_fit97_s0` on fit-TRAIN reached
+validation MRR 0.6994 (the 100% teacher: 0.7041, −0.0047); probes tracked
+the 100% teacher within −0.004 throughout. Guard sweep on holdout halves:
+250 → 0.8028, 500 → 0.8018, 1000 → 0.7998, 2000 → 0.7990; guard 250, 192
+local groups, in-sample holdout 0.8039. Applied to the released student
+(s1) with the seven members on all of TRAIN, full validation, official
+Evaluator: **MRR 0.6967**, hits@1 0.6216, hits@10 0.8431 (tail 0.942, head
+0.452). On the held-out half of validation (seed 0): model alone 0.7186,
+selection blend 0.7542, validation-fit learned combiner 0.7826,
+holdout-fit combiner 0.6970. Gate bar 0.7684 → **FAIL** (below the model
+alone). Receipts: `results/hc1/dist_s1.{json,log}`, weights
+`results/hc1/weights_dist_s1.npz`, split `results/hc1/holdout_wiki.json`.
+
+Cause, visible in the split's own receipts: the pair-grouped holdout
+holds out every TRAIN row of a reserved pair, so a held-out query is never
+already linked to its answer in fit-TRAIN (0% of holdout rows). Validation
+queries are linked to their answer under another relation 9.3% of the
+time, test 12.1%, and 10.6% of TRAIN rows sit on multi-row pairs. The
+graph members encode exactly that link: on the holdout `linked` scores
+0.002 alone and the fit gives it −4.04 in the head direction (validation
+fit: +0.12); `holders` and `analogy` also flip sign. The holdout was the
+wrong analogue of the time split for this dataset by construction, not
+a calibration or drift finding. Teacher→teacher diagnostic (same fit applied to the released 100% teacher s0):
+full validation **0.6874** (alone 0.7041); on the half: model alone 0.7042, selection 0.7450,
+validation-fit combiner 0.7740, holdout-fit 0.6876, bar 0.7595 → FAIL, the same −200% of
+the gain. Both channels fail identically, which is what a defect in the split, not in the
+model channel, predicts. Receipts: `results/hc1/wiki_s0.{json,log}`, `results/hc1/teacher_s0.log`.
+
+## HC2 (registered 2026-09-08 23:35, user approved): row-level holdout, one attempt
+
+Change, and the only change: `holdout_wiki.py --grouping row` buckets
+TRAIN rows independently (same hash, seed 36840, cutoff 97), so other rows
+on the same pair stay in fit-TRAIN. A row-level 3% holdout has 10.3% of
+its rows linked to their answer in fit-TRAIN, the validation statistic.
+Everything else as HC1: same recipe teacher on the new fit-TRAIN, same
+seven members, same guard sweep inside the holdout, same apply world
+(student s1, teacher s0 diagnostic), same gate on the same validation
+half. This is a second attempt after seeing HC1's validation number; the
+defect it corrects was diagnosable from the split alone, and no
+validation label informs the change. If HC2 fails the gate too, the
+holdout route is closed: the combiner stays unfiled and the paper keeps
+the rows as reported.
