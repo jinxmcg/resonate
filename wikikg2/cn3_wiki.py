@@ -70,7 +70,7 @@ def features(q, cands, deg, indptr, nbr, keys, n_ent, cap, wlog):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--split", default="valid", choices=["valid", "test"])
+    p.add_argument("--split", default="valid", choices=["valid", "test", "holdout"])
     p.add_argument("--device", default="cuda")
     p.add_argument("--chunk", type=int, default=64)
     p.add_argument("--cap", type=int, default=16)

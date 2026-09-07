@@ -58,7 +58,35 @@ def load(root="data_ogb"):
     d = LinkPropPredDataset("ogbl-wikikg2", root=root)
     n_ent = int(d[0]["num_nodes"])
     split = d.get_edge_split()
+    ho = os.environ.get("WIKI_HOLDOUT")
+    if ho:
+        split = apply_holdout(split, ho)
     return split, n_ent
+
+
+def apply_holdout(split, path):
+    """HC1 (HOLDOUT_COMBINER.md): with WIKI_HOLDOUT=<holdout_wiki.py file>
+    'train' becomes the fit part of the pair-grouped TRAIN split and a
+    'holdout' query split (the reserved TRAIN rows with their fixed 500
+    negatives per direction) is added. Everything that reads the graph
+    through load() then sees the fit part only; 'valid' and 'test' are
+    untouched. The file records a digest of the official TRAIN arrays and
+    refuses a mismatch."""
+    import hashlib
+    z = np.load(path)
+    tr = split["train"]
+    h, r, t = (np.asarray(tr[k]).astype(np.int64) for k in ("head", "relation", "tail"))
+    dg = hashlib.sha256(np.concatenate([h, r, t]).tobytes()).hexdigest()
+    if dg != str(z["train_sha256"]):
+        raise RuntimeError(f"WIKI_HOLDOUT {path}: TRAIN digest {dg[:12]} != recorded {str(z['train_sha256'])[:12]}")
+    fit, hold = z["fit_rows"], z["holdout_rows"]
+    out = dict(split)
+    out["train"] = {"head": h[fit], "relation": r[fit], "tail": t[fit]}
+    out["holdout"] = {"head": h[hold], "relation": r[hold], "tail": t[hold],
+                      "head_neg": z["head_neg"], "tail_neg": z["tail_neg"]}
+    print(f"WIKI_HOLDOUT={path}: train -> {len(fit):,} fit rows; holdout {len(hold):,} rows "
+          f"(seed {int(z['seed'])}, buckets >= {int(z['cutoff'])})", flush=True)
+    return out
 
 
 @torch.no_grad()

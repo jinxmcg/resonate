@@ -105,12 +105,14 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", required=True)
     p.add_argument("--tag", required=True, help="suffix: analogy_<tag>")
-    p.add_argument("--split", default="valid", choices=["valid", "test"])
+    p.add_argument("--split", default="valid", choices=["valid", "test", "holdout"])
     p.add_argument("--device", default="cuda")
     p.add_argument("--chunk", type=int, default=512)
     p.add_argument("--cap", type=int, default=128)
     p.add_argument("--out-dir", default="ens_cache")
     p.add_argument("--data-root", default="data_ogb")
+    p.add_argument("--table-dtype", default=None, choices=["fp32", "fp16", "bf16"],
+                   help="override the stored table dtype (fp32 on a GPU without bf16)")
     p.add_argument("--keep-frac", type=float, default=1.0,
                    help="keep this fraction of training triples (seeded) before "
                         "building the graph: simulates evidence scarcity")
@@ -144,7 +146,7 @@ def main():
         hh = np.concatenate([hh, ex["h"]]); rr = np.concatenate([rr, ex["r"]]); tt = np.concatenate([tt, ex["t"]])
         print(f"extra edges: +{len(ex['h']):,}", flush=True)
 
-    model, _ = load_model(args.model, n_ent, dev)
+    model, _ = load_model(args.model, n_ent, dev, table_dtype=args.table_dtype)
     En = torch.view_as_real(cnorm(model.table())).reshape(n_ent, -1) \
         .contiguous().half()                         # cos = <real views>
     del model

@@ -24,10 +24,12 @@ from train_wiki import load, load_model, score_split
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--models", nargs="+", required=True)
-    p.add_argument("--split", default="valid", choices=["valid", "test"])
+    p.add_argument("--split", default="valid", choices=["valid", "test", "holdout"])
     p.add_argument("--device", default="cuda")
     p.add_argument("--out", default="ens_cache")
     p.add_argument("--data-root", default="data_ogb")
+    p.add_argument("--table-dtype", default=None, choices=["fp32", "fp16", "bf16"],
+                   help="override the stored table dtype (fp32 on a GPU without bf16)")
     args = p.parse_args()
     dev = torch.device(args.device)
     os.makedirs(args.out, exist_ok=True)
@@ -39,7 +41,7 @@ def main():
         if os.path.exists(out):
             print(f"skip {tag} (cached)", flush=True)
             continue
-        model, ck = load_model(path, n_ent, dev)
+        model, ck = load_model(path, n_ent, dev, table_dtype=args.table_dtype)
         sp, sn, rel = score_split(model, part, ck["n_rel"], dev)
         sp = sp.numpy().astype(np.float16)
         sn = sn.numpy().astype(np.float16)

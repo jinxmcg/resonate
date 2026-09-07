@@ -76,7 +76,7 @@ def path_types(start, end, deg, indptr, nbr, nop, keys, n_ent, R, cap):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--split", default="valid", choices=["valid", "test"])
+    p.add_argument("--split", default="valid", choices=["valid", "test", "holdout"])
     p.add_argument("--device", default="cuda")
     p.add_argument("--chunk", type=int, default=128)
     p.add_argument("--cap", type=int, default=48)
