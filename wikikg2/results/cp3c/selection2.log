@@ -1,0 +1,24 @@
+=== c8 / standard
+per-relation recipe: fit-half 0.7105  HELD-OUT 0.7108
+  head (?,r,t): model-only 0.4648 -> recipe 0.4648
+=== c8 / rich
+per-relation recipe: fit-half 0.7105  HELD-OUT 0.7108
+  head (?,r,t): model-only 0.4648 -> recipe 0.4648
+=== c8+9 / standard
+per-relation recipe: fit-half 0.7621  HELD-OUT 0.7622
+  head (?,r,t): model-only 0.4648 -> recipe 0.5559
+=== c8+9 / rich
+per-relation recipe: fit-half 0.7665  HELD-OUT 0.7663
+  head (?,r,t): model-only 0.4648 -> recipe 0.5623
+=== c4 / standard
+per-relation recipe: fit-half 0.7026  HELD-OUT 0.7029
+  head (?,r,t): model-only 0.4535 -> recipe 0.4535
+=== c4 / rich
+per-relation recipe: fit-half 0.7026  HELD-OUT 0.7029
+  head (?,r,t): model-only 0.4535 -> recipe 0.4535
+=== c4+9 / standard
+=== c4+9 / rich
+=== c4r / standard
+=== c4r / rich
+=== c4r+9 / standard
+=== c4r+9 / rich

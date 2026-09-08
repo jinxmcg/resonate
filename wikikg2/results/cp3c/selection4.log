@@ -1,0 +1,12 @@
+=== c4+9 / standard
+per-relation recipe: fit-half 0.7549  HELD-OUT 0.7548
+  head (?,r,t): model-only 0.4535 -> recipe 0.5437
+=== c4+9 / rich
+per-relation recipe: fit-half 0.7600  HELD-OUT 0.7594
+  head (?,r,t): model-only 0.4535 -> recipe 0.5509
+=== c4r+9 / standard
+per-relation recipe: fit-half 0.7602  HELD-OUT 0.7601
+  head (?,r,t): model-only 0.4516 -> recipe 0.5522
+=== c4r+9 / rich
+per-relation recipe: fit-half 0.7643  HELD-OUT 0.7639
+  head (?,r,t): model-only 0.4516 -> recipe 0.5589

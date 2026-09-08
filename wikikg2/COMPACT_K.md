@@ -283,3 +283,26 @@ cluster subspaces start at random (`--tiered-random-init`); only the cluster
 assignment is taken from the wide model. Answers whether training narrow
 reaches the compress-and-refit number (CP3e's 41M result) in the same
 budget. Informational; validation only.
+
+## CP3c / CP3e RESULTS (2026-09-08 13:30): the compact rows with the evidence layer
+
+Selection blend, held-out half, nine members (own analogy, holders, cn_aa,
+linked, cn3_aa, typed, own rev_raw / rev_nov); `results/cp3c/selection{2,3}.log`,
+`results/cp3e/selection.log`:
+
+| model | table | model alone (valid) | row, standard | row, rich |
+|---|---|---|---|---|
+| k=8 T=2 student (reference) | 320M | 0.7190 | 0.7711 | 0.7734 |
+| K=4096, widths 8/16/36/64, init only | 80.4M | 0.7109 | 0.7622 | 0.7663 |
+| K=4096, widths 4/8/36/64, init only | 41.5M | 0.7029 | 0.7548 | 0.7594 |
+| same, gentle refit (50k, lr 0.1) | 41.5M | 0.7044 | 0.7601 | 0.7639 |
+| same, full refit (200k, lr 0.6) | 41.5M | **0.7074** | 0.7629 | **0.7667** |
+
+Both K = 4096 models meet the CP3c bar (within 0.02 of the student row): the
+fully refit 41M-table model (≈ 50M with operators) is 0.0067 under the
+student row with the rich selection, and above the un-refit 80M model.
+Reading: the refit is worth +0.0045 on the model and +0.007 on the row; the
+evidence layer narrows the gap to the wide model from 0.012 (alone) to
+0.007 (row). The 80M full refit and the per-tier diagnostic are pending.
+Decision candidate for the second wikikg2 entry: the refit 41M model + nine
+members, rich selection (≈ 50M parameters), pending the 80M number.

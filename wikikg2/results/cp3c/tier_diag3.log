@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/root/resonate/wikikg2/tier_diag.py", line 14, in <module>
+    res = {lab: mrr_of(p) for lab, p in [("student", "teachers/model_dist_s1.bf16.pt"), ("tiered54M", "model_tiered_8_16_36_64.pt"), ("tiered108M", "model_tiered_16_32_64_64.pt"), ("cp3_k256", "model_cp3_k256.pt")]}
+                ^^^^^^^^^
+  File "/root/resonate/wikikg2/tier_diag.py", line 11, in mrr_of
+    m, ck = load_model(path, n, dev)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/resonate/wikikg2/train_wiki.py", line 159, in load_model
+    ck = torch.load(path, map_location="cpu", weights_only=False)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/resonate/wikikg2/train_wiki.py", line 50, in load_wo
+    return orig(*a, **k)
+           ^^^^^^^^^^^^^
+  File "/root/resonate/.venv/lib/python3.12/site-packages/torch/serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/resonate/.venv/lib/python3.12/site-packages/torch/serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/resonate/.venv/lib/python3.12/site-packages/torch/serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'model_tiered_8_16_36_64.pt'

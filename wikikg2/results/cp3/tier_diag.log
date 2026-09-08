@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/root/resonate/wikikg2/tier_diag.py", line 14, in <module>
+    res = {lab: mrr_of(p) for lab, p in [("student", "teachers/model_dist_s1.bf16.pt"), ("tiered54M", "model_tiered_8_16_36_64.pt"), ("tiered108M", "model_tiered_16_32_64_64.pt"), ("cp3_k256", "model_cp3_k256.pt")]}
+                ^^^^^^^^^
+  File "/root/resonate/wikikg2/tier_diag.py", line 11, in mrr_of
+    m, ck = load_model(path, n, dev)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/resonate/wikikg2/train_wiki.py", line 176, in load_model
+    m.load_state_dict({k_: v for k_, v in ck["model"].items() if k_ != "E_real"}, strict=False)
+  File "/root/resonate/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2643, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TieredTableResonatE:
+	size mismatch for proj.0: copying a param with shape torch.Size([16, 128]) from checkpoint, the shape in current model is torch.Size([1, 16, 128]).
+	size mismatch for proj.1: copying a param with shape torch.Size([32, 128]) from checkpoint, the shape in current model is torch.Size([1, 32, 128]).
+	size mismatch for proj.2: copying a param with shape torch.Size([72, 128]) from checkpoint, the shape in current model is torch.Size([1, 72, 128]).
+	size mismatch for proj.3: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([1, 128, 128]).
+	size mismatch for mu.0: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([1, 128]).
+	size mismatch for mu.1: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([1, 128]).
+	size mismatch for mu.2: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([1, 128]).
+	size mismatch for mu.3: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([1, 128]).

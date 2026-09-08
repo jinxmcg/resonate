@@ -1,0 +1,20 @@
+ogbl-wikikg2 loaded in 15s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 50000, 'batch': 2048, 'neg': 4096, 'k': 12, 'block_size': 4, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.1, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': ['teachers/model_dist_s1.bf16.pt'], 'distill_w': 1.0, 'distill_T': 2.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'comp': 0, 'comp_k': 8, 'comp_drop': 0.3, 'comp_lam': 1.0, 'comp_hubw': False, 'comp_gain': False, 'comp_free_min_deg': 0, 'tiered_from': 'teachers/model_dist_s1.bf16.pt', 'tiers': '8,64,1024', 'widths': '4,8,36,64', 'train_ops': False, 'subspaces': '4096,4096,16,1', 'rev_frac': 0.5, 'seed': 0, 'save': 'model_cp3_k4096_w4_refit.pt', 'eval': 'valid', 'eval_only': False, 'probe_every': 10000, 'probe_size': 20000, 'ckpt_every': 0, 'log_every': 10000, 'device': 'cuda', 'data_root': 'data_ogb'}
+tiered table from teachers/model_dist_s1.bf16.pt: cutoffs [8, 64, 1024], widths [4, 8, 36, 64], sizes [1674500, 808275, 16593, 1236], table params 41,478,808 (13.0% of the wide table); operators frozen
+params: 41,478,808 (M=64, table 0.00 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.1 table_sched=cosine
+distill: 1 teachers (bf16 tables), w=1.0, T=2.0
+step 10000/50000  loss 4.533  23.9 ms/step  tau 9.23  (239s)
+[probe@10000] MRR 0.6750  hits@1 0.6036  hits@3 0.7087  hits@10 0.8158  (n=20,000, 0s)
+step 20000/50000  loss 3.777  25.3 ms/step  tau 9.23  (492s)
+[probe@20000] MRR 0.6868  hits@1 0.6166  hits@3 0.7190  hits@10 0.8261  (n=20,000, 0s)
+step 30000/50000  loss 3.233  25.9 ms/step  tau 9.23  (751s)
+[probe@30000] MRR 0.6966  hits@1 0.6269  hits@3 0.7302  hits@10 0.8348  (n=20,000, 0s)
+step 40000/50000  loss 3.026  18.7 ms/step  tau 9.23  (938s)
+[probe@40000] MRR 0.7034  hits@1 0.6336  hits@3 0.7360  hits@10 0.8426  (n=20,000, 0s)
+step 50000/50000  loss 2.914  18.8 ms/step  tau 9.23  (1126s)
+[probe@50000] MRR 0.7048  hits@1 0.6355  hits@3 0.7374  hits@10 0.8432  (n=20,000, 0s)
+saved model_cp3_k4096_w4_refit.pt  (train 1126s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7044  hits@1 0.6350  hits@3 0.7370  hits@10 0.8428  (n=429,456, 2s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739
