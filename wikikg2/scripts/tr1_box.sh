@@ -26,7 +26,7 @@ case $row in
   C) permodel teachers/model_dist_s1.bf16.pt d1; permodel teachers/model_wiki_s0.bf16.pt s0
      [ -f ens_cache/rev_nov_ens10t.test.npz ] || $U ens_cache.py --device cuda --tag ens10t --split test --models $TE 2>&1 | grep -v "^dir"
      $U blend_wiki.py freeze --members ens10t analogy_d1_t3 analogy_s0_t3 holders cn_aa linked cn3_aa typed rev_raw_ens10t rev_nov_ens10t --test --min-rows 250 $RICH --out results/tr1/frozen_C.npz --result results/tr1/C.json 2>&1 | tee results/tr1/C.log ;;
-  D) permodel model_k6.pt k6
-     $U blend_wiki.py freeze --members model_k6 analogy_k6_t3 holders cn_aa linked cn3_aa typed rev_raw_k6 rev_nov_k6 --test --min-rows 250 $RICH --out results/tr1/frozen_D.npz --result results/tr1/D.json 2>&1 | tee results/tr1/D.log ;;
+  D) permodel model_dist_k6.pt k6d
+     $U blend_wiki.py freeze --members model_dist_k6 analogy_k6d_t3 holders cn_aa linked cn3_aa typed rev_raw_k6d rev_nov_k6d --test --min-rows 250 $RICH --out results/tr1/frozen_D.npz --result results/tr1/D.json 2>&1 | tee results/tr1/D.log ;;
 esac
 echo "TR1_${row}_DONE" >> results/tr1/status.log

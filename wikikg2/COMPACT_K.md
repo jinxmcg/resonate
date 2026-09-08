@@ -84,3 +84,17 @@ row-C script's `--eval both` is NOT used). Then its members (analogy tag k6d,
 reverse tag k6d) and the selection blend: k6d + nine members. Bar: within
 0.02 of the student row (0.7711) → it replaces row D as the compact filing
 candidate; also reported against the undistilled k6 row (0.7529).
+
+## CK4 RESULT (2026-09-08 04:58): the distilled k=6 student
+
+`model_dist_k6.pt` (T=2 from the ten k=8 teachers, 400k, seed 0): validation
+MRR **0.7048**, hits@1 0.6376, hits@10 0.8378 — above the undistilled k=6
+(0.6829, +0.022) and level with a k=8 teacher (0.7041) at 180M parameters; the
+k=8 student is 0.7190. Selection blend, held-out half
+(`results/ck4/selection.log`): k6d alone 0.7046; k6d + nine members
+**0.7543** (head 0.542), against 0.7529 for the undistilled k6 row and 0.7711
+for the k=8 student row. Bar met (0.7711 − 0.7543 = 0.017 < 0.02): the
+distilled k=6 row replaces row D as the compact filing candidate. Note for the
+paper: the +0.022 the distillation adds to the model becomes +0.0014 in the
+blended row; the members carry most of what the wider or better-trained
+model would add.

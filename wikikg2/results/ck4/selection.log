@@ -1,0 +1,16 @@
+=== k6d
+  model_dist_k6: valid MRR alone 0.7046  (tail 0.9547 head 0.4545)
+per-relation recipe: fit-half 0.7045  HELD-OUT 0.7046
+  head (?,r,t): model-only 0.4546 -> recipe 0.4546
+=== k6d+9
+  model_dist_k6: valid MRR alone 0.7046  (tail 0.9547 head 0.4545)
+  analogy_k6d_t3: valid MRR alone 0.4918  (tail 0.8468 head 0.1368)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+  rev_raw_k6d: valid MRR alone 0.5511  (tail 0.7156 head 0.3866)
+  rev_nov_k6d: valid MRR alone 0.2979  (tail 0.3637 head 0.2321)
+per-relation recipe: fit-half 0.7547  HELD-OUT 0.7543
+  head (?,r,t): model-only 0.4546 -> recipe 0.5415
