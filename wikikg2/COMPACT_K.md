@@ -74,3 +74,13 @@ Bars: the compact row is within 0.02 of the student row (0.7711 − 0.7529 =
 ensemble reaches +0.004 with all members, under its +0.005 bar; recorded, not
 promoted. The k6 row would need its own T=2 distillation to be the "distilled
 compact" analogue of the student row; not run tonight.
+
+## CK4 (registered 2026-09-08 04:10): the distilled compact model
+
+`model_dist_k6.pt`: the row-C recipe (T=2 student distilled from the ten
+released k=8 teachers, 400k steps, seed 0) with k=6, block size 36; logits
+distillation does not depend on the student's width. `--eval valid` only (the
+row-C script's `--eval both` is NOT used). Then its members (analogy tag k6d,
+reverse tag k6d) and the selection blend: k6d + nine members. Bar: within
+0.02 of the student row (0.7711) → it replaces row D as the compact filing
+candidate; also reported against the undistilled k6 row (0.7529).
