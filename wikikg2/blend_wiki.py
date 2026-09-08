@@ -69,10 +69,37 @@ def candidates(per_m, M, tops=(1, 3, 5, 9)):
     return cands
 
 
+def candidates_rich(per_m, M, is_model):
+    """SEL1: the standard list plus a fixed, larger family — still a finite
+    selection by fit-half MRR, no gradient: softer/sharper softmaxes, the model
+    channel(s) doubled inside top-m, and 'model + one member' mixes."""
+    cands = candidates(per_m, M)
+    for eta in (10, 200):
+        e = np.exp(eta * (per_m - per_m.max()))
+        cands[f"soft{eta}"] = e / e.sum()
+    order = np.argsort(-per_m)
+    for mtop in (3, 5, 9):
+        if mtop <= M:
+            w = np.zeros(M); w[order[:mtop]] = 1.0
+            w = w + is_model.astype(float)          # model channel(s) count twice
+            cands[f"top{mtop}x2model"] = w / w.sum()
+    if is_model.any():
+        base = is_model.astype(float) / is_model.sum()
+        for j in range(M):
+            if not is_model[j]:
+                for a in (0.25, 0.5):
+                    w = (1 - a) * base; w[j] += a
+                    cands[f"model+{j}@{a}"] = w
+    return cands
+
+
+RICH = {"on": False, "is_model": None}
+
+
 def fit(Z, grp, extra, M):
     per_m = np.array([mrr_rows(z[grp].astype(np.float32)).mean() for z in Z])
     local = dict(extra)
-    local.update(candidates(per_m, M))
+    local.update(candidates_rich(per_m, M, RICH["is_model"]) if RICH["on"] else candidates(per_m, M))
     best = (None, None, -1.0)
     for lab, w in local.items():
         v = mrr_rows(combined(Z, w, grp)).mean()
@@ -148,6 +175,7 @@ def main():
     p.add_argument("--cache-dir", default="ens_cache")
     p.add_argument("--out", default="frozen_weights_wiki.npz")
     p.add_argument("--result", default="committed_test_wiki.json")
+    p.add_argument("--rich", action="store_true", help="SEL1: the larger fixed candidate family")
     args = p.parse_args()
     M = len(args.members)
     min_rows = args.min_rows or (250 if args.mode == "search" else 500)
@@ -162,10 +190,13 @@ def main():
         print(f"  {tag}: valid MRR alone {rm.mean():.4f}  (tail {rm[~dv].mean():.4f} "
               f"head {rm[dv].mean():.4f})", flush=True)
     is_model = np.array([not n.startswith(("analogy", "holders", "jaccard",
-                                           "cn", "linked"))
+                                           "cn", "linked", "typed", "rev_"))
                          for n in args.members])
     uni = np.full(M, 1.0 / M)
     model_only = is_model / max(is_model.sum(), 1)
+    if args.rich:
+        RICH["on"] = True; RICH["is_model"] = is_model
+        print("SEL1 rich candidate family on", flush=True)
 
     if args.mode == "search":
         half = np.random.default_rng(args.seed).random(n_tri) < 0.5
