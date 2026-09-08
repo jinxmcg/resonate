@@ -233,3 +233,14 @@ point: 50k steps, table lr 0.1, operators frozen, student as T=2 teacher
 diagnostic for all three. Bars: a compact row within 0.02 of the student row
 (0.7711 standard / 0.7734 rich) is the second wikikg2 entry in place of row A,
 the smaller of the two that meets it preferred. Validation only.
+
+## CP3d (registered 2026-09-08 11:40, user: "still coarse"): finer tiers for the tail
+Degree histogram (entities / share of validation answers): 1–2 20k / 0.5%,
+3–4 236k / 2.0%, 5–7 1.42M / 32.2%, 8–15 671k / 20.0%, 16–63 137k / 10.0%,
+64–1023 17k / 13.9%, ≥ 1024 1.2k / 21.3%. Init-only sweep (as CP3b) with
+cutoffs (5, 8, 16, 64, 1024), K per tier scaled to its size (512, 4096, 2048,
+512, 16, 1), widths (2, 4, 8, 16, 36, 64) ≈ 40M and (4, 8, 16, 32, 36, 64) ≈ 65M,
+and (2, 4, 4, 8, 36, 64) ≈ 30M; plus the same three with K doubled where the
+tier allows (1024, 4096, 4096, 1024, 16, 1). Reported against CP3b's points
+of equal size. Informational; the best point joins CP3c's member/selection
+check if it beats CP3b at equal size.
