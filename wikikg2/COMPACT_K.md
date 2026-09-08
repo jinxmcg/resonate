@@ -275,3 +275,11 @@ As CP3 (200k steps, table lr 0.6 cosine, operators frozen, student as T=2
 teacher) on `model_cp3_k4096_w4.pt` (41.5M table) and `model_cp3_k4096_w8.pt`
 (80.4M). Bars unchanged; the refit models then get members and the selection
 blend as in CP3c. Validation only.
+
+## CP3f (registered 2026-09-08 13:05): train narrow, with the wide model's clusters only
+As CP3e on the 41M configuration (K = 4096, widths 4, 8, 36, 64, operators
+frozen, student as T=2 teacher, 200k steps), but the narrow rows and the
+cluster subspaces start at random (`--tiered-random-init`); only the cluster
+assignment is taken from the wide model. Answers whether training narrow
+reaches the compress-and-refit number (CP3e's 41M result) in the same
+budget. Informational; validation only.

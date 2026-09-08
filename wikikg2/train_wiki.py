@@ -237,6 +237,12 @@ def build_tiered(args, n_ent, n_rel, dev, split, wide_path):
     sd = {k_: v for k_, v in wide.state_dict().items() if k_ != "E_real"}
     m.load_state_dict(sd, strict=False)
     m.init_from_wide(wide.E_real.detach().float())
+    if getattr(args, "tiered_random_init", False):
+        with torch.no_grad():
+            for c in m.coef: c.normal_(0, 1.0 / c.shape[1] ** 0.5)
+            for pj in m.proj: pj.normal_(0, 1.0 / pj.shape[1] ** 0.5)
+            for mu in m.mu: mu.zero_()
+        print("tiered table: cluster assignment kept, rows and subspaces re-initialised at random (CP3f)", flush=True)
     if not args.train_ops:
         for name, q in m.named_parameters():
             if not (name.startswith("coef") or name.startswith("proj") or name.startswith("mu")):
@@ -342,6 +348,8 @@ def main():
     p.add_argument("--widths", type=str, default="8,16,36,64", help="complex width per tier (tail -> hubs)")
     p.add_argument("--train-ops", action="store_true", help="CP2: also train the copied operators (default frozen)")
     p.add_argument("--subspaces", type=str, default=None, help="CP3: K learned subspaces per tier, e.g. 256,256,16,1")
+    p.add_argument("--tiered-random-init", action="store_true",
+                   help="CP3f: keep the wide model's cluster assignment but discard its rows: random coefficients and projections")
     p.add_argument("--rev-frac", type=float, default=0.5,
                    help="fraction of rows trained in the head direction "
                         "(?, r, t); 0.5 = symmetric (default)")
