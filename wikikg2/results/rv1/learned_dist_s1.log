@@ -1,0 +1,20 @@
+=== dist_s1 / seven
+ selection    0.7542    0.7137  0.542 |  0.263  0.289  0.362  0.537
+   learned    0.7826    0.7382  0.595 |  0.319  0.338  0.475  0.558   (136 local groups)
+global weights: {'model_dist_s1.bf16': np.float32(1.718), 'analogy_d1_t3': np.float32(0.046), 'holders': np.float32(-0.015), 'cn_aa': np.float32(0.06), 'linked': np.float32(0.135), 'cn3_aa': np.float32(0.0), 'typed': np.float32(0.136)}
+head-direction weights: {'model_dist_s1.bf16': np.float32(1.704), 'analogy_d1_t3': np.float32(0.244), 'holders': np.float32(-0.317), 'cn_aa': np.float32(0.054), 'linked': np.float32(0.123), 'cn3_aa': np.float32(-0.016), 'typed': np.float32(0.159)}
+=== dist_s1 / raw
+ selection    0.7665    0.7186  0.566 |  0.263  0.293  0.435  0.551
+   learned    0.7850    0.7385  0.599 |  0.318  0.340  0.480  0.558   (136 local groups)
+global weights: {'model_dist_s1.bf16': np.float32(1.436), 'analogy_d1_t3': np.float32(-0.01), 'holders': np.float32(0.053), 'cn_aa': np.float32(0.057), 'linked': np.float32(0.135), 'cn3_aa': np.float32(0.012), 'typed': np.float32(0.138), 'rev_raw_d1': np.float32(0.762)}
+head-direction weights: {'model_dist_s1.bf16': np.float32(1.429), 'analogy_d1_t3': np.float32(0.187), 'holders': np.float32(-0.246), 'cn_aa': np.float32(0.05), 'linked': np.float32(0.124), 'cn3_aa': np.float32(-0.002), 'typed': np.float32(0.161), 'rev_raw_d1': np.float32(0.83)}
+=== dist_s1 / nov
+ selection    0.7589    0.7187  0.547 |  0.263  0.289  0.362  0.551
+   learned    0.7880    0.7490  0.601 |  0.319  0.339  0.476  0.559   (136 local groups)
+global weights: {'model_dist_s1.bf16': np.float32(1.608), 'analogy_d1_t3': np.float32(-0.004), 'holders': np.float32(0.046), 'cn_aa': np.float32(0.058), 'linked': np.float32(0.135), 'cn3_aa': np.float32(0.009), 'typed': np.float32(0.135), 'rev_nov_d1': np.float32(0.636)}
+head-direction weights: {'model_dist_s1.bf16': np.float32(1.553), 'analogy_d1_t3': np.float32(0.248), 'holders': np.float32(-0.323), 'cn_aa': np.float32(0.051), 'linked': np.float32(0.124), 'cn3_aa': np.float32(-0.002), 'typed': np.float32(0.16), 'rev_nov_d1': np.float32(1.259)}
+=== dist_s1 / both
+ selection    0.7711    0.7285  0.571 |  0.263  0.293  0.435  0.551
+   learned    0.7903    0.7503  0.605 |  0.319  0.339  0.480  0.557   (136 local groups)
+global weights: {'model_dist_s1.bf16': np.float32(1.461), 'analogy_d1_t3': np.float32(-0.018), 'holders': np.float32(0.063), 'cn_aa': np.float32(0.057), 'linked': np.float32(0.135), 'cn3_aa': np.float32(0.012), 'typed': np.float32(0.137), 'rev_raw_d1': np.float32(0.59), 'rev_nov_d1': np.float32(0.256)}
+head-direction weights: {'model_dist_s1.bf16': np.float32(1.457), 'analogy_d1_t3': np.float32(0.214), 'holders': np.float32(-0.281), 'cn_aa': np.float32(0.049), 'linked': np.float32(0.124), 'cn3_aa': np.float32(0.001), 'typed': np.float32(0.161), 'rev_raw_d1': np.float32(0.443), 'rev_nov_d1': np.float32(0.941)}

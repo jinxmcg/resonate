@@ -1,0 +1,52 @@
+=== dist_s1 / seven
+  model_dist_s1.bf16: valid MRR alone 0.7184  (tail 0.9619 head 0.4750)
+  analogy_d1_t3: valid MRR alone 0.4947  (tail 0.8475 head 0.1418)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+per-relation recipe: fit-half 0.7543  HELD-OUT 0.7542
+held-out delta vs model-only: +0.0608
+  tail (h,r,?): model-only 0.9058 -> recipe 0.9664
+  head (?,r,t): model-only 0.4810 -> recipe 0.5421
+=== dist_s1 / raw
+  model_dist_s1.bf16: valid MRR alone 0.7184  (tail 0.9619 head 0.4750)
+  analogy_d1_t3: valid MRR alone 0.4947  (tail 0.8475 head 0.1418)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+  rev_raw_d1: valid MRR alone 0.6078  (tail 0.7746 head 0.4411)
+per-relation recipe: fit-half 0.7667  HELD-OUT 0.7665
+held-out delta vs model-only: +0.0654
+  tail (h,r,?): model-only 0.9130 -> recipe 0.9666
+  head (?,r,t): model-only 0.4891 -> recipe 0.5664
+=== dist_s1 / nov
+  model_dist_s1.bf16: valid MRR alone 0.7184  (tail 0.9619 head 0.4750)
+  analogy_d1_t3: valid MRR alone 0.4947  (tail 0.8475 head 0.1418)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+  rev_nov_d1: valid MRR alone 0.3120  (tail 0.3801 head 0.2438)
+per-relation recipe: fit-half 0.7586  HELD-OUT 0.7589
+held-out delta vs model-only: +0.0654
+  tail (h,r,?): model-only 0.9005 -> recipe 0.9705
+  head (?,r,t): model-only 0.4863 -> recipe 0.5472
+=== dist_s1 / both
+  model_dist_s1.bf16: valid MRR alone 0.7184  (tail 0.9619 head 0.4750)
+  analogy_d1_t3: valid MRR alone 0.4947  (tail 0.8475 head 0.1418)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+  rev_raw_d1: valid MRR alone 0.6078  (tail 0.7746 head 0.4411)
+  rev_nov_d1: valid MRR alone 0.3120  (tail 0.3801 head 0.2438)
+per-relation recipe: fit-half 0.7709  HELD-OUT 0.7711
+held-out delta vs model-only: +0.0731
+  tail (h,r,?): model-only 0.9033 -> recipe 0.9709
+  head (?,r,t): model-only 0.4927 -> recipe 0.5713

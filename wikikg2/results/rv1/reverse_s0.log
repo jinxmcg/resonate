@@ -1,0 +1,4 @@
+rev_raw_s0: valid MRR alone 0.5566 (tail 0.6655 head 0.4478) -> ens_cache/rev_raw_s0.valid.npz
+rev_nov_s0: valid MRR alone 0.3827 (tail 0.3475 head 0.4180) -> ens_cache/rev_nov_s0.valid.npz
+self-check: |tail-direction score - rev_raw(head block, true head)| max 9.54e-06 on 512 questions
+done in 30s

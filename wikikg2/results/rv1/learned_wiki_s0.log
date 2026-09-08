@@ -1,0 +1,20 @@
+=== wiki_s0 / seven
+ selection    0.7450    0.7053  0.529 |  0.271  0.268  0.352  0.532
+   learned    0.7740    0.7252  0.582 |  0.282  0.318  0.470  0.554   (136 local groups)
+global weights: {'model_wiki_s0.bf16': np.float32(1.679), 'analogy_s0_t3': np.float32(0.029), 'holders': np.float32(0.047), 'cn_aa': np.float32(0.06), 'linked': np.float32(0.142), 'cn3_aa': np.float32(0.026), 'typed': np.float32(0.144)}
+head-direction weights: {'model_wiki_s0.bf16': np.float32(1.66), 'analogy_s0_t3': np.float32(0.429), 'holders': np.float32(-0.485), 'cn_aa': np.float32(0.055), 'linked': np.float32(0.129), 'cn3_aa': np.float32(0.01), 'typed': np.float32(0.164)}
+=== wiki_s0 / raw
+ selection    0.7615    0.7120  0.561 |  0.271  0.279  0.440  0.549
+   learned    0.7791    0.7269  0.591 |  0.281  0.324  0.481  0.557   (136 local groups)
+global weights: {'model_wiki_s0.bf16': np.float32(1.316), 'analogy_s0_t3': np.float32(-0.029), 'holders': np.float32(0.126), 'cn_aa': np.float32(0.053), 'linked': np.float32(0.142), 'cn3_aa': np.float32(0.038), 'typed': np.float32(0.143), 'rev_raw_s0': np.float32(0.969)}
+head-direction weights: {'model_wiki_s0.bf16': np.float32(1.197), 'analogy_s0_t3': np.float32(0.31), 'holders': np.float32(-0.348), 'cn_aa': np.float32(0.046), 'linked': np.float32(0.131), 'cn3_aa': np.float32(0.029), 'typed': np.float32(0.164), 'rev_raw_s0': np.float32(1.364)}
+=== wiki_s0 / nov
+ selection    0.7496    0.7111  0.534 |  0.271  0.268  0.352  0.547
+   learned    0.7796    0.7359  0.589 |  0.281  0.320  0.472  0.557   (136 local groups)
+global weights: {'model_wiki_s0.bf16': np.float32(1.555), 'analogy_s0_t3': np.float32(-0.015), 'holders': np.float32(0.104), 'cn_aa': np.float32(0.057), 'linked': np.float32(0.142), 'cn3_aa': np.float32(0.034), 'typed': np.float32(0.143), 'rev_nov_s0': np.float32(0.612)}
+head-direction weights: {'model_wiki_s0.bf16': np.float32(1.459), 'analogy_s0_t3': np.float32(0.417), 'holders': np.float32(-0.479), 'cn_aa': np.float32(0.051), 'linked': np.float32(0.131), 'cn3_aa': np.float32(0.025), 'typed': np.float32(0.165), 'rev_nov_s0': np.float32(1.406)}
+=== wiki_s0 / both
+ selection    0.7656    0.7210  0.565 |  0.271  0.279  0.440  0.549
+   learned    0.7840    0.7380  0.596 |  0.281  0.323  0.481  0.555   (136 local groups)
+global weights: {'model_wiki_s0.bf16': np.float32(1.334), 'analogy_s0_t3': np.float32(-0.029), 'holders': np.float32(0.124), 'cn_aa': np.float32(0.054), 'linked': np.float32(0.142), 'cn3_aa': np.float32(0.037), 'typed': np.float32(0.142), 'rev_raw_s0': np.float32(0.931), 'rev_nov_s0': np.float32(-0.01)}
+head-direction weights: {'model_wiki_s0.bf16': np.float32(1.218), 'analogy_s0_t3': np.float32(0.325), 'holders': np.float32(-0.368), 'cn_aa': np.float32(0.046), 'linked': np.float32(0.131), 'cn3_aa': np.float32(0.03), 'typed': np.float32(0.165), 'rev_raw_s0': np.float32(1.134), 'rev_nov_s0': np.float32(0.5)}
