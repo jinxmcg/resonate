@@ -75,3 +75,20 @@ parameter count from the checkpoint: 50,244,249 real parameters (coefficients
 checkpoints `model_cp3s{1,4,5,6,7,8,9}_w4_full.pt` on release v2.0-two-boards
 (SHA256SUMS_compact). On the 2026-09-04 board this is 8th, between StarGraph +
 TripleRE (2022) 0.7201 and CompoundE3D 0.7006, and the best entry under 90M.
+
+## TR2 (registered 2026-09-08 evening, pending the user's go): the ten-seed requirement
+
+OGB: "average and unbiased standard deviation must be taken over 10 different
+random seeds". E has seven released students; C is one read.
+* **E, seeds 0, 2, 3**: retrain the lost students with the row-C recipe
+  (`train_wiki.py --distill <ten teachers> --distill-T 2.0`, 400k steps, seed s,
+  `--eval valid`), then exactly the E procedure (`e_seed.sh`): compress with the
+  student's own clusters, refit 200k, nine members, rich selection frozen on full
+  validation, one read each. Reported together with the seven as mean ± std over
+  ten.
+* **C, ten leave-one-out reads**: for i in 0…9 the score average of the nine
+  teachers without seed i (and their averaged reverse members), the same seven
+  other members, standard selection frozen on full validation, one read each;
+  reported as mean ± std over the ten, next to the full ten-teacher read 0.7320
+  (the protocol already used for the unfiled ensemble row). Thirteen reads in
+  total; no other test access.
