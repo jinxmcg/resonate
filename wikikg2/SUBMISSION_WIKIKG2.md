@@ -1,0 +1,59 @@
+# ogbl-wikikg2 filings (draft, 2026-09-08; numbers marked TBD are filled by the TR1 reads)
+
+Two entries, both by allowed means (validation used only to select among fixed
+per-relation weight patterns; no gradient touches validation labels; one test
+read per row through the official Evaluator). Team: Cristian Malaia. Code and
+checkpoints: https://github.com/jinxmcg/resonate (release v2.0-two-boards plus
+the compact checkpoints and frozen selection weights added for this filing).
+
+## Entry C — ResonatE ensemble + graph evidence (ensemble)
+
+| field | value |
+|---|---|
+| method name | ResonatE ×10 + retrieval + reverse (selection blend) |
+| test MRR | TBD (one read) |
+| validation MRR | TBD (the frozen selection, in-sample, from `results/tr1/C.json`) |
+| parameters | 3,288,427,530 (ten released k=8 teachers of 328,842,753 each; the members add none) |
+| ensemble | yes |
+| external data | none |
+| hardware | RTX 5090, 40 min per teacher; members and blend minutes |
+
+What it is: the score average of the ten released teachers, plus nine evidence
+members computed from the training graph and the frozen models (two analogy
+members, holders, common-neighbour, two-hop link, three-hop, typed paths, and
+the two opposite-operator members rev_raw / rev_nov), combined per (relation,
+direction) by a selection among nine fixed weight patterns chosen by validation
+MRR (guard 250 rows, chosen on validation halves). Validation held-out estimate
+of the same procedure: 0.7909.
+
+## Entry E — ResonatE compact single model + graph evidence
+
+| field | value |
+|---|---|
+| method name | ResonatE compact (clustered narrow rows) + retrieval + reverse |
+| test MRR | TBD, mean ± std over seven seeds (s1, s4–s9) |
+| validation MRR | TBD (frozen selection, in-sample, mean over seeds) |
+| parameters | 50,3xx,xxx (41,478,808 table + 8,847,360 operators + temperature; exact count from the checkpoint) |
+| ensemble | no |
+| external data | none |
+| hardware | RTX 5090; compression 1 min, refit 30 min per seed |
+
+What it is: the released T=2 student (k=8, 329M) with every entity row
+replaced by a narrow row of width 4/8/36/64 complex by training degree,
+expanded through one of 4,096 learned subspaces per tier (k-means over the
+trained rows, per-cluster PCA), refit for 200k steps with the student as
+teacher and the operators frozen. Alone it reads 0.7074 on validation
+(student 0.7190); with the nine members and the richer selection family
+(SEL1) its held-out estimate is 0.7667 (student row 0.7734).
+
+## Disclosures carried into README and paper
+
+* The learned per-relation combiner (Adam on validation labels; rows F / C-F /
+  ensemble, up to 0.7426 test) remains reported and not filed.
+* The selection guard (250) is chosen on validation halves; the earlier
+  test-mix-informed guard is not used in any filed row.
+* The reverse members are functions of the frozen models; the graph members
+  read the training graph only; the compact rows are built from the released
+  student and refit on training edges.
+* Records: REVERSE_MEMBER.md, ENSEMBLE_SELECTION.md, SELECTION_RICH.md,
+  COMPACT_K.md (CP1–CP3f), HOLDOUT_COMBINER.md (HC1–HC3), TEST_READS_PROPOSAL.md.
