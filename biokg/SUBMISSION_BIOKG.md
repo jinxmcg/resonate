@@ -194,9 +194,10 @@ is 49× smaller than TripleRE, which it beats by 0.0120.
   its construction; the current one is 20 pages and carries
   §"Compressing the entity table after training", the C′ row and the CP-B4
   reading. And the link given on the form should be **pinned to a commit**,
-  `https://github.com/jinxmcg/resonate/blob/<sha>/paper/resonate.pdf`, not to
+  `https://github.com/jinxmcg/resonate/blob/aa0601d7b927bfca5372945a2cd25da854fc98b2/paper/resonate.pdf`
+  (the commit carrying the rebuilt PDF), not
   `main` — otherwise later edits to the preprint silently change the report the
-  filed entries point at. Use the SHA of the commit that carries this document.
+  filed entries point at. That SHA is the one to paste on the form.
 * **CP-B4.** Its ten-seed campaign would replace entry C′ at the refit numbers
   (seed 0: 0.8539 held-out on validation, above entry C) at the same 9,555,497
   parameters. Confirm whether it finished before filing — if it did and it holds,
