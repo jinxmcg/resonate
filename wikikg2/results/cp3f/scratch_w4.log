@@ -1,0 +1,23 @@
+ogbl-wikikg2 loaded in 15s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 200000, 'batch': 2048, 'neg': 4096, 'k': 12, 'block_size': 4, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': ['teachers/model_dist_s1.bf16.pt'], 'distill_w': 1.0, 'distill_T': 2.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'comp': 0, 'comp_k': 8, 'comp_drop': 0.3, 'comp_lam': 1.0, 'comp_hubw': False, 'comp_gain': False, 'comp_free_min_deg': 0, 'tiered_from': 'teachers/model_dist_s1.bf16.pt', 'tiers': '8,64,1024', 'widths': '4,8,36,64', 'train_ops': False, 'subspaces': '4096,4096,16,1', 'tiered_random_init': True, 'rev_frac': 0.5, 'seed': 0, 'save': 'model_cp3f_w4_scratch.pt', 'eval': 'valid', 'eval_only': False, 'probe_every': 50000, 'probe_size': 20000, 'ckpt_every': 0, 'log_every': 25000, 'device': 'cuda', 'data_root': 'data_ogb'}
+tiered table: cluster assignment kept, rows and subspaces re-initialised at random (CP3f)
+tiered table from teachers/model_dist_s1.bf16.pt: cutoffs [8, 64, 1024], widths [4, 8, 36, 64], sizes [1674500, 808275, 16593, 1236], table params 41,478,808 (13.0% of the wide table); operators frozen
+params: 41,478,808 (M=64, table 0.00 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+distill: 1 teachers (bf16 tables), w=1.0, T=2.0
+step 25000/200000  loss 7.427  6.9 ms/step  tau 9.23  (174s)
+step 50000/200000  loss 5.059  6.9 ms/step  tau 9.23  (346s)
+[probe@50000] MRR 0.6629  hits@1 0.5893  hits@3 0.6974  hits@10 0.8051  (n=20,000, 0s)
+step 75000/200000  loss 4.092  6.9 ms/step  tau 9.23  (518s)
+step 100000/200000  loss 3.418  6.9 ms/step  tau 9.23  (692s)
+[probe@100000] MRR 0.6961  hits@1 0.6263  hits@3 0.7274  hits@10 0.8360  (n=20,000, 0s)
+step 125000/200000  loss 3.005  6.9 ms/step  tau 9.23  (864s)
+step 150000/200000  loss 3.002  7.0 ms/step  tau 9.23  (1038s)
+[probe@150000] MRR 0.7027  hits@1 0.6339  hits@3 0.7333  hits@10 0.8403  (n=20,000, 0s)
+step 175000/200000  loss 2.850  7.0 ms/step  tau 9.23  (1212s)
+step 200000/200000  loss 2.968  6.9 ms/step  tau 9.23  (1385s)
+[probe@200000] MRR 0.7057  hits@1 0.6372  hits@3 0.7375  hits@10 0.8418  (n=20,000, 0s)
+saved model_cp3f_w4_scratch.pt  (train 1385s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7069  hits@1 0.6384  hits@3 0.7392  hits@10 0.8434  (n=429,456, 2s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739

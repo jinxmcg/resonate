@@ -323,3 +323,17 @@ second wikikg2 entry is the 50M model (refit 41M table + operators) with its
 nine members and the rich selection, 0.7667 held-out, 0.0067 under the 329M
 student's row; the 89M model buys +0.0017 for +40M and is kept as a curve
 point. Both remain "validation only" until the user's test-read go.
+
+## CP3f RESULT (2026-09-08 14:31): training narrow from random reaches the same point
+
+Same 41M configuration, same 200k recipe, rows and subspaces at random init,
+only the cluster assignment from the wide model: probes 0.6629 / 0.6961 /
+0.7027 → **valid 0.7069**, against 0.7074 for compress-and-refit (probes
+0.6639 / 0.6957 / 0.7033) and 0.7029 for the compression alone. The two
+trajectories coincide within noise at every probe. Reading: with the operators
+frozen and the student as teacher, what the wide rows contribute is the
+cluster assignment; the rows themselves are re-learned in 200k steps either
+way. Training narrow is therefore as good as, not better than, compressing
+in this budget; the remaining 0.012 to the student is the width, not the
+initialisation. A learned assignment (no wide model at all) remains the open
+research item.
