@@ -407,12 +407,13 @@ development record. On the board as of 2026-09-09 (12 entries, unchanged since
 Not filed (combiner fit on validation labels; see Compliance above): wikikg2
 C-F 0.7320 ± 0.0010 and the ensemble 0.7426 ± 0.0002.
 
-> **Open:** [`wikikg2/SUBMISSION_WIKIKG2.md`](wikikg2/SUBMISSION_WIKIKG2.md)
-> prepares *two* wikikg2 entries — E above, and C, the ten-teacher ensemble
-> under the selection blend (0.7320, 3.29B parameters, allowed by the same
-> fixed-candidate reasoning as the biokg blends). The filing decision of
-> 9 September names only E. Confirm whether C is dropped or still goes in
-> before either form is submitted.
+Also prepared but **not filed** (decision of 9 September): wikikg2 entry C, the
+ten-teacher ensemble under the selection blend, 0.7320 at 3,288,427,530
+parameters. It is allowed by the same fixed-candidate reasoning as the biokg
+blends and would have ranked 2nd on the 2026-09-04 board, against 7th for E —
+but it is a ten-model ensemble three orders of magnitude larger than the row
+that carries the argument, so E goes in alone. Its receipts stay in
+[`wikikg2/SUBMISSION_WIKIKG2.md`](wikikg2/SUBMISSION_WIKIKG2.md).
 
 No external data on either board. One RTX 5090 per run.
 

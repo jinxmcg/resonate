@@ -1,12 +1,21 @@
-# ogbl-wikikg2 filings (final, 2026-09-08 evening; all reads done)
+# ogbl-wikikg2 filing (2026-09-09: entry E only; all reads done)
 
-Two entries, both by allowed means (validation used only to select among fixed
+**One entry is filed: E, the compact single model.** Both rows below were
+prepared by allowed means (validation used only to select among fixed
 per-relation weight patterns; no gradient touches validation labels; one test
-read per row through the official Evaluator). Team: Cristian Malaia. Code and
-checkpoints: https://github.com/jinxmcg/resonate (release v2.0-two-boards plus
-the compact checkpoints and frozen selection weights added for this filing).
+read per row through the official Evaluator), but the decision of 9 September is
+to file E alone. Entry C stays here as the documented result, not as a
+submission. Team: Cristian Malaia. Code and checkpoints:
+https://github.com/jinxmcg/resonate (release v2.0-two-boards plus the compact
+checkpoints and frozen selection weights).
 
-## Entry C — ResonatE ensemble + graph evidence (ensemble)
+Against the 2026-09-04 board, E at 0.7096 would rank 7th; C at 0.7320 would have
+ranked 2nd. C is a ten-model ensemble of 3,288,427,530 parameters — the largest
+thing this project has built — and filing it would put the project's headline
+wikikg2 number on the one row that argues against its own thesis. E, at
+50,244,249 parameters, is the row that carries the claim.
+
+## Entry C — ResonatE ensemble + graph evidence (ensemble) — **NOT FILED**
 
 | field | value |
 |---|---|
@@ -26,7 +35,7 @@ direction) by a selection among nine fixed weight patterns chosen by validation
 MRR (guard 250 rows, chosen on validation halves). Validation held-out estimate
 of the same procedure: 0.7909.
 
-## Entry E — ResonatE compact single model + graph evidence
+## Entry E — ResonatE compact single model + graph evidence — **THE FILED ENTRY**
 
 | field | value |
 |---|---|
