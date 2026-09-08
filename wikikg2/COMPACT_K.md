@@ -153,3 +153,17 @@ loss and the student as T=2 distillation teacher, 200k steps, seed 0, neg
 (16, 32, 64, 64) = 108M. Bars as CP1: within 0.02 of the student (0.7190) →
 worth the full run and its members; within 0.01 → replaces row A as the
 single-model entry. Validation only.
+
+## CP2 RESULT (2026-09-08 10:00): the tiered refit sits on the uniform-width curve
+
+Refit from the k=8 student (operators frozen, T=2 distillation from the
+student, 200k steps; `results/cp2/`): widths (8, 16, 36, 64), 54M table + 8.8M
+operators ≈ 63M: PCA init 0.4834 → probes 0.6296 / 0.6369 / 0.6415 → **valid
+0.6424**. Widths (16, 32, 64, 64), 108M + 8.8M: **valid ≈ 0.68** (probe@150k
+0.6786; final in the log). Reference: the student 0.7190; the uniform-width
+points trained from scratch, k=4 (80M) 0.6454 and k=6 (180M) 0.6829. The
+tiered rows land on that same curve: width by degree buys nothing over width
+alone, and neither meets the 0.02 bar. Reading: a per-entity row costs its
+width whatever the entity's degree; the parameter count on this graph falls
+only by sharing structure across entities (anchor/hash encoders), which is
+the next research item. Rows C and A remain the two wikikg2 entries.
