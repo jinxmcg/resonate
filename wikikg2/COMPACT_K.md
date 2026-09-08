@@ -54,3 +54,23 @@ As bare ensembles the compact widths add +0.004 to +0.006 to the student; once
 the nine members are in they add +0.001 to +0.0015, under the +0.002 bar. The
 members already carry most of what a second width contributes. Informational
 at 200k; CK3 (the 800k k=6) is the full-strength check and is queued.
+
+## CK3 RESULT (2026-09-08 03:12): the full k=6 model
+
+`model_k6.pt` (800k, seed 0): validation MRR 0.6829, hits@1 0.6171, hits@10
+0.8123; the k=8 teacher of the same recipe reads 0.7041 (−0.021). Selection
+blend, held-out half (`results/ck3/selection.log`):
+
+| row | MRR | head |
+|---|---|---|
+| k6 alone | 0.6826 | 0.424 |
+| k6 + nine members (analogy_k6, holders, cn_aa, linked, cn3_aa, typed, rev_raw_k6, rev_nov_k6) | **0.7529** | 0.545 |
+| student + k6 | 0.7241 | 0.484 |
+| student + k6 + nine | 0.7725 | 0.572 |
+| student + k6 + eleven (both analogy and both reverse pairs) | 0.7750 | 0.578 |
+
+Bars: the compact row is within 0.02 of the student row (0.7711 − 0.7529 =
+0.018) → a filing candidate at ~180M (the student row: 329M). The two-width
+ensemble reaches +0.004 with all members, under its +0.005 bar; recorded, not
+promoted. The k6 row would need its own T=2 distillation to be the "distilled
+compact" analogue of the student row; not run tonight.
