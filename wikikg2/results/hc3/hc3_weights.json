@@ -1,0 +1,14 @@
+{
+ "holdout": "/mnt/geocore/wiki/holdout_wiki_row.npz",
+ "rows": 484833,
+ "validation_rows": 429456,
+ "cap": 20,
+ "clip": 50.0,
+ "validation_mass_in_cells_absent_from_holdout": 0.00036325025148094335,
+ "fraction_clipped": 0.0,
+ "effective_sample_size": 269581.6456192674,
+ "max_weight": 16.940356394129978,
+ "zero_weight_rows": 188,
+ "l1_distance_valid_vs_holdout": 0.6774680812796032,
+ "l1_distance_valid_vs_weighted_holdout": 0.0007265005029194129
+}

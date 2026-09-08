@@ -160,3 +160,64 @@ remain are outside this registration: a zero-order (non-gradient) search
 of the same per-relation weights on validation, which is what the board's
 current first entry (RelEns, TPE on validation MRR) does, or asking the
 OGB maintainers directly. Both are the user's call.
+
+## HC3 (registered 2026-09-08 00:40, user approved after the degree finding): HC2 fit rows, degree-matched weights
+
+Finding that motivates it (query-side and answer-side entity degrees, in the
+graph the members read): heads look alike in every split (median 6–8); tails do
+not. Validation tails: p25 / median / p90 = 24 / 642 / 82k; test 49 / 1,230 /
+55k; training rows and the HC2 holdout 150 / 4,600 / 1.2M. The row holdout
+also over-samples cold heads (7.0% with degree ≤ 3 vs 1.3% on validation). In
+the head direction the tail is the query entity and the members are built from
+its neighbourhood, so HC2's head-direction weights were fit on hubs and applied
+to modest entities.
+
+Change, and the only change: the HC2 fit world (same teacher `model_fit97r_s0`,
+same seven holdout caches, nothing retrained) with an importance weight per
+held-out triple, applied to both of its directions:
+w = P_valid(cell) / P_holdout(cell), cell = (⌊log2(deg(head)+1)⌋, ⌊log2(deg(tail)+1)⌋),
+each capped at 20; validation degrees in full TRAIN, holdout degrees in
+fit-TRAIN; cells with no holdout mass are dropped (their validation mass is
+reported); weights clipped to [0, 50] and scaled to mean 1; effective sample
+size reported (`hc3_weights.py`). The listwise fit uses the weighted
+cross-entropy (`learned_blend.fit_weights(w=...)`); the guard is chosen by the
+weighted cross-fit MRR on holdout halves over the same {250, 500, 1000, 2000}.
+Apply world, members, gate and validation half unchanged from HC1/HC2.
+
+Disclosure: the weights are derived from validation's aggregate degree
+histogram — a query-side statistic for head queries, an answer-side one for
+tail queries; no validation label enters row by row and nothing is fit on
+validation. This is a third attempt after two failures, run because the
+cause it addresses was measured, not because a number was close. If it
+fails the gate, degree is not the whole difference between old and new
+edges, and no further holdout variant will be run.
+
+## HC3 RESULT (2026-09-08 01:05, box 50209059): FAIL on both; the holdout route is closed for good
+
+Weights (`results/hc3/hc3_weights.json`): effective sample size 269,582 of
+484,833 triples, max weight 16.9, none clipped, 0.04% of validation mass in
+cells absent from the holdout; the L1 distance between the validation and
+holdout (head-degree, tail-degree) histograms went from 0.677 to 0.0007.
+Guard sweep by weighted cross-fit: 250 → 0.8429, 500 → 0.8416, 1000 →
+0.8374, 2000 → 0.8313; guard 250, 198 local groups.
+
+Student s1, full validation, official Evaluator: **MRR 0.7313** (HC2
+0.7266), hits@1 0.6589, hits@10 0.8729. On the held-out half: model alone
+0.7186, selection 0.7542, validation-fit combiner 0.7826, holdout-fit
+0.7315 → bar 0.7684, **FAIL** (keeps −80% of the gain over selection).
+Teacher s0: full validation **0.7220** (HC2 0.7171); half: 0.7042 / 0.7450 /
+0.7740 / 0.7221 → bar 0.7595, **FAIL** (−79%). Receipts:
+`results/hc3/{dist_s1,wiki_s0}.{json,log}`, `results/hc3/weights_*.npz`.
+
+Reading: degree matching recovers about +0.005 on both channels and no more.
+The head-direction weights moved toward the validation fit (linked −0.31 →
+−0.22, analogy −0.24 → +0.06 vs +0.12 / +0.24 on validation) but did not
+get there. Degree is part of what separates May-2015 edges from August-2015
+queries, not most of it. As registered: no further holdout variant. The
+combiner fit on validation labels stays reported-not-filed; the ways to a
+filing are the selection blend (allowed as tuning; 0.7542 on the half) and a
+gradient-free search of the per-relation weights on validation MRR (the
+RelEns precedent). A combiner trained inside the model would need to
+condition on the pair's neighbourhood, not the relation alone, and to learn
+from the training edges that resemble new ones; those are not identified by
+degree.

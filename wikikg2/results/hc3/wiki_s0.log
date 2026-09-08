@@ -1,0 +1,32 @@
+row weights: hc3_weights.npy, ESS 269,582 of 484,833 triples
+holdout: 484,833 rows x 2 directions; members (7):
+         model_fit97r_s0: holdout MRR alone 0.6766 (tail 0.9752 head 0.3779)
+          analogy_f0r_t3: holdout MRR alone 0.5401 (tail 0.9317 head 0.1484)
+                 holders: holdout MRR alone 0.4725 (tail 0.8808 head 0.0642)
+                   cn_aa: holdout MRR alone 0.1290 (tail 0.0952 head 0.1628)
+                  linked: holdout MRR alone 0.1018 (tail 0.1041 head 0.0996)
+                  cn3_aa: holdout MRR alone 0.4958 (tail 0.7031 head 0.2885)
+                   typed: holdout MRR alone 0.2725 (tail 0.3520 head 0.1929)
+guard   250: holdout cross-fit 0.8429 (folds 0.8424 0.8434)
+guard   500: holdout cross-fit 0.8416 (folds 0.8410 0.8422)
+guard  1000: holdout cross-fit 0.8374 (folds 0.8369 0.8378)
+guard  2000: holdout cross-fit 0.8313 (folds 0.8309 0.8317)
+holdout fit: guard 250, 198 local groups, in-sample holdout MRR 0.8062
+holdout global/dir weights:
+  tail: model_fit97r_s0=+1.753 analogy_f0r_t3=+0.024 holders=+0.133 cn_aa=+0.081 linked=+0.196 cn3_aa=+0.099 typed=+0.090
+  head: model_fit97r_s0=+1.779 analogy_f0r_t3=+0.055 holders=-0.208 cn_aa=+0.021 linked=-0.223 cn3_aa=+0.116 typed=+0.060
+
+HOLDOUT-FIT combiner on FULL validation (official Evaluator): MRR 0.7220  hits@1 0.6509 hits@3 0.7615 hits@10 0.8602  (tail 0.9622 head 0.4817; 1,682 rows on direction fallback)
+
+on the held-out half of validation (seed 0, 214,447 triples):
+  row                                                        MRR    tail    head
+  model alone                                             0.7042  0.9511  0.4574
+  selection blend (fit other half)                        0.7450  0.9608  0.5291
+  learned combiner (fit other half, validation labels)    0.7740  0.9664  0.5816
+  HOLDOUT-FIT combiner (no validation fit)                0.7221  0.9618  0.4824
+
+GATE: combiner gain over selection +0.0290; holdout-fit keeps -79% of it; bar 0.7595 -> FAIL
+validation-fit global/dir weights (for comparison, not used):
+  tail: model_wiki_s0.bf16=+1.749 analogy_s0_t3=+0.163 holders=+0.057 cn_aa=+0.176 linked=+0.280 cn3_aa=+0.074 typed=+0.120
+  head: model_wiki_s0.bf16=+1.660 analogy_s0_t3=+0.429 holders=-0.485 cn_aa=+0.055 linked=+0.129 cn3_aa=+0.010 typed=+0.164
+HC1_DONE wiki_s0

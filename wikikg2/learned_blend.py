@@ -24,10 +24,12 @@ from blend_wiki import load_split, mrr_rows, combined, choose, apply
 from train_wiki import load
 
 
-def fit_weights(Z, rows, dev, steps=300, lr=0.05, l2=1e-3, init=None):
+def fit_weights(Z, rows, dev, steps=300, lr=0.05, l2=1e-3, init=None, w=None):
     """Z: list of (R2, 501) float16 members; rows: bool mask. Returns
-    weight vector (M,) + bias-free listwise logistic fit."""
+    weight vector (M,) + bias-free listwise logistic fit. w: optional
+    per-row importance weights (R2,) for the loss (HC3)."""
     X = torch.stack([torch.from_numpy(z[rows].astype(np.float32)) for z in Z], -1).to(dev)  # (n, 501, M)
+    wt = None if w is None else torch.from_numpy(np.asarray(w)[rows].astype(np.float32)).to(dev)
     M = X.shape[-1]
     w = torch.zeros(M, device=dev) if init is None else torch.tensor(init, device=dev, dtype=torch.float32)
     w.requires_grad_(True)
@@ -36,7 +38,8 @@ def fit_weights(Z, rows, dev, steps=300, lr=0.05, l2=1e-3, init=None):
     for _ in range(steps):
         opt.zero_grad()
         s = X @ w
-        loss = torch.nn.functional.cross_entropy(s, y) + l2 * (w * w).sum()
+        ce = torch.nn.functional.cross_entropy(s, y, reduction="none")
+        loss = ((ce * wt).sum() / wt.sum() if wt is not None else ce.mean()) + l2 * (w * w).sum()
         loss.backward()
         opt.step()
     return w.detach().cpu().numpy()
@@ -113,7 +116,7 @@ def main():
     print("head-direction weights:", dict(zip(args.members, np.round(w_d[1], 3))))
 
 
-def fit_all(Z, rel, rows_mask, dirs, min_rows, dev):
+def fit_all(Z, rel, rows_mask, dirs, min_rows, dev, w=None):
     """global -> direction -> relation fits on rows_mask; returns
     (chosen {(r,d): w}, dir weights {d: w})."""
     rng = np.random.default_rng(1)
@@ -121,13 +124,13 @@ def fit_all(Z, rel, rows_mask, dirs, min_rows, dev):
     def sub(mask, k=60000):
         idx = np.nonzero(mask)[0]
         return np.isin(np.arange(R2), rng.choice(idx, size=min(k, len(idx)), replace=False))
-    w_g = fit_weights(Z, sub(rows_mask), dev)
-    w_d = {d: fit_weights(Z, sub(rows_mask & (dirs == bool(d))), dev, init=w_g) for d in (0, 1)}
+    w_g = fit_weights(Z, sub(rows_mask), dev, w=w)
+    w_d = {d: fit_weights(Z, sub(rows_mask & (dirs == bool(d))), dev, init=w_g, w=w) for d in (0, 1)}
     chosen = {}
     for r in np.unique(rel):
         for d in (0, 1):
             gf = (rel == r) & (dirs == bool(d)) & rows_mask
-            chosen[(int(r), d)] = fit_weights(Z, gf, dev, steps=200, init=w_d[d]) if gf.sum() >= min_rows else w_d[d]
+            chosen[(int(r), d)] = fit_weights(Z, gf, dev, steps=200, init=w_d[d], w=w) if gf.sum() >= min_rows else w_d[d]
     return chosen, w_d
 
 

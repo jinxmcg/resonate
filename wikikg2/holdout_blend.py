@@ -73,6 +73,8 @@ def main():
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--label", default="hc1")
     p.add_argument("--out-dir", default="results/hc1")
+    p.add_argument("--row-weights", default=None,
+                   help="HC3: .npy of one importance weight per holdout triple (applied to both directions)")
     args = p.parse_args()
     assert len(args.fit_members) == len(args.apply_members)
     M = len(args.fit_members)
@@ -83,6 +85,13 @@ def main():
     # ---- fit world -------------------------------------------------------
     Zh, relh = load_split(args.fit_members, "holdout", args.fit_cache_dir)
     R2h = len(relh); dh = dirs_of(R2h)
+    W = None
+    if args.row_weights:
+        w1 = np.load(args.row_weights).astype(np.float32)
+        assert len(w1) == R2h // 2, (len(w1), R2h)
+        W = np.concatenate([w1, w1]); rec["row_weights"] = args.row_weights
+        print(f"row weights: {args.row_weights}, ESS {W.sum()**2/(W*W).sum()/2:,.0f} of {R2h//2:,} triples", flush=True)
+    wm = (lambda r, m: float((r[m] * W[m]).sum() / W[m].sum())) if W is not None else (lambda r, m: float(r[m].mean()))
     print(f"holdout: {R2h//2:,} rows x 2 directions; members ({M}):", flush=True)
     rec["holdout_alone"] = {}
     for m, tag in enumerate(args.fit_members):
@@ -95,9 +104,9 @@ def main():
         for mr in args.guards:
             vals = []
             for fold in (fm, ~fm):
-                ch, wd = fit_all(Zh, relh, fold, dh, mr, dev)
+                ch, wd = fit_all(Zh, relh, fold, dh, mr, dev, w=W)
                 s, _ = apply_w(Zh, relh, dh, ch, wd)
-                vals.append(float(mrr_rows(s)[~fold].mean()))
+                vals.append(wm(mrr_rows(s), ~fold))
             rec["guard_sweep"][str(mr)] = vals
             print(f"guard {mr:>5}: holdout cross-fit {np.mean(vals):.4f} (folds {vals[0]:.4f} {vals[1]:.4f})", flush=True)
         best = max(rec["guard_sweep"].values(), key=np.mean)
@@ -105,10 +114,12 @@ def main():
     else:
         min_rows = args.min_rows
     rec["min_rows"] = min_rows
-    chosen, w_d = fit_all(Zh, relh, np.ones(R2h, bool), dh, min_rows, dev)
+    chosen, w_d = fit_all(Zh, relh, np.ones(R2h, bool), dh, min_rows, dev, w=W)
     n_loc = sum(1 for (r, d), w in chosen.items() if not np.array_equal(w, w_d[d]))
     s_in, _ = apply_w(Zh, relh, dh, chosen, w_d)
     rec["holdout_in_sample"] = float(mrr_rows(s_in).mean())
+    if W is not None:
+        rec["holdout_in_sample_weighted"] = wm(mrr_rows(s_in), np.ones(R2h, bool))
     rec["local_groups"] = n_loc
     print(f"holdout fit: guard {min_rows}, {n_loc} local groups, in-sample holdout MRR {rec['holdout_in_sample']:.4f}", flush=True)
     print("holdout global/dir weights:")

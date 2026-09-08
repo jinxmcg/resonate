@@ -1,0 +1,85 @@
+{
+ "fit_members": [
+  "model_fit97r_s0",
+  "analogy_f0r_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed"
+ ],
+ "apply_members": [
+  "model_wiki_s0.bf16",
+  "analogy_s0_t3",
+  "holders",
+  "cn_aa",
+  "linked",
+  "cn3_aa",
+  "typed"
+ ],
+ "seed": 0,
+ "row_weights": "hc3_weights.npy",
+ "holdout_alone": {
+  "model_fit97r_s0": 0.676550454021181,
+  "analogy_f0r_t3": 0.5400662590474753,
+  "holders": 0.4725342557010058,
+  "cn_aa": 0.1290259502792449,
+  "linked": 0.10184142256522492,
+  "cn3_aa": 0.49578236764352945,
+  "typed": 0.2724637745177056
+ },
+ "guard_sweep": {
+  "250": [
+   0.8423669795092503,
+   0.8434481714941129
+  ],
+  "500": [
+   0.8410049945953401,
+   0.8421831091992308
+  ],
+  "1000": [
+   0.8369202554128274,
+   0.8378403040792658
+  ],
+  "2000": [
+   0.8308586374917722,
+   0.8316868082586707
+  ]
+ },
+ "min_rows": 250,
+ "holdout_in_sample": 0.806171020887754,
+ "holdout_in_sample_weighted": 0.8441993966570738,
+ "local_groups": 198,
+ "valid_full": {
+  "mrr": 0.7219544053077698,
+  "hits@1": 0.6508501172065735,
+  "hits@3": 0.7615110874176025,
+  "hits@10": 0.8601521253585815,
+  "tail": 0.9621786272858817,
+  "head": 0.4816994728132322,
+  "fallback_rows": 1682
+ },
+ "valid_alone": {
+  "model_wiki_s0.bf16": 0.7038353839766569,
+  "analogy_s0_t3": 0.4954358044273827,
+  "holders": 0.4250369304396891,
+  "cn_aa": 0.1643246651168084,
+  "linked": 0.09211651682609483,
+  "cn3_aa": 0.36193913036167263,
+  "typed": 0.3699341891430547
+ },
+ "valid_half": {
+  "model alone": 0.7042124324182941,
+  "selection blend (fit other half)": 0.7449792977793455,
+  "learned combiner (fit other half, validation labels)": 0.7739906128717777,
+  "HOLDOUT-FIT combiner (no validation fit)": 0.722083294245697
+ },
+ "gate": {
+  "selection": 0.7449792977793455,
+  "learned_xfit": 0.7739906128717777,
+  "holdout_fit": 0.722083294245697,
+  "bar": 0.7594849553255616,
+  "fraction_of_gain_kept": -0.7892094329643484,
+  "pass": false
+ }
+}
