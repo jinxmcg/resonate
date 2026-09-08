@@ -162,6 +162,19 @@ def load_model(path, n_ent, dev, table_dtype=None):
     kw = dict(k=ca["k"], block_size=ca["block_size"], sparse_grad=False,
               device=dev, ent_bias=ca.get("ent_bias", False),
               rel_gain=ca.get("rel_gain", False), table_dtype=dt)
+    if ca.get("tiered_from"):
+        from resonate_tiered import TieredTableResonatE
+        split, _ = load(ca.get("data_root", "data_ogb"))
+        tr = split["train"]
+        deg = np.bincount(np.concatenate([np.asarray(tr["head"]), np.asarray(tr["tail"])]), minlength=n_ent)
+        cutoffs = np.array([int(x) for x in ca["tiers"].split(",")]); widths = [int(x) for x in ca["widths"].split(",")]
+        m = TieredTableResonatE(n_ent, ck["n_rel"], np.searchsorted(cutoffs, deg, side="right"), widths,
+                                k=ca["k"], block_size=ca["block_size"], sparse_grad=False, device=dev)
+        m.load_state_dict({k_: v for k_, v in ck["model"].items() if k_ != "E_real"}, strict=False)
+        m.eval(); m.build_eval_table()
+        for q in m.parameters():
+            q.requires_grad_(False)
+        return m, ck
     if ca.get("comp", 0):
         split, _ = load(ca.get("data_root", "data_ogb"))
         tr = split["train"]
@@ -205,7 +218,33 @@ DTYPES = {"fp32": torch.float32, "fp16": torch.float16,
           "bf16": torch.bfloat16}
 
 
+def build_tiered(args, n_ent, n_rel, dev, split, wide_path):
+    from resonate_tiered import TieredTableResonatE
+    tr = split["train"]
+    deg = np.bincount(np.concatenate([np.asarray(tr["head"]), np.asarray(tr["tail"])]), minlength=n_ent)
+    cutoffs = np.array([int(x) for x in args.tiers.split(",")])
+    widths = [int(x) for x in args.widths.split(",")]
+    tier_of = np.searchsorted(cutoffs, deg, side="right")
+    wide, wck = load_model(wide_path, n_ent, dev)
+    m = TieredTableResonatE(n_ent, n_rel, tier_of, widths, k=wck["args"]["k"], block_size=wck["args"]["block_size"],
+                            sparse_grad=(args.opt != "adam"), device=dev, rel_gain=wck["args"].get("rel_gain", False))
+    sd = {k_: v for k_, v in wide.state_dict().items() if k_ != "E_real"}
+    m.load_state_dict(sd, strict=False)
+    m.init_from_wide(wide.E_real.detach().float())
+    if not args.train_ops:
+        for name, q in m.named_parameters():
+            if not (name.startswith("coef") or name.startswith("proj") or name.startswith("mu")):
+                q.requires_grad_(False)
+    print(f"tiered table from {wide_path}: cutoffs {cutoffs.tolist()}, widths {widths}, sizes {m.sizes}, "
+          f"table params {m.n_params():,} ({m.n_params()/(n_ent*2*m.m)*100:.1f}% of the wide table); "
+          f"operators {'trainable' if args.train_ops else 'frozen'}", flush=True)
+    del wide; torch.cuda.empty_cache()
+    return m
+
+
 def build_model(args, n_ent, n_rel, dev, split=None):
+    if getattr(args, "tiered_from", None):
+        return build_tiered(args, n_ent, n_rel, dev, split, args.tiered_from)
     kw = dict(k=args.k, block_size=args.block_size,
               sparse_grad=(args.opt != "adam"), device=dev,
               ent_bias=args.ent_bias, rel_gain=args.rel_gain,
@@ -291,6 +330,11 @@ def main():
     p.add_argument("--comp-free-min-deg", type=int, default=0,
                    help="only entities with >= this many training edges keep a "
                         "free row (0 = all); the rest are composed-only")
+    p.add_argument("--tiered-from", type=str, default=None,
+                   help="CP2: build a degree-tiered table initialised from this wide checkpoint (operators copied)")
+    p.add_argument("--tiers", type=str, default="8,64,1024", help="degree cutoffs of the tiers")
+    p.add_argument("--widths", type=str, default="8,16,36,64", help="complex width per tier (tail -> hubs)")
+    p.add_argument("--train-ops", action="store_true", help="CP2: also train the copied operators (default frozen)")
     p.add_argument("--rev-frac", type=float, default=0.5,
                    help="fraction of rows trained in the head direction "
                         "(?, r, t); 0.5 = symmetric (default)")

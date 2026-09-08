@@ -139,3 +139,17 @@ change, not registered tonight). The uniform-width points bound it: k=6 costs
 0.02 at 180M, k=4 costs 0.05 at 80M. Decision for the two wikikg2 entries:
 row C (ensemble) and row A (the k=8 student row); the distilled k=6 row stays
 a curve point for the paper.
+
+## CP2 (registered 2026-09-08 06:20, user's idea "capture the essence wide, then compact where not needed"): the tiered refit
+
+`resonate_tiered.py` + `train_wiki.py --tiered-from`: the k=8 T=2 student's
+operators and temperature are copied and frozen; every entity gets a row of
+width by training degree (tiers < 8 / 8–63 / 64–1023 / ≥ 1024), a coefficient
+vector per entity plus one shared projection and offset per tier, initialised
+from CP1's per-tier PCA. Only the coefficients (RowAdagrad, lr 0.6) and the
+four projections/offsets (Adam) train, on training edges, with the standard
+loss and the student as T=2 distillation teacher, 200k steps, seed 0, neg
+4096, `--eval valid`. Configurations: widths (8, 16, 36, 64) = 54M table and
+(16, 32, 64, 64) = 108M. Bars as CP1: within 0.02 of the student (0.7190) →
+worth the full run and its members; within 0.01 → replaces row A as the
+single-model entry. Validation only.
