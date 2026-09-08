@@ -122,3 +122,41 @@ defect it corrects was diagnosable from the split alone, and no
 validation label informs the change. If HC2 fails the gate too, the
 holdout route is closed: the combiner stays unfiled and the paper keeps
 the rows as reported.
+
+## HC2 RESULT (2026-09-08 00:12, box 50209059): FAIL on the student; the holdout route is closed
+
+Row-level holdout: 484,833 rows (3.0%), 49,831 (10.3%) linked to their answer
+in fit-TRAIN (receipt `results/hc2/holdout_wiki_row.json`). Teacher
+`model_fit97r_s0` on its fit-TRAIN: validation 0.6977 (100% teacher 0.7041,
+−0.0064). The defect of HC1 is gone in the fit world: `linked` scores 0.102
+alone on the holdout (HC1: 0.002) and takes +0.18 (tail) in the fit. Guard
+sweep on holdout halves: 250 → 0.8052, 500 → 0.8034, 1000 → 0.7999,
+2000 → 0.7949; guard 250, 198 local groups, in-sample holdout 0.8064.
+
+Applied to the released student (s1), full validation, official Evaluator:
+**MRR 0.7266**, hits@1 0.6529, hits@10 0.8713 (tail 0.965, head 0.489). On
+the held-out half: model alone 0.7186, selection blend 0.7542,
+validation-fit learned combiner 0.7826, holdout-fit combiner 0.7267. Bar
+0.7684 → **FAIL** (keeps −97% of the combiner's gain over selection: it no
+longer hurts, +0.008 over the model alone, but it stays below the allowed
+selection blend). Receipts: `results/hc2/dist_s1.{json,log}`,
+`results/hc2/weights_dist_s1.npz`, `results/hc2/teacher_s0.log`.
+
+Teacher→teacher diagnostic (released 100% teacher s0): full validation **0.7171**
+(alone 0.7041); on the half: model alone 0.7042, selection 0.7450, validation-fit combiner
+0.7740, holdout-fit 0.7172, bar 0.7595 → FAIL (−96% of the gain). Same pattern as the student,
+so the model channel's calibration is not the cause. Receipts: `results/hc2/wiki_s0.{json,log}`.
+
+Reading: what remains is the head direction. On held-out TRAIN rows the
+tail direction is nearly solved by the model (0.975 alone) and the
+head-direction fit gives `analogy` and `linked` the opposite sign to the
+validation fit (holdout +0.15 / −0.31; validation +0.24 / +0.12). Older
+edges and newer edges want different head-side weights; that is the time
+split, not a construction error, and no holdout of May-2015 edges will
+stand in for August-2015 queries on this axis. Decision, as registered:
+the holdout route is closed; the learned combiner stays unfiled and the
+paper keeps rows F / C-F / ensemble as reported-not-filed. The routes that
+remain are outside this registration: a zero-order (non-gradient) search
+of the same per-relation weights on validation, which is what the board's
+current first entry (RelEns, TPE on validation MRR) does, or asking the
+OGB maintainers directly. Both are the user's call.
