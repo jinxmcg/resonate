@@ -166,3 +166,37 @@ alone, and neither meets the 0.02 bar. Reading: a per-entity row costs its
 width whatever the entity's degree; the parameter count on this graph falls
 only by sharing structure across entities (anchor/hash encoders), which is
 the next research item. Rows C and A remain the two wikikg2 entries.
+
+CP2 diagnostic (per-tier, `tier_diag.py`): the loss is where a TAIL entity is
+the ANSWER — answer tier < 8: 0.4658 (student) → 0.3283 (54M) / 0.4019 (108M);
+answer tier 8–63: 0.7016 → 0.6156 / 0.6491; hub answers unchanged (0.99);
+tail entities as queries lose far less (0.9195 → 0.8449 / 0.8732). Narrow
+rows fail as candidates: 1.67M rows in ONE shared 16-real subspace cannot be
+told apart among 500 decoys that are mostly tail entities too. The width is
+not the defect; the single subspace per tier is.
+
+## CP3 (registered 2026-09-08 10:40, user's reading: "the range is huge"): many subspaces per tier
+
+As CP2 (narrow coefficients per entity, operators frozen, refit with the
+student as T=2 teacher, 200k steps, seed 0), but each tier gets K learned
+subspaces instead of one: entities are assigned to a subspace by k-means on
+their wide rows (K = 256 for the two tail tiers, 16 for the 64–1023 tier, 1 for
+the hubs), each subspace has its own projection and offset initialised by
+PCA of its cluster, and the assignment is fixed. Parameters: coefficients as
+CP2 + K·(d·2M + 2M) per tier (≈ 0.5M for K = 256, d = 16). Configuration
+(8, 16, 36, 64) as CP2's 54M. Bars as CP2 (within 0.02 of 0.7190 → worth the
+full run; within 0.01 → replaces row A). The per-tier diagnostic is reported
+again. Validation only.
+
+CP3 init check (jinx, 2026-09-08 11:00): with K = 256 / 256 / 16 / 1 subspaces
+and widths (8, 16, 36, 64), the k-means + per-cluster PCA initialisation alone,
+no training, reads **0.6831** on validation (55.8M table parameters), against
+0.4834 for one subspace per tier (CP1) and 0.6424 after CP2's 200k-step refit.
+
+## CP3b (registered 11:05): init-only sweep over K and widths
+Same construction, `--steps 0`, validation MRR and parameter count for
+K ∈ {256, 1024, 4096} on the two tail tiers (16 / 1 above) × widths
+(8, 16, 36, 64), (4, 8, 36, 64), (4, 4, 16, 64). Informational: maps the
+size–accuracy frontier of clustered narrow rows before any refit; the refit
+(CP3) is run on the registered K = 256 point, and the best CP3b point may be
+refit afterwards under the same bars.

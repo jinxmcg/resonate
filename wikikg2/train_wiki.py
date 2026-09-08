@@ -168,8 +168,11 @@ def load_model(path, n_ent, dev, table_dtype=None):
         tr = split["train"]
         deg = np.bincount(np.concatenate([np.asarray(tr["head"]), np.asarray(tr["tail"])]), minlength=n_ent)
         cutoffs = np.array([int(x) for x in ca["tiers"].split(",")]); widths = [int(x) for x in ca["widths"].split(",")]
+        H = ck["model"]["H"]                       # (n_rel, blocks, bs, bs): the operator shape fixes k and the block size
+        bs = int(H.shape[-1]); kk = int(round((H.shape[1] * bs) ** 0.5))
+        K = [int(x) for x in ca["subspaces"].split(",")] if ca.get("subspaces") else None
         m = TieredTableResonatE(n_ent, ck["n_rel"], np.searchsorted(cutoffs, deg, side="right"), widths,
-                                k=ca["k"], block_size=ca["block_size"], sparse_grad=False, device=dev)
+                                k=kk, block_size=bs, sparse_grad=False, device=dev, subspaces=K)
         m.load_state_dict({k_: v for k_, v in ck["model"].items() if k_ != "E_real"}, strict=False)
         m.eval(); m.build_eval_table()
         for q in m.parameters():
@@ -226,8 +229,11 @@ def build_tiered(args, n_ent, n_rel, dev, split, wide_path):
     widths = [int(x) for x in args.widths.split(",")]
     tier_of = np.searchsorted(cutoffs, deg, side="right")
     wide, wck = load_model(wide_path, n_ent, dev)
+    args.k, args.block_size = wck["args"]["k"], wck["args"]["block_size"]   # recorded in the checkpoint's args
+    K = [int(x) for x in args.subspaces.split(",")] if args.subspaces else None
     m = TieredTableResonatE(n_ent, n_rel, tier_of, widths, k=wck["args"]["k"], block_size=wck["args"]["block_size"],
-                            sparse_grad=(args.opt != "adam"), device=dev, rel_gain=wck["args"].get("rel_gain", False))
+                            sparse_grad=(args.opt != "adam"), device=dev, rel_gain=wck["args"].get("rel_gain", False),
+                            subspaces=K)
     sd = {k_: v for k_, v in wide.state_dict().items() if k_ != "E_real"}
     m.load_state_dict(sd, strict=False)
     m.init_from_wide(wide.E_real.detach().float())
@@ -335,6 +341,7 @@ def main():
     p.add_argument("--tiers", type=str, default="8,64,1024", help="degree cutoffs of the tiers")
     p.add_argument("--widths", type=str, default="8,16,36,64", help="complex width per tier (tail -> hubs)")
     p.add_argument("--train-ops", action="store_true", help="CP2: also train the copied operators (default frozen)")
+    p.add_argument("--subspaces", type=str, default=None, help="CP3: K learned subspaces per tier, e.g. 256,256,16,1")
     p.add_argument("--rev-frac", type=float, default=0.5,
                    help="fraction of rows trained in the head direction "
                         "(?, r, t); 0.5 = symmetric (default)")
