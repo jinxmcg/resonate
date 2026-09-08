@@ -3,3 +3,20 @@ args: {'steps': 200000, 'batch': 2048, 'neg': 4096, 'k': 12, 'block_size': 4, 'e
 tiered table from teachers/model_dist_s1.bf16.pt: cutoffs [8, 64, 1024], widths [8, 16, 36, 64], sizes [1674500, 808275, 16593, 1236], table params 80,390,120 (25.1% of the wide table); operators frozen
 params: 80,390,120 (M=64, table 0.00 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
 distill: 1 teachers (bf16 tables), w=1.0, T=2.0
+step 25000/200000  loss 18.097  8.1 ms/step  tau 9.23  (202s)
+step 50000/200000  loss 10.457  7.9 ms/step  tau 9.23  (400s)
+[probe@50000] MRR 0.5972  hits@1 0.5191  hits@3 0.6346  hits@10 0.7431  (n=20,000, 0s)
+step 75000/200000  loss 5.486  7.9 ms/step  tau 9.23  (597s)
+step 100000/200000  loss 3.840  7.9 ms/step  tau 9.23  (795s)
+[probe@100000] MRR 0.6852  hits@1 0.6152  hits@3 0.7176  hits@10 0.8238  (n=20,000, 0s)
+step 125000/200000  loss 2.947  7.9 ms/step  tau 9.23  (993s)
+step 150000/200000  loss 2.768  7.9 ms/step  tau 9.23  (1191s)
+[probe@150000] MRR 0.7063  hits@1 0.6387  hits@3 0.7373  hits@10 0.8418  (n=20,000, 0s)
+step 175000/200000  loss 2.553  7.9 ms/step  tau 9.23  (1389s)
+step 200000/200000  loss 2.604  7.9 ms/step  tau 9.23  (1587s)
+[probe@200000] MRR 0.7094  hits@1 0.6416  hits@3 0.7408  hits@10 0.8438  (n=20,000, 0s)
+saved model_cp3_k4096_w8_full.pt  (train 1588s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7105  hits@1 0.6425  hits@3 0.7430  hits@10 0.8458  (n=429,456, 2s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739

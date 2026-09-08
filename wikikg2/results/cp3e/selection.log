@@ -4,3 +4,9 @@ per-relation recipe: fit-half 0.7630  HELD-OUT 0.7629
 === w4f+9 / rich
 per-relation recipe: fit-half 0.7670  HELD-OUT 0.7667
   head (?,r,t): model-only 0.4565 -> recipe 0.5635
+=== w8f+9 / standard
+per-relation recipe: fit-half 0.7646  HELD-OUT 0.7645
+  head (?,r,t): model-only 0.4618 -> recipe 0.5593
+=== w8f+9 / rich
+per-relation recipe: fit-half 0.7686  HELD-OUT 0.7684
+  head (?,r,t): model-only 0.4618 -> recipe 0.5662

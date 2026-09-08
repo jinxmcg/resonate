@@ -306,3 +306,20 @@ evidence layer narrows the gap to the wide model from 0.012 (alone) to
 0.007 (row). The 80M full refit and the per-tier diagnostic are pending.
 Decision candidate for the second wikikg2 entry: the refit 41M model + nine
 members, rich selection (≈ 50M parameters), pending the 80M number.
+
+## CP3e RESULT (2026-09-08 14:05): full refits of the two K = 4096 models, and the decision
+
+| model | table | total | alone | row std | row rich |
+|---|---|---|---|---|---|
+| student k=8 (reference) | 320M | 329M | 0.7190 | 0.7711 | 0.7734 |
+| widths 8/16/36/64, full refit (`model_cp3_k4096_w8_full.pt`) | 80.4M | 89M | 0.7105 (init 0.7109; the deeper high-rate dip, 0.597 at 50k, did not fully recover) | 0.7645 | **0.7684** |
+| widths 4/8/36/64, full refit (`model_cp3_k4096_w4_full.pt`) | 41.5M | 50M | 0.7074 (init 0.7029) | 0.7629 | **0.7667** |
+
+Per-tier diagnostic (`results/cp3c/tier_diag5.log`): the clustered models
+keep tail answers at 0.43–0.45 (CP2's single subspace: 0.33; student 0.47) and
+lose nothing above 64 edges; the refit moves tail answers up (0.4262 →
+0.4473 for the 41M table) at a small cost in the 8–63 group. Decision: the
+second wikikg2 entry is the 50M model (refit 41M table + operators) with its
+nine members and the rich selection, 0.7667 held-out, 0.0067 under the 329M
+student's row; the 89M model buys +0.0017 for +40M and is kept as a curve
+point. Both remain "validation only" until the user's test-read go.

@@ -1,5 +1,8 @@
 # TR1 proposal: test reads for the allowed rows (DRAFT for the user's approval; nothing here has run)
 
+User's decision (2026-09-08): at most two wikikg2 entries — C (the score entry) and the compact
+model E (the architecture entry). Reads: one for C, one for E (seed 0 exists).
+
 Written 2026-09-08 04:00 while the user slept. No test cache exists on the box
 for any of these rows; building them is part of the read and waits for the go.
 
@@ -8,7 +11,8 @@ Rows, all "selection blend on full validation, frozen, applied once to test"
 
 | row | validation held-out | test estimate | params | reads |
 |---|---|---|---|---|
-| A. T=2 student s1 + nine members (analogy, holders, cn_aa, linked, cn3_aa, typed, rev_raw, rev_nov) | 0.7711 | ~0.71 | 329M | 1 per released student (7) for a mean ± std, or 1 for s1 alone |
+| A. T=2 student s1 + nine members, rich selection | 0.7734 | ~0.715 | 329M | superseded by E for the two-entry plan; kept as reference |
+| E. compact: K=4096 clustered narrow rows (widths 4/8/36/64) refit from the student, operators frozen, + nine members, rich selection (`model_cp3_k4096_w4_full.pt`) | 0.7667 | ~0.70 | 50M | 1 (seed 0) |
 | B. seven-student ensemble + members + reverse | 0.7834 | ~0.727 | 2.3B | 1 |
 | C. ten-teacher ensemble + members + reverse | 0.7909 | ~0.735 | 3.29B | 1 |
 | D. distilled k=6 (T=2, CK4) + its nine members (compact) | 0.7543 | ~0.70 | 180M | 1 (seed 0 only exists) |
