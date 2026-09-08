@@ -678,8 +678,9 @@ def main():
             mining_note = (f"  mining w={current_mining_weight:.4f}, "
                            f"eligible slots {mining_selected.item() / mining_slots:.4%}"
                            if mining_slots else "")
+            progress_note = "  lr=" + ",".join(f"{o.param_groups[0]['lr']:.8g}" for o in opts)
             print(f"step {step}/{args.steps}  loss {loss.item():.3f}  "
-                  f"({time.time()-t0:.0f}s){filter_note}{mining_note}", flush=True)
+                  f"({time.time()-t0:.0f}s){filter_note}{mining_note}{progress_note}", flush=True)
         if probe_part is not None and step % args.probe_every == 0:
             eval_split(model, probe_part, offset, n_rel, dev,
                        label=f"probe@{step}")

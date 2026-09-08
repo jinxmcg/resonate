@@ -1,5 +1,8 @@
 # Validating the results without retraining
 
+> **Submission status — 7 September 2026 (confirmed by the user): nothing has
+> been filed for BioKG, WikiKG2, or STaRK-Prime.** Entries are proposed only.
+
 What a reviewer can run, what it costs, and what it printed when we ran it
 ourselves on a machine that had nothing but this repository, its GitHub
 release and the OGB download (a rented RTX 5090 on vast.ai, 128 CPUs,
@@ -12,7 +15,7 @@ claims rest on; tier 3 rebuilds one retrieval row from its checkpoint.
 ```
 git clone https://github.com/jinxmcg/resonate && cd resonate
 uv sync                                  # 129 s on one box, 1,975 s on another (network)
-uv run python biokg/scripts/summarize.py         # submitted biokg ladder, from biokg/results/sparse/
+uv run python biokg/scripts/summarize.py         # proposed biokg ladder (not filed), from biokg/results/sparse/
 uv run python biokg/scripts/summarize.py dense   # first ladder,          from biokg/results/dense/
 uv run python wikikg2/summarize_wiki.py          # wikikg2,               from wikikg2/results/
 ```
@@ -45,7 +48,7 @@ C(T=1). distilled 27M model + retrieval features [ablation]
   per seed: 0.8508 0.8511 0.8506 0.8512 0.8506 0.8508 0.8514 0.8509 0.8510 0.8508
   held-out - test: mean +0.0005, max |gap| 0.0011
 
-C. distilled 27M model (T=2) + retrieval features [submitted]
+C. distilled 27M model (T=2) + retrieval features [not filed]
   test  MRR  0.8528 +/- 0.0002
   valid MRR  0.8537 +/- 0.0002
   held-out   0.8532 +/- 0.0003
@@ -68,10 +71,10 @@ row B+  + self-augmented members
   test MRR   0.6866 +/- 0.0015 (n=10)   valid (in-sample) 0.7467 +/- 0.0007 (n=10)
 row F   A + 10 members + learned combiner
   test MRR   0.7222 +/- 0.0010 (n=10)   valid (in-sample) 0.7800 +/- 0.0004 (n=10)
-row C-F T=2 student + members + learned combiner  [submitted]
+row C-F T=2 student + members + learned combiner  [not filed]
   test MRR   0.7320 +/- 0.0010 (n=10)   valid (in-sample) 0.7880 +/- 0.0002 (n=10)
   student alone: test 0.6855 +/- 0.0008 (n=10)   valid 0.7190 +/- 0.0004 (n=10)
-ensemble  ten-seed ensemble + members + learned combiner  [submitted]
+ensemble  ten-seed ensemble + members + learned combiner  [not filed]
   full ten-seed ensemble: test 0.7430   valid (in-sample) 0.7998  (one read)
   leave-one-out (9 of 10 seeds), ten reads: test 0.7426 +/- 0.0002 (n=10)   valid (in-sample) 0.7994 +/- 0.0001 (n=10)
   cross-fitted valid, dist_s1: 0.7874   ... dist_s9: 0.7870   ens: 0.7992   rowf_s0: 0.7791 ... rowf_s6: 0.7795
@@ -218,3 +221,58 @@ seed-level noise, not bit-for-bit.
 | student 5 re-scored | — | 67 s |
 
 Rented time for both attempts: about 6 GPU-hours at $0.35–0.45 per hour.
+
+## The compact row (C', 9,555,497 parameters) — 2026-09-08
+
+Row C' is row C's released T=2 student with its entity table replaced by
+degree-tiered coefficients over per-tier subspace banks (k-means + per-cluster
+PCA, no training; `biokg/COMPACT_B.md`). Ten seeds, one frozen test read each:
+**test MRR 0.8468 +/- 0.0003**, against row C's 0.8528 +/- 0.0002 at 27,124,129
+parameters.
+
+```
+cd biokg
+scripts/fetch_checkpoints.sh compact          # tiered_T2_s{0..9}.pt, 10 x 39 MB
+uv run python verify_compact.py --device cuda # re-scores all ten on validation
+python scripts/summarize_cpb3.py              # the row from results/cpb3/
+```
+
+`verify_compact.py` rebuilds each tiered table and re-scores it with the
+official Evaluator against the value logged when it was built
+(`results/cpb3/expected.json`), tolerance 3e-4, and asserts the 9,555,497
+parameter count. On the GTX 1080 Ti that produced them, all ten reproduce with
+max |d| = 0.00004:
+
+```
+device: NVIDIA GeForce GTX 1080 Ti  torch 2.6.0+cu124
+  seed 0: recomputed 0.8176 vs logged 0.8176  (|d|=0.00001) [OK]
+  ...
+  seed 9: recomputed 0.8175 vs logged 0.8175  (|d|=0.00003) [OK]
+ALL 10 COMPACT CHECKPOINTS REPRODUCE (max |d| = 0.00004, tolerance 0.0003)
+```
+
+Cross-machine, on a rented RTX 5090 (vast.ai instance 50261550, driver
+595.71.05, torch 2.11.0+cu128 -- a different architecture AND a different
+torch/CUDA build from the GTX 1080 Ti that produced the files):
+
+```
+device: NVIDIA GeForce RTX 5090  torch 2.11.0+cu128
+  seed 0: recomputed 0.8176 vs logged 0.8176  (|d|=0.00001) [OK]
+  ...
+  seed 9: recomputed 0.8175 vs logged 0.8175  (|d|=0.00003) [OK]
+ALL 10 COMPACT CHECKPOINTS REPRODUCE (max |d| = 0.00004, tolerance 0.0003)
+```
+
+The per-seed deviations are identical to five decimals on both machines, so
+the two recomputed MRRs agree with each other to better than 1e-5 -- tighter
+than the 3e-4 the other released rows are checked to. The 387 MB of
+checkpoints also re-checksummed clean after transfer (`sha256sum -c
+SHA256SUMS.compact`, 10/10 OK).
+
+**Important scope note.** This verifies the released FILES, which are
+device-independent once built — reconstructing a row is a matmul. It does NOT
+mean the tiered CONSTRUCTION is portable: `compress_biokg.py` seeds its k-means
+from the device RNG, so re-deriving a compact table on a different device
+yields a different (equally good) table, not the released one. That is why
+these checkpoints ship as files rather than as a script to re-run. See the
+portability note in `biokg/COMPACT_B.md`.

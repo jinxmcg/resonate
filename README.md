@@ -1,10 +1,13 @@
 # Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access
 
+> **Submission status — 7 September 2026 (confirmed by the user): nothing has
+> been filed for BioKG, WikiKG2, or STaRK-Prime.** Entries are proposed only.
+
 *(the ResonatE repository; the model is the experimental vehicle, the properties measured are the result)*
 
 > **Preprint / draft (4 September 2026), not peer reviewed.** The results
 > below are self-reported; four OGB leaderboard entries (listed at the end)
-> are in process of submission from the receipts in this repository; two wikikg2 results
+> are proposed only and have not been filed; two wikikg2 results
 > are reported but not filed (see Compliance).
 > Project page: [resonate.page](https://resonate.page). Paper:
 > [`paper/resonate.pdf`](paper/resonate.pdf).
@@ -40,6 +43,7 @@ seed** under the official OGB Evaluator.
 | A. single model | 0.8158 ± 0.0006 | 0.8164 ± 0.0006 | 0.7457 | 0.9412 | 27,124,129 |
 | B. A + retrieval features | 0.8463 ± 0.0004 | 0.8465 / 0.8472 | 0.7875 | 0.9523 | 27,124,129 |
 | C. distilled (T=2) + retrieval features | **0.8528 ± 0.0002** | 0.8532 / 0.8537 | 0.7964 | 0.9539 | 27,124,129 |
+| C′. C with the entity table compressed after training | 0.8468 ± 0.0003 | 0.8478 / 0.8481 | 0.7888 | 0.9513 | **9,555,497** |
 
 `python biokg/scripts/summarize.py` prints this from `biokg/results/sparse/`.
 The distilled model alone scores 0.8321 ± 0.0003 on validation; the same
@@ -48,7 +52,7 @@ ablation, `summarize.py` prints it too). The public board as of
 2026-09-04: RelEns 0.9618 (849M, ensemble), ComplEx² 0.8583 (188M), UniBi
 0.8550 (182M), AutoBLM-KGBench 0.8536 (192M), ComplEx-RP 0.8492 (188M), TripleRE
 0.8348 (470M), AutoSF 0.8309 (94M), PairRE 0.8164 (188M), ComplEx 0.8095
-(188M). Row C is 5th of 12 and the 4th single model, at the smallest
+(188M). Row C would rank 5th against the listed entries and be the 4th single model, at the smallest
 parameter count on the board by 3.5×.
 
 This is the **second** biokg ladder. The first (`biokg/results/dense/`,
@@ -56,7 +60,7 @@ dense Adam on the entity table: A 0.8118 ± 0.0013, B 0.8425 ± 0.0007,
 C 0.8505 ± 0.0004, all ten seeds, all read once) is kept as history: the
 sparse shell was built for wikikg2, then brought back to biokg under a
 pre-registered bar and won on every seed (+0.0040 on A). Only the sparse
-ladder is submitted.
+ladder is proposed for submission.
 
 ### ogbl-wikikg2 (`wikikg2/`)
 
@@ -65,7 +69,7 @@ ladder is submitted.
 | A. single model | 0.6676 ± 0.0010 | 0.7030 ± 0.0009 | 328,842,753 |
 | B. A + 8 retrieval members, frozen blend | 0.6820 ± 0.0014 | — / 0.7413 | 328,842,753 |
 | B+. + self-augmented members | 0.6866 ± 0.0015 | — / 0.7467 | 328,842,753 |
-| distilled (T=2), alone — **filed** | **0.6855 ± 0.0008** | 0.7190 | 328,842,753 |
+| distilled (T=2), alone — **not filed** | **0.6855 ± 0.0008** | 0.7190 | 328,842,753 |
 | F. A + 10 members + learned combiner — not filed | 0.7222 ± 0.0010 | 0.779 / 0.7800 | 328,842,753 |
 | C-F. distilled (T=2) + members + learned combiner — not filed | 0.7320 ± 0.0010 | 0.787 / 0.7880 | 328,842,753 |
 | ensemble of 10 seeds + members + learned combiner — not filed | 0.7426 ± 0.0002 (leave-one-out, n=10; full ten-seed 0.7430) | 0.7992 / 0.7998 | 10 × 328.8M |
@@ -81,16 +85,16 @@ test split's relation mix (query relations, not answers) was also used to
 explain the validation–test gap and a test-mix-weighted validation number
 was used as a development signal, including for the blend guard (4,000 →
 500 rows) that every later blend row inherits; no test label was used, and
-it is disclosed here and in the paper. What is filed for wikikg2 is the
+it is disclosed here and in the paper. What is proposed for wikikg2 is the
 distilled single model alone, 0.6855 ± 0.0008, whose recipe was tuned on
 validation only. The biokg blends are selections among a fixed candidate
 list per relation group (hyperparameter tuning, not gradient search) and
-are filed. The public board as of 2026-09-04 (28 entries): RelEns 0.7392
+have not been filed. The public board as of 2026-09-04 (28 entries): RelEns 0.7392
 (2.18B params, ensemble), StarGraph + TripleRE + Text 0.7305 (1.93B, uses
 entity text), InterHT+ 0.7293 (156M), StarGraph + TripleRE 0.7286 (93M),
 InterHT+ 256-dim 0.7257 (148M), StarGraph + TripleRE 0.7201 (87M),
 CompoundE3D 0.7006 (751M), TranS 0.6939 (38M), TripleRE + NodePiece 0.6866,
-InterHT 0.6779. The filed single model (0.6855) would be 11th. The two
+InterHT 0.6779. The proposed single model (0.6855) would be 11th. The two
 combiner rows, which are not filed, would have been 1st (the ensemble, also
 the largest entry at 3.29B) and 2nd.
 
@@ -100,7 +104,7 @@ was read once, 0.7430. The learned combiner is fit on the full validation
 split, so its in-sample validation number is optimistic; the held-out
 column is the same fit on a random half of the validation triples,
 scored on the other half (`learned_blend.py` default mode), which is
-what the submission form carries. It is within 0.001 of in-sample on
+the held-out estimate reported here; no form has been filed. It is within 0.001 of in-sample on
 every seed where it was computed (the ensemble's one fit, seven of ten
 row-F seeds, six C-F seeds whose member caches survived; the machine was
 released before the rest).
@@ -109,7 +113,7 @@ released before the rest).
 
 Questions in words over PrimeKG (129,375 nodes, 8.1M edges), scored on the whole node set. The same
 architecture, trained on the graph's edges and then jointly on the training questions, answers a
-question from its text with the readout that scores a graph query; the submitted pipeline runs no
+question from its text with the readout that scores a graph query; the reported pipeline runs no
 language model at query time. Committed reads (one per split, second read overall; the first read,
 28.7 / 28.2 / 20.4 Hit@1, is reported alongside):
 
@@ -314,7 +318,7 @@ bf16 table, `to_bf16.py`) and write to `ens_cache/`, `results/`, `logs/`.
   and row B is not a submitted entry; T=1 student pilots seeds 2 and 0
   (0.6669 / 0.6672); row E (ten-seed ensemble + 6 frozen members) 0.7129
   and E+ 0.7164; a members-only diagnostic (eight shared members + learned
-  combiner, no model) 0.6723. Each submitted wikikg2 run — the ten C-F
+  combiner, no model) 0.6723. Each reported wikikg2 run — the ten C-F
   students with their own `--eval both` read, the ten C-F blends, the ten
   leave-one-out ensembles and the full ensemble — was read exactly once.
 - The blend weights are selected (biokg) or fit (wikikg2) on the full
@@ -352,7 +356,7 @@ biokg/
   cache_scores.py analogy_member.py jaccard_member.py ensemble_weights.py freeze_test.py verify.py
   scripts/                 run_campaign_sparse.sh run_distill_sparse.sh run_retrieval.sh (both ladders)
                            run_campaign.sh run_distill.sh (first ladder) summarize.py fetch_checkpoints.sh
-  results/sparse/          the submitted ladder: h24_sparse_s*.log, committed_*_s*.json/.log, pure_*_s*.log,
+  results/sparse/          the proposed ladder: h24_sparse_s*.log, committed_*_s*.json/.log, pure_*_s*.log,
                            h25_dist_s*.log (T=1 students), h26_dist_T2_s*.log (T=2 students), h27_* (T=3/4 probes)
   results/dense/           the first ladder's receipts
 wikikg2/
@@ -374,13 +378,14 @@ and `dist_T2_s{0..9}.pt` (108 MB each, dense format, `{"model", "offset",
 campaign script after their reads and cannot be re-verified from a
 checkpoint (their receipts and logs are in `results/rowCF/`).
 
-## Leaderboard entries
+## Proposed leaderboard entries — not filed
 
 | board | entry | test MRR | valid MRR | params |
 |---|---|---|---|---|
 | ogbl-biokg | ResonatE (single model) | 0.8158 ± 0.0006 | 0.8164 ± 0.0006 | 27.1M |
 | ogbl-biokg | ResonatE + retrieval features | 0.8463 ± 0.0004 | 0.8465 ± 0.0004 (held-out) | 27.1M |
 | ogbl-biokg | ResonatE distilled + retrieval features | 0.8528 ± 0.0002 | 0.8532 ± 0.0003 (held-out) | 27.1M |
+| ogbl-biokg | ResonatE distilled, tiered-compressed + retrieval features | 0.8468 ± 0.0003 | 0.8478 ± 0.0003 (held-out) | **9.56M** |
 | ogbl-wikikg2 | ResonatE distilled single model (T=2 from ten seeds) | 0.6855 ± 0.0008 | 0.7190 ± 0.0004 | 328.8M |
 
 Not filed (combiner fit on validation labels; see Compliance above): wikikg2
