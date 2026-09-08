@@ -29,3 +29,21 @@ validation halves (the earlier test-mix-informed guard is not used); the
 reverse members are functions of the frozen models; ensembles are marked as
 ensembles with summed parameters; the validation-fit learned combiner rows
 stay reported-not-filed.
+
+## TR1 APPROVED (2026-09-08 15:25; the user: "ok let's do prepare the submissions today")
+
+Rows read, each once through the official Evaluator after its selection is frozen on
+full validation:
+* **C**: `ens10t` (score average of the ten released teachers) + analogy_d1_t3 +
+  analogy_s0_t3 + holders + cn_aa + linked + cn3_aa + typed + rev_raw_ens10t +
+  rev_nov_ens10t; standard selection family, guard 250 (`scripts/read_c.sh`, box 1).
+  One read. The leave-one-out spread is optional and separate.
+* **E, seven seeds** (the released T=2 students s1, s4–s9): each compressed with its
+  own k-means clusters (K = 4096/4096/16/1, widths 4/8/36/64, per-cluster PCA), refit
+  200k steps with that student as T=2 teacher and its operators frozen
+  (`model_cp3s<s>_w4_full.pt`; seed 1 = the existing `model_cp3_k4096_w4_full.pt`),
+  then its nine members (own analogy, holders, cn_aa, linked, cn3_aa, typed, own
+  rev_raw / rev_nov); rich selection family, guard 250 (`scripts/e_seed.sh`; seeds
+  1, 4, 5, 6 on box 1, 7, 8, 9 on box 2). Seven reads; reported as mean ± std.
+Test caches are built inside these scripts and deleted per seed afterwards; no
+other test access. Receipts: `results/tr1/`.
