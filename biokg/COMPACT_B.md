@@ -632,15 +632,24 @@ therefore not the members absorbing the improvement -- it is the blend being
 mis-tuned for the new component. Redundancy would have shown up as a shrunken
 gain; this showed up as no gain.
 
+### Test reads: none were spent
+
+**The row was abandoned on validation. No test read was taken under CP-B4.**
+The registered rule names 0.8468, C's test number, but the decision never got
+that far: the blended row failed on the validation evidence and the campaign was
+stopped there. The protocol forbids a second read of the same model; it does not
+require a first one, and declining to spend a read on a row already known to
+fail is the cheap direction of that rule.
+
+Two consequences. The project's read ledger is unchanged by CP-B4 -- there is no
+read to disclose, which is why none is listed. And the ten reads the campaign
+was authorised to take **remain unspent**: if the blend is ever re-selected
+against the refit models rather than inherited from the init-only ones -- the
+experiment this failure actually suggests, with its own bar written first -- that
+model would still be entitled to ten fresh reads.
+
 ### Open on this record
 
 * **The per-seed receipts are not in this repository.** They are on 50270859 and
   have not been pulled into `results/`. Every other campaign in this file ships
   its logs; this one does not yet.
-* **Whether the ten test reads were spent is not recorded here.** The registered
-  rule compares against 0.8468, which is C's *test* number, and the campaign was
-  authorised with "one test read per seed, and only one". If those reads were
-  taken they must be listed -- this project discloses every test read it spends,
-  including the ones on rows that were then dropped. If the row was abandoned on
-  validation before any read, that should be stated too. **This is the one open
-  item that affects the disclosure record rather than just the write-up.**
