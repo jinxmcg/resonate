@@ -36,3 +36,15 @@ Filing candidates, in the user's hands: ens10t + members + reverse (estimate
 ~0.735 on test, ±0.01; RelEns is 0.7392) and ens7s + members + reverse
 (~0.727), each one test read, under a registration to be approved in the
 morning. No test cache was built or read tonight.
+
+## ES2 (registered 2026-09-08 14:40, user's idea): the ensemble built from compact models
+
+Each of the ten released teachers is compressed as in CP3 (its own k-means
+clusters, K = 4096/4096/16/1, widths 4/8/36/64, per-cluster PCA, operators
+kept, no refit): ten models of ~50M each. `ens10c` = their score average, with
+their averaged reverse members (`ens_cache.py`), plus the shared members and
+the two analogy members already in use; selection blend on validation halves
+(standard and rich), reported next to ES1's ens10t (0.7909 / 0.7923). Bars: a
+filing candidate in place of C if it is within 0.01 of ens10t (the size drops
+from 3.29B to ~0.5B); reported as a curve point otherwise. If it passes, the
+per-model refit (10 × 30 min) is the optional follow-up. Validation only.
