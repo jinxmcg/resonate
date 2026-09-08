@@ -158,12 +158,18 @@ the per-seed deviations identical to five decimals.
   model with the same retrieval features, 0.8463 ± 0.0004. Both are dominated by
   the filed rows and are kept as the development record. Also not filed: the
   first (dense-Adam) ladder in `results/dense/`, superseded by this one.
-* **Superseding work in progress.** CP-B4 (`COMPACT_B.md`) refits the compact
-  table's coefficients at lr 5e-4 with everything else frozen; on seed 0 it reads
-  0.8539 held-out on validation, above entry C. Its ten-seed campaign is
-  registered with its own ten test reads. If it holds, C′ would be updated at the
-  refit numbers — same 9,555,497 parameters, different weights — and it would
-  then dominate entry C.
+* **CP-B4 ran and was dropped; C′ as filed stands.** The refit of the compact
+  table's coefficients (lr 5e-4, everything else frozen) cleared its
+  pre-registered bar on seed 0 — 0.8539 held-out on validation, above entry C —
+  and earned the ten-seed campaign. The campaign landed and the row did not hold:
+  under the registered rule ("reported as C″ only if the mean beats 0.8468 by
+  more than the pooled seed spread; otherwise C′ stands as filed and the refit is
+  a validation curiosity"), C′ stands. **The individual refit models were good;
+  the combination was what failed** — each refit table improved on its own scores
+  much as seed 0 promised, but the blended row did not follow. Nothing about the
+  filed entry changes: the ten checkpoints, the ten test reads and the 0.8468
+  above are the init-only compact tables, untouched by CP-B4. The campaign's
+  receipts and the reading of why the blend failed belong in `COMPACT_B.md`.
 
 ## Board position
 
