@@ -54,3 +54,8 @@ frozen selection in-sample validation 0.7914 (held-out estimate 0.7909; gap to
 test 0.059). Global pattern chosen: soft20. On the board of 2026-09-04 this is
 2nd, behind RelEns 0.7392 and ahead of StarGraph + TripleRE + Text 0.7305.
 Receipts: `results/tr1/C.{json,log}`, `results/tr1/frozen_C.npz`.
+
+### E READS (one per seed; rich selection frozen on full validation)
+| seed | test MRR | hits@1 | hits@3 | hits@10 | tail / head | in-sample valid |
+|---|---|---|---|---|---|---|
+| s1 | **0.7116** | 0.6450 | 0.7433 | 0.8429 | 0.9621 / 0.4610 | 0.7675 |

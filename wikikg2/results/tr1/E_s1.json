@@ -1,0 +1,16 @@
+{
+  "members": [
+    "model_cp3_k4096_w4_full",
+    "analogy_w4f_t3",
+    "holders",
+    "cn_aa",
+    "linked",
+    "cn3_aa",
+    "typed",
+    "rev_raw_w4f",
+    "rev_nov_w4f"
+  ],
+  "valid_in_sample": 0.7674531117460638,
+  "test_mrr": 0.7115873694419861,
+  "global": "model+6@0.25"
+}
