@@ -1,0 +1,32 @@
+refit checkpoints/cpb3_dist_s0_0.pt: 9,555,497 parameters, 9,437,992 trainable (operators and temperature frozen)
+step 2000/50000  loss 4.634  lr 4.98e-04  (74s)
+step 4000/50000  loss 3.679  lr 4.92e-04  (147s)
+step 6000/50000  loss 3.687  lr 4.82e-04  (219s)
+step 8000/50000  loss 5.065  lr 4.69e-04  (289s)
+step 10000/50000  loss 3.837  lr 4.52e-04  (365s)
+[probe@10000] MRR 0.8147  hits@1 0.7422  hits@3 0.8664  hits@10 0.9436
+step 12000/50000  loss 4.982  lr 4.32e-04  (440s)
+step 14000/50000  loss 3.323  lr 4.09e-04  (515s)
+step 16000/50000  loss 5.994  lr 3.84e-04  (588s)
+step 18000/50000  loss 4.749  lr 3.56e-04  (663s)
+step 20000/50000  loss 3.610  lr 3.27e-04  (727s)
+[probe@20000] MRR 0.8203  hits@1 0.7503  hits@3 0.8714  hits@10 0.9441
+step 22000/50000  loss 5.019  lr 2.97e-04  (789s)
+step 24000/50000  loss 4.657  lr 2.66e-04  (864s)
+step 26000/50000  loss 4.820  lr 2.34e-04  (940s)
+step 28000/50000  loss 3.439  lr 2.03e-04  (1013s)
+step 30000/50000  loss 3.240  lr 1.73e-04  (1075s)
+[probe@30000] MRR 0.8221  hits@1 0.7515  hits@3 0.8745  hits@10 0.9458
+step 32000/50000  loss 3.349  lr 1.44e-04  (1134s)
+step 34000/50000  loss 3.461  lr 1.16e-04  (1194s)
+step 36000/50000  loss 4.808  lr 9.06e-05  (1256s)
+step 38000/50000  loss 4.977  lr 6.78e-05  (1328s)
+step 40000/50000  loss 4.837  lr 4.77e-05  (1387s)
+[probe@40000] MRR 0.8268  hits@1 0.7583  hits@3 0.8772  hits@10 0.9459
+step 42000/50000  loss 3.453  lr 3.09e-05  (1457s)
+step 44000/50000  loss 3.542  lr 1.76e-05  (1523s)
+step 46000/50000  loss 4.914  lr 7.85e-06  (1591s)
+step 48000/50000  loss 3.250  lr 1.97e-06  (1666s)
+step 50000/50000  loss 3.267  lr 0.00e+00  (1730s)
+[valid refit (full)] MRR 0.8301  hits@1 0.7640  hits@3 0.8781  hits@10 0.9473
+saved checkpoints/cpb4_refit_lr5e-4_s0.pt

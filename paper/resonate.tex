@@ -959,6 +959,28 @@ above TripleRE --- a model $49\times$ its size --- at $9.8\times$ fewer
 parameters than AutoSF, the smallest entry currently listed, and $20\times$
 fewer than the leading single models.
 
+\paragraph{A refit is free in parameters, and closes the gap (one seed,
+validation only).} The compact table above is an initialisation: $k$-means plus
+a per-cluster PCA, never trained. Training the coefficients and the subspace
+banks --- with the operators, the temperature and the cluster assignment frozen,
+so the parameter count cannot move --- recovers most of what the compression
+cost. On seed 0, 50{,}000 steps at learning rate $5\times10^{-4}$ take the
+model's own validation MRR from 0.8176 to 0.8301 against the wide model's
+0.8322, i.e. 86\% of the model-alone deficit, and the blended held-out estimate
+from 0.8478 to \textbf{0.8539} against row C's 0.8532 --- parity at 35\% of the
+parameters. The rate matters more than the schedule: at the ladder's own
+$5\times10^{-3}$ the run collapses to 0.7196 by 10k steps and spends the rest of
+the cosine climbing back to 0.8189, a gain of $+0.0013$.
+
+We report this as a validation-only result on one seed and do not file it. The
+$+0.0007$ over row C is well inside the $\pm0.0002$--$0.0004$ seed spreads and
+must not be read as the smaller model winning; the claim is parity. No test read
+has been taken for the refit, and the filed row C$'$ remains the init-only
+model at $0.8468\pm0.0003$. It also corrects the reading we drew from the
+absorption ratio: 57\% absorption bounds what a model improvement is \emph{worth}
+after blending, not how large that improvement can be, and a refit worth
+$+0.0125$ on the model survives it.
+
 \paragraph{Disclosure.} The construction is deterministic on a given
 device --- re-running it reproduces the coefficients, bases and cluster
 assignments bitwise --- but it is \emph{not} portable across devices:

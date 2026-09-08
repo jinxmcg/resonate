@@ -443,3 +443,151 @@ with the wikikg2 TR1 refits and were left alone. 50261550 was idle (0% GPU,
 0.04% CPU) and was used for this. Setup there: torch 2.11+cu128 and ogb 1.3.6
 were already in `/venv/main`; only the code, the checkpoints and the 2.9 GB
 biokg download were added.
+
+# CP-B4 (registered 2026-09-08 19:10, before any run): does a refit close enough of the gap to overtake ComplEx-RP?
+
+CP-B3 filed row C' at test 0.8468 +/- 0.0003 (9,555,497 params), sixth on the
+board, 0.0024 below ComplEx-RP (0.8492, 188M). The compact table is INIT ONLY:
+k-means + per-cluster PCA, never trained. The CP2/CP3 precedent on wikikg2 says
+a refit of the narrow coefficients recovers a real share of the init-only gap.
+
+The question is not whether a refit helps the model -- it will -- but whether
+enough survives the blend to change the board position. Measured exchange rate
+(CP-B3): the members absorb 57% of any model-quality difference, so a model
+gain of D is worth about 0.43*D blended. C' gives up 0.0143 model-alone; a
+refit recovering half of that is worth ~+0.003 blended, which lands right on
+top of ComplEx-RP. It genuinely straddles the line, which is why this is a
+one-seed probe and not a campaign.
+
+Design: seed 0 only. Start from `checkpoints/cpb3_dist_s0_0.pt` (the filed
+tiered init). Train ONLY the coefficients, projections and offsets; operators,
+temperature and the tier/cluster assignment stay frozen exactly as filed.
+Standard biokg loss with typed negatives (batch 2048, neg 4096) plus T=2
+distillation from `dist_T2_s0.pt`, the model it was compressed from. 50,000
+steps -- the biokg ladder's own schedule, not wikikg2's 200k. Adam at lr 5e-3
+with cosine decay, the biokg ladder's own optimiser. (CORRECTION, made before
+the run: this registration first said "table lr 0.6", carried over from
+wikikg2's CP2. That is a RowAdagrad rate for a row-sparse table; the biokg
+shell is dense Adam and this port's coefficients take dense gradients, so 0.6
+is not a meaningful setting here.) Parameter count is unchanged at 9,555,497:
+a refit moves values, not shapes.
+
+Hardware: the local GTX 1080 Ti. vast.ai 50209059 was requested for this and
+could not start ("required resources are currently unavailable"); the other two
+boxes are running P15 and P16.
+
+Then its two analogy members and the same five-member selection blend, seed 0,
+`--norm z --min-rows 2000`, exactly as CP-B3.
+
+**Bar, fixed now.** C' seed 0 read held-out 0.8478 -> test 0.8466, and across
+ten seeds held-out ran +0.0011 optimistic. Overtaking ComplEx-RP's 0.8492 on
+test therefore needs held-out >= **0.8503**.
+* held-out >= 0.8503 -> the refit is worth a ten-seed campaign and its own ten
+  test reads; C' would be re-filed at the refit numbers.
+* held-out < 0.8503 -> NO campaign. The refit is recorded as a measured
+  negative, C' stands as filed at 0.8468, and the finding is that the members
+  make the refit unnecessary -- which is itself the CK4 result reproduced a
+  third time.
+
+READS: train (fitting), validation (the decision). No test read under CP-B4:
+row C' has already spent seed 0's read, and a second one on a refit of the same
+model would be a second read of the same seed.
+
+### CP-B4 amendment (registered 19:25, before the run): two learning rates, chosen on validation
+
+A 200-step smoke test at the registered lr 5e-3 took validation from 0.8176 to
+0.7499 -- the "high early rate" dip CP3 recorded on wikikg2 (init 0.6866 ->
+probe 0.6586 at 50k). The biokg ladder's 5e-3 is a from-scratch rate; a refit
+starts from an init that is already good, so the rate is a real hyperparameter
+here and fixing it blind would test the rate rather than the refit.
+
+Two arms, both 50k steps, cosine, everything else as registered: **lr 5e-3**
+(the ladder's rate) and **lr 5e-4**. The better arm ON VALIDATION carries
+forward to the blend; the other is reported. This is hyperparameter selection
+on validation, which the protocol permits and which the CP-B4 bar then judges
+on validation as well. No test read either way.
+
+The bar is unchanged: blended held-out >= 0.8503 to justify a ten-seed
+campaign, below it C' stands as filed at 0.8468.
+
+## CP-B4 RESULT (2026-09-08 21:4x, jinx GTX 1080 Ti): BAR PASSED — the refit puts the 9.56M row level with the 27.1M one
+
+Seed 0, both arms 50k steps, everything but the coefficients / projections /
+offsets frozen. `results/cpb3/cpb4_refit_lr*_s0.log`, `cpb4_blend_s0.log`.
+
+**The learning rate was the whole experiment.**
+
+| arm | model-alone valid (fp32) | vs the init |
+|---|---|---|
+| init (C' as filed) | 0.8176 | — |
+| lr 5e-3 (the ladder's rate) | 0.8189 | +0.0013 |
+| **lr 5e-4** | **0.8301** | **+0.0125** |
+| wide `dist_T2_s0` | 0.8322 | (the ceiling) |
+
+At 5e-3 the run dipped to 0.7196 by 10k and spent the whole cosine climbing back
+to roughly where it started -- CP3's "high early rate", worse here. At 5e-4 it
+rose monotonically (0.8147 / 0.8203 / 0.8221 / 0.8268 / 0.8301) and recovered
+**86% of the 0.0146 model-alone gap**. Splitting into two arms was worth it; the
+single registered rate would have produced a false negative.
+
+**The blend, seed 0, five members, identical settings to CP-B3:**
+
+| row | params | model-alone held-out | blended HELD-OUT |
+|---|---|---|---|
+| C'. compact, init only (filed) | 9,555,497 | 0.8160 | 0.8478 |
+| **C''. compact, refit** | **9,555,497** | 0.8285 | **0.8539** |
+| C. wide distilled | 27,124,129 | 0.8305 | 0.8532 |
+
+**BAR: held-out >= 0.8503. Measured 0.8539 -> PASSED** by 0.0036, which under the
+registered rule means the refit earns a ten-seed campaign and its own ten test
+reads, and C' would be re-filed at the refit numbers.
+
+**Reading.** The refit costs nothing in parameters -- it moves values inside a
+fixed shape -- and buys +0.0061 blended. It leaves the compact model 0.0020
+behind the wide one on its own scores while the blended row sits 0.0007 AHEAD,
+i.e. at parity within seed noise. Projected test, through seed 0's measured
+held-out-minus-test offset of +0.0011, is ~0.8528: level with row C at 35% of
+its parameters, and 5th on the board rather than 6th.
+
+**What this does NOT yet establish.** One seed. The +0.0007 over row C is well
+inside the +/-0.0002-0.0004 seed spreads and must not be read as "smaller beats
+bigger"; the honest claim is parity. The ten-seed campaign is what settles both
+the mean and whether the 5e-4 rate holds across seeds. No test read has been
+taken under CP-B4.
+
+**Correction to CP-B3's reading.** CP-B3 concluded the refit was "the wrong next
+step" because the members absorb 57% of any model gain. That arithmetic was
+right and the conclusion was wrong: it assumed a refit worth ~+0.007 model-alone,
+and the measured refit is worth +0.0125, nearly double. 43% of a big enough gain
+is still decisive. The absorption ratio bounds what a model improvement is worth;
+it does not bound how large the improvement can be.
+
+## CP-B4 CAMPAIGN (registered 2026-09-08 21:55, before it runs): ten seeds, ten test reads
+
+Authorised by the CP-B4 bar, which was met on validation (0.8539 >= 0.8503) and
+whose registered consequence is "a ten-seed campaign and its own ten test reads".
+Fixed now, before any seed runs:
+
+* **Arm: lr 5e-4**, chosen on validation in the two-arm probe (5e-4 gave +0.0125
+  model-alone, 5e-3 gave +0.0013). 50,000 steps, cosine, Adam, everything else as
+  CP-B4.
+* **Init: the ten filed `cpb3_dist_s{0..9}_0.pt`**, unchanged. The compression is
+  NOT re-run: those files were all built on the one GTX 1080 Ti and verified
+  portable to <1e-5, so construction homogeneity is already guaranteed and the
+  device-dependence of k-means cannot contaminate the ten-seed spread.
+* **Device: one RTX 5090** (vast.ai 50270859) for all ten refits, so the training
+  numerics are homogeneous too. The 1080 Ti is not used for any refit in the
+  campaign; seed 0's probe refit is superseded and its numbers are not pooled.
+* **Teacher: `dist_T2_s{N}.pt`** per seed -- each compact model is distilled from
+  the wide model it was compressed from, never from another seed's.
+* Members, blend and freeze exactly as CP-B3: five members, `--norm z --seed 0
+  --min-rows 2000` for the held-out estimate, `--min-rows 4000` for the frozen
+  read, weights fixed on the FULL validation split, applied once.
+
+**One test read per seed, and only one.** Row C' has already spent its ten reads
+as the init-only model; these are ten fresh reads for a different model (refit
+weights), which the protocol allows -- what it forbids is a second read of the
+same model, and no seed gets that here.
+
+Reported as row C'' if the mean beats C''s 0.8468 by more than the pooled seed
+spread; otherwise C' stands as filed and the refit is a validation curiosity.

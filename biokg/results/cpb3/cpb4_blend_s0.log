@@ -1,0 +1,14 @@
+checkpoints/cpb4_w48_s0.pt {'E': (93773, 144), 'H': (102, 36, 4, 4), 'log_tau': ()} stored tiered params 9,555,497
+cpb4_w48_s0: valid MRR(f16) 0.8297 -> ens_cache/cpb4_w48_s0.valid.npz
+top3-mean variant alone: MRR 0.7549 -> ens_cache/analogy_cpb4_w48_s0_t3.valid.npz
+analogy member alone: valid MRR 0.6499 (positive has holders on 100% of rows) -> ens_cache/analogy_cpb4_w48_s0.valid.npz
+norm: z
+members (5): cpb4_w48_s0, analogy_cpb4_w48_s0, analogy_cpb4_w48_s0_t3, jaccard, jaccard_t3
+uniform (z-mean): fit-half 0.8418  held-out 0.8414
+model-only (z-mean): fit-half 0.8296  held-out 0.8285
+global best on fit half: soft20 (0.8481)
+family weights fitted for 12 (family,dir) groups
+
+per-relation recipe: fit-half 0.8545  HELD-OUT 0.8539
+held-out delta vs uniform: +0.0125
+groups with local weights: 5/102; family weights: 91
