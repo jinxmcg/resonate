@@ -262,3 +262,16 @@ At ~30M the finer split of the tail (degree 1–4 at width 2, 5–7 at 4) is
 worth +0.007 to +0.010; from 40M up the schedules are equal and the curve
 saturates near 0.71 by 80M. Best small point: 33.8M table + 8.8M operators
 ≈ 43M at 0.6991, within 0.02 of the student (0.7190).
+
+## CP3 RESULT (2026-09-08 12:45): the K = 256 refit adds +0.012 over 200k steps
+`model_cp3_k256.pt` (widths 8, 16, 36, 64, K = 256/256/16/1, 55.8M table):
+init 0.6866 → probes 0.6586 (50k, the high-rate dip) / 0.6878 / 0.6956 →
+**valid 0.6983**. CP3c's gentle refit (K = 4096, widths 4, 8, 36, 64, 50k steps,
+table lr 0.1) went 0.7029 → **0.7044**: too short to matter. The refit works
+given a full schedule; the dip is the high early rate.
+
+## CP3e (registered 12:47): full refit of the two K = 4096 models
+As CP3 (200k steps, table lr 0.6 cosine, operators frozen, student as T=2
+teacher) on `model_cp3_k4096_w4.pt` (41.5M table) and `model_cp3_k4096_w8.pt`
+(80.4M). Bars unchanged; the refit models then get members and the selection
+blend as in CP3c. Validation only.
