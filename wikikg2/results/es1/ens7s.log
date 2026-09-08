@@ -1,0 +1,11 @@
+[1/7] model_dist_s1.bf16.pt accumulated (32s)
+[2/7] model_dist_s4.bf16.pt accumulated (62s)
+[3/7] model_dist_s5.bf16.pt accumulated (93s)
+[4/7] model_dist_s6.bf16.pt accumulated (123s)
+[5/7] model_dist_s7.bf16.pt accumulated (153s)
+[6/7] model_dist_s8.bf16.pt accumulated (183s)
+[7/7] model_dist_s9.bf16.pt accumulated (213s)
+ens7s: valid MRR alone 0.7333 (tail 0.9695 head 0.4972) -> ens_cache/ens7s.valid.npz
+rev_raw_ens7s: valid MRR alone 0.7033 (tail 0.9165 head 0.4901) -> ens_cache/rev_raw_ens7s.valid.npz
+rev_nov_ens7s: valid MRR alone 0.5361 (tail 0.6031 head 0.4690) -> ens_cache/rev_nov_ens7s.valid.npz
+done in 217s

@@ -15,3 +15,24 @@ reported with the ensemble alone and with the members without reverse.
 Bar for a filing candidate: held-out MRR ≥ the student row (0.7711) + 0.01.
 Validation only; the test reads, if any, are a separate registration for the
 user to approve in the morning.
+
+## ES1 RESULT (2026-09-08 03:45): both ensembles clear the bar with allowed tuning
+
+Ensembles alone on validation: ens7s 0.7331, ens10t 0.7373, ens17 0.7373
+(their reverse members: see `results/es1/ens*.log`). Selection blend, held-out
+half (`results/es1/selection.log`):
+
+| ensemble | alone | + members | + members + reverse | head |
+|---|---|---|---|---|
+| ens7s, seven T=2 students, 2.3B | 0.7331 | 0.7640 | **0.7834** | 0.590 |
+| ens10t, ten teachers, 3.29B | 0.7373 | 0.7682 | **0.7909** | 0.605 |
+| ens17, all, 5.6B | 0.7373 | 0.7678 | 0.7903 | 0.603 |
+
+Bar 0.7721 (student row + 0.01): ens7s and ens10t PASS; ens17 adds nothing
+over ens10t and is dropped. Reference: the same ten-teacher ensemble with the
+validation-fit learned combiner reads 0.7992 held-out and 0.7426 on test; the
+allowed selection with the reverse members is 0.008 below it on validation.
+Filing candidates, in the user's hands: ens10t + members + reverse (estimate
+~0.735 on test, ±0.01; RelEns is 0.7392) and ens7s + members + reverse
+(~0.727), each one test read, under a registration to be approved in the
+morning. No test cache was built or read tonight.

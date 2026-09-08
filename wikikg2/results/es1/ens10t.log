@@ -1,0 +1,14 @@
+[1/10] model_wiki_s0.bf16.pt accumulated (30s)
+[2/10] model_wiki_s1.bf16.pt accumulated (62s)
+[3/10] model_wiki_s2.bf16.pt accumulated (91s)
+[4/10] model_wiki_s3.bf16.pt accumulated (121s)
+[5/10] model_wiki_s4.bf16.pt accumulated (151s)
+[6/10] model_wiki_s5.bf16.pt accumulated (182s)
+[7/10] model_wiki_s6.bf16.pt accumulated (212s)
+[8/10] model_wiki_s7.bf16.pt accumulated (242s)
+[9/10] model_wiki_s8.bf16.pt accumulated (272s)
+[10/10] model_wiki_s9.bf16.pt accumulated (302s)
+ens10t: valid MRR alone 0.7376 (tail 0.9698 head 0.5054) -> ens_cache/ens10t.valid.npz
+rev_raw_ens10t: valid MRR alone 0.7125 (tail 0.9063 head 0.5186) -> ens_cache/rev_raw_ens10t.valid.npz
+rev_nov_ens10t: valid MRR alone 0.5513 (tail 0.6103 head 0.4923) -> ens_cache/rev_nov_ens10t.valid.npz
+done in 305s

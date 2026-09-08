@@ -1,0 +1,21 @@
+[1/17] model_dist_s1.bf16.pt accumulated (30s)
+[2/17] model_dist_s4.bf16.pt accumulated (61s)
+[3/17] model_dist_s5.bf16.pt accumulated (91s)
+[4/17] model_dist_s6.bf16.pt accumulated (121s)
+[5/17] model_dist_s7.bf16.pt accumulated (151s)
+[6/17] model_dist_s8.bf16.pt accumulated (181s)
+[7/17] model_dist_s9.bf16.pt accumulated (211s)
+[8/17] model_wiki_s0.bf16.pt accumulated (241s)
+[9/17] model_wiki_s1.bf16.pt accumulated (271s)
+[10/17] model_wiki_s2.bf16.pt accumulated (301s)
+[11/17] model_wiki_s3.bf16.pt accumulated (331s)
+[12/17] model_wiki_s4.bf16.pt accumulated (361s)
+[13/17] model_wiki_s5.bf16.pt accumulated (391s)
+[14/17] model_wiki_s6.bf16.pt accumulated (421s)
+[15/17] model_wiki_s7.bf16.pt accumulated (451s)
+[16/17] model_wiki_s8.bf16.pt accumulated (481s)
+[17/17] model_wiki_s9.bf16.pt accumulated (511s)
+ens17: valid MRR alone 0.7375 (tail 0.9708 head 0.5041) -> ens_cache/ens17.valid.npz
+rev_raw_ens17: valid MRR alone 0.7191 (tail 0.9219 head 0.5162) -> ens_cache/rev_raw_ens17.valid.npz
+rev_nov_ens17: valid MRR alone 0.5691 (tail 0.6455 head 0.4927) -> ens_cache/rev_nov_ens17.valid.npz
+done in 514s
