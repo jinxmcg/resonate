@@ -47,3 +47,10 @@ full validation:
   1, 4, 5, 6 on box 1, 7, 8, 9 on box 2). Seven reads; reported as mean ± std.
 Test caches are built inside these scripts and deleted per seed afterwards; no
 other test access. Receipts: `results/tr1/`.
+
+### C READ (2026-09-08 13:46 box time): test MRR **0.7320**
+hits@1 0.6656, hits@3 0.7641, hits@10 0.8643; tail 0.9691, head 0.4949;
+frozen selection in-sample validation 0.7914 (held-out estimate 0.7909; gap to
+test 0.059). Global pattern chosen: soft20. On the board of 2026-09-04 this is
+2nd, behind RelEns 0.7392 and ahead of StarGraph + TripleRE + Text 0.7305.
+Receipts: `results/tr1/C.{json,log}`, `results/tr1/frozen_C.npz`.

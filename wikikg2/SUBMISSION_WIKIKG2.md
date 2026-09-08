@@ -11,8 +11,8 @@ the compact checkpoints and frozen selection weights added for this filing).
 | field | value |
 |---|---|
 | method name | ResonatE ×10 + retrieval + reverse (selection blend) |
-| test MRR | TBD (one read) |
-| validation MRR | TBD (the frozen selection, in-sample, from `results/tr1/C.json`) |
+| test MRR | **0.7320** (one read, 2026-09-08; hits@1 0.6656, hits@3 0.7641, hits@10 0.8643; tail 0.9691 / head 0.4949) |
+| validation MRR | 0.7914 (the frozen selection, in-sample); 0.7909 held-out estimate |
 | parameters | 3,288,427,530 (ten released k=8 teachers of 328,842,753 each; the members add none) |
 | ensemble | yes |
 | external data | none |

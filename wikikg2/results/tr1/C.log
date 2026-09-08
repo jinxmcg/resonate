@@ -1,0 +1,25 @@
+members (10): ens10t, analogy_d1_t3, analogy_s0_t3, holders, cn_aa, linked, cn3_aa, typed, rev_raw_ens10t, rev_nov_ens10t  min_rows=250
+  ens10t: valid MRR alone 0.7374  (tail 0.9697 head 0.5050)
+  analogy_d1_t3: valid MRR alone 0.4947  (tail 0.8475 head 0.1418)
+  analogy_s0_t3: valid MRR alone 0.4954  (tail 0.8456 head 0.1453)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+  rev_raw_ens10t: valid MRR alone 0.7117  (tail 0.9062 head 0.5171)
+  rev_nov_ens10t: valid MRR alone 0.4813  (tail 0.6098 head 0.3529)
+global choice on fit rows: soft20 (0.7419)
+direction tail choice: soft20 (0.9707)
+direction head choice: soft100 (0.5334)
+groups with local weights: 146/726
+frozen weights on full valid (in-sample): 0.7914
+weights frozen -> results/tr1/frozen_C.npz
+  fallback weights applied to 9,176 rows of unseen (relation, direction) groups
+
+================= COMMITTED TEST RESULT (wikikg2) ==============
+official Evaluator test MRR: 0.7320
+  by direction: tail 0.9691  head 0.4949
+hits@1: 0.6656
+hits@3: 0.7641
+hits@10: 0.8643
