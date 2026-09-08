@@ -1,0 +1,16 @@
+=== student+9 / standard
+per-relation recipe: fit-half 0.7709  HELD-OUT 0.7711
+  tail (h,r,?): model-only 0.9616 -> recipe 0.9709
+  head (?,r,t): model-only 0.4755 -> recipe 0.5713
+=== student+9 / rich
+per-relation recipe: fit-half 0.7734  HELD-OUT 0.7734
+  tail (h,r,?): model-only 0.9616 -> recipe 0.9717
+  head (?,r,t): model-only 0.4755 -> recipe 0.5751
+=== ens10t+members+rev / standard
+per-relation recipe: fit-half 0.7910  HELD-OUT 0.7909
+  tail (h,r,?): model-only 0.9694 -> recipe 0.9771
+  head (?,r,t): model-only 0.5053 -> recipe 0.6048
+=== ens10t+members+rev / rich
+per-relation recipe: fit-half 0.7927  HELD-OUT 0.7923
+  tail (h,r,?): model-only 0.9694 -> recipe 0.9774
+  head (?,r,t): model-only 0.5053 -> recipe 0.6072

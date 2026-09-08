@@ -13,3 +13,14 @@ the standard list's numbers, which were re-run unchanged).
 Test: the student + nine row and the best ES1 row, standard vs rich, seed-0
 halves, guard 250. Bar: held-out MRR +0.002 with rich. If met, rich is the
 selection used for any filing of those rows; if not, dropped. Validation only.
+
+## SEL1 RESULT (2026-09-08 04:26): the rich family meets its bar on both rows
+
+Held-out half, seed 0 (`results/sel1/selection.log`): student + nine 0.7711 →
+**0.7734** (+0.0023; head 0.571 → 0.575); ten-teacher ensemble + members +
+reverse 0.7909 → **0.7923** (+0.0014; head 0.605 → 0.607). The bar (+0.002)
+is met on the student row and not on the ensemble row. Decision, as
+registered: rich is the selection for any filing of the student row; for the
+ensemble row the standard family is kept (its gain is under the bar, and the
+smaller family is the simpler claim). STAB1 (other half-split seeds) reports
+whether the +0.002 is stable.
