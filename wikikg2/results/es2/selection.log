@@ -1,0 +1,18 @@
+=== ens10c / standard
+per-relation recipe: fit-half 0.7188  HELD-OUT 0.7188
+  head (?,r,t): model-only 0.4782 -> recipe 0.4782
+=== ens10c / rich
+per-relation recipe: fit-half 0.7188  HELD-OUT 0.7188
+  head (?,r,t): model-only 0.4782 -> recipe 0.4782
+=== ens10c+members / standard
+per-relation recipe: fit-half 0.7556  HELD-OUT 0.7549
+  head (?,r,t): model-only 0.4782 -> recipe 0.5432
+=== ens10c+members / rich
+per-relation recipe: fit-half 0.7589  HELD-OUT 0.7580
+  head (?,r,t): model-only 0.4782 -> recipe 0.5478
+=== ens10c+members+rev / standard
+per-relation recipe: fit-half 0.7739  HELD-OUT 0.7732
+  head (?,r,t): model-only 0.4782 -> recipe 0.5753
+=== ens10c+members+rev / rich
+per-relation recipe: fit-half 0.7765  HELD-OUT 0.7755
+  head (?,r,t): model-only 0.4782 -> recipe 0.5782

@@ -1,0 +1,14 @@
+[1/10] teacher_c_s0.pt accumulated (44s)
+[2/10] teacher_c_s1.pt accumulated (88s)
+[3/10] teacher_c_s2.pt accumulated (132s)
+[4/10] teacher_c_s3.pt accumulated (176s)
+[5/10] teacher_c_s4.pt accumulated (220s)
+[6/10] teacher_c_s5.pt accumulated (264s)
+[7/10] teacher_c_s6.pt accumulated (308s)
+[8/10] teacher_c_s7.pt accumulated (351s)
+[9/10] teacher_c_s8.pt accumulated (395s)
+[10/10] teacher_c_s9.pt accumulated (439s)
+ens10c: valid MRR alone 0.7190 (tail 0.9598 head 0.4782) -> ens_cache/ens10c.valid.npz
+rev_raw_ens10c: valid MRR alone 0.6924 (tail 0.8984 head 0.4864) -> ens_cache/rev_raw_ens10c.valid.npz
+rev_nov_ens10c: valid MRR alone 0.5268 (tail 0.5877 head 0.4659) -> ens_cache/rev_nov_ens10c.valid.npz
+done in 442s

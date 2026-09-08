@@ -48,3 +48,17 @@ the two analogy members already in use; selection blend on validation halves
 filing candidate in place of C if it is within 0.01 of ens10t (the size drops
 from 3.29B to ~0.5B); reported as a curve point otherwise. If it passes, the
 per-model refit (10 × 30 min) is the optional follow-up. Validation only.
+
+## ES2 RESULT (2026-09-08 15:08): the compact ensemble misses the bar; a curve point
+
+Ten teachers compressed as in CP3 (41.5M tables each, no refit; individual
+validation 0.6848–0.6901, the wide teachers ~0.704): `ens10c` alone 0.7190,
+its reverse 0.6924 (wide ensemble: 0.7373 / 0.7125). Selection blend, held-out
+half (`results/es2/selection.log`): ens10c 0.7188; + members 0.7549 (rich
+0.7580); + members + reverse **0.7732** (rich **0.7755**), against 0.7909 /
+0.7923 for the wide ensemble. The compression cost (~0.018) passes through the
+whole stack; the members do not absorb it. Bar (within 0.01 of ens10t) not
+met: entry C stays the wide ensemble. Note for the paper: ten compressed
+teachers (0.5B) land where one wide student lands (0.7734, 329M). A per-model
+refit (+0.005 each on the student) would put the compact ensemble near 0.78;
+not run.
