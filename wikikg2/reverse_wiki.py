@@ -20,6 +20,42 @@ from train_wiki import load, load_model
 
 
 @torch.no_grad()
+def reverse_scores(m, ck, part, dev, chunk=96, limit=0):
+    """Returns (raw, nov) of shape (2N, 501): tail block then head block."""
+    h = np.asarray(part["head"]).astype(np.int64); r = np.asarray(part["relation"]).astype(np.int64)
+    t = np.asarray(part["tail"]).astype(np.int64)
+    neg_h = np.asarray(part["head_neg"]).astype(np.int64); neg_t = np.asarray(part["tail_neg"]).astype(np.int64)
+    if limit:
+        h, r, t, neg_h, neg_t = h[:limit], r[:limit], t[:limit], neg_h[:limit], neg_t[:limit]
+    N = len(h)
+    R = ck["n_rel"] // 2
+    tau = m.log_tau.exp()
+    raw = np.zeros((2 * N, 501), np.float32); nov = np.zeros((2 * N, 501), np.float32)
+    t0 = time.time()
+    for d in (0, 1):
+        q_a = h if d == 0 else t
+        pos_a = t if d == 0 else h
+        cand_a = neg_t if d == 0 else neg_h
+        op_a = r + R if d == 0 else r
+        for i in range(0, N, chunk):
+            sl = slice(i, min(i + chunk, N)); B = sl.stop - sl.start
+            cands = torch.from_numpy(np.concatenate([pos_a[sl][:, None], cand_a[sl]], 1)).to(dev)
+            q = torch.from_numpy(q_a[sl]).to(dev)
+            op = torch.from_numpy(op_a[sl]).to(dev).repeat_interleave(501)
+            z = m.out(m.hop(m.embed(cands.reshape(-1)), op), op).reshape(B, 501, -1)
+            targets = torch.cat([q[:, None], cands[:, 1:]], 1)
+            rows = m.rows(targets)
+            S = torch.real(torch.einsum("bxm,bym->bxy", z, rows.conj())) * tau
+            sq = S[:, :, 0]
+            block = slice(d * N + sl.start, d * N + sl.stop)
+            raw[block] = sq.float().cpu().numpy()
+            nov[block] = (sq - torch.logsumexp(S, dim=2)).float().cpu().numpy()
+            if (i // chunk) % 500 == 0:
+                print(f"dir {d} row {i}/{N} ({time.time()-t0:.0f}s)", flush=True)
+    return raw, nov
+
+
+@torch.no_grad()
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", required=True)
@@ -41,34 +77,11 @@ def main():
     neg_h = np.asarray(part["head_neg"]).astype(np.int64); neg_t = np.asarray(part["tail_neg"]).astype(np.int64)
     if a.limit:
         h, r, t, neg_h, neg_t = h[:a.limit], r[:a.limit], t[:a.limit], neg_h[:a.limit], neg_t[:a.limit]
-    N = len(h)
     m, ck = load_model(a.model, n_ent, dev, table_dtype=a.table_dtype)
-    R = ck["n_rel"] // 2
-    tau = m.log_tau.exp()
-    raw = np.zeros((2 * N, 501), np.float32); nov = np.zeros((2 * N, 501), np.float32)
+    raw, nov = reverse_scores(m, ck, part, dev, a.chunk, a.limit)
+    N = raw.shape[0] // 2
+    r = np.asarray(part["relation"]).astype(np.int64)[:N]
     t0 = time.time()
-    # d=0: tail question (h, r, ?): candidates are tails, known q = h, opposite operator = reverse r + R
-    # d=1: head question (?, r, t): candidates are heads, known q = t, opposite operator = forward r
-    for d in (0, 1):
-        q_a = h if d == 0 else t
-        pos_a = t if d == 0 else h
-        cand_a = neg_t if d == 0 else neg_h
-        op_a = r + R if d == 0 else r
-        for i in range(0, N, a.chunk):
-            sl = slice(i, min(i + a.chunk, N)); B = sl.stop - sl.start
-            cands = torch.from_numpy(np.concatenate([pos_a[sl][:, None], cand_a[sl]], 1)).to(dev)   # (B, 501)
-            q = torch.from_numpy(q_a[sl]).to(dev)
-            op = torch.from_numpy(op_a[sl]).to(dev).repeat_interleave(501)
-            z = m.out(m.hop(m.embed(cands.reshape(-1)), op), op).reshape(B, 501, -1)             # (B, 501, M)
-            targets = torch.cat([q[:, None], cands[:, 1:]], 1)                                    # (B, 501): q then decoys
-            rows = m.rows(targets)                                                                # (B, 501, M)
-            S = torch.real(torch.einsum("bxm,bym->bxy", z, rows.conj())) * tau                    # (B, 501, 501)
-            sq = S[:, :, 0]
-            block = slice(d * N + sl.start, d * N + sl.stop)
-            raw[block] = sq.float().cpu().numpy()
-            nov[block] = (sq - torch.logsumexp(S, dim=2)).float().cpu().numpy()
-            if (i // a.chunk) % 500 == 0:
-                print(f"dir {d} row {i}/{N} ({time.time()-t0:.0f}s)", flush=True)
     rel_out = np.concatenate([r, r])
     for name, v in (("rev_raw", raw), ("rev_nov", nov)):
         out = os.path.join(a.out_dir, f"{name}_{a.tag}.{a.split}.npz")

@@ -1,0 +1,36 @@
+# CK1: the width curve below k=8 on ogbl-wikikg2 (registered 2026-09-08 02:20, user approved)
+
+The k=8 model is 329M parameters, 97% of it the entity table (2.5M × k²
+complex). The measured curve is flat from k=8 to k=12 (0.6945 vs 0.6879–0.6961
+at the 200k screen); nothing below k=8 has been run. TripleRE + NodePiece
+sits at 0.6866 with 36M and StarGraph + TripleRE at 0.7286 with 93M.
+
+Screen, same recipe as the row-A teachers except k and steps: dense operator
+(block size = k²), rev-frac 0.75, RowAdagrad table lr 0.6, neg 4096, seed 0,
+**200k steps**, `--eval valid` only (the setting of the paper's curve table,
+reference k=8 dense 200k = 0.6945).
+* k=6: width 36 complex, ~180M parameters.
+* k=4: width 16 complex, ~80M parameters.
+
+Bar, fixed now: a width is carried to the full 800k run (and then members +
+reverse + selection blend on validation, one compact row candidate) if its
+200k validation MRR is ≥ 0.6945 − 0.020 = 0.6745, i.e. within the 0.02 that
+k=8 costs on biokg. Below that the width is recorded as a curve point only.
+No test read in CK1.
+
+## CK1 RESULT (2026-09-08 02:23): k=6 PASS 0.6764 (−0.018 vs k=8 at 200k, ~180M); k=4 FAIL 0.6454 (−0.049, ~80M): the width curve bends between k=6 and k=4. Logs: `results/ck1/`.
+
+## CK2 (registered 02:25): the compact screens as ensemble partners of the T=2 student
+Validation halves, selection blend (guard 250, seed 0): student alone; k6 / k4 alone;
+student + k6, student + k4, student + k6 + k4 as two/three-model score ensembles (uniform
+z-mean and the per-relation selected weighting); the same with the nine members. A pairing
+is "useful" if its selection-blend held-out MRR beats the student's by ≥ +0.002 with the
+same members. Informational at 200k; the full-strength check is CK3.
+
+## CK3 (registered 02:25): the full k=6 model
+`model_k6.pt`: the row-A recipe with k=6, block size 36 (dense), 800k steps, seed 0,
+`--eval valid`. Then its members on validation (analogy tag k6, reverse tag k6) and the
+selection blend for: k6 + nine members (the compact row candidate, ~180M) and student + k6 +
+nine members (the two-width ensemble, ~510M). Bars: the compact row is a filing candidate if
+its held-out MRR is within 0.02 of the student's row (0.7711); the ensemble is a filing
+candidate if it beats the student's row by ≥ +0.005. No test read tonight.
