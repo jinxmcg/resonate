@@ -200,3 +200,36 @@ K ∈ {256, 1024, 4096} on the two tail tiers (16 / 1 above) × widths
 size–accuracy frontier of clustered narrow rows before any refit; the refit
 (CP3) is run on the registered K = 256 point, and the best CP3b point may be
 refit afterwards under the same bars.
+
+## CP3b RESULT (2026-09-08 11:10): the frontier of clustered narrow rows, no training
+
+`results/cp3b/summary.log` (init only; the student is 0.7190 at 320M):
+
+| K (two tail tiers) | widths | table params | valid MRR |
+|---|---|---|---|
+| 256 | 8, 16, 36, 64 | 55.8M | 0.6866 |
+| 256 | 4, 8, 36, 64 | 28.7M | 0.6652 |
+| 256 | 4, 4, 16, 64 | 21.2M | 0.6426 |
+| 1024 | 8, 16, 36, 64 | 60.7M | 0.7020 |
+| 1024 | 4, 8, 36, 64 | 31.3M | 0.6875 |
+| 1024 | 4, 4, 16, 64 | 23.0M | 0.6711 |
+| 4096 | 8, 16, 36, 64 | 80.4M | **0.7109** |
+| 4096 | 4, 8, 36, 64 | 41.5M | **0.7029** |
+| 4096 | 4, 4, 16, 64 | 30.1M | 0.6887 |
+
+The number of subspaces is the lever, not the width: 256 → 1024 → 4096
+gains +0.015 and +0.009 at fixed widths, while halving the tail width costs
+0.008 to 0.016. K = 4096 with (8, 16, 36, 64) is within 0.01 of the student
+(CP3's "replaces row A" bar) with a quarter of the table; K = 4096 with
+(4, 8, 36, 64) is within 0.02 at an eighth. Operators add 8.8M to each.
+
+## CP3c (registered 11:15): the two K = 4096 points as models
+Rebuild and keep both (`model_cp3_k4096_w8.pt`, `model_cp3_k4096_w4.pt`,
+same seed → same k-means), give each its members on validation (analogy from
+its own table, reverse through the copied operators, the shared members) and
+run the selection blend: compact rows "cp3 + nine". Gentle refit of the 41M
+point: 50k steps, table lr 0.1, operators frozen, student as T=2 teacher
+(`model_cp3_k4096_w4_refit.pt`), reported against its init. Per-tier
+diagnostic for all three. Bars: a compact row within 0.02 of the student row
+(0.7711 standard / 0.7734 rich) is the second wikikg2 entry in place of row A,
+the smaller of the two that meets it preferred. Validation only.
