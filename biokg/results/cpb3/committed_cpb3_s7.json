@@ -1,0 +1,12 @@
+{
+  "members": [
+    "cpb3_dist_w48_s7",
+    "analogy_cpb3_dist_w48_s7",
+    "analogy_cpb3_dist_w48_s7_t3",
+    "jaccard",
+    "jaccard_t3"
+  ],
+  "test_mrr": 0.8469004034996033,
+  "global": "soft20",
+  "local_groups": 2
+}

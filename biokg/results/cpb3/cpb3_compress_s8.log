@@ -1,0 +1,11 @@
+ogbl-biokg loaded in 10s: 93,773 entities, 51 relations, 4,762,678 train triples
+tiers by training degree [5, 8, 32, 128, 1024]:
+  tier 0 [0, 4]: 22,766 entities ( 24.3%),   0.5% of validation answers
+  tier 1 [5, 7]:  3,666 entities (  3.9%),   0.4% of validation answers
+  tier 2 [8, 31]: 28,676 entities ( 30.6%),   5.7% of validation answers
+  tier 3 [32, 127]: 29,285 entities ( 31.2%),  19.3% of validation answers
+  tier 4 [128, 1023]:  8,038 entities (  8.6%),  29.9% of validation answers
+  tier 5 [1024, 62733]:  1,342 entities (  1.4%),  44.3% of validation answers
+wide model checkpoints/dist_T2_s8.pt: k=12 b=4 M=144 complex; table 27,006,624 + operators 117,505 = 27,124,129
+[valid (2,4,8,48,144,144:256,256,256,32,1,1)] MRR 0.8184  hits@1 0.7501  hits@3 0.8673  hits@10 0.9400
+CP-B1 cfg 2,4,8,48,144,144:256,256,256,32,1,1: widths [2, 4, 8, 48, 144, 144] K [256, 256, 256, 32, 1, 1] -> table 9,437,992 (34.9% of the wide table), total 9,555,497  valid MRR 0.8184  variance kept per tier [0.259, 0.601, 0.547, 0.845, 1.0, 1.0]  (11s)

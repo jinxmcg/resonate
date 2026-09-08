@@ -854,6 +854,125 @@ and the members that help most are the ones that answer ``who speaks
 language X'' through person $\to$ citizenship $\to$ country $\to$
 official language, which is exactly the two-hop path member.
 
+\section{Compressing the entity table after training}
+\label{sec:compress}
+
+Ninety-seven per cent of the biokg model is the entity table:
+$93{,}773 \times 144$ complex rows against $117{,}505$ parameters of
+operators and temperature. If a trained table carries redundancy, it can
+be removed \emph{after} training, without touching the recipe that
+produced it. This section reports that it can, at a cost that does not
+vary from seed to seed.
+
+\paragraph{Construction.} Entities are grouped into tiers by training
+degree. Inside tier $t$ the rows are read through their real view,
+$k$-means clustered into $K_t$ groups, and each cluster is replaced by
+its top $d_t = 2w_t$ principal directions: an entity stores a narrow
+coefficient vector and the tier stores $K_t$ shared projections $P$ and
+offsets $\mu$, so
+\begin{equation}
+\mathrm{row}(e) \;=\; \mu_{c(e)} \;+\; \mathrm{coef}(e)\,P_{c(e)},
+\end{equation}
+with $c(e)$ the fixed cluster of $e$. The table costs
+$\sum_t \left[ n_t d_t + K_t (d_t + 1) 2M \right]$ real parameters.
+Operators and temperature are copied from the trained model and frozen.
+\textbf{Nothing is trained}: the construction is $k$-means plus a
+per-cluster eigendecomposition and takes about ten seconds on a
+GTX~1080~Ti. At full width with $K=1$ it reproduces the source model
+exactly, which is the sanity check.
+
+\paragraph{The graph decides whether this works.} On
+\texttt{ogbl-wikikg2} the same construction with one subspace per tier
+collapses (0.4834 against the student's 0.7190): the trained tail rows of
+a 2.5M-entity table are close to isotropic, and there is no shared narrow
+subspace to project onto. On \texttt{ogbl-biokg} the same
+one-subspace-per-tier point reads 0.7180 against 0.8155 --- a real loss,
+but not a collapse --- and clustering recovers most of it. Two properties
+of the graph explain the difference. biokg has $27\times$ fewer entities,
+so a bank of $K$ subspaces is $27\times$ more expensive per row: at
+widths $(2,4,8,32,96,144)$ the wikikg2-optimal $K=4096$ would cost 56.7M
+parameters, more than twice the 27.0M table it compresses, and the knee
+instead sits near $K=256$. And biokg's entities live in five
+type-disjoint ranges with type-matched negatives, so the model never has
+to separate a protein from a side-effect; its rows are correspondingly
+more clusterable.
+
+\paragraph{Where the width belongs.} Degree tiers on biokg are far
+flatter than on wikikg2 (median degree 22 against $\approx6$), and the
+answers concentrate at the top: the 24\% of entities with degree $<5$ are
+0.5\% of validation answers, while the 1.4\% with degree $\geq 1024$ are
+44\%. Width spent on the tail is close to wasted. Two configurations make
+the point: $(4,8,16,36,72,144)$ at 11.0M scores 0.8001 while
+$(2,4,8,32,96,144)$ at 8.5M scores 0.8006 --- 2.5M fewer parameters for
+the same accuracy, because the first widens three tail tiers holding
+6.6\% of the answers and starves the tier holding 30\%. Holding the top
+two tiers at full width and cutting the tail to $(2,4,8)$ gives the
+configuration used below: widths $(2,4,8,48,144,144)$,
+$K=(256,256,256,32,1,1)$, 9{,}555{,}497 parameters, 35\% of the original.
+
+\paragraph{Result.} Table~\ref{tab:compress} applies this to the row-C
+distilled students. The compact row is not a separately trained model: it
+is row C's released checkpoint with its table replaced, blended with the
+same four label-free members.
+
+\begin{table}[t]
+\centering
+\caption{\texttt{ogbl-biokg}, post-hoc tiered compression of the row-C
+distilled students. Same seeds, same members, same blend procedure; one
+test read per seed. ``model alone'' is the held-out blend of the model's
+own scores without members.}
+\label{tab:compress}
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+ & params & model alone & test MRR \\
+\midrule
+C. distilled ($T=2$) + retrieval & 27{,}124{,}129 & $0.8305$ & $0.8528\pm0.0002$ \\
+C$'$. compact table + retrieval & $\mathbf{9{,}555{,}497}$ & $0.8162$ & $\mathbf{0.8468\pm0.0003}$ \\
+\midrule
+cost of $2.84\times$ compression & $-64.8\%$ & $+0.0143$ & $+0.0061\pm0.0004$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two things are worth stating precisely. First, \textbf{the members absorb
+most of the loss}: the narrow table gives up 0.0143 on its own scores and
+0.0061 after blending, so 57\% of what the wider table
+contributed is recovered by features that read the training graph rather
+than the table. The same ratio appears when the construction is applied
+to the row-A/B model instead ($0.0093 \to 0.0028$), from a different
+source model. Second, \textbf{the cost does not vary across seeds}: the
+per-seed gap spans 0.0056--0.0067 over ten seeds with a single mild
+outlier (seed 5), and the compact row's seed spread ($\pm0.0003$) is
+within a whisker of the uncompressed row's ($\pm0.0002$), so the compression
+adds no variance of its own. No seed produced a compression that failed.
+This is the practical claim: the reduction is a property of the trained
+table, not a lucky draw, and it can be applied to a released checkpoint
+without rerunning anything.
+
+Row C$'$ is proposed alongside row C rather than in place of it. The two are
+one model at two operating points, not two results: C$'$ is C's released
+checkpoint with its table replaced, so it inherits C's recipe and C's errors,
+and the pair must not be read as independent evidence. On the board of
+Table~\ref{tab:board} C$'$ would sit sixth, 0.0024 below ComplEx-RP and 0.0120
+above TripleRE --- a model $49\times$ its size --- at $9.8\times$ fewer
+parameters than AutoSF, the smallest entry currently listed, and $20\times$
+fewer than the leading single models.
+
+\paragraph{Disclosure.} The construction is deterministic on a given
+device --- re-running it reproduces the coefficients, bases and cluster
+assignments bitwise --- but it is \emph{not} portable across devices:
+$k$-means seeds its centroids from the device RNG, so a CPU run and a GPU
+run of the same checkpoint produce different clusterings and tables
+differing by 49\% relative. The two are equally good (validation 0.8197
+against 0.8176), so the method reproduces even though the artefact does
+not; but the compact checkpoints must therefore be released as files, and
+a re-derivation from the script alone will land near, not on, the
+committed numbers. The $k$-means seed is fixed at 0 throughout and is not
+selected on validation; the clustering-initialisation spread is about
+0.002, a third of the reported gap, so selecting it would inflate the
+result by a meaningful fraction of what is being claimed.
+
 \section{Beyond the boards: missing links, direct access, language}
 \label{sec:beyond}
 
