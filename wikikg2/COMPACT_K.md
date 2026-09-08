@@ -34,3 +34,23 @@ selection blend for: k6 + nine members (the compact row candidate, ~180M) and st
 nine members (the two-width ensemble, ~510M). Bars: the compact row is a filing candidate if
 its held-out MRR is within 0.02 of the student's row (0.7711); the ensemble is a filing
 candidate if it beats the student's row by ≥ +0.005. No test read tonight.
+
+## CK2 RESULT (2026-09-08 02:35): compact screens as ensemble partners — below the bar once the members are in
+
+Selection blend, held-out half (200k screens; `results/ck2/selection.log`):
+
+| set | model-only (uniform) | selected per-relation | head |
+|---|---|---|---|
+| student | 0.7186 | 0.7186 | 0.476 |
+| student + k6 | 0.7199 | 0.7232 | 0.482 |
+| student + k4 | 0.7177 | 0.7221 | 0.481 |
+| student + k6 + k4 | 0.7207 | 0.7247 | 0.484 |
+| student + 9 members | | 0.7711 | 0.571 |
+| student + k6 + 9 | | 0.7721 | 0.572 |
+| student + k4 + 9 | | 0.7713 | 0.571 |
+| student + k6 + k4 + 9 | | 0.7726 | 0.572 |
+
+As bare ensembles the compact widths add +0.004 to +0.006 to the student; once
+the nine members are in they add +0.001 to +0.0015, under the +0.002 bar. The
+members already carry most of what a second width contributes. Informational
+at 200k; CK3 (the 800k k=6) is the full-strength check and is queued.

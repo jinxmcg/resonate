@@ -1,0 +1,2 @@
+model_k6_200k: valid MRR(f16) 0.6762 -> ens_cache/model_k6_200k.valid.npz
+model_k4_200k: valid MRR(f16) 0.6452 -> ens_cache/model_k4_200k.valid.npz

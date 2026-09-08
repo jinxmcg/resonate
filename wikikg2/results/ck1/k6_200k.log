@@ -1,0 +1,14 @@
+ogbl-wikikg2 loaded in 15s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 200000, 'batch': 2048, 'neg': 4096, 'k': 6, 'block_size': 36, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': [], 'distill_w': 1.0, 'distill_T': 1.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'comp': 0, 'comp_k': 8, 'comp_drop': 0.3, 'comp_lam': 1.0, 'comp_hubw': False, 'comp_gain': False, 'comp_free_min_deg': 0, 'rev_frac': 0.75, 'seed': 0, 'save': 'model_k6_200k.pt', 'eval': 'valid', 'eval_only': False, 'probe_every': 100000, 'probe_size': 20000, 'ckpt_every': 100000, 'log_every': 50000, 'device': 'cuda', 'data_root': 'data_ogb'}
+params: 182,816,929 (M=36, table 0.67 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+step 50000/200000  loss 4.269  1.8 ms/step  tau 4.11  (88s)
+step 100000/200000  loss 3.334  1.8 ms/step  tau 5.53  (176s)
+[probe@100000] MRR 0.6638  hits@1 0.5987  hits@3 0.6928  hits@10 0.7892  (n=20,000, 0s)
+step 150000/200000  loss 2.920  1.8 ms/step  tau 7.76  (264s)
+step 200000/200000  loss 2.850  1.8 ms/step  tau 9.79  (352s)
+[probe@200000] MRR 0.6769  hits@1 0.6120  hits@3 0.7057  hits@10 0.8026  (n=20,000, 0s)
+saved model_k6_200k.pt  (train 352s)
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.6764  hits@1 0.6110  hits@3 0.7053  hits@10 0.8046  (n=429,456, 1s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739
