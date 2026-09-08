@@ -98,3 +98,44 @@ distilled k=6 row replaces row D as the compact filing candidate. Note for the
 paper: the +0.022 the distillation adds to the model becomes +0.0014 in the
 blended row; the members carry most of what the wider or better-trained
 model would add.
+
+## CP1 (registered 2026-09-08 05:40, user's idea): compress the trained full-width table by degree tier
+
+Train wide, then narrow the tail: take the released k=8 T=2 student (s1),
+group entities by training degree (tiers < 8, 8–63, 64–1023, ≥ 1024), and in
+each tier keep only the top principal directions of the trained rows (real
+view, centred), i.e. a narrow coefficient vector per entity plus one shared
+projection per tier (`compress_wiki.py`). No training. Configurations are
+listed by tier widths in complex dimensions, e.g. (8, 16, 36, 64) = 8 for the
+tail up to the full 64 for hubs. The full width (64, 64, 64, 64) must
+reproduce the student's 0.7190 (sanity). Report validation MRR (official
+Evaluator), head/tail, the parameter count and the variance kept per tier.
+Bars: within 0.01 of 0.7190 under 100M parameters → a candidate for a short
+fine-tune of the narrow coefficients (CP2, to be registered); within 0.02 →
+the tiered training screen (adaptive-width table) is worth running. Precedent:
+adaptive input embeddings (Baevski & Auli 2019), mixed-dimension embeddings
+(Ginart et al. 2019). Validation only.
+
+## CP1 RESULT (2026-09-08 05:50, jinx 1080 Ti): post-hoc tiered compression FAILS
+
+Student s1, tiers by degree < 8 / 8–63 / 64–1023 / ≥ 1024 = 1,674,500 /
+808,275 / 16,593 / 1,236 entities (`results/cp1/cp1_student_s1.log`):
+
+| widths (complex, tail → hubs) | params | valid MRR | variance kept per tier |
+|---|---|---|---|
+| 64, 64, 64, 64 | 320M | 0.7187 (sanity: the student) | 1, 1, 1, 1 |
+| 16, 32, 64, 64 | 108M | 0.5876 | 0.49, 0.72, 1, 1 |
+| 8, 16, 36, 64 | 54M | 0.4834 | 0.34, 0.49, 0.78, 1 |
+| 8, 8, 16, 64 | 40M | 0.4367 | 0.34, 0.33, 0.53, 1 |
+| 4, 8, 16, 64 | 27M | 0.4182 | 0.24, 0.33, 0.53, 1 |
+| 4, 4, 8, 64 | 20M | 0.3821 | 0.24, 0.23, 0.37, 1 |
+| 2, 4, 8, 64 | 14M | 0.3753 | 0.17, 0.23, 0.37, 1 |
+
+No bar is met. The trained tail rows are close to isotropic (16 of 128 real
+directions hold a third of the variance), so there is no shared narrow
+subspace to project onto after training; the width must be trained narrow,
+with the tier's subspace learned jointly (adaptive-width table, a trainer
+change, not registered tonight). The uniform-width points bound it: k=6 costs
+0.02 at 180M, k=4 costs 0.05 at 80M. Decision for the two wikikg2 entries:
+row C (ensemble) and row A (the k=8 student row); the distilled k=6 row stays
+a curve point for the paper.
