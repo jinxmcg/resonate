@@ -591,3 +591,56 @@ same model, and no seed gets that here.
 
 Reported as row C'' if the mean beats C''s 0.8468 by more than the pooled seed
 spread; otherwise C' stands as filed and the refit is a validation curiosity.
+
+## CP-B4 CAMPAIGN RESULT (2026-09-09, recorded after the fact): BAR MISSED — the refit is dropped, C' stands as filed
+
+The ten-seed campaign ran, on 50270859 as registered. Under the rule written
+before it started, **C' stands as filed and the refit is a validation
+curiosity.** The filed entry is untouched: row C's ten checkpoints and ten test
+reads are the init-only compact tables (`tiered_T2_s{0..9}.pt`, release
+`v2.1-compact`), which CP-B4 never modified.
+
+**The refit worked. The blend is what failed.** Every seed's refitted table
+improved on its own scores about as much as seed 0's +0.0125 promised -- the
+learning-rate finding from the probe holds across seeds. What did not survive
+was the five-member blend. The weight patterns and the `z` normalisation were
+selected against the *init-only* model's score profile, and a sharper model is a
+different component than the one they were tuned around, so the gain on the
+model's own scores did not carry into the combination.
+
+**Improving a component does not reliably improve an ensemble that was tuned
+around the original component.** That is the finding, and it is not confined to
+this experiment: the same shape appeared a few hours later in P15 on the STaRK
+side, where three individually-fine heads fused into a worse pipeline. Two
+independent instances in one day, on different benchmarks, in different
+codebases.
+
+**Seed 0's 0.8539 was a lucky draw.** The probe's blended number, which cleared
+the CP-B3-comparable bar by 0.0036 and authorised this campaign, did not
+represent the ten-seed mean. The projection written at the time -- "~0.8528,
+level with row C at 35% of its parameters" -- was wrong, and it was wrong in the
+way the registration itself warned about when it said one seed's spread is
+"within the +/-0.0002-0.0004 seed spreads and must not be read as 'smaller beats
+bigger'". One seed projecting a ten-seed mean bent three times on 2026-09-08;
+this was the third.
+
+**What the absorption arithmetic did and did not predict.** CP-B3 measured that
+the members absorb 57% of a model-quality *change*. Applied forward, 43% of
++0.0125 is about +0.0054, close to what seed 0's blend actually showed. So
+absorption alone predicted a *smaller* gain, not a vanished one. The failure is
+therefore not the members absorbing the improvement -- it is the blend being
+mis-tuned for the new component. Redundancy would have shown up as a shrunken
+gain; this showed up as no gain.
+
+### Open on this record
+
+* **The per-seed receipts are not in this repository.** They are on 50270859 and
+  have not been pulled into `results/`. Every other campaign in this file ships
+  its logs; this one does not yet.
+* **Whether the ten test reads were spent is not recorded here.** The registered
+  rule compares against 0.8468, which is C's *test* number, and the campaign was
+  authorised with "one test read per seed, and only one". If those reads were
+  taken they must be listed -- this project discloses every test read it spends,
+  including the ones on rows that were then dropped. If the row was abandoned on
+  validation before any read, that should be stated too. **This is the one open
+  item that affects the disclosure record rather than just the write-up.**
