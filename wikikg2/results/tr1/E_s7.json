@@ -1,0 +1,16 @@
+{
+  "members": [
+    "model_cp3s7_w4_full",
+    "analogy_c7_t3",
+    "holders",
+    "cn_aa",
+    "linked",
+    "cn3_aa",
+    "typed",
+    "rev_raw_c7",
+    "rev_nov_c7"
+  ],
+  "valid_in_sample": 0.7661429139927312,
+  "test_mrr": 0.7083449959754944,
+  "global": "model+6@0.25"
+}

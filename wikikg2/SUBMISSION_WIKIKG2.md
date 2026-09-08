@@ -1,4 +1,4 @@
-# ogbl-wikikg2 filings (draft, 2026-09-08; numbers marked TBD are filled by the TR1 reads)
+# ogbl-wikikg2 filings (final, 2026-09-08 evening; all reads done)
 
 Two entries, both by allowed means (validation used only to select among fixed
 per-relation weight patterns; no gradient touches validation labels; one test
@@ -31,9 +31,9 @@ of the same procedure: 0.7909.
 | field | value |
 |---|---|
 | method name | ResonatE compact (clustered narrow rows) + retrieval + reverse |
-| test MRR | TBD, mean ± std over seven seeds (s1, s4–s9) |
-| validation MRR | TBD (frozen selection, in-sample, mean over seeds) |
-| parameters | 50,3xx,xxx (41,478,808 table + 8,847,360 operators + temperature; exact count from the checkpoint) |
+| test MRR | **0.7096 ± 0.0013** over seven seeds (s1, s4–s9); hits@1 0.6443 ± 0.0010, hits@10 0.8383 ± 0.0024 |
+| validation MRR | 0.7668 ± 0.0013 (frozen selection, in-sample); held-out estimate 0.7667 |
+| parameters | 50,244,249 (27,681,304 coefficients + 12,746,752 projections + 1,050,752 offsets + 8,765,440 operators + temperature) |
 | ensemble | no |
 | external data | none |
 | hardware | RTX 5090; compression 1 min, refit 30 min per seed |

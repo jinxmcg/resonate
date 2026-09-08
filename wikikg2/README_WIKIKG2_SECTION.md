@@ -1,6 +1,6 @@
 <!-- Replacement text for the README's "### ogbl-wikikg2" subsection (the README itself is held by
      another session's uncommitted edits; paste this in place of the current wikikg2 table + Compliance
-     paragraph). Numbers marked TBD are filled when the seventh E read lands. -->
+     paragraph). Final numbers. -->
 
 ### ogbl-wikikg2 (`wikikg2/`)
 
@@ -10,7 +10,7 @@ Two rows are filed (2026-09-08); everything else in this table is reported, not 
 |---|---|---|---|---|
 | A. single k=8 model | 0.6676 ± 0.0010 | 0.7030 ± 0.0009 | 328,842,753 | no |
 | distilled (T=2) student, alone | 0.6855 ± 0.0008 | 0.7190 | 328,842,753 | no (superseded by E) |
-| **E. compact student + graph evidence + reverse operator, selection blend** | **TBD ± TBD (7 seeds)** | TBD / 0.7667 | **≈50.4M** (41.5M table + 8.8M operators) | **yes** |
+| **E. compact student + graph evidence + reverse operator, selection blend** | **0.7096 ± 0.0013** (7 seeds) | 0.7668 ± 0.0013 / 0.7667 | **50,244,249** | **yes** |
 | **C. ten-teacher ensemble + graph evidence + reverse operator, selection blend** | **0.7320** (one read) | 0.7914 / 0.7909 | 3,288,427,530 (ensemble) | **yes** |
 | F / C-F / ensemble with the learned (Adam-on-validation) combiner | 0.7222 / 0.7320 / 0.7426 | 0.780 / 0.788 / 0.799 | 329M / 329M / 3.29B | no |
 

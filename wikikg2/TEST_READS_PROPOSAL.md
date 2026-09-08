@@ -64,3 +64,14 @@ Receipts: `results/tr1/C.{json,log}`, `results/tr1/frozen_C.npz`.
 | s5 | **0.7105** | 0.6454 | 0.7405 | 0.8391 | 0.9576 / 0.4634 | 0.7665 |
 | s8 | **0.7087** | 0.6437 | 0.7388 | 0.8367 | 0.9570 / 0.4604 | 0.7686 |
 | s9 | **0.7107** | 0.6455 | 0.7408 | 0.8391 | 0.9585 / 0.4628 | 0.7657 |
+| s7 | **0.7083** | 0.6434 | 0.7388 | 0.8355 | 0.9567 / 0.4599 | 0.7661 |
+
+**E, seven seeds: test MRR 0.7096 ± 0.0013** (hits@1 0.6443 ± 0.0010, hits@3
+0.7399 ± 0.0018, hits@10 0.8383 ± 0.0024); frozen-selection validation
+0.7668 ± 0.0013 in-sample (held-out estimate on seed 1: 0.7667). Exact
+parameter count from the checkpoint: 50,244,249 real parameters (coefficients
+27,681,304 + projections 12,746,752 + offsets 1,050,752 + operators 8,765,440
++ temperature). Receipts: `results/tr1/E_s*.{json,log}`, `frozen_E_s*.npz`;
+checkpoints `model_cp3s{1,4,5,6,7,8,9}_w4_full.pt` on release v2.0-two-boards
+(SHA256SUMS_compact). On the 2026-09-04 board this is 8th, between StarGraph +
+TripleRE (2022) 0.7201 and CompoundE3D 0.7006, and the best entry under 90M.
