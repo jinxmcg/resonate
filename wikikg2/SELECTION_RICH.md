@@ -24,3 +24,11 @@ registered: rich is the selection for any filing of the student row; for the
 ensemble row the standard family is kept (its gain is under the bar, and the
 smaller family is the simpler claim). STAB1 (other half-split seeds) reports
 whether the +0.002 is stable.
+
+## STAB1 RESULT (2026-09-08 04:28): the held-out numbers are stable over the half-split seed
+
+Seeds 0 / 1 / 2 of the validation halves (`results/stab1/selection.log`):
+student + nine, standard 0.7711 / 0.7712 / 0.7710, rich 0.7734 / 0.7736 / 0.7732;
+ten-teacher ensemble + members + reverse, standard 0.7909 / 0.7908 / 0.7907,
+rich 0.7923 / 0.7924 / 0.7923. Spread ±0.0003; the SEL1 gains (+0.0023 and
++0.0015) hold on every split.

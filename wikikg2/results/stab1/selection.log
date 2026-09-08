@@ -1,0 +1,24 @@
+=== student+9 / standard / seed 1
+per-relation recipe: fit-half 0.7708  HELD-OUT 0.7712
+  head (?,r,t): model-only 0.4753 -> recipe 0.5716
+=== student+9 / rich / seed 1
+per-relation recipe: fit-half 0.7732  HELD-OUT 0.7736
+  head (?,r,t): model-only 0.4753 -> recipe 0.5755
+=== ens10t+members+rev / standard / seed 1
+per-relation recipe: fit-half 0.7909  HELD-OUT 0.7908
+  head (?,r,t): model-only 0.5051 -> recipe 0.6045
+=== ens10t+members+rev / rich / seed 1
+per-relation recipe: fit-half 0.7925  HELD-OUT 0.7924
+  head (?,r,t): model-only 0.5051 -> recipe 0.6073
+=== student+9 / standard / seed 2
+per-relation recipe: fit-half 0.7710  HELD-OUT 0.7710
+  head (?,r,t): model-only 0.4752 -> recipe 0.5710
+=== student+9 / rich / seed 2
+per-relation recipe: fit-half 0.7736  HELD-OUT 0.7732
+  head (?,r,t): model-only 0.4752 -> recipe 0.5746
+=== ens10t+members+rev / standard / seed 2
+per-relation recipe: fit-half 0.7910  HELD-OUT 0.7907
+  head (?,r,t): model-only 0.5052 -> recipe 0.6042
+=== ens10t+members+rev / rich / seed 2
+per-relation recipe: fit-half 0.7928  HELD-OUT 0.7923
+  head (?,r,t): model-only 0.5052 -> recipe 0.6072
