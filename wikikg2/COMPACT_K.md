@@ -244,3 +244,21 @@ and (2, 4, 4, 8, 36, 64) ≈ 30M; plus the same three with K doubled where the
 tier allows (1024, 4096, 4096, 1024, 16, 1). Reported against CP3b's points
 of equal size. Informational; the best point joins CP3c's member/selection
 check if it beats CP3b at equal size.
+
+## CP3d RESULT (2026-09-08 12:30): finer tiers gain at the small end only
+
+Init-only (`results/cp3d/summary.log`), cutoffs (5, 8, 16, 64, 1024):
+
+| K (first four tiers) | widths | table params | valid MRR | coarse point of equal size (CP3b) |
+|---|---|---|---|---|
+| 512, 4096, 2048, 512 | 2, 4, 4, 8, 36, 64 | 30.0M | 0.6960 | 0.6887 (30.1M) |
+| 1024, 4096, 4096, 1024 | 2, 4, 4, 8, 36, 64 | 33.8M | **0.6991** | |
+| 512 … | 2, 4, 8, 16, 36, 64 | 40.7M | 0.7007 | 0.7029 (41.5M) |
+| 1024 … | 2, 4, 8, 16, 36, 64 | 47.6M | 0.7022 | |
+| 512 … | 4, 8, 16, 32, 36, 64 | 78.9M | 0.7084 | 0.7109 (80.4M) |
+| 1024 … | 4, 8, 16, 32, 36, 64 | 92.4M | 0.7091 | |
+
+At ~30M the finer split of the tail (degree 1–4 at width 2, 5–7 at 4) is
+worth +0.007 to +0.010; from 40M up the schedules are equal and the curve
+saturates near 0.71 by 80M. Best small point: 33.8M table + 8.8M operators
+≈ 43M at 0.6991, within 0.02 of the student (0.7190).

@@ -1,0 +1,6 @@
+K512_w2_4_8_16_36_64 table params 40,685,384 [valid] MRR 0.7007  hits@1 0.6279  hits@
+K512_w4_8_16_32_36_64 table params 78,934,344 [valid] MRR 0.7084  hits@1 0.6376  hits@
+K512_w2_4_4_8_36_64 table params 29,975,592 [valid] MRR 0.6960  hits@1 0.6214  hits@
+K1024_w2_4_8_16_36_64 table params 47,632,200 [valid] MRR 0.7022  hits@1 0.6300  hits@
+K1024_w4_8_16_32_36_64 table params 92,434,760 [valid] MRR 0.7091  hits@1 0.6386  hits@
+K1024_w2_4_4_8_36_64 table params 33,776,680 [valid] MRR 0.6991  hits@1 0.6254  hits@

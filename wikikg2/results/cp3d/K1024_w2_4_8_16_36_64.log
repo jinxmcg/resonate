@@ -1,0 +1,8 @@
+ogbl-wikikg2 loaded in 15s: 2,500,604 entities, 535 relations, 16,109,182 train triples, valid 429,456, test 598,543
+args: {'steps': 0, 'batch': 2048, 'neg': 4096, 'k': 12, 'block_size': 4, 'ent_bias': False, 'rel_gain': False, 'opt': 'rowadagrad', 'lr': 0.005, 'table_lr': 0.6, 'table_sched': 'cosine', 'lam': 0.1, 'clip': 1.0, 'distill': [], 'distill_w': 1.0, 'distill_T': 1.0, 'rel_alpha': 1.0, 'n3': 0.0, 'table_dtype': 'fp32', 'comp': 0, 'comp_k': 8, 'comp_drop': 0.3, 'comp_lam': 1.0, 'comp_hubw': False, 'comp_gain': False, 'comp_free_min_deg': 0, 'tiered_from': 'teachers/model_dist_s1.bf16.pt', 'tiers': '5,8,16,64,1024', 'widths': '2,4,8,16,36,64', 'train_ops': False, 'subspaces': '1024,4096,4096,1024,16,1', 'rev_frac': 0.5, 'seed': 0, 'save': '/tmp/cp3d_K1024_w2_4_8_16_36_64.pt', 'eval': 'valid', 'eval_only': False, 'probe_every': 0, 'probe_size': 20000, 'ckpt_every': 0, 'log_every': 500, 'device': 'cuda', 'data_root': 'data_ogb'}
+tiered table from teachers/model_dist_s1.bf16.pt: cutoffs [5, 8, 16, 64, 1024], widths [2, 4, 8, 16, 36, 64], sizes [255768, 1418732, 671042, 137233, 16593, 1236], table params 47,632,200 (14.9% of the wide table); operators frozen
+params: 47,632,200 (M=64, table 0.00 GB fp32)  opt=rowadagrad lr=0.005 table_lr=0.6 table_sched=cosine
+
+=== OGB official evaluation (ogbl-wikikg2) ===
+[valid] MRR 0.7022  hits@1 0.6300  hits@3 0.7371  hits@10 0.8474  (n=429,456, 2s)
+leaderboard context (test MRR): RotatE 0.433, PairRE 0.521, AutoSF 0.546, TripleRE 0.579, ComplEx-RP 0.639, TranS 0.694, StarGraph+TripleRE 0.729, RelEns 0.739
