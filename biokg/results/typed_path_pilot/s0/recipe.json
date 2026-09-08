@@ -1,0 +1,964 @@
+{
+  "weights": [
+    [
+      0.3333333432674408,
+      0.3333333432674408,
+      0.3333333432674408
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.5,
+      0.5,
+      0.0
+    ],
+    [
+      0.5,
+      0.0,
+      0.5
+    ],
+    [
+      0.0,
+      0.5,
+      0.5
+    ]
+  ],
+  "global_choice": {
+    "index": 2,
+    "weights": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "fit_mrr": 0.2478532574929714,
+    "fit_queries": 12958
+  },
+  "min_fit": 128,
+  "groups": {
+    "2/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2849150859061553,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "2/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.25101289677921607,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "3/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.21936492782475522,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "3/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.23484091044507938,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "4/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.23066968796044662,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "4/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.24594132789248388,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "5/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2830252387919116,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "5/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.2690983981086644,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "6/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.29552023220306184,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "6/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.3259684899361154,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "7/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 8
+    },
+    "7/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 8
+    },
+    "8/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.22540839735749305,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "8/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.25605458263229375,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "9/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 2
+    },
+    "9/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 2
+    },
+    "10/0": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.22649419498240617,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "10/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.2641593565628431,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "11/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2838132983882064,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "11/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.26490701375609604,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "12/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.25662717837360943,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "12/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.22592016920788324,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "13/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.3325396733966489,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "13/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2986362712356397,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "14/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2696464225810842,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "14/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.25196214142862233,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "15/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 78
+    },
+    "15/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 78
+    },
+    "16/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 9
+    },
+    "16/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 9
+    },
+    "17/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2342866744397956,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "17/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.2393885244003906,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "18/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2009424261153291,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "18/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.22104874706711342,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "19/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.29814568911904754,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "19/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.2633079483386865,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "20/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2210731584755675,
+      "fit_queries": 184,
+      "level": "relation",
+      "group_fit_queries": 184
+    },
+    "20/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.21809489609762306,
+      "fit_queries": 184,
+      "level": "relation",
+      "group_fit_queries": 184
+    },
+    "21/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 15
+    },
+    "21/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 15
+    },
+    "22/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.335125867007556,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "22/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.29310004113502675,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "23/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.3087494644419079,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "23/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.29029382907831475,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "24/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 7
+    },
+    "24/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 7
+    },
+    "25/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 42
+    },
+    "25/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 42
+    },
+    "26/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 36
+    },
+    "26/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 36
+    },
+    "27/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 12
+    },
+    "27/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 12
+    },
+    "28/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 73
+    },
+    "28/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 73
+    },
+    "29/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 53
+    },
+    "29/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 53
+    },
+    "30/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.26558190081468347,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "30/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.29600115323709014,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "31/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.30472730837727585,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "31/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2976872323387282,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "32/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 36
+    },
+    "32/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 36
+    },
+    "33/0": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.2434732286436739,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "33/1": {
+      "index": 6,
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fit_mrr": 0.24427492544070922,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "34/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 47
+    },
+    "34/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 47
+    },
+    "35/0": {
+      "index": 0,
+      "weights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ],
+      "fit_mrr": 0.03320281694058132,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "35/1": {
+      "index": 0,
+      "weights": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ],
+      "fit_mrr": 0.04324602877890511,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "36/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 123
+    },
+    "36/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 123
+    },
+    "37/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 122
+    },
+    "37/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2478532574929714,
+      "fit_queries": 12958,
+      "level": "global",
+      "group_fit_queries": 122
+    },
+    "38/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.24866707664875357,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "38/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.255859717160861,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "39/0": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.23745034516814115,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    },
+    "39/1": {
+      "index": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "fit_mrr": 0.2609720900944417,
+      "fit_queries": 256,
+      "level": "relation",
+      "group_fit_queries": 256
+    }
+  }
+}

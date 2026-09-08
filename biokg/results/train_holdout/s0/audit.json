@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt"
+  ],
+  "artifact_sha256": {
+    "fit_train.npz": "aa13b00c4f4e5f93f18a2af02e895f85375fedc873d09a25778090e97913796f",
+    "holdout_train.npz": "783a55949f188b1ac09194df3bf03ed5a371284e228a17b7ca8282003b4e7e2f",
+    "assignment.npz": "70b85b96d097bfe582f0a30b3949207324961ea477ad45a4f7743cc93640c5d6",
+    "manifest.json": "f9e3c4ea6669ef9773f03789c3bb5472abf6b59dab8def123ab5f2f27569705b",
+    "prerun.json": "0fb981f84880f25c60d90d79d40305d36446b05966b1ab0f77f3d6518d919e5e"
+  },
+  "source_input_hashes_unchanged": true,
+  "seconds": 15.463563284953125,
+  "model_updates": 0,
+  "lr": 0.0
+}

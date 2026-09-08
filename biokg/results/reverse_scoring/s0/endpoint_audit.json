@@ -1,0 +1,22 @@
+{
+  "audit_passed": true,
+  "source_input_artifact_hashes_verified": true,
+  "model_unchanged": true,
+  "gradients_absent": true,
+  "direct_reverse_queries": 76,
+  "direct_candidates_per_query": 501,
+  "sampled_raw_score_maximum_error": 1.52587890625e-05,
+  "all_normalized_reverse_scores_exact": true,
+  "evaluated_fit_only_recipes_reproduced": 1,
+  "all_evaluated_baseline_and_treatment_ranks_exact": true,
+  "non_drug_drug_unchanged": true,
+  "staging_coverage_metrics_clustered_intervals_reproduced": true,
+  "unused_folds_not_evaluated": true,
+  "train_deserialized": false,
+  "valid_deserialized": true,
+  "test_loaded": false,
+  "single_checkpoint": true,
+  "model_updates": 0,
+  "lr": 0.0,
+  "device": "cpu"
+}

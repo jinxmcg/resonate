@@ -1,0 +1,16 @@
+{
+  "audit_passed": true,
+  "source_input_artifact_hashes_verified": true,
+  "train_masks_matched_random_pools_and_probe_selection_reconstructed": true,
+  "direct_cpu_probe_scores_and_ranks_reproduced": true,
+  "direct_probe_occurrences": 424,
+  "saved_derivative_arithmetic_and_summary_reproduced": true,
+  "tf2_focal_projection_parity": true,
+  "unchanged_model_hashes_verified": true,
+  "direct_gradients_recomputed_by_endpoint": false,
+  "direct_gradient_checks_in_runner": true,
+  "validation_loaded": false,
+  "test_loaded": false,
+  "model_updates": 0,
+  "lr": 0.0
+}

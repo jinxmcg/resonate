@@ -1,0 +1,96 @@
+[
+  {
+    "seed": 0,
+    "fold": 0,
+    "fit_triples": 81687,
+    "report_triples": 81199,
+    "metrics": {
+      "baseline": {
+        "mrr": 0.8578497365986548,
+        "hits1": 0.8026084065074693,
+        "hits10": 0.9563664577149965,
+        "queries": 162398
+      },
+      "reverse_pipeline": {
+        "mrr": 0.8581763191315652,
+        "hits1": 0.8030887079890147,
+        "hits10": 0.9564588233845245,
+        "queries": 162398
+      }
+    },
+    "drug_drug": {
+      "baseline": {
+        "mrr": 0.7004866964938714,
+        "hits1": 0.5458709718752002,
+        "hits10": 0.9818053686975463,
+        "queries": 31218
+      },
+      "reverse_pipeline": {
+        "mrr": 0.7021855993761694,
+        "hits1": 0.5483695303991287,
+        "hits10": 0.9822858607213787,
+        "queries": 31218
+      },
+      "delta_mrr": 0.001698902882298134
+    },
+    "primary": {
+      "delta_mrr": 0.00032658253291040006,
+      "bootstrap_95": [
+        0.0001030823507612856,
+        0.000550505798078827
+      ],
+      "seed": 3661,
+      "replicates": 2000,
+      "resampling_unit": "original triple",
+      "descriptive": true
+    },
+    "directions": {
+      "0": {
+        "baseline": {
+          "mrr": 0.8534077909998017,
+          "hits1": 0.8003793150161947,
+          "hits10": 0.9470313673813717,
+          "queries": 81199
+        },
+        "reverse_pipeline": {
+          "mrr": 0.8540609560656226,
+          "hits1": 0.8013399179792855,
+          "hits10": 0.9472160987204276,
+          "queries": 81199
+        }
+      },
+      "1": {
+        "baseline": {
+          "mrr": 0.8622916821975081,
+          "hits1": 0.8048374979987438,
+          "hits10": 0.9657015480486213,
+          "queries": 81199
+        },
+        "reverse_pipeline": {
+          "mrr": 0.8622916821975081,
+          "hits1": 0.8048374979987438,
+          "hits10": 0.9657015480486213,
+          "queries": 81199
+        }
+      }
+    },
+    "recovered_top1": 591,
+    "lost_top1": 513,
+    "recovered_from_rank2_to10": 591,
+    "non_drug_drug_ranks_unchanged": true,
+    "global_alpha": 0.0,
+    "directed_group_alpha_counts": {
+      "0.0": 38,
+      "0.025": 0,
+      "0.05": 38,
+      "0.1": 0,
+      "0.2": 0
+    },
+    "reverse_alone_drug_drug_report": {
+      "mrr": 0.6463750361424447,
+      "hits1": 0.47581523480043564,
+      "hits10": 0.9703376257287463,
+      "queries": 31218
+    }
+  }
+]

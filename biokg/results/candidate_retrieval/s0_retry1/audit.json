@@ -1,0 +1,38 @@
+{
+  "source_input_hashes_unchanged": true,
+  "model_before": {
+    "a.E": "59d7c08d41502f17c0d4480cfe7436d0bd2ea4149c4597bb529d1129e13df53e",
+    "a.log_tau": "6934713c5e487bfd7392ba224770647d51efe1f918e21550a6f416ff1a19ad62",
+    "a.H_b": "1128e57ef358884b5ac545f741c7c894ab77a08a50eb183373fe3f6ddd71ae42"
+  },
+  "model_after": {
+    "a.E": "59d7c08d41502f17c0d4480cfe7436d0bd2ea4149c4597bb529d1129e13df53e",
+    "a.log_tau": "6934713c5e487bfd7392ba224770647d51efe1f918e21550a6f416ff1a19ad62",
+    "a.H_b": "1128e57ef358884b5ac545f741c7c894ab77a08a50eb183373fe3f6ddd71ae42"
+  },
+  "model_unchanged": true,
+  "gradients_absent": true,
+  "baseline_ranks_exact": true,
+  "coverage_exact": true,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt",
+    "split/random/valid.pt"
+  ],
+  "artifact_sha256": {
+    "prerun.json": "ea329b6c948f9b127a16fb718cb1fdecc60d68a7d52027d6545007ad7c496ef0",
+    "graph_audit.json": "b66d5bf709e58e36e16c3e59ef4af332b43d660724b93435ffd7c5a3773884b9",
+    "raw_features.npy": "5f020fde41044e8d3c4e1ca0e8b973f92559e3f3ae49fdfaf087e9cc6a11ab8f",
+    "normalized_features.npy": "a862c84058fdac630c553d5334d91fd8d99c90e3fe6786babfe2b2b4fcc21274",
+    "pair_scores.npy": "0518d7be96ea912cf347d9a08a6324a3c56a307354707d604f1c5b21a3798bc0",
+    "seed0_fold0_beta_recipe.json": "7809218ac9752bf2f1c7809b675923ef5aa13950dd031964b8621cc6ec7538bc",
+    "seed0_fold1_beta_recipe.json": "7cce32036a721c1deef7abdc4cc97fd70df95dd9c10c311b90ac5912ec0307b4",
+    "seed1_fold0_beta_recipe.json": "c1b9384e56b27f0ce5646048aa073b0ecceb028c5f6abab1ac31ab5e407da4b6",
+    "seed1_fold1_beta_recipe.json": "c7f7c72d6397f81d835e32ec7b031cd6391c6ede3b50ff8aea1127086d440e62",
+    "seed2_fold0_beta_recipe.json": "af62580bfdd054caaa4db691a16e018abfade7f6c2a79e690c46e86fd4b5e420",
+    "seed2_fold1_beta_recipe.json": "c03ce0cfff3236c092fdf26b8676339783b096c07a425d6b4a520bf9e4ee741f",
+    "folds.json": "d9c368a8cac2419464577c63741126c0f56c9167a482203500ee401a344ac5dc",
+    "ranks.npz": "0397c39a3d83f707c4c1bfc4c756fbeea253a0a6825ad1c75171b16cbf396abc",
+    "summary.json": "1a658b6910eeda8b024e45ad423e235c8c3fe8bd7c37f0753539295180aeffaa"
+  }
+}

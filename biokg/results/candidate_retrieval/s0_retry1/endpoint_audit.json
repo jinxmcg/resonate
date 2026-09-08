@@ -1,0 +1,14 @@
+{
+  "audit_passed": true,
+  "source_input_artifact_hashes_verified": true,
+  "model_unchanged": true,
+  "sampled_train_neighbor_features_reproduced": true,
+  "examples_checked": 105,
+  "sampled_feature_maximum_error": 5.364418029785156e-07,
+  "normalization_and_pair_exact": true,
+  "all_six_fit_only_beta_recipes_reproduced": true,
+  "all_baseline_and_treatment_report_ranks_exact": true,
+  "coverage_metrics_and_clustered_interval_reproduced": true,
+  "test_loaded": false,
+  "device": "cpu"
+}

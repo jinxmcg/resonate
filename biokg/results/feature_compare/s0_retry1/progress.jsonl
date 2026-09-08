@@ -1,0 +1,64 @@
+{"stage": "start", "triples": 162886, "queries": 325772, "model_updates": 0, "lr": 0.0}
+{"stage": "features", "queries": 42742, "total": 325772, "seconds": 35.060833406983875, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.6562352535652525, "improved": 0.6596945854963947}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 55105, "total": 325772, "seconds": 70.12740782101173, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.6125916098573863, "improved": 0.6154314827689784}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 63585, "total": 325772, "seconds": 105.17435126402415, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.6582121134261595, "improved": 0.660807845246905}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 72097, "total": 325772, "seconds": 140.17484829598106, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.693076075538226, "improved": 0.6956492706466099}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 80417, "total": 325772, "seconds": 175.27822203398682, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.7201740125243054, "improved": 0.7225680397802235}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 88257, "total": 325772, "seconds": 210.31781057501212, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.740593525493, "improved": 0.7428953409693415}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 102244, "total": 325772, "seconds": 245.37696302798577, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.7659086825357359, "improved": 0.7679724464290072}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 118436, "total": 325772, "seconds": 280.38225655199494, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.7872239062995576, "improved": 0.7891317512117788}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 135025, "total": 325772, "seconds": 315.38226929400116, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8041187947745171, "improved": 0.8058751809445307}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 156805, "total": 325772, "seconds": 350.3888650620356, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8265474695362932, "improved": 0.8281137898606555}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 193249, "total": 325772, "seconds": 385.3964878449915, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8122849388314783, "improved": 0.8139386956772858}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 215687, "total": 325772, "seconds": 420.41266227298183, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.7964939809118885, "improved": 0.7980633781208059}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 224327, "total": 325772, "seconds": 455.4869585140259, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8033677462265206, "improved": 0.8048772898515262}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 232967, "total": 325772, "seconds": 490.56440502702026, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8097270870291615, "improved": 0.8111954337574501}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 240839, "total": 325772, "seconds": 525.7096649830346, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8151663370738866, "improved": 0.8165734373061597}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 248775, "total": 325772, "seconds": 560.7703389010276, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8202824894544632, "improved": 0.8216371681956757}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 255754, "total": 325772, "seconds": 595.9002556229825, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8224910760533377, "improved": 0.8239298274558248}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 263146, "total": 325772, "seconds": 631.011938710988, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8218319570179694, "improved": 0.8234021891592134}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 270730, "total": 325772, "seconds": 666.025405294029, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8209830544078321, "improved": 0.8227110549474485}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 280394, "total": 325772, "seconds": 701.0824747949955, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8199951595729456, "improved": 0.8218295453634851}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 288106, "total": 325772, "seconds": 736.1011780889821, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8192553076922582, "improved": 0.8212408002273079}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 300580, "total": 325772, "seconds": 771.1129768060055, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8204884001497245, "improved": 0.8225702308463235}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features", "queries": 322923, "total": 325772, "seconds": 806.1582279279828, "lr": 0.0, "lr_status": "not applicable: frozen inference", "partial_model_mrr": {"original": 0.8308093277280136, "improved": 0.8327493752054589}, "partial_warning": "relation-ordered partial queries, not the final comparison"}
+{"stage": "features_complete", "queries": 325772, "seconds": 811.0354348720284, "model_mrr": {"original": 0.8321748668335324, "improved": 0.8340991234586371}, "lr": 0.0}
+{"stage": "normalized", "feature": "original_score", "lr": 0.0}
+{"stage": "normalized", "feature": "original_analogy_max", "lr": 0.0}
+{"stage": "normalized", "feature": "original_analogy_top3", "lr": 0.0}
+{"stage": "normalized", "feature": "improved_score", "lr": 0.0}
+{"stage": "normalized", "feature": "improved_analogy_max", "lr": 0.0}
+{"stage": "normalized", "feature": "improved_analogy_top3", "lr": 0.0}
+{"stage": "normalized", "feature": "jaccard_max", "lr": 0.0}
+{"stage": "normalized", "feature": "jaccard_top3", "lr": 0.0}
+{"stage": "selection_start", "arm": "original", "lr": 0.0}
+{"arm": "original", "stage": "global_recipe", "label": "soft20", "weights": [0.5725070834159851, 0.03368755429983139, 0.16597938537597656, 0.04571860656142235, 0.1821073591709137], "fit_mrr": 0.8497426910309, "fit_queries": 163374, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "drug-drug", "direction": 0, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "drug-drug", "direction": 1, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "drug-protein", "direction": 0, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "drug-protein", "direction": 1, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 0, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 1, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "function-function", "direction": 0, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "function-function", "direction": 1, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "protein-function", "direction": 0, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "protein-function", "direction": 1, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "protein-protein", "direction": 0, "lr": 0.0}
+{"arm": "original", "stage": "family_recipe", "family": "protein-protein", "direction": 1, "lr": 0.0}
+{"stage": "pipeline_scored", "arm": "original", "report": {"mrr": 0.8535134998097783, "hits1": 0.797306617076565, "hits10": 0.9551964925676425, "queries": 162398}, "lr": 0.0}
+{"stage": "selection_start", "arm": "improved", "lr": 0.0}
+{"arm": "improved", "stage": "global_recipe", "label": "soft20", "weights": [0.5831753015518188, 0.03253335505723953, 0.1607072502374649, 0.0448673740029335, 0.17871670424938202], "fit_mrr": 0.850870465377053, "fit_queries": 163374, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "drug-drug", "direction": 0, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "drug-drug", "direction": 1, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "drug-protein", "direction": 0, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "drug-protein", "direction": 1, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 0, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 1, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "function-function", "direction": 0, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "function-function", "direction": 1, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "protein-function", "direction": 0, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "protein-function", "direction": 1, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "protein-protein", "direction": 0, "lr": 0.0}
+{"arm": "improved", "stage": "family_recipe", "family": "protein-protein", "direction": 1, "lr": 0.0}
+{"stage": "pipeline_scored", "arm": "improved", "report": {"mrr": 0.8540538579928584, "hits1": 0.7978669688050345, "hits10": 0.9555597975344524, "queries": 162398}, "lr": 0.0}
+{"stage": "complete", "primary": {"delta_mrr": 0.0005403581830799461, "bootstrap_95": [0.00021906305961129181, 0.0008650384412816849], "recovered_top1": 1351, "lost_top1": 1260}, "useful_gain_flag": false, "seconds": 878.9986168079777, "lr": 0.0}

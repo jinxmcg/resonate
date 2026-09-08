@@ -1,0 +1,38 @@
+{
+  "args": {
+    "model": "biokg/checkpoints/dist_T2_s0.pt",
+    "data_root": "/mnt/geocore/geocore/data_ogb",
+    "out": "biokg/results/h35/campaign_s0",
+    "device": "cuda",
+    "smoke": false
+  },
+  "checkpoint_sha256": "b463a8bcc431ada38f4834e235677464f9cd3a86346f88aecd2fd681a01260ef",
+  "torch": "2.6.0+cu124",
+  "numpy": "2.5.2",
+  "device": "NVIDIA GeForce GTX 1080 Ti",
+  "source_hashes": {
+    "biokg/H35.md": "d7c424d9e8de51a908c862ec5c81fedf35113fff3b7459f888c85bdddbe0061f",
+    "biokg/dual_operator.py": "a7703bd468c49f0de3b15575232b42ac9fb4f0a8a152bcf368db3b8d2a78f0ff",
+    "biokg/train_dual_operator.py": "3b4e75a3e1a525d92978a39bfadd11a07be1c9e915b5be8c030aee014b8dbffe",
+    "biokg/train_biokg_comp.py": "c4a0f65a2e1a273bf835367533820a2ee606155cdbff0449a109137a238e5ccd",
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e"
+  },
+  "data_hashes": {
+    "split/random/train.pt": "958ad61478efffda0db28cf05e49c14cba6880e0f2d50d6023aca99b354d0385",
+    "split/random/valid.pt": "e26e85eab6d822a8efbaefbf1dd279393751c8744d8be3eb612b29e524ff8ba4",
+    "processed/data_processed": "e21662048715fe6dacb2650ff11e8b49c9e5b2a178022e833b0ad8f1a0b7af00",
+    "mapping/relidx2relname.csv.gz": "7c370b8491f451ee155dc26c220f07853a5c205166ad320aecbcea6df4b1b39e"
+  },
+  "steps": 5000,
+  "batch": 2048,
+  "negatives": 4096,
+  "learning_rate": 0.0005,
+  "seed": 3500,
+  "test_loaded": false,
+  "variants": [
+    "single",
+    "mean",
+    "or",
+    "and"
+  ]
+}

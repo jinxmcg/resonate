@@ -1,7 +1,9 @@
 # Validating the results without retraining
 
-> **Submission status — 7 September 2026 (confirmed by the user): nothing has
-> been filed for BioKG, WikiKG2, or STaRK-Prime.** Entries are proposed only.
+> **Submission status — 9 September 2026: nothing has been filed for BioKG,
+> WikiKG2, or STaRK-Prime.** Two biokg entries (rows C and C′) are prepared for
+> filing — see [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md) — but
+> the form has not been submitted. Everything else is proposed only.
 
 What a reviewer can run, what it costs, and what it printed when we ran it
 ourselves on a machine that had nothing but this repository, its GitHub

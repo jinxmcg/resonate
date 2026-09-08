@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "candidate_stream_sha256": "ce2c0473811155e06a7cddcf0e4a2c5d57d146a4938c86860ab9935e8698ab0c",
+  "model_before": [
+    "37b641941987004c7c36092e3860e352e279697909477983f6d26fa35d8d21aa",
+    "de720cb4dee34c40663f8177a1155c84922a431441c75623765532b06474ca4a",
+    "24b7f58ff090ccf146ee55fcb6c3e0be2801a6a2180a5111ac671ad988d8a9d3"
+  ],
+  "model_after": [
+    "37b641941987004c7c36092e3860e352e279697909477983f6d26fa35d8d21aa",
+    "de720cb4dee34c40663f8177a1155c84922a431441c75623765532b06474ca4a",
+    "24b7f58ff090ccf146ee55fcb6c3e0be2801a6a2180a5111ac671ad988d8a9d3"
+  ],
+  "dataset_files_opened": [
+    "fit_train.npz",
+    "holdout_train.npz",
+    "manifest.json"
+  ],
+  "pair_disjoint": true,
+  "model_updates": 0,
+  "seconds": 27.06630801000574,
+  "artifact_sha256": {
+    "ranks.npz": "4074eb9f8838151829e32a1267124a5da9eb549d0337e61c8486928bc2ff342c",
+    "summary.json": "3215c199020d82f76ff3721639f665d79595f2be244eb5f9eba803d65a91db13",
+    "training_audit.json": "81077e70e441305dfc7cbba2998fa4321e0dc82ae3819c5699e824bcc2bed0c8"
+  }
+}

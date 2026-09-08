@@ -1,0 +1,61 @@
+{
+  "reproduced": true,
+  "failure_step": 1426,
+  "arm": "squared",
+  "loss": 14.310430526733398,
+  "loss_parts": {
+    "nll": 10.408132553100586,
+    "trajectory": 39.022979736328125,
+    "eligible_entities": 17499,
+    "positive_negative_dot_fraction": 0.5048828125,
+    "mean_epsilon_denominator_share": 0.06443829834461212,
+    "tau": 0.01077083870768547
+  },
+  "gradients_before_clipping": {
+    "H": {
+      "present": true,
+      "finite": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "norm": 0.26050102710723877
+    },
+    "log_tau": {
+      "present": true,
+      "finite": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "norm": 0.40985941886901855
+    },
+    "E_real": {
+      "present": true,
+      "finite": false,
+      "nan_count": 288,
+      "inf_count": 0,
+      "norm": "nonfinite"
+    }
+  },
+  "tensor_diagnostics": {
+    "source_zero_norm_rows": 1,
+    "source_min_squared_norm": 0.0,
+    "prehop_finite": true,
+    "hop_zero_norm_rows": 0,
+    "query_finite": true,
+    "tau": 0.01077083870768547,
+    "all_weights_finite": true
+  },
+  "anomaly": "Traceback (most recent call last):\n  File \"/workspace/biokg_h37/biokg/h37_failure_replay.py\", line 98, in run\n    again.backward()\n  File \"/workspace/biokg_mn1/.uv-cache/environments-v2/h37-failure-replay-8d3a5b52e5aa13cf/lib/python3.12/site-packages/torch/_tensor.py\", line 631, in backward\n    torch.autograd.backward(\n  File \"/workspace/biokg_mn1/.uv-cache/environments-v2/h37-failure-replay-8d3a5b52e5aa13cf/lib/python3.12/site-packages/torch/autograd/__init__.py\", line 381, in backward\n    _engine_run_backward(\n  File \"/workspace/biokg_mn1/.uv-cache/environments-v2/h37-failure-replay-8d3a5b52e5aa13cf/lib/python3.12/site-packages/torch/autograd/graph.py\", line 869, in _engine_run_backward\n    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Function 'ViewAsComplexBackward0' returned nan values in its 0th output.\n",
+  "adam_lr": 0.004989985959831845,
+  "table_lr": 0.29939915758991076,
+  "initial_model": "8c2a76c926cbc0133c97a8f6f208db705a9c27261a9c67c994166d1ff53bc6f0",
+  "source_files_unchanged": true,
+  "dataset_files_opened": [
+    "fit_train.npz",
+    "manifest.json"
+  ],
+  "heldout_opened": false,
+  "official_validation_loaded": false,
+  "official_test_loaded": false,
+  "recipe_changed": false,
+  "failure_state_sha256": "bd872d47e12c1a1db1e03ed4acc767f851ff5b3410b23f22de0f411f781b4480",
+  "seconds": 13.330096224002773
+}

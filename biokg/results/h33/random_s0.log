@@ -1,0 +1,71 @@
+/tmp/.tmpLbuLuB/environments-v2/run-h33-vast-65d99f552ec87785/lib/python3.12/site-packages/outdated/__init__.py:36: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import parse_version
+ogbl-biokg loaded in 6s: 93,773 entities (disease:10687, drug:10533, function:45085, protein:17499, sideeffect:9969), 51 relations, 4,762,678 train triples
+auxiliary mining: random, count 64, weight 0.1, warmup 2500, ramp 1250; original random CE unfiltered
+mining TRAIN index: 697.4 MiB, built in 1.6s; train SHA256 ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b
+sparse shell: row-sparse table grads, RowAdagrad lr 0.3, table fp32
+params: 27,124,129 (M=144)
+step 1000/50000  loss 8.476  (6s)  lr=0.0049950668,0.29970401
+step 2000/50000  loss 5.322  (10s)  lr=0.0049802868,0.29881721
+step 3000/50000  loss 7.649  (14s)  mining w=0.0400, eligible slots 100.0000%  lr=0.0049557181,0.29734309
+step 4000/50000  loss 4.632  (20s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0049214579,0.29528747
+step 5000/50000  loss 4.221  (25s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0048776413,0.29265848
+[probe@5000] MRR 0.6377  hits@1 0.5226  hits@3 0.7082  hits@10 0.8598
+step 6000/50000  loss 4.441  (31s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0048244412,0.28946647
+step 7000/50000  loss 4.213  (36s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0047620676,0.28572406
+step 8000/50000  loss 4.867  (41s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0046907667,0.281446
+step 9000/50000  loss 6.371  (47s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0046108198,0.27664919
+step 10000/50000  loss 4.051  (52s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0045225425,0.27135255
+[probe@10000] MRR 0.6900  hits@1 0.5825  hits@3 0.7612  hits@10 0.8905
+step 11000/50000  loss 3.831  (58s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0044262831,0.26557699
+step 12000/50000  loss 4.773  (63s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0043224216,0.25934529
+step 13000/50000  loss 4.007  (68s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0042113678,0.25268207
+step 14000/50000  loss 3.616  (73s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00409356,0.2456136
+step 15000/50000  loss 3.797  (79s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0039694631,0.23816779
+[probe@15000] MRR 0.7157  hits@1 0.6122  hits@3 0.7866  hits@10 0.9075
+step 16000/50000  loss 6.050  (84s)  mining w=0.1000, eligible slots 100.0000%  lr=0.003839567,0.23037402
+step 17000/50000  loss 3.555  (89s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0037043842,0.22226305
+step 18000/50000  loss 4.625  (95s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0035644482,0.21386689
+step 19000/50000  loss 4.590  (100s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0034203114,0.20521868
+step 20000/50000  loss 3.852  (105s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0032725425,0.19635255
+[probe@20000] MRR 0.7391  hits@1 0.6420  hits@3 0.8088  hits@10 0.9184
+step 21000/50000  loss 3.510  (111s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0031217247,0.18730348
+step 22000/50000  loss 4.710  (116s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0029684533,0.1781072
+step 23000/50000  loss 4.502  (121s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0028133331,0.16879999
+step 24000/50000  loss 4.373  (127s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0026569763,0.15941858
+step 25000/50000  loss 3.757  (132s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0025,0.15
+[probe@25000] MRR 0.7617  hits@1 0.6708  hits@3 0.8278  hits@10 0.9226
+step 26000/50000  loss 4.539  (137s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0023430237,0.14058142
+step 27000/50000  loss 3.664  (143s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0021866669,0.13120001
+step 28000/50000  loss 3.370  (148s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0020315467,0.1218928
+step 29000/50000  loss 3.302  (153s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0018782753,0.11269652
+step 30000/50000  loss 2.961  (158s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0017274575,0.10364745
+[probe@30000] MRR 0.7770  hits@1 0.6940  hits@3 0.8335  hits@10 0.9278
+step 31000/50000  loss 5.479  (164s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0015796886,0.094781317
+step 32000/50000  loss 3.077  (169s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0014355518,0.086133106
+step 33000/50000  loss 4.462  (174s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0012956158,0.077736949
+step 34000/50000  loss 3.131  (180s)  mining w=0.1000, eligible slots 100.0000%  lr=0.001160433,0.069625981
+step 35000/50000  loss 4.425  (185s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0010305369,0.061832212
+[probe@35000] MRR 0.7892  hits@1 0.7085  hits@3 0.8471  hits@10 0.9336
+step 36000/50000  loss 4.474  (190s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00090644003,0.054386402
+step 37000/50000  loss 4.289  (196s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00078863224,0.047317934
+step 38000/50000  loss 4.582  (201s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00067757843,0.040654706
+step 39000/50000  loss 3.300  (206s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00057371689,0.034423014
+step 40000/50000  loss 4.448  (211s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00047745751,0.028647451
+[probe@40000] MRR 0.8042  hits@1 0.7299  hits@3 0.8567  hits@10 0.9394
+step 41000/50000  loss 2.995  (217s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00038918019,0.023350811
+step 42000/50000  loss 3.067  (222s)  mining w=0.1000, eligible slots 100.0000%  lr=0.0003092333,0.018553998
+step 43000/50000  loss 5.099  (227s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00023793237,0.014275942
+step 44000/50000  loss 3.105  (233s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00017555879,0.010533527
+step 45000/50000  loss 4.363  (238s)  mining w=0.1000, eligible slots 100.0000%  lr=0.00012235871,0.0073415226
+[probe@45000] MRR 0.8099  hits@1 0.7375  hits@3 0.8625  hits@10 0.9392
+step 46000/50000  loss 4.483  (244s)  mining w=0.1000, eligible slots 100.0000%  lr=7.8542097e-05,0.0047125258
+step 47000/50000  loss 2.922  (249s)  mining w=0.1000, eligible slots 100.0000%  lr=4.4281873e-05,0.0026569124
+step 48000/50000  loss 2.820  (254s)  mining w=0.1000, eligible slots 100.0000%  lr=1.9713247e-05,0.0011827948
+step 49000/50000  loss 2.721  (259s)  mining w=0.1000, eligible slots 100.0000%  lr=4.9331789e-06,0.00029599074
+step 50000/50000  loss 2.845  (265s)  mining w=0.1000, eligible slots 100.0000%  lr=0,0
+[probe@50000] MRR 0.8123  hits@1 0.7415  hits@3 0.8633  hits@10 0.9410
+
+=== OGB official evaluation ===
+[valid] MRR 0.8131  hits@1 0.7424  hits@3 0.8630  hits@10 0.9402
+leaderboard context: TransE 0.745, RotatE 0.799, DistMult 0.804, ComplEx 0.810, top ~0.86

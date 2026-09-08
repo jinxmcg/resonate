@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "failure_step": 1426,
+  "original_failure_state_sha256": "bd872d47e12c1a1db1e03ed4acc767f851ff5b3410b23f22de0f411f781b4480",
+  "identical_forward_query_and_loss": true,
+  "original_gradients_nonfinite": true,
+  "repaired_gradients_and_norms_finite": true,
+  "unchanged_H_and_tau_gradients": true,
+  "model_weights_unchanged": true,
+  "optimizer_updates": 0,
+  "holdout_loaded": false,
+  "official_validation_loaded": false,
+  "official_test_loaded": false,
+  "repaired_entity_gradient_norm": 6351189180416.0,
+  "repaired_source_sha256": "b5090cb6214defbae1abca9ef0e4211866e5c6f9abd3d334f07cf04c4f60a1fc",
+  "runner_sha256": "681f7b81e320392fc7e91f77bec2de4f82b8992f1e04480466703390a82c0662"
+}

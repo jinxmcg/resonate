@@ -1,0 +1,14 @@
+{
+  "audit_passed": true,
+  "full_endpoint_scores_ranks_and_candidates_replayed": true,
+  "pair_cluster_summary_reproduced": true,
+  "source_input_artifact_hashes_verified": true,
+  "saved_optimizer_counters_accumulators_and_lr_schedule_verified": true,
+  "training_holdout_access_absent_recorded": true,
+  "no_optimizer_replay_claim": true,
+  "model_weights_unchanged": true,
+  "holdout_gradient_updates": 0,
+  "official_validation_loaded": false,
+  "official_test_loaded": false,
+  "seconds": 26.45046689499577
+}

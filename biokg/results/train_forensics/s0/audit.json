@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "source_input_hashes_unchanged": true,
+  "model_before": {
+    "a.E": "59d7c08d41502f17c0d4480cfe7436d0bd2ea4149c4597bb529d1129e13df53e",
+    "a.log_tau": "6934713c5e487bfd7392ba224770647d51efe1f918e21550a6f416ff1a19ad62",
+    "a.H_b": "1128e57ef358884b5ac545f741c7c894ab77a08a50eb183373fe3f6ddd71ae42"
+  },
+  "model_after": {
+    "a.E": "59d7c08d41502f17c0d4480cfe7436d0bd2ea4149c4597bb529d1129e13df53e",
+    "a.log_tau": "6934713c5e487bfd7392ba224770647d51efe1f918e21550a6f416ff1a19ad62",
+    "a.H_b": "1128e57ef358884b5ac545f741c7c894ab77a08a50eb183373fe3f6ddd71ae42"
+  },
+  "gradients_absent": true,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt"
+  ],
+  "candidate_identity_checks_passed": true,
+  "selected_rank_and_score_reconstruction_passed": true,
+  "artifact_sha256": {
+    "prerun.json": "513ca77f710b382f58f314a7288096ea20ad6170f46298630566ea9f59b962f8",
+    "findings.json": "5b580f048c8614f714ae4d511d3a6a34dbd926b62a2a66362d2cb3bef5f577f7",
+    "catalog_scores.npy": "07c94feeff313d4477801d741b3920c283c08fa10f4e7590f49c9b561996c740"
+  },
+  "seconds": 5.690211784094572
+}

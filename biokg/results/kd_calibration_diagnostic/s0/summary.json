@@ -1,0 +1,316 @@
+{
+  "arms": {
+    "original_A": {
+      "fit": {
+        "top1_overlap": {
+          "count": 32739,
+          "mean": 0.4672409053422524,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "student_positive_top": {
+          "count": 32739,
+          "mean": 0.1266379547328874,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "teacher_positive_top": {
+          "count": 32739,
+          "mean": 0.12844008674669355,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "centered_score_cosine": {
+          "count": 32739,
+          "mean": 0.9520132587699485,
+          "median": 0.9535322785377502,
+          "p10": 0.9215465307235717,
+          "p90": 0.9826656818389893
+        },
+        "baseline_kd": {
+          "count": 32739,
+          "mean": 0.06331188808950813,
+          "median": 0.038048744201660156,
+          "p10": 0.0123443603515625,
+          "p90": 0.14529037475585938
+        },
+        "global_kd": {
+          "count": 32739,
+          "mean": 0.06304261588945427,
+          "median": 0.03767204284667969,
+          "p10": 0.012233352661132813,
+          "p90": 0.14500503540039067
+        },
+        "oracle_kd": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "p10": null,
+          "p90": null
+        },
+        "oracle_beta": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "p10": null,
+          "p90": null
+        },
+        "global_kd_relative_reduction": 0.004253106457245082,
+        "oracle_kd_relative_reduction": null,
+        "teacher_positive_only_count": 1196,
+        "student_positive_only_count": 1137
+      },
+      "report": {
+        "top1_overlap": {
+          "count": 32797,
+          "mean": 0.47111016251486415,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "student_positive_top": {
+          "count": 32797,
+          "mean": 0.12272463944873006,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "teacher_positive_top": {
+          "count": 32797,
+          "mean": 0.12546879287739732,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "centered_score_cosine": {
+          "count": 32797,
+          "mean": 0.9519622552833583,
+          "median": 0.9535833597183228,
+          "p10": 0.9213724732398987,
+          "p90": 0.9827673673629761
+        },
+        "baseline_kd": {
+          "count": 32797,
+          "mean": 0.06415924886510471,
+          "median": 0.0385284423828125,
+          "p10": 0.012439727783203125,
+          "p90": 0.14883346557617194
+        },
+        "global_kd": {
+          "count": 32797,
+          "mean": 0.06390177105884637,
+          "median": 0.03808879852294922,
+          "p10": 0.01232147216796875,
+          "p90": 0.14840049743652345
+        },
+        "oracle_kd": {
+          "count": 32797,
+          "mean": 0.062313373442789796,
+          "median": 0.03713035583496094,
+          "p10": 0.012124252319335938,
+          "p90": 0.14604721069335938
+        },
+        "oracle_beta": {
+          "count": 32797,
+          "mean": 0.9898524517332864,
+          "median": 0.9910385608673096,
+          "p10": 0.9702043533325195,
+          "p90": 1.008629035949707
+        },
+        "global_kd_relative_reduction": 0.004013105059875177,
+        "oracle_kd_relative_reduction": 0.028770215595819715,
+        "teacher_positive_only_count": 1158,
+        "student_positive_only_count": 1068
+      }
+    },
+    "improved_A": {
+      "fit": {
+        "top1_overlap": {
+          "count": 32739,
+          "mean": 0.47295274748770577,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "student_positive_top": {
+          "count": 32739,
+          "mean": 0.12694340083692232,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "teacher_positive_top": {
+          "count": 32739,
+          "mean": 0.12844008674669355,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "centered_score_cosine": {
+          "count": 32739,
+          "mean": 0.9530007479743487,
+          "median": 0.9543907642364502,
+          "p10": 0.9228780150413514,
+          "p90": 0.9839579939842225
+        },
+        "baseline_kd": {
+          "count": 32739,
+          "mean": 0.06052485129585547,
+          "median": 0.03539466857910156,
+          "p10": 0.011651611328125,
+          "p90": 0.1383056640625
+        },
+        "global_kd": {
+          "count": 32739,
+          "mean": 0.06026078703320526,
+          "median": 0.03499603271484375,
+          "p10": 0.011500930786132813,
+          "p90": 0.1380084991455078
+        },
+        "oracle_kd": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "p10": null,
+          "p90": null
+        },
+        "oracle_beta": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "p10": null,
+          "p90": null
+        },
+        "global_kd_relative_reduction": 0.004362906425980584,
+        "oracle_kd_relative_reduction": null,
+        "teacher_positive_only_count": 1181,
+        "student_positive_only_count": 1132
+      },
+      "report": {
+        "top1_overlap": {
+          "count": 32797,
+          "mean": 0.47479952434673905,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "student_positive_top": {
+          "count": 32797,
+          "mean": 0.12330396072811538,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "teacher_positive_top": {
+          "count": 32797,
+          "mean": 0.12546879287739732,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 1.0
+        },
+        "centered_score_cosine": {
+          "count": 32797,
+          "mean": 0.9529585605602233,
+          "median": 0.9544979929924011,
+          "p10": 0.9224259495735169,
+          "p90": 0.9840397357940673
+        },
+        "baseline_kd": {
+          "count": 32797,
+          "mean": 0.06128514313889003,
+          "median": 0.03582954406738281,
+          "p10": 0.0117034912109375,
+          "p90": 0.14171524047851564
+        },
+        "global_kd": {
+          "count": 32797,
+          "mean": 0.061018730357030794,
+          "median": 0.03539848327636719,
+          "p10": 0.011560440063476562,
+          "p90": 0.1412322998046875
+        },
+        "oracle_kd": {
+          "count": 32797,
+          "mean": 0.05952909920213208,
+          "median": 0.034698486328125,
+          "p10": 0.011287689208984375,
+          "p90": 0.13904075622558595
+        },
+        "oracle_beta": {
+          "count": 32797,
+          "mean": 0.9909243272743483,
+          "median": 0.9915801286697388,
+          "p10": 0.972598385810852,
+          "p90": 1.0086585521697997
+        },
+        "global_kd_relative_reduction": 0.004347102221095689,
+        "oracle_kd_relative_reduction": 0.028653664604784357,
+        "teacher_positive_only_count": 1171,
+        "student_positive_only_count": 1100
+      }
+    }
+  },
+  "global_fits": {
+    "original_A": {
+      "beta": 0.9938770476728678,
+      "derivative_before": 0.02193010392337281,
+      "derivative_after": -8.748719871264678e-07,
+      "boundary": false
+    },
+    "improved_A": {
+      "beta": 0.9939435441046953,
+      "derivative_before": 0.021740750574577316,
+      "derivative_after": 9.849997285869324e-07,
+      "boundary": false
+    }
+  },
+  "diagnostic_seconds": 5.32808802195359,
+  "peak_allocated_bytes": 4684101120,
+  "model_updates": 0,
+  "validation_loaded": false,
+  "test_loaded": false,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt"
+  ],
+  "all_states_unchanged": true,
+  "all_parameter_grads_absent": true,
+  "top_score_sets_unchanged": true,
+  "model_state_hashes_before": {
+    "original_A": "1612b5dbc43493c122f5cf3bf84cc7a5c4fd2c8e295e211ffc0c90616bff5b4f",
+    "improved_A": "1e17b87ceeca569e9b34219fb1c909add90d273cf8b27be0439ead549fc7f623",
+    "own_teacher_0": "348e59e78c1cbfae319bd99b3ada23fb767430dca29bd0c1a24c57a0630cba6a",
+    "own_teacher_1": "0b26722a0ef4359e3ad8dabe4de1ebd185ef811ee03c8d0759d555f5bf8b34fd",
+    "own_teacher_2": "92289afa5b09f6e74ecc929b36a066865a25a4890c3add6a74dea1e7b215f235",
+    "own_teacher_3": "b80a6b3eda9ee3dd67e91ab120b59fd2664e81f8c51da3cff957c656d70ec3d5",
+    "own_teacher_4": "0b62f2bfc233bc6b38a762c7b8f3ff8d2f012634fab14e84dab6df88c26a779c",
+    "own_teacher_5": "937cfdc26a4aa45766a4cf982f37b6c1c4f77e7bc83c9dcd52ef21750cc85123",
+    "own_teacher_6": "cc1e77bde9c88b7896786031fbf1f87df226ec0f8e94c44fe3bdcf9c2336ba51",
+    "own_teacher_7": "c0955d4d92d759856407a371323b7c66d61c7b62a416b8a9f518e2672dda4a1b",
+    "own_teacher_8": "8733a5f00545b3252433d1dffd83935bf871971eb9468b59e7f9254b78ee8d14",
+    "own_teacher_9": "96e1e09a8d62c5655b664b49cd682cb3621d28e717da53a2dcb637808999e95d"
+  },
+  "model_state_hashes_after": {
+    "original_A": "1612b5dbc43493c122f5cf3bf84cc7a5c4fd2c8e295e211ffc0c90616bff5b4f",
+    "improved_A": "1e17b87ceeca569e9b34219fb1c909add90d273cf8b27be0439ead549fc7f623",
+    "own_teacher_0": "348e59e78c1cbfae319bd99b3ada23fb767430dca29bd0c1a24c57a0630cba6a",
+    "own_teacher_1": "0b26722a0ef4359e3ad8dabe4de1ebd185ef811ee03c8d0759d555f5bf8b34fd",
+    "own_teacher_2": "92289afa5b09f6e74ecc929b36a066865a25a4890c3add6a74dea1e7b215f235",
+    "own_teacher_3": "b80a6b3eda9ee3dd67e91ab120b59fd2664e81f8c51da3cff957c656d70ec3d5",
+    "own_teacher_4": "0b62f2bfc233bc6b38a762c7b8f3ff8d2f012634fab14e84dab6df88c26a779c",
+    "own_teacher_5": "937cfdc26a4aa45766a4cf982f37b6c1c4f77e7bc83c9dcd52ef21750cc85123",
+    "own_teacher_6": "cc1e77bde9c88b7896786031fbf1f87df226ec0f8e94c44fe3bdcf9c2336ba51",
+    "own_teacher_7": "c0955d4d92d759856407a371323b7c66d61c7b62a416b8a9f518e2672dda4a1b",
+    "own_teacher_8": "8733a5f00545b3252433d1dffd83935bf871971eb9468b59e7f9254b78ee8d14",
+    "own_teacher_9": "96e1e09a8d62c5655b664b49cd682cb3621d28e717da53a2dcb637808999e95d"
+  },
+  "stream_sha256": "61de338a890f1934ab7d26d11f0dcff547538d1a00528e47b4054c84934760e2",
+  "directed_relations_seen": 36,
+  "record_sha256": {
+    "original_A": "193e6e45d5a08104ac11cde3d9b175ad63fd6c81120ac79ea04a4fb951071e23",
+    "improved_A": "4f622641c2b7eda0427874b329dd8775491f17fc03d2efe959b407b68590708c"
+  }
+}

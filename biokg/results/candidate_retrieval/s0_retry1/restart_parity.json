@@ -1,0 +1,9 @@
+{
+  "technical_restart_feature_parity": true,
+  "directed_relations": 5,
+  "queries": 7164,
+  "all_501_candidates": true,
+  "both_features": true,
+  "maximum_error": 0.0,
+  "new_mrr_used": false
+}

@@ -1,0 +1,67 @@
+{
+  "original_triples": 4762678,
+  "unique_triples": 4762677,
+  "duplicate_triples_removed": 1,
+  "construction_triples": 4285608,
+  "construction_pairs": 2003742,
+  "fit_pairs": 111213,
+  "report_pairs": 111286,
+  "grouped_pair_disjoint": true,
+  "paths": [
+    {
+      "mediator": "protein",
+      "relation": 40,
+      "signature": [
+        "drug",
+        "protein"
+      ],
+      "construction_edges": 106079
+    },
+    {
+      "mediator": "sideeffect",
+      "relation": 41,
+      "signature": [
+        "drug",
+        "sideeffect"
+      ],
+      "construction_edges": 141675
+    },
+    {
+      "mediator": "disease",
+      "relation": 1,
+      "signature": [
+        "drug",
+        "disease"
+      ],
+      "construction_edges": 4615
+    }
+  ],
+  "selected_fit_triples": 6479,
+  "selected_report_triples": 6524,
+  "query_columns": [
+    "head_local_drug",
+    "relation",
+    "tail_local_drug",
+    "global_pair_key",
+    "role"
+  ],
+  "roles": {
+    "fit": 0,
+    "report": 1
+  },
+  "n_drug": 10533,
+  "offset": {
+    "disease": 0,
+    "drug": 10687,
+    "function": 21220,
+    "protein": 66305,
+    "sideeffect": 83804
+  },
+  "counts": {
+    "disease": 10687,
+    "protein": 17499,
+    "drug": 10533,
+    "sideeffect": 9969,
+    "function": 45085
+  }
+}

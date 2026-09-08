@@ -1,0 +1,50 @@
+{
+  "spec": {
+    "protocol": "NL1",
+    "steps": 50000,
+    "seed": 0,
+    "stream_seed": 0,
+    "batch": 2048,
+    "negatives": 4096,
+    "alpha": 1.0,
+    "k": 12,
+    "block_size": 4,
+    "trajectory": 0.1,
+    "adam_lr": 0.005,
+    "table_lr": 0.3,
+    "probe_seed": 36852,
+    "probe_rows": 1024,
+    "probe_every": 5000,
+    "evaluation_seed": 36853,
+    "bootstrap_seed": 36854,
+    "eval_chunk": 256,
+    "cpu_threads": 4
+  },
+  "source_sha256": {
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "resonate_wiki.py": "ac8ce8763f6f009634d7617755e2bbcc885e96387d54fa5a0af79473c83c6697",
+    "rowadagrad.py": "de8afd9919f7478b3ab06d75846991afa92aeb412d3be5dc2b4549737aded115",
+    "biokg/masked_neighborhood.py": "fbdcb598ac50cc5aeb99c6c931f030f453c1c0893408112e43ba230b943467ba",
+    "biokg/masked_neighborhood_run.py": "d03775f0d0f957e4123373b1756e678454fab57e6984d7a1d4ba37a6ff5b86b0",
+    "biokg/test_masked_neighborhood.py": "94ae9d7824e6eaf24d2e38ead9d124f8807d8313376aa40d15a0fd3761ae4636",
+    "biokg/nonlinear_operator.py": "dad480131bccc21168f92c6893ec6714bf354c606e6f5baafc147ab0816a9df1",
+    "biokg/test_nonlinear_operator.py": "d603ff7d9d196f50bc1a6b78bf9cd0cd2a3565ff5598c72a98586ede3ba2f16e",
+    "biokg/NONLINEAR_OPERATOR.md": "7ac3dd851b32911873c26b4ccf111fba82e90817f3fa8b4a49499975f05b5e88",
+    "biokg/run_nonlinear_vast.py": "b85a3f5066b0817c9ce9290b0fcdd18bb30cee04b242aac660a93f42e028de8f",
+    "biokg/scripts/run_nonlinear.sh": "0d0e09784f6a99104e1ed83e0ad8e39eacb00d41670cf6bc90c8b3de61c974f1",
+    "biokg/scripts/nonlinear.supervisor.conf": "1e56940e7e9b746ebbb57c54be4f983a793d04e3766f36a5944799a6cf2d9cda"
+  },
+  "data_sha256": {
+    "fit_train.npz": "aa13b00c4f4e5f93f18a2af02e895f85375fedc873d09a25778090e97913796f",
+    "manifest.json": "f9e3c4ea6669ef9773f03789c3bb5472abf6b59dab8def123ab5f2f27569705b"
+  },
+  "reserved_holdout_sha256_not_opened": "783a55949f188b1ac09194df3bf03ed5a371284e228a17b7ca8282003b4e7e2f",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "cuda": "12.8",
+  "cpu_threads": 4,
+  "tf32": false,
+  "teachers": 0,
+  "distillation": false
+}

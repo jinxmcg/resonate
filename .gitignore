@@ -23,3 +23,14 @@ paper/*.fls
 paper/*.fdb_latexmk
 paper/*.synctex.gz
 .vercel
+
+# per-experiment feature and query caches under results/ (tens of GB, all
+# regenerable from the released checkpoints). The frozen blend weights that
+# the committed test reads depend on ARE tracked.
+*.npy
+biokg/results/**/*.npz
+!biokg/results/**/frozen_*.npz
+
+# upstream baseline sources kept locally for code inspection only:
+# CC-BY-NC-4.0, not MIT project code, must not be redistributed here.
+biokg/external/

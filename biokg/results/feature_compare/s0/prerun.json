@@ -1,0 +1,85 @@
+{
+  "protocol": "FC1",
+  "hashes": {
+    "/mnt/geocore/resonate/biokg/checkpoints/dist_T2_s0.pt": "b463a8bcc431ada38f4834e235677464f9cd3a86346f88aecd2fd681a01260ef",
+    "/mnt/geocore/resonate/biokg/results/h35f/campaign_s0/single.pt": "df7c783e7b8a6110f126bca1c60d89209735accbaa5ffc0b362f2cab52d9d2f1",
+    "/mnt/geocore/resonate/biokg/results/candidate_focus/s0/relation_families.json": "a3dc895d2ce62e3ab0539099ffee29bd8c9ed045edba075fc021f64dd25b5ed0",
+    "/mnt/geocore/resonate/biokg/results/h35/campaign_s0/frozen_queries.npz": "8b42ce359b89adc0b9a956d316d2693492486468d24c63f555bdc7f0793d285c",
+    "/mnt/geocore/resonate/biokg/results/h35f/campaign_s0/single_queries.npz": "ac62ecb65fbefe98d7e8643ec5f351ed087f80b83c930812e507aacce7ea5149",
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/split/random/train.pt": "958ad61478efffda0db28cf05e49c14cba6880e0f2d50d6023aca99b354d0385",
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/split/random/valid.pt": "e26e85eab6d822a8efbaefbf1dd279393751c8744d8be3eb612b29e524ff8ba4",
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/raw/num-node-dict.csv.gz": "de2fb3e32b2f3328cd82adaab40a18983954c0c356e4099ea6ca9a3fc3017375",
+    "/mnt/geocore/resonate/biokg/FEATURE_COMPARE.md": "9a60bc624378fca3d69e3e06b5de19f2f154d28433392f3e184c42c330401c6d",
+    "/mnt/geocore/resonate/biokg/compare_feature_pipeline.py": "0a38fd68037fd5bd75e6135f4b1c6d76e0de26ec1ca5b6be6cda4c1da73d5b32",
+    "/mnt/geocore/resonate/biokg/test_feature_pipeline.py": "722f031990ee80b7b3ce44bca6e48f53c8f147d453823d2ec55252a1fa7631d5",
+    "/mnt/geocore/resonate/biokg/audit_feature_pipeline.py": "bce9e8ea0a3f57a7a0b4841dc5ee051ba0ab00b57330363b28445968c2ebba10",
+    "/mnt/geocore/resonate/resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "/mnt/geocore/resonate/biokg/relation_analogy.py": "37c004d0c3ec6f3bd1cab352083bfc29a4d31df81d4a12c753da35e9d9f07a1f",
+    "/mnt/geocore/resonate/biokg/mixed_operator.py": "29a720abef6e7e960783dde530c9cdb7a9f156784542a1f550f848e355b9cd77",
+    "/mnt/geocore/resonate/biokg/joint_operator.py": "135c16ad3fe4cf7a0f827321c36cf42fce49cb595f5c0f1f673b90cc8347a195",
+    "/mnt/geocore/resonate/biokg/dual_operator.py": "a7703bd468c49f0de3b15575232b42ac9fb4f0a8a152bcf368db3b8d2a78f0ff",
+    "/mnt/geocore/resonate/biokg/gradient_diagnostic.py": "d860516f6a6d53bab409d6b199341bfeef4fdb99ab4c18f3e6c4f56a092bb34e",
+    "/mnt/geocore/resonate/biokg/train_candidate_focus.py": "55a1c09e7453c20523b054cf0e452cb39d04b4ae4a6a2d91e65e6dac3f4e5e7b",
+    "/mnt/geocore/resonate/biokg/train_joint_operator.py": "357b8ab67c2948789f5351fc27e7aac59ce5eb36b529861da147d5c7e2d2004f",
+    "/mnt/geocore/resonate/biokg/train_dual_operator.py": "3b4e75a3e1a525d92978a39bfadd11a07be1c9e915b5be8c030aee014b8dbffe",
+    "/mnt/geocore/resonate/biokg/train_biokg_comp.py": "c4a0f65a2e1a273bf835367533820a2ee606155cdbff0449a109137a238e5ccd"
+  },
+  "checkpoints": {
+    "/mnt/geocore/resonate/biokg/checkpoints/dist_T2_s0.pt": "b463a8bcc431ada38f4834e235677464f9cd3a86346f88aecd2fd681a01260ef",
+    "/mnt/geocore/resonate/biokg/results/h35f/campaign_s0/single.pt": "df7c783e7b8a6110f126bca1c60d89209735accbaa5ffc0b362f2cab52d9d2f1"
+  },
+  "references": {
+    "original": "/mnt/geocore/resonate/biokg/results/h35/campaign_s0/frozen_queries.npz",
+    "improved": "/mnt/geocore/resonate/biokg/results/h35f/campaign_s0/single_queries.npz"
+  },
+  "channels": [
+    "original_score",
+    "original_analogy_max",
+    "original_analogy_top3",
+    "improved_score",
+    "improved_analogy_max",
+    "improved_analogy_top3",
+    "jaccard_max",
+    "jaccard_top3"
+  ],
+  "views": {
+    "original": [
+      0,
+      1,
+      2,
+      6,
+      7
+    ],
+    "improved": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "score_only_swap": [
+      3,
+      1,
+      2,
+      6,
+      7
+    ],
+    "analogy_only_swap": [
+      0,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "min_rows": 2000,
+  "mask_seed": 0,
+  "bootstrap_seed": 3611,
+  "device": "NVIDIA GeForce GTX 1080 Ti",
+  "torch": "2.6.0+cu124",
+  "numpy": "2.5.2",
+  "training_performed": false,
+  "test_loaded": false,
+  "lr": 0.0,
+  "started_utc": "2026-09-06T13:04:29Z"
+}

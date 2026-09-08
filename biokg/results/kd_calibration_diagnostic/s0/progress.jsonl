@@ -1,0 +1,27 @@
+{"stage": "loading_own_models", "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "cache_train_scores", "batches_done": 1, "batches_total": 128, "elapsed_seconds": 0.2469011819921434, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "cache_train_scores", "batches_done": 32, "batches_total": 128, "elapsed_seconds": 0.6551713279914111, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "cache_train_scores", "batches_done": 64, "batches_total": 128, "elapsed_seconds": 1.0646870859782211, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "cache_train_scores", "batches_done": 96, "batches_total": 128, "elapsed_seconds": 1.4757508269976825, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "cache_train_scores", "batches_done": 128, "batches_total": 128, "elapsed_seconds": 1.8844195829587989, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "original_A", "fit_queries": 32739, "report_queries": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "original_A", "iterations_done": 8, "iterations_total": 24, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "original_A", "iterations_done": 16, "iterations_total": 24, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "original_A", "iterations_done": 24, "iterations_total": 24, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "global_scale_fitted", "arm": "original_A", "beta": 0.9938770476728678, "derivative_before": 0.02193010392337281, "derivative_after": -8.748719871264678e-07, "boundary": false, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "original_A", "queries_done": 1024, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "original_A", "queries_done": 8192, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "original_A", "queries_done": 16384, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "original_A", "queries_done": 24576, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "original_A", "queries_done": 32768, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "improved_A", "fit_queries": 32739, "report_queries": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "improved_A", "iterations_done": 8, "iterations_total": 24, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "improved_A", "iterations_done": 16, "iterations_total": 24, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "fit_global_scale", "arm": "improved_A", "iterations_done": 24, "iterations_total": 24, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "global_scale_fitted", "arm": "improved_A", "beta": 0.9939435441046953, "derivative_before": 0.021740750574577316, "derivative_after": 9.849997285869324e-07, "boundary": false, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "improved_A", "queries_done": 1024, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "improved_A", "queries_done": 8192, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "improved_A", "queries_done": 16384, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "improved_A", "queries_done": 24576, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "query_scale_upper_bound", "arm": "improved_A", "queries_done": 32768, "queries_total": 32797, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}
+{"stage": "complete", "seconds": 5.32808802195359, "all_states_unchanged": true, "peak_allocated_bytes": 4684101120, "lr": 0.0, "model_updates": 0, "mrr_evaluated": false}

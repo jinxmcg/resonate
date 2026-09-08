@@ -1,0 +1,267 @@
+{
+  "screen_only": true,
+  "test_loaded": false,
+  "frozen": {
+    "mrr": 0.8321748668335268,
+    "hits1": 0.7676565205112779,
+    "hits10": 0.9471839200422382,
+    "queries": 325772
+  },
+  "metrics": {
+    "single": {
+      "mrr": 0.832734761425888,
+      "hits1": 0.768439276549243,
+      "hits10": 0.9473435408813526,
+      "queries": 325772
+    },
+    "or": {
+      "mrr": 0.83270245503133,
+      "hits1": 0.7684116498655501,
+      "hits10": 0.9472760089878811,
+      "queries": 325772
+    }
+  },
+  "single_minus_frozen": 0.0005598945923610142,
+  "dual_minus_single": -3.2306394557767296e-05,
+  "dual_minus_frozen": 0.0005275881978032471,
+  "dual_vs_single_adjusted_97_5": [
+    -0.00015158444061416388,
+    0.00010289815444299026
+  ],
+  "dual_vs_frozen_adjusted_97_5": [
+    0.0002005038400187518,
+    0.000851563786154172
+  ],
+  "advance_gate": false,
+  "branches": {
+    "a": {
+      "mrr": 0.8343624183461611,
+      "hits1": 0.7706156452979385,
+      "hits10": 0.9479083530812962,
+      "queries": 325772
+    },
+    "b": {
+      "mrr": 0.8302947212574905,
+      "hits1": 0.7652560686615179,
+      "hits10": 0.9463121446901513,
+      "queries": 325772
+    },
+    "mean_query_cosine": 0.9987899661064148,
+    "median_query_cosine": 0.9988546371459961,
+    "mean_b_positive_responsibility": 0.47709742188453674,
+    "b_positive_stronger_fraction": 0.1524931547217072
+  },
+  "family_direction": [
+    {
+      "family": "disease-protein",
+      "direction": 0,
+      "queries": 3777,
+      "frozen_mrr": 0.5645539161986634,
+      "single_mrr": 0.5643302512456436,
+      "dual_mrr": 0.5648868021823662,
+      "dual_minus_single": 0.0005565509367227005
+    },
+    {
+      "family": "disease-protein",
+      "direction": 1,
+      "queries": 3777,
+      "frozen_mrr": 0.6467851707691477,
+      "single_mrr": 0.6483457889312072,
+      "dual_mrr": 0.6483387107247999,
+      "dual_minus_single": -7.078206407253149e-06
+    },
+    {
+      "family": "drug-disease",
+      "direction": 0,
+      "queries": 267,
+      "frozen_mrr": 0.255935121059605,
+      "single_mrr": 0.2588542229703595,
+      "dual_mrr": 0.2591889409083013,
+      "dual_minus_single": 0.0003347179379418119
+    },
+    {
+      "family": "drug-disease",
+      "direction": 1,
+      "queries": 267,
+      "frozen_mrr": 0.44050273327814976,
+      "single_mrr": 0.44371323696824366,
+      "dual_mrr": 0.4418272296135388,
+      "dual_minus_single": -0.0018860073547048212
+    },
+    {
+      "family": "drug-drug",
+      "direction": 0,
+      "queries": 31135,
+      "frozen_mrr": 0.6704165976841188,
+      "single_mrr": 0.6714483847807592,
+      "dual_mrr": 0.6716684008426762,
+      "dual_minus_single": 0.00022001606191731496
+    },
+    {
+      "family": "drug-drug",
+      "direction": 1,
+      "queries": 31135,
+      "frozen_mrr": 0.7015880306710096,
+      "single_mrr": 0.7019886397227315,
+      "dual_mrr": 0.702222216922616,
+      "dual_minus_single": 0.00023357719988459564
+    },
+    {
+      "family": "drug-protein",
+      "direction": 0,
+      "queries": 6539,
+      "frozen_mrr": 0.738869800722934,
+      "single_mrr": 0.7434048759585024,
+      "dual_mrr": 0.7431112216597704,
+      "dual_minus_single": -0.0002936542987320117
+    },
+    {
+      "family": "drug-protein",
+      "direction": 1,
+      "queries": 6539,
+      "frozen_mrr": 0.9535785960687512,
+      "single_mrr": 0.9533710644178636,
+      "dual_mrr": 0.9535292571691188,
+      "dual_minus_single": 0.0001581927512552819
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": 0,
+      "queries": 8619,
+      "frozen_mrr": 0.1483511502987041,
+      "single_mrr": 0.14833378367082967,
+      "dual_mrr": 0.1481717380009479,
+      "dual_minus_single": -0.0001620456698817764
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": 1,
+      "queries": 8619,
+      "frozen_mrr": 0.36321285174374324,
+      "single_mrr": 0.36369240210638026,
+      "dual_mrr": 0.36367371240836466,
+      "dual_minus_single": -1.8689698015657712e-05
+    },
+    {
+      "family": "function-function",
+      "direction": 0,
+      "queries": 39811,
+      "frozen_mrr": 0.954177072065208,
+      "single_mrr": 0.9537917905524533,
+      "dual_mrr": 0.953890278530638,
+      "dual_minus_single": 9.848797818467941e-05
+    },
+    {
+      "family": "function-function",
+      "direction": 1,
+      "queries": 39811,
+      "frozen_mrr": 0.9750498446444426,
+      "single_mrr": 0.9746668119805771,
+      "dual_mrr": 0.9745162436989232,
+      "dual_minus_single": -0.00015056828165400718
+    },
+    {
+      "family": "protein-function",
+      "direction": 0,
+      "queries": 43181,
+      "frozen_mrr": 0.9224515413837633,
+      "single_mrr": 0.9224578772930477,
+      "dual_mrr": 0.9225084539803814,
+      "dual_minus_single": 5.057668733352748e-05
+    },
+    {
+      "family": "protein-function",
+      "direction": 1,
+      "queries": 43181,
+      "frozen_mrr": 0.7943528010379732,
+      "single_mrr": 0.7970762112580929,
+      "dual_mrr": 0.7966174334148272,
+      "dual_minus_single": -0.0004587778432660525
+    },
+    {
+      "family": "protein-protein",
+      "direction": 0,
+      "queries": 29557,
+      "frozen_mrr": 0.968241619300184,
+      "single_mrr": 0.9684349507718799,
+      "dual_mrr": 0.9683545159009286,
+      "dual_minus_single": -8.04348709513419e-05
+    },
+    {
+      "family": "protein-protein",
+      "direction": 1,
+      "queries": 29557,
+      "frozen_mrr": 0.9672341963848855,
+      "single_mrr": 0.9674315293601518,
+      "dual_mrr": 0.9673710546350142,
+      "dual_minus_single": -6.0474725137675516e-05
+    }
+  ],
+  "training_audit": {
+    "teacher_state_sha256": [
+      "348e59e78c1cbfae319bd99b3ada23fb767430dca29bd0c1a24c57a0630cba6a",
+      "0b26722a0ef4359e3ad8dabe4de1ebd185ef811ee03c8d0759d555f5bf8b34fd",
+      "92289afa5b09f6e74ecc929b36a066865a25a4890c3add6a74dea1e7b215f235",
+      "b80a6b3eda9ee3dd67e91ab120b59fd2664e81f8c51da3cff957c656d70ec3d5",
+      "0b62f2bfc233bc6b38a762c7b8f3ff8d2f012634fab14e84dab6df88c26a779c",
+      "937cfdc26a4aa45766a4cf982f37b6c1c4f77e7bc83c9dcd52ef21750cc85123",
+      "cc1e77bde9c88b7896786031fbf1f87df226ec0f8e94c44fe3bdcf9c2336ba51",
+      "c0955d4d92d759856407a371323b7c66d61c7b62a416b8a9f518e2672dda4a1b",
+      "8733a5f00545b3252433d1dffd83935bf871971eb9468b59e7f9254b78ee8d14",
+      "96e1e09a8d62c5655b664b49cd682cb3621d28e717da53a2dcb637808999e95d"
+    ],
+    "teachers_unchanged": true,
+    "teachers_without_grad": true,
+    "student_changes": {
+      "single": {
+        "changed": {
+          "E": true,
+          "log_tau": true,
+          "H_b": true
+        },
+        "initial_hashes": {
+          "E": "0995ced7ea29e6ffde7f0866de1973baeda64a02130b8749a0e6d08537ffc720",
+          "log_tau": "0735e9c1f43102bd28e51e6af7308cb7c648e79c44799518cffb39f3e443fa37",
+          "H_b": "8cee805f450d061d8b849e95c33b4f8e094169f71156cb37b7324926e73799ae"
+        },
+        "final_hashes": {
+          "E": "2eb664d2d2c83fc6f7982613a59f0d3e2dc29862ac730a55f55744efa1ddce3f",
+          "log_tau": "68eb555c2451eb23e38726a8ad2b788d16d76421a59aff4649053ecace659d51",
+          "H_b": "1347afd3f7b9937af8844c47866ee447c46920d49e6ed079a6572603c11b88a5"
+        }
+      },
+      "or": {
+        "changed": {
+          "E": true,
+          "log_tau": true,
+          "H_a": true,
+          "H_b": true
+        },
+        "initial_hashes": {
+          "E": "0995ced7ea29e6ffde7f0866de1973baeda64a02130b8749a0e6d08537ffc720",
+          "log_tau": "0735e9c1f43102bd28e51e6af7308cb7c648e79c44799518cffb39f3e443fa37",
+          "H_a": "3908625444d46b155cf8594cb74e16c9aa63be89e93c0058291006926b077a6f",
+          "H_b": "b8b50d23149b3488189162900478c4670bc106068675a0434eaea24560ee19f6"
+        },
+        "final_hashes": {
+          "E": "bfe8d65c993a43189f783dd40aa9b4968fe9d3e4c40c5c19efcc8b5b233b5cef",
+          "log_tau": "5a7ca10967421bf4eacdf32afec6f6d678d57efa6769a7174681215749a547ad",
+          "H_a": "c7cac7180db166375057e664bdd3301cd76ba6cacc4cac209f2ce1d7ec4bfc62",
+          "H_b": "aab33f1ab4efd2667a097c2b8e1eea0542ca8b9c59e7afeae0705760d63a1c6a"
+        }
+      }
+    },
+    "train_stream_sha256": "8821d02f21c2b0b50154e368ab9f82271224ab1d699fae9606e4f972ce9cbe44",
+    "updates": {
+      "single": 5000,
+      "or": 5000
+    },
+    "teacher_forward_seconds": 136.68747313373024,
+    "student_update_seconds": {
+      "single": 124.4727644851082,
+      "or": 195.4433753323974
+    },
+    "training_and_probes_elapsed_seconds": 466.7929103959468,
+    "peak_allocated_bytes": 2338668544
+  }
+}

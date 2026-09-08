@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "base": {
+    "model": "37b641941987004c7c36092e3860e352e279697909477983f6d26fa35d8d21aa",
+    "optimizer": "951bf3ffe71d450b4690a5964c79cab2d4573425e5a417a65b23b40944773928",
+    "checkpoint_sha256": "210b5580720d0737ae6b5b623db7188d7a938b6df4e30c5544b84d763cb0d59d",
+    "steps": 50000
+  },
+  "endpoints": {
+    "control": {
+      "model": "de720cb4dee34c40663f8177a1155c84922a431441c75623765532b06474ca4a",
+      "optimizer": "994f1797f8778cb769fee0b89f40780f4c22594a3b1b13a6690f334e0da539fb",
+      "checkpoint_sha256": "6d626370994500fc8620a2b176d53f5525954318d0e4de7d01659b2e3f2480b4",
+      "steps": 62500
+    },
+    "masked": {
+      "model": "24b7f58ff090ccf146ee55fcb6c3e0be2801a6a2180a5111ac671ad988d8a9d3",
+      "optimizer": "70323a7cd3ea02ca1c68a238927a765d4ef693b44714d0b18652b9fe19df1362",
+      "checkpoint_sha256": "4d2d8f7bb5837dbe20bd161d7b919ef7ebdc4dd796d226639f4db0280a51d0d2",
+      "steps": 62500
+    }
+  },
+  "identical_initial_model_optimizer": true,
+  "independent_storage": true,
+  "identical_batch_stream_by_construction": true,
+  "base_stream_sha256": "edcd42a60df349de02ef6c8ebaa492f50937c2f5dacb5931fdc536cdfbfe5948",
+  "continuation_stream_sha256": "f17f06bb51f49acd3b239283444cd5bab0eecfe76a51b3e3a8b8451327b4ba54",
+  "context_batches": 3022,
+  "context_rows": 6151934,
+  "sampled_context_slots": 49215472,
+  "target_exclusion_checked_every_context_batch": true,
+  "adam_steps_each": 62500,
+  "paired_updates_each": 12500,
+  "dataset_files_opened": [
+    "fit_train.npz",
+    "manifest.json"
+  ],
+  "holdout_opened": false,
+  "teacher_count": 0,
+  "source_inputs_unchanged": true,
+  "seconds": 259.0561085429945,
+  "peak_allocated_bytes": 619832832,
+  "artifact_sha256": {
+    "base.pt": "210b5580720d0737ae6b5b623db7188d7a938b6df4e30c5544b84d763cb0d59d",
+    "control.pt": "6d626370994500fc8620a2b176d53f5525954318d0e4de7d01659b2e3f2480b4",
+    "masked.pt": "4d2d8f7bb5837dbe20bd161d7b919ef7ebdc4dd796d226639f4db0280a51d0d2",
+    "prerun.json": "1bbab84c51f960cbf07b36cdb8d37fea389308e6fef6227b162e6be6d0aecd8e",
+    "fit_probe_rows.npz": "f2c8467834ad1a2b9608e6b437e18647d3df25d301c28608b3a589d7791e1645",
+    "progress.jsonl": "a44b3fa496f1d4a7708847266281d7b6fbc31e38225182dfa6fc9e0a2f876cca"
+  }
+}

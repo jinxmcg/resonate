@@ -1,14 +1,16 @@
 # Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access
 
-> **Submission status — 7 September 2026 (confirmed by the user): nothing has
-> been filed for BioKG, WikiKG2, or STaRK-Prime.** Entries are proposed only.
+> **Submission status — 9 September 2026: nothing has been filed for BioKG,
+> WikiKG2, or STaRK-Prime.** Two biokg entries (rows C and C′) are prepared for
+> filing — see [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md) — but
+> the form has not been submitted. Everything else is proposed only.
 
 *(the ResonatE repository; the model is the experimental vehicle, the properties measured are the result)*
 
 > **Preprint / draft (4 September 2026), not peer reviewed.** The results
-> below are self-reported; four OGB leaderboard entries (listed at the end)
-> are proposed only and have not been filed; two wikikg2 results
-> are reported but not filed (see Compliance).
+> below are self-reported; two biokg entries (listed at the end) are prepared
+> for filing and the remaining OGB rows are proposed only — none has been
+> filed; two wikikg2 results are reported but not filed (see Compliance).
 > Project page: [resonate.page](https://resonate.page). Paper:
 > [`paper/resonate.pdf`](paper/resonate.pdf).
 
@@ -378,18 +380,39 @@ and `dist_T2_s{0..9}.pt` (108 MB each, dense format, `{"model", "offset",
 campaign script after their reads and cannot be re-verified from a
 checkpoint (their receipts and logs are in `results/rowCF/`).
 
-## Proposed leaderboard entries — not filed
+## Leaderboard entries — prepared, none filed yet
 
-| board | entry | test MRR | valid MRR | params |
-|---|---|---|---|---|
-| ogbl-biokg | ResonatE (single model) | 0.8158 ± 0.0006 | 0.8164 ± 0.0006 | 27.1M |
-| ogbl-biokg | ResonatE + retrieval features | 0.8463 ± 0.0004 | 0.8465 ± 0.0004 (held-out) | 27.1M |
-| ogbl-biokg | ResonatE distilled + retrieval features | 0.8528 ± 0.0002 | 0.8532 ± 0.0003 (held-out) | 27.1M |
-| ogbl-biokg | ResonatE distilled, tiered-compressed + retrieval features | 0.8468 ± 0.0003 | 0.8478 ± 0.0003 (held-out) | **9.56M** |
-| ogbl-wikikg2 | ResonatE distilled single model (T=2 from ten seeds) | 0.6855 ± 0.0008 | 0.7190 ± 0.0004 | 328.8M |
+**biokg: two entries, C and C′** — the Pareto frontier of the ladder, the best
+MRR and the best MRR per parameter. Fields, hyperparameters and disclosures are
+in [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md), ready for
+[OGB's form](https://forms.gle/7PB7375i5P1rHgng6).
+
+| board | entry | test MRR | valid MRR | params | |
+|---|---|---|---|---|---|
+| ogbl-biokg | C. ResonatE distilled + retrieval features | 0.8528 ± 0.0002 | 0.8532 ± 0.0003 (held-out) | 27.1M | **to file** |
+| ogbl-biokg | C′. ResonatE distilled, tiered-compressed + retrieval features | 0.8468 ± 0.0003 | 0.8478 ± 0.0003 (held-out) | **9.56M** | **to file** |
+| ogbl-biokg | A. ResonatE (single model) | 0.8158 ± 0.0006 | 0.8164 ± 0.0006 | 27.1M | not filed |
+| ogbl-biokg | B. ResonatE + retrieval features | 0.8463 ± 0.0004 | 0.8465 ± 0.0004 (held-out) | 27.1M | not filed |
+| ogbl-wikikg2 | E. ResonatE compact (clustered narrow rows, refit) + retrieval + reverse | 0.7096 ± 0.0013 (7 seeds) | 0.7668 ± 0.0013 (in-sample) | **50.2M** | **to file** |
+| ogbl-wikikg2 | ResonatE distilled single model (T=2 from ten seeds) | 0.6855 ± 0.0008 | 0.7190 ± 0.0004 | 328.8M | not filed |
+| STaRK-Prime | P3, reference pipeline (no LLM at query time) | 43.1 / 41.8 / 28.6 Hit@1 | — | 404M at query time | **to file** |
+
+A and B are dropped from the filing rather than withheld for any compliance
+reason: B is dominated by C′ on both axes the board reports — lower test MRR at
+2.84× the parameters — and A sits below both. They stay here as the ladder's
+development record. On the board as of 2026-09-09 (12 entries, unchanged since
+2026-09-04) C would rank 5th and C′ 6th, C′ being 9.8× smaller than AutoSF
+(93.8M), the smallest entry currently listed.
 
 Not filed (combiner fit on validation labels; see Compliance above): wikikg2
 C-F 0.7320 ± 0.0010 and the ensemble 0.7426 ± 0.0002.
+
+> **Open:** [`wikikg2/SUBMISSION_WIKIKG2.md`](wikikg2/SUBMISSION_WIKIKG2.md)
+> prepares *two* wikikg2 entries — E above, and C, the ten-teacher ensemble
+> under the selection blend (0.7320, 3.29B parameters, allowed by the same
+> fixed-candidate reasoning as the biokg blends). The filing decision of
+> 9 September names only E. Confirm whether C is dropped or still goes in
+> before either form is submitted.
 
 No external data on either board. One RTX 5090 per run.
 

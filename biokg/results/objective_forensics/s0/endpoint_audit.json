@@ -1,0 +1,16 @@
+{
+  "audit_passed": true,
+  "source_input_artifact_hashes_verified": true,
+  "selection_and_train_batches_reproduced": true,
+  "saved_normalization_and_fixed_pipeline_exact": true,
+  "train_filtered_ranks_and_summary_reproduced": true,
+  "gradient_component_projection_sums_verified": true,
+  "unchanged_model_hashes_recorded": true,
+  "direct_gradients_recomputed_by_endpoint": false,
+  "direct_graph_features_recomputed_by_endpoint": false,
+  "direct_gradient_and_feature_checks_in_runner": true,
+  "validation_loaded": false,
+  "test_loaded": false,
+  "model_updates": 0,
+  "lr": 0.0
+}

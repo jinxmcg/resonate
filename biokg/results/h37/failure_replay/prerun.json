@@ -1,0 +1,7 @@
+{
+  "original_receipt_sha256": "cd6897154de251e717a438f5e4e7346286c6f777f9d7341390e4f1296a75ff8d",
+  "diagnostic_source_sha256": "f64c5854b216fb612baf9093f07b1debc1b581b6db481335a2ec9f0e626c945f",
+  "max_steps": 5000,
+  "no_recipe_changes": true,
+  "no_holdout_evaluation": true
+}

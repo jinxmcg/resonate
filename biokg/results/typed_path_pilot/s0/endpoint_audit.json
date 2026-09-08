@@ -1,0 +1,16 @@
+{
+  "audit_passed": true,
+  "source_input_artifact_hashes_verified": true,
+  "grouped_pair_split_and_graph_reproduced": true,
+  "all_samples_and_candidates_exact": true,
+  "representative_direct_path_queries": 203,
+  "all_501_candidates": true,
+  "raw_feature_maximum_error": 0.0,
+  "all_normalization_exact": true,
+  "fit_only_recipe_and_all_report_ranks_exact": true,
+  "summary_and_pair_cluster_interval_reproduced": true,
+  "valid_loaded": false,
+  "test_loaded": false,
+  "checkpoint_loaded": false,
+  "gpu_used": false
+}

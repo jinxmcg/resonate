@@ -1,0 +1,29 @@
+{
+  "post_hoc_descriptive_only": true,
+  "split_files_loaded": false,
+  "single_exactly_matches_h35c_endpoint_ranks": true,
+  "independent_endpoint_auditor_passed": true,
+  "method": "Read saved endpoint states/query arrays. Reconstruct initial B with CPU generator seed 35130, randn(93773,32), row L2 normalization. Compute mean and quantiles of each query b_correction_std/a_score_std; do not divide their separately averaged standard deviations.",
+  "dot": {
+    "private_temperature": 0.3559253215789795,
+    "mean_gate_unweighted_relations": 0.047080688178539276,
+    "correction_to_a_std_mean": 0.0027947151102125645,
+    "correction_to_a_std_quantiles_05_50_95": [0.001672395586501807, 0.002534941886551678, 0.004488009703345597],
+    "private_embedding_initial_cosine_mean": 0.9835140705108643,
+    "private_embedding_relative_change": 0.1838853508234024,
+    "head_scale_mean": 0.9629359245300293,
+    "tail_scale_mean": 0.9631226658821106,
+    "shift_norm": 1.45484459400177
+  },
+  "distance": {
+    "private_temperature": 0.33527055382728577,
+    "mean_gate_unweighted_relations": 0.047079216688871384,
+    "correction_to_a_std_mean": 0.0021891584619879723,
+    "correction_to_a_std_quantiles_05_50_95": [0.0011077376198954882, 0.0021312328753992915, 0.00343786507146433],
+    "private_embedding_initial_cosine_mean": 0.9821220636367798,
+    "private_embedding_relative_change": 0.19075483083724976,
+    "head_scale_mean": 0.9868006110191345,
+    "tail_scale_mean": 0.9886960983276367,
+    "shift_norm": 2.0168840885162354
+  }
+}

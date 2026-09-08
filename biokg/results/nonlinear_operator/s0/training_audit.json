@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "endpoints": {
+    "linear": {
+      "model": "37b641941987004c7c36092e3860e352e279697909477983f6d26fa35d8d21aa",
+      "optimizer": "951bf3ffe71d450b4690a5964c79cab2d4573425e5a417a65b23b40944773928",
+      "checkpoint_sha256": "c0a20bcf659e91c7189fe12cf7d0a7738da222fd50969addabada6b605208305",
+      "steps": 50000,
+      "alpha": 0.0
+    },
+    "nonlinear": {
+      "model": "ecc16d0c1bfc05e49e21ae00f7d8be1fc67edd751f9003bd7caf2cee87ca8484",
+      "optimizer": "c397ebd6377dbc68eb1ecf1a89eba30d0a634f195768b6250d2fcb3869e3b2ab",
+      "checkpoint_sha256": "94e03e48959172deb8e14cbd1bd047f6a8b4618a1134958e8d9254c1ba6c04c1",
+      "steps": 50000,
+      "alpha": 1.0
+    }
+  },
+  "initial_model": "8c2a76c926cbc0133c97a8f6f208db705a9c27261a9c67c994166d1ff53bc6f0",
+  "initial_optimizer": "bd4a3999cf86b1ff44fcf9fbf61351d0d1c8b3dc961b9aa69e7fe68f5fe0fac9",
+  "identical_initial_model_optimizer": true,
+  "independent_storage": true,
+  "identical_batch_stream_by_construction": true,
+  "batch_stream_sha256": "edcd42a60df349de02ef6c8ebaa492f50937c2f5dacb5931fdc536cdfbfe5948",
+  "paired_updates_each": 50000,
+  "parameters_each": 27124129,
+  "dataset_files_opened": [
+    "fit_train.npz",
+    "manifest.json"
+  ],
+  "holdout_opened": false,
+  "teacher_count": 0,
+  "source_inputs_unchanged": true,
+  "seconds": 330.75357653001265,
+  "peak_allocated_bytes": 427863040,
+  "artifact_sha256": {
+    "linear.pt": "c0a20bcf659e91c7189fe12cf7d0a7738da222fd50969addabada6b605208305",
+    "nonlinear.pt": "94e03e48959172deb8e14cbd1bd047f6a8b4618a1134958e8d9254c1ba6c04c1",
+    "prerun.json": "19ae4b7638d32092512f79f3ebb028156038b6a8a9d84777d94b6420beb54133",
+    "fit_probe_rows.npz": "f2c8467834ad1a2b9608e6b437e18647d3df25d301c28608b3a589d7791e1645",
+    "progress.jsonl": "6bdd18507d1cfbac546690857ed3dab5e5c659c1d0c635d4b2f5b709e5dd5db6"
+  }
+}

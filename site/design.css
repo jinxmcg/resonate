@@ -19,3 +19,5 @@ body>.top-disclaimer{margin:0 24px;background:#eeeee5;border-bottom:1px solid va
 @media(max-width:1100px) and (min-width:901px){.topbar nav{gap:14px}.topbar .github-link span{display:none}}
 @media(max-width:900px){.topbar .wrap{position:relative}.topbar .brand{padding-right:105px}.topbar .github-link{position:absolute;right:28px;top:12px}.topbar nav{margin-left:0}}
 @media(max-width:600px){.topbar .github-link{right:22px;top:11px}.topbar .github-link span{font-size:11px}}
+
+.filing td{color:var(--ink)}.filing td:first-child{font-weight:500}.notfiled td{color:var(--muted)}.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--panel);background:var(--accent);padding:3px 7px;white-space:nowrap}

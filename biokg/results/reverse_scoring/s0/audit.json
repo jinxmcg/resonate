@@ -1,0 +1,33 @@
+{
+  "source_input_hashes_unchanged": true,
+  "model_before": {
+    "a.E": "59d7c08d41502f17c0d4480cfe7436d0bd2ea4149c4597bb529d1129e13df53e",
+    "a.log_tau": "6934713c5e487bfd7392ba224770647d51efe1f918e21550a6f416ff1a19ad62",
+    "a.H_b": "1128e57ef358884b5ac545f741c7c894ab77a08a50eb183373fe3f6ddd71ae42"
+  },
+  "model_after": {
+    "a.E": "59d7c08d41502f17c0d4480cfe7436d0bd2ea4149c4597bb529d1129e13df53e",
+    "a.log_tau": "6934713c5e487bfd7392ba224770647d51efe1f918e21550a6f416ff1a19ad62",
+    "a.H_b": "1128e57ef358884b5ac545f741c7c894ab77a08a50eb183373fe3f6ddd71ae42"
+  },
+  "model_unchanged": true,
+  "gradients_absent": true,
+  "baseline_report_ranks_exact": true,
+  "non_drug_drug_ranks_unchanged": true,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt",
+    "split/random/valid.pt"
+  ],
+  "artifact_sha256": {
+    "prerun.json": "89d33d36737069c6f0c5924d4148cc645e1f2e59cf05f40769e7df41e0d41a34",
+    "query_data.npz": "200d554b95ce6e3974b4f45eff42de8cbde06278773763b5d3fbd9c8da67d463",
+    "raw_reverse.npy": "3caa5686ce289d4df34765ac0c7d59f57c4f27ce1d6685b48eac5949feadb641",
+    "normalized_reverse.npy": "d36d920fd91eb1fab7840975d0c85520e88cbfb13d41875c471d1a13c60f675d",
+    "scoring_audit.json": "6ba090c2565c3b1c72bace4527909fe3d2d7cf98be2ba286055fbf1efcb4adeb",
+    "seed0_fold0_reverse_alpha_recipe.json": "cc6e3c87ce52f51e12fc4b98c0f27375e4891f5764b5adebebc88159038087b1",
+    "folds.json": "907ee9205c9f5f8be56d049531d774ea123d50abe5c5c381a078dda9645afe35",
+    "ranks.npz": "8c372c79b072c719261cb528d1a7a225d19c0137d08eee8f6e66c0bd87ad9a40",
+    "summary.json": "27ad5970e5fb312ad81082530f9bec1c784c2828670ad303d18695eaa923806f"
+  }
+}

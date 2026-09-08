@@ -1,0 +1,1106 @@
+[
+  {
+    "sample_index": 0,
+    "train_row": 1168263,
+    "direction": 0,
+    "relation": 38,
+    "directed_relation": 38,
+    "source_local_id": 1381,
+    "positive_local_id": 786,
+    "raw_rank": 73.0,
+    "filtered_rank": 10.0,
+    "known_train_positives": 222,
+    "raw_winner_local_id": 654,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1528,
+    "model_rank": 10.0,
+    "pipeline_rank": 6.0,
+    "pipeline_winner_local_id": 1048,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": 0.007411479949951172,
+    "feature_pair_values": [
+      [
+        4.6947550773620605,
+        4.871401309967041
+      ],
+      [
+        0.5792259573936462,
+        0.49650564789772034
+      ],
+      [
+        0.4777235984802246,
+        0.3971680998802185
+      ],
+      [
+        0.5317725539207458,
+        0.5296052694320679
+      ],
+      [
+        0.5243611335754395,
+        0.5159777998924255
+      ],
+      [
+        0.43458035588264465,
+        0.27124884724617004
+      ],
+      [
+        0.411581426858902,
+        0.26015910506248474
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 86
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 86
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 4,
+    "train_row": 137170,
+    "direction": 0,
+    "relation": 2,
+    "directed_relation": 2,
+    "source_local_id": 2867,
+    "positive_local_id": 1037,
+    "raw_rank": 31.0,
+    "filtered_rank": 3.0,
+    "known_train_positives": 156,
+    "raw_winner_local_id": 1529,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1094,
+    "model_rank": 3.0,
+    "pipeline_rank": 2.0,
+    "pipeline_winner_local_id": 1094,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.005484104156494141,
+    "feature_pair_values": [
+      [
+        4.836055755615234,
+        4.945226192474365
+      ],
+      [
+        0.33480164408683777,
+        0.33480164408683777
+      ],
+      [
+        0.24352304637432098,
+        0.24352304637432098
+      ],
+      [
+        0.5560975670814514,
+        0.5560975670814514
+      ],
+      [
+        0.538999617099762,
+        0.538999617099762
+      ],
+      [
+        0.617304265499115,
+        0.517210841178894
+      ],
+      [
+        0.5983381867408752,
+        0.462495356798172
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 62
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 62
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 5,
+    "train_row": 297214,
+    "direction": 0,
+    "relation": 6,
+    "directed_relation": 6,
+    "source_local_id": 3725,
+    "positive_local_id": 1393,
+    "raw_rank": 103.0,
+    "filtered_rank": 9.0,
+    "known_train_positives": 197,
+    "raw_winner_local_id": 1642,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 760,
+    "model_rank": 9.0,
+    "pipeline_rank": 14.0,
+    "pipeline_winner_local_id": 760,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.04970979690551758,
+    "feature_pair_values": [
+      [
+        4.124190330505371,
+        4.5958099365234375
+      ],
+      [
+        0.13940785825252533,
+        0.13940785825252533
+      ],
+      [
+        0.11641764640808105,
+        0.1183723658323288
+      ],
+      [
+        0.550561785697937,
+        0.550561785697937
+      ],
+      [
+        0.5241054892539978,
+        0.5395708680152893
+      ],
+      [
+        0.14527438580989838,
+        0.1896434724330902
+      ],
+      [
+        0.12742431461811066,
+        0.13464052975177765
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 63
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 63
+    },
+    "pools_identical": true
+  },
+  {
+    "sample_index": 6,
+    "train_row": 917069,
+    "direction": 0,
+    "relation": 23,
+    "directed_relation": 23,
+    "source_local_id": 1572,
+    "positive_local_id": 125,
+    "raw_rank": 24.0,
+    "filtered_rank": 3.0,
+    "known_train_positives": 143,
+    "raw_winner_local_id": 1473,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 931,
+    "model_rank": 3.0,
+    "pipeline_rank": 5.0,
+    "pipeline_winner_local_id": 931,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.01746535301208496,
+    "feature_pair_values": [
+      [
+        4.231871128082275,
+        4.282447338104248
+      ],
+      [
+        0.10376384109258652,
+        0.1138995885848999
+      ],
+      [
+        0.0956023782491684,
+        0.10439938306808472
+      ],
+      [
+        0.44811320304870605,
+        0.44811320304870605
+      ],
+      [
+        0.42010900378227234,
+        0.43529048562049866
+      ],
+      [
+        0.22473672032356262,
+        0.23045289516448975
+      ],
+      [
+        0.178340345621109,
+        0.21630677580833435
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 49
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 49
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 10,
+    "train_row": 629298,
+    "direction": 0,
+    "relation": 14,
+    "directed_relation": 14,
+    "source_local_id": 1418,
+    "positive_local_id": 1113,
+    "raw_rank": 54.0,
+    "filtered_rank": 3.0,
+    "known_train_positives": 187,
+    "raw_winner_local_id": 3220,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1203,
+    "model_rank": 3.0,
+    "pipeline_rank": 3.0,
+    "pipeline_winner_local_id": 3533,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": 0.019543170928955078,
+    "feature_pair_values": [
+      [
+        4.651561260223389,
+        4.700173377990723
+      ],
+      [
+        0.20881320536136627,
+        0.18784894049167633
+      ],
+      [
+        0.19876216351985931,
+        0.1794368177652359
+      ],
+      [
+        0.5239852666854858,
+        0.4960629940032959
+      ],
+      [
+        0.5022383332252502,
+        0.4894813299179077
+      ],
+      [
+        0.2616916596889496,
+        0.05534587427973747
+      ],
+      [
+        0.2489246279001236,
+        0.05162087082862854
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 55
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 55
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 11,
+    "train_row": 582450,
+    "direction": 0,
+    "relation": 14,
+    "directed_relation": 14,
+    "source_local_id": 1189,
+    "positive_local_id": 1586,
+    "raw_rank": 19.0,
+    "filtered_rank": 3.0,
+    "known_train_positives": 80,
+    "raw_winner_local_id": 1183,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1400,
+    "model_rank": 3.0,
+    "pipeline_rank": 9.0,
+    "pipeline_winner_local_id": 1400,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.04967856407165527,
+    "feature_pair_values": [
+      [
+        4.052643299102783,
+        4.47650146484375
+      ],
+      [
+        0.1769215315580368,
+        0.20237553119659424
+      ],
+      [
+        0.17270362377166748,
+        0.18345370888710022
+      ],
+      [
+        0.3897058963775635,
+        0.42553192377090454
+      ],
+      [
+        0.37921014428138733,
+        0.38888099789619446
+      ],
+      [
+        0.2134932577610016,
+        0.07554851472377777
+      ],
+      [
+        0.20392562448978424,
+        0.07071314007043839
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 1,
+      "known_positive_draws": 38
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 1,
+      "known_positive_draws": 38
+    },
+    "pools_identical": true
+  },
+  {
+    "sample_index": 15,
+    "train_row": 295975,
+    "direction": 0,
+    "relation": 6,
+    "directed_relation": 6,
+    "source_local_id": 1521,
+    "positive_local_id": 598,
+    "raw_rank": 36.0,
+    "filtered_rank": 2.0,
+    "known_train_positives": 204,
+    "raw_winner_local_id": 1590,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1159,
+    "model_rank": 2.0,
+    "pipeline_rank": 4.0,
+    "pipeline_winner_local_id": 1159,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.001322031021118164,
+    "feature_pair_values": [
+      [
+        4.7316508293151855,
+        4.7371907234191895
+      ],
+      [
+        0.19794975221157074,
+        0.22401221096515656
+      ],
+      [
+        0.1967189759016037,
+        0.19799044728279114
+      ],
+      [
+        0.586345374584198,
+        0.586345374584198
+      ],
+      [
+        0.5845370292663574,
+        0.5834078788757324
+      ],
+      [
+        0.4809653162956238,
+        0.16301551461219788
+      ],
+      [
+        0.473913311958313,
+        0.15680335462093353
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 75
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 75
+    },
+    "pools_identical": true
+  },
+  {
+    "sample_index": 16,
+    "train_row": 96683,
+    "direction": 0,
+    "relation": 2,
+    "directed_relation": 2,
+    "source_local_id": 470,
+    "positive_local_id": 1521,
+    "raw_rank": 83.0,
+    "filtered_rank": 4.0,
+    "known_train_positives": 356,
+    "raw_winner_local_id": 1437,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 103,
+    "model_rank": 4.0,
+    "pipeline_rank": 3.0,
+    "pipeline_winner_local_id": 103,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.005108833312988281,
+    "feature_pair_values": [
+      [
+        4.659651279449463,
+        4.727406024932861
+      ],
+      [
+        0.5721068978309631,
+        0.5721068978309631
+      ],
+      [
+        0.480397492647171,
+        0.480397492647171
+      ],
+      [
+        0.6349557638168335,
+        0.6349557638168335
+      ],
+      [
+        0.624960720539093,
+        0.624960720539093
+      ],
+      [
+        0.2240120768547058,
+        0.366733193397522
+      ],
+      [
+        0.20513680577278137,
+        0.345095157623291
+      ]
+    ],
+    "bc_weights": [
+      0.14862103760242462,
+      0.0316200777888298,
+      0.08170729875564575,
+      0.22554431855678558,
+      0.5125072598457336
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 122
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 122
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 130,
+    "train_row": 461202,
+    "direction": 1,
+    "relation": 12,
+    "directed_relation": 63,
+    "source_local_id": 443,
+    "positive_local_id": 823,
+    "raw_rank": 20.0,
+    "filtered_rank": 9.0,
+    "known_train_positives": 130,
+    "raw_winner_local_id": 658,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 897,
+    "model_rank": 9.0,
+    "pipeline_rank": 8.0,
+    "pipeline_winner_local_id": 412,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.008898258209228516,
+    "feature_pair_values": [
+      [
+        4.847146034240723,
+        5.104594707489014
+      ],
+      [
+        0.457881361246109,
+        0.38134798407554626
+      ],
+      [
+        0.3945241868495941,
+        0.35473915934562683
+      ],
+      [
+        0.30388692021369934,
+        0.30388692021369934
+      ],
+      [
+        0.2966635525226593,
+        0.2968497574329376
+      ],
+      [
+        0.25282761454582214,
+        0.11000361293554306
+      ],
+      [
+        0.22810661792755127,
+        0.08022261410951614
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 49
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 49
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 136,
+    "train_row": 317166,
+    "direction": 1,
+    "relation": 6,
+    "directed_relation": 57,
+    "source_local_id": 840,
+    "positive_local_id": 1094,
+    "raw_rank": 80.0,
+    "filtered_rank": 10.0,
+    "known_train_positives": 113,
+    "raw_winner_local_id": 891,
+    "raw_winner_known_positive": false,
+    "winner_local_id": 891,
+    "model_rank": 10.0,
+    "pipeline_rank": 7.0,
+    "pipeline_winner_local_id": 891,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.05671119689941406,
+    "feature_pair_values": [
+      [
+        3.802826404571533,
+        4.8053297996521
+      ],
+      [
+        0.08588280528783798,
+        0.08588280528783798
+      ],
+      [
+        0.08068474382162094,
+        0.08068474382162094
+      ],
+      [
+        0.5421686768531799,
+        0.5421686768531799
+      ],
+      [
+        0.47932374477386475,
+        0.47932374477386475
+      ],
+      [
+        0.517210841178894,
+        0.5289856195449829
+      ],
+      [
+        0.4775891900062561,
+        0.5143412947654724
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 1,
+      "known_positive_draws": 65
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 1,
+      "known_positive_draws": 65
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 137,
+    "train_row": 519058,
+    "direction": 1,
+    "relation": 13,
+    "directed_relation": 64,
+    "source_local_id": 930,
+    "positive_local_id": 1441,
+    "raw_rank": 56.0,
+    "filtered_rank": 3.0,
+    "known_train_positives": 346,
+    "raw_winner_local_id": 1197,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1560,
+    "model_rank": 3.0,
+    "pipeline_rank": 3.0,
+    "pipeline_winner_local_id": 1560,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.02647542953491211,
+    "feature_pair_values": [
+      [
+        4.950893402099609,
+        5.204070091247559
+      ],
+      [
+        0.4961256682872772,
+        0.4961256682872772
+      ],
+      [
+        0.48695892095565796,
+        0.48695892095565796
+      ],
+      [
+        0.6780487895011902,
+        0.6780487895011902
+      ],
+      [
+        0.6639378666877747,
+        0.664004921913147
+      ],
+      [
+        0.0811610296368599,
+        0.047504983842372894
+      ],
+      [
+        0.06658878922462463,
+        0.03677469491958618
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 138
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 138
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 141,
+    "train_row": 753418,
+    "direction": 1,
+    "relation": 19,
+    "directed_relation": 70,
+    "source_local_id": 1004,
+    "positive_local_id": 1323,
+    "raw_rank": 50.0,
+    "filtered_rank": 6.0,
+    "known_train_positives": 89,
+    "raw_winner_local_id": 405,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 638,
+    "model_rank": 6.0,
+    "pipeline_rank": 6.0,
+    "pipeline_winner_local_id": 598,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.031181812286376953,
+    "feature_pair_values": [
+      [
+        4.158173561096191,
+        4.67906379699707
+      ],
+      [
+        0.05811809375882149,
+        0.04250682145357132
+      ],
+      [
+        0.0466960184276104,
+        0.04086092859506607
+      ],
+      [
+        0.4173228442668915,
+        0.4296875
+      ],
+      [
+        0.40338078141212463,
+        0.39785876870155334
+      ],
+      [
+        0.517389178276062,
+        0.3734942078590393
+      ],
+      [
+        0.49943944811820984,
+        0.35157865285873413
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 2,
+      "positive_draws": 0,
+      "known_positive_draws": 45
+    },
+    "forced_pool": {
+      "competitor_draws": 2,
+      "positive_draws": 0,
+      "known_positive_draws": 45
+    },
+    "pools_identical": true
+  },
+  {
+    "sample_index": 148,
+    "train_row": 172624,
+    "direction": 1,
+    "relation": 4,
+    "directed_relation": 55,
+    "source_local_id": 6789,
+    "positive_local_id": 405,
+    "raw_rank": 8.0,
+    "filtered_rank": 3.0,
+    "known_train_positives": 102,
+    "raw_winner_local_id": 1224,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1341,
+    "model_rank": 3.0,
+    "pipeline_rank": 3.0,
+    "pipeline_winner_local_id": 1341,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.00927734375,
+    "feature_pair_values": [
+      [
+        5.201316833496094,
+        5.2354416847229
+      ],
+      [
+        0.2700165808200836,
+        0.2700165808200836
+      ],
+      [
+        0.2561165690422058,
+        0.2561165690422058
+      ],
+      [
+        0.356097549200058,
+        0.356097549200058
+      ],
+      [
+        0.3341200649738312,
+        0.3423647880554199
+      ],
+      [
+        0.47592848539352417,
+        0.5839996933937073
+      ],
+      [
+        0.38093674182891846,
+        0.5644950866699219
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 1,
+      "known_positive_draws": 36
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 1,
+      "known_positive_draws": 36
+    },
+    "pools_identical": false
+  },
+  {
+    "sample_index": 149,
+    "train_row": 948808,
+    "direction": 1,
+    "relation": 30,
+    "directed_relation": 81,
+    "source_local_id": 863,
+    "positive_local_id": 533,
+    "raw_rank": 12.0,
+    "filtered_rank": 4.0,
+    "known_train_positives": 99,
+    "raw_winner_local_id": 1214,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 1409,
+    "model_rank": 4.0,
+    "pipeline_rank": 3.0,
+    "pipeline_winner_local_id": 1409,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.01694178581237793,
+    "feature_pair_values": [
+      [
+        5.006312370300293,
+        5.231719970703125
+      ],
+      [
+        0.43980008363723755,
+        0.43980008363723755
+      ],
+      [
+        0.37108084559440613,
+        0.37302127480506897
+      ],
+      [
+        0.35668790340423584,
+        0.35668790340423584
+      ],
+      [
+        0.348102331161499,
+        0.3500516414642334
+      ],
+      [
+        0.2797218859195709,
+        0.42646971344947815
+      ],
+      [
+        0.25324442982673645,
+        0.3780808746814728
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 1,
+      "known_positive_draws": 27
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 1,
+      "known_positive_draws": 27
+    },
+    "pools_identical": true
+  },
+  {
+    "sample_index": 152,
+    "train_row": 971733,
+    "direction": 1,
+    "relation": 31,
+    "directed_relation": 82,
+    "source_local_id": 1522,
+    "positive_local_id": 893,
+    "raw_rank": 69.0,
+    "filtered_rank": 9.0,
+    "known_train_positives": 138,
+    "raw_winner_local_id": 412,
+    "raw_winner_known_positive": true,
+    "winner_local_id": 125,
+    "model_rank": 9.0,
+    "pipeline_rank": 11.0,
+    "pipeline_winner_local_id": 125,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.035080671310424805,
+    "feature_pair_values": [
+      [
+        4.141436576843262,
+        4.633602619171143
+      ],
+      [
+        0.10460402816534042,
+        0.10460402816534042
+      ],
+      [
+        0.09850316494703293,
+        0.09183769673109055
+      ],
+      [
+        0.4345991611480713,
+        0.4450867176055908
+      ],
+      [
+        0.4342823922634125,
+        0.438822478055954
+      ],
+      [
+        0.4489037096500397,
+        0.22473672032356262
+      ],
+      [
+        0.4216548800468445,
+        0.1598544716835022
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 2,
+      "positive_draws": 1,
+      "known_positive_draws": 57
+    },
+    "forced_pool": {
+      "competitor_draws": 2,
+      "positive_draws": 1,
+      "known_positive_draws": 57
+    },
+    "pools_identical": true
+  },
+  {
+    "sample_index": 155,
+    "train_row": 408961,
+    "direction": 1,
+    "relation": 11,
+    "directed_relation": 62,
+    "source_local_id": 1998,
+    "positive_local_id": 1101,
+    "raw_rank": 10.0,
+    "filtered_rank": 5.0,
+    "known_train_positives": 9,
+    "raw_winner_local_id": 679,
+    "raw_winner_known_positive": false,
+    "winner_local_id": 679,
+    "model_rank": 5.0,
+    "pipeline_rank": 4.0,
+    "pipeline_winner_local_id": 679,
+    "focal_edge_copies_removed": 2,
+    "pipeline_pair_margin": -0.23488616943359375,
+    "feature_pair_values": [
+      [
+        3.8535687923431396,
+        4.786311149597168
+      ],
+      [
+        0.12834186851978302,
+        0.2240157127380371
+      ],
+      [
+        0.08668287098407745,
+        0.10985108464956284
+      ],
+      [
+        0.3076923191547394,
+        0.5454545617103577
+      ],
+      [
+        0.21268315613269806,
+        0.2877964675426483
+      ],
+      [
+        0.4593627154827118,
+        0.3771425783634186
+      ],
+      [
+        0.3051433861255646,
+        0.2476998269557953
+      ]
+    ],
+    "bc_weights": [
+      0.1880403310060501,
+      0.0336296483874321,
+      0.08205876499414444,
+      0.20439942181110382,
+      0.49187180399894714
+    ],
+    "cs_beta": 0.0,
+    "random_pool": {
+      "competitor_draws": 0,
+      "positive_draws": 0,
+      "known_positive_draws": 3
+    },
+    "forced_pool": {
+      "competitor_draws": 1,
+      "positive_draws": 0,
+      "known_positive_draws": 3
+    },
+    "pools_identical": false
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "status": "interrupted_before_evaluation",
+  "reason": "Repeated conversion of full VALID type lists in each query-source group caused avoidable CPU overhead; canonicalize once at build entry.",
+  "exit_code": 130,
+  "last_logged_queries": 8022,
+  "completed_relation_queries": 7164,
+  "new_mrr_evaluated": false,
+  "experiment_settings_changed": false,
+  "training_performed": false,
+  "test_loaded": false,
+  "changed_sources_archived": [
+    "source_at_launch/candidate_retrieval.py",
+    "source_at_launch/test_candidate_retrieval.py"
+  ],
+  "retry_directory": "../s0_retry1"
+}

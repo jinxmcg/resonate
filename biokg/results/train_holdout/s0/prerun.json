@@ -1,0 +1,25 @@
+{
+  "protocol": "TH1",
+  "seed": 36840,
+  "cutoff": 95,
+  "hashes": {
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/split/random/train.pt": "958ad61478efffda0db28cf05e49c14cba6880e0f2d50d6023aca99b354d0385",
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/raw/num-node-dict.csv.gz": "de2fb3e32b2f3328cd82adaab40a18983954c0c356e4099ea6ca9a3fc3017375",
+    "/mnt/geocore/resonate/biokg/TRAIN_HOLDOUT.md": "c97d9efb5eba1c4d7647aae8641527753203b5293820cf26c6e54a3bf08bc460",
+    "/mnt/geocore/resonate/biokg/train_holdout.py": "7a782d8a15cced6e5018bd6b3838cc94b134d20219fd30512ecc8a57f37bb61f",
+    "/mnt/geocore/resonate/biokg/test_train_holdout.py": "50dff9ad623a94a5e05781c5671b8192c047eeeb675172249e6c70247489519b",
+    "/mnt/geocore/resonate/biokg/typed_path_pilot.py": "4761d2a23c860d534f1cc981a6f17b5baf879553ff0adc0d824e1712ae4f8bc7"
+  },
+  "roles": [
+    "fit",
+    "holdout"
+  ],
+  "grouping": "unordered_global_entity_pair_all_relations",
+  "official_train_modified": false,
+  "checkpoint_loaded": false,
+  "validation_loaded": false,
+  "test_loaded": false,
+  "model_updates": 0,
+  "lr": 0.0,
+  "numpy": "2.5.2"
+}

@@ -1,0 +1,19 @@
+{
+  "source_inputs_unchanged": true,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt"
+  ],
+  "artifact_sha256": {
+    "prerun.json": "43b60577d79e48d006e9cc7362f9f49244889b1061e3b2ddbc7791bfb950a159",
+    "queries.npy": "5c7663ac5a23632f4c6bc996b746d2510dbe9b2442fad07eba361da4856f249f",
+    "graph_audit.json": "a9a6e48025b54123e057c9a4289c495dbac699036322250b9ed2c4ab1df16113",
+    "candidates.npy": "c51ea09ba9f102d53eee0c584ec63ff10c314cccec8ee0e7e4ce03ddbd040510",
+    "degree_scores.npy": "8afe890a8321a2d51b2351e832e41650746dd742fb266e908f0b3dc23e2f7680",
+    "raw_features.npy": "384da3e69598e5d465bb3cfe3e711b627b5b55d9964376ee5a85954686c12510",
+    "normalized_features.npy": "1a4621c74c58c3b3b0a1cf96adfb0d544e2970765e7373a64ec779b402ce92bd",
+    "recipe.json": "3ba6c7a3b700e1bc862ab41255eb447ca5f3f98e946872c0816de9388928dd30",
+    "report_ranks.npz": "2ec22a4e84c8f72e724f3f8aa6514c5c279b9abcd43039f06bdfe1abbdc3b8de",
+    "summary.json": "2e51f3ac82b02a8f5fe9ff6bfa37002b9598f516d8a3c914452f9bc4a1aec8ac"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "audit_passed": true,
+  "source_and_artifact_hashes_verified": true,
+  "model_unchanged": true,
+  "baseline_ranks_exact": true,
+  "normalization_and_support_transforms_reproduced": true,
+  "fit_only_recipes_reproduced": true,
+  "all_saved_ranks_reproduced": true,
+  "metrics_and_adjusted_intervals_reproduced": true,
+  "dataset_splits_loaded": false
+}

@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "endpoints": {
+    "linear": {
+      "model": "37b641941987004c7c36092e3860e352e279697909477983f6d26fa35d8d21aa",
+      "optimizer": "951bf3ffe71d450b4690a5964c79cab2d4573425e5a417a65b23b40944773928",
+      "checkpoint_sha256": "23b3db4a3a04be455692adcb9a34b0a2b122bef777d82ddfaa023d8a0e004a24",
+      "steps": 50000,
+      "arm": "linear"
+    },
+    "squared": {
+      "model": "e887e88ca76b6b73e763031db7984a33a0e756c5972c4edda2d3e53a2f51f836",
+      "optimizer": "240cba8a6e97fa236a5def86f3ef44e5724968e07788c814a7b97a8b80ce5f6d",
+      "checkpoint_sha256": "f9797fe995cd652ba2e1c94714fd5e9211e7d143becaf4d3d63b3266cdcb0dab",
+      "steps": 50000,
+      "arm": "squared"
+    }
+  },
+  "initial_model": "8c2a76c926cbc0133c97a8f6f208db705a9c27261a9c67c994166d1ff53bc6f0",
+  "initial_optimizer": "bd4a3999cf86b1ff44fcf9fbf61351d0d1c8b3dc961b9aa69e7fe68f5fe0fac9",
+  "identical_initial_model_optimizer": true,
+  "independent_storage": true,
+  "identical_positive_batch_stream_by_construction": true,
+  "exact_normalizer_recomputed_with_gradients_every_squared_step": true,
+  "batch_stream_sha256": "edcd42a60df349de02ef6c8ebaa492f50937c2f5dacb5931fdc536cdfbfe5948",
+  "paired_updates_each": 50000,
+  "parameters_each": 27124129,
+  "dataset_files_opened": [
+    "fit_train.npz",
+    "manifest.json"
+  ],
+  "holdout_opened": false,
+  "teacher_count": 0,
+  "source_inputs_unchanged": true,
+  "seconds": 365.68886877699697,
+  "peak_allocated_bytes": 596274688,
+  "artifact_sha256": {
+    "linear.pt": "23b3db4a3a04be455692adcb9a34b0a2b122bef777d82ddfaa023d8a0e004a24",
+    "squared.pt": "f9797fe995cd652ba2e1c94714fd5e9211e7d143becaf4d3d63b3266cdcb0dab",
+    "prerun.json": "ba54eb1d29b5b25d27330c17dc7ba92f1fba239829a6ec911a737800fe6d1138",
+    "fit_probe_rows.npz": "f2c8467834ad1a2b9608e6b437e18647d3df25d301c28608b3a589d7791e1645",
+    "progress.jsonl": "a420c8121d9f1f3530acfcba17a58fdd97b68ce09de3e8e9ef1d01a1bd3368da"
+  }
+}

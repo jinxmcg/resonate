@@ -1,0 +1,16 @@
+{
+  "audit_passed": true,
+  "full_endpoint_scores_ranks_and_candidates_replayed": true,
+  "pair_cluster_summary_reproduced": true,
+  "source_input_artifact_hashes_verified": true,
+  "fresh_initial_weights_and_optimizer_state_regenerated": true,
+  "saved_optimizer_counters_accumulators_and_lr_schedule_verified": true,
+  "training_holdout_access_absent_recorded": true,
+  "no_optimizer_replay_claim": true,
+  "model_weights_unchanged": true,
+  "holdout_gradient_updates": 0,
+  "official_validation_loaded": false,
+  "official_test_loaded": false,
+  "parameters_each": 27124129,
+  "seconds": 25.446136023994768
+}

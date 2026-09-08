@@ -1,0 +1,878 @@
+{
+  "protocol": "RF1",
+  "training_performed": false,
+  "test_loaded": false,
+  "model_updates": 0,
+  "fit_triples": 81687,
+  "report_triples": 81199,
+  "metrics": {
+    "baseline": {
+      "fit": {
+        "mrr": 0.8553192195420011,
+        "hits1": 0.799857994540135,
+        "hits10": 0.9552193127425417,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8540538579928584,
+        "hits1": 0.7978669688050345,
+        "hits10": 0.9555597975344524,
+        "queries": 162398
+      }
+    },
+    "model": {
+      "fit": {
+        "mrr": 0.8344326539109526,
+        "hits1": 0.7707285124928079,
+        "hits10": 0.9474457379999266,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8337635885128938,
+        "hits1": 0.7700649022771217,
+        "hits10": 0.9481151245704996,
+        "queries": 162398
+      }
+    },
+    "rarity": {
+      "fit": {
+        "mrr": 0.8553735824966386,
+        "hits1": 0.7998763573151174,
+        "hits10": 0.955329489392437,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8541798047177318,
+        "hits1": 0.7980886464119016,
+        "hits10": 0.9557630020074139,
+        "queries": 162398
+      }
+    },
+    "rarity_fixed_baseline_recipe": {
+      "fit": {
+        "mrr": 0.8554256472513603,
+        "hits1": 0.8000048967399953,
+        "hits10": 0.9552254336675359,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8542285655275689,
+        "hits1": 0.7981871697927314,
+        "hits10": 0.9556583209152822,
+        "queries": 162398
+      }
+    },
+    "rarity_uniform": {
+      "fit": {
+        "mrr": 0.8416971302362856,
+        "hits1": 0.7834661574057071,
+        "hits10": 0.950702070096833,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8413659556674902,
+        "hits1": 0.7827313144250545,
+        "hits10": 0.9513171344474686,
+        "queries": 162398
+      }
+    },
+    "rarity_member1": {
+      "fit": {
+        "mrr": 0.6901215349522118,
+        "hits1": 0.5566981282211367,
+        "hits10": 0.9047951326404446,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.6879211646706794,
+        "hits1": 0.5531472062463824,
+        "hits10": 0.9048572026749098,
+        "queries": 162398
+      }
+    },
+    "rarity_member2": {
+      "fit": {
+        "mrr": 0.7699874611616317,
+        "hits1": 0.6745871436091422,
+        "hits10": 0.9260959516202089,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.769229242876677,
+        "hits1": 0.673592039310829,
+        "hits10": 0.926249091737583,
+        "queries": 162398
+      }
+    },
+    "rarity_member3": {
+      "fit": {
+        "mrr": 0.7100239184887613,
+        "hits1": 0.5806554286483774,
+        "hits10": 0.9102427558852694,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7081622030186256,
+        "hits1": 0.5775009544452517,
+        "hits10": 0.9103252503109645,
+        "queries": 162398
+      }
+    },
+    "rarity_member4": {
+      "fit": {
+        "mrr": 0.77986283275997,
+        "hits1": 0.6901342930943725,
+        "hits10": 0.9272956529190691,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7787411041324472,
+        "hits1": 0.688142711117132,
+        "hits10": 0.9272897449475979,
+        "queries": 162398
+      }
+    },
+    "support": {
+      "fit": {
+        "mrr": 0.8518164855926977,
+        "hits1": 0.7950102219447402,
+        "hits10": 0.9537013233439837,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8510670133179739,
+        "hits1": 0.7935134669146172,
+        "hits10": 0.9542174164706462,
+        "queries": 162398
+      }
+    },
+    "support_fixed_baseline_recipe": {
+      "fit": {
+        "mrr": 0.8498238575140963,
+        "hits1": 0.7918273409477641,
+        "hits10": 0.9531381982445187,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8491923936847103,
+        "hits1": 0.7906686042931563,
+        "hits10": 0.9536139607630636,
+        "queries": 162398
+      }
+    },
+    "support_uniform": {
+      "fit": {
+        "mrr": 0.8277515601573806,
+        "hits1": 0.7556037068321765,
+        "hits10": 0.9502674844222458,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8278428908945452,
+        "hits1": 0.7557051195211764,
+        "hits10": 0.9509291986354512,
+        "queries": 162398
+      }
+    },
+    "support_member1": {
+      "fit": {
+        "mrr": 0.7916344740440603,
+        "hits1": 0.7049714152802772,
+        "hits10": 0.944617870652613,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7903971884398275,
+        "hits1": 0.7026133326765108,
+        "hits10": 0.9454365201541891,
+        "queries": 162398
+      }
+    },
+    "support_member2": {
+      "fit": {
+        "mrr": 0.7779195377813966,
+        "hits1": 0.6845214048747047,
+        "hits10": 0.9427387466793982,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7768026902425479,
+        "hits1": 0.6822189928447394,
+        "hits10": 0.9432690057759332,
+        "queries": 162398
+      }
+    },
+    "support_member3": {
+      "fit": {
+        "mrr": 0.77126054582847,
+        "hits1": 0.6740607440596423,
+        "hits10": 0.9385091875084163,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7701933248816297,
+        "hits1": 0.6720033497949482,
+        "hits10": 0.939087919801968,
+        "queries": 162398
+      }
+    },
+    "support_member4": {
+      "fit": {
+        "mrr": 0.7631991879432354,
+        "hits1": 0.6645671893936612,
+        "hits10": 0.9342306609374809,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7629576183037284,
+        "hits1": 0.6639429057008092,
+        "hits10": 0.9346666830872301,
+        "queries": 162398
+      }
+    },
+    "half_strength": {
+      "fit": {
+        "mrr": 0.8561104094297025,
+        "hits1": 0.8008434634641987,
+        "hits10": 0.9549377501928091,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8550978917603994,
+        "hits1": 0.7991354573332183,
+        "hits10": 0.9553565930614909,
+        "queries": 162398
+      }
+    },
+    "half_strength_fixed_baseline_recipe": {
+      "fit": {
+        "mrr": 0.8507345739958522,
+        "hits1": 0.7928985028217465,
+        "hits10": 0.9535605420691174,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8497543394496775,
+        "hits1": 0.7913459525363613,
+        "hits10": 0.9539403194620624,
+        "queries": 162398
+      }
+    },
+    "half_strength_uniform": {
+      "fit": {
+        "mrr": 0.8515548099374813,
+        "hits1": 0.7946735710700601,
+        "hits10": 0.9534320026442396,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8508699361929358,
+        "hits1": 0.7936920405423712,
+        "hits10": 0.9538048498134214,
+        "queries": 162398
+      }
+    },
+    "half_strength_member1": {
+      "fit": {
+        "mrr": 0.8447863260541951,
+        "hits1": 0.7868387870775031,
+        "hits10": 0.9504266284720947,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8442648880673022,
+        "hits1": 0.7858286432098918,
+        "hits10": 0.9510400374388848,
+        "queries": 162398
+      }
+    },
+    "half_strength_member2": {
+      "fit": {
+        "mrr": 0.8446540428986636,
+        "hits1": 0.7860369459032649,
+        "hits10": 0.9507265537968098,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8438842058957754,
+        "hits1": 0.7847756745772732,
+        "hits10": 0.9513048190248649,
+        "queries": 162398
+      }
+    },
+    "half_strength_member3": {
+      "fit": {
+        "mrr": 0.8491669180386,
+        "hits1": 0.7915886248729908,
+        "hits10": 0.9526485242449839,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8481597319315404,
+        "hits1": 0.7899727829160458,
+        "hits10": 0.9531829209719331,
+        "queries": 162398
+      }
+    },
+    "half_strength_member4": {
+      "fit": {
+        "mrr": 0.8478992703097806,
+        "hits1": 0.7896972590497876,
+        "hits10": 0.9522812687453328,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8471830881411695,
+        "hits1": 0.7885503516053154,
+        "hits10": 0.9528011428712176,
+        "queries": 162398
+      }
+    }
+  },
+  "primary": {
+    "rarity": {
+      "delta_mrr": 0.0001259467248736469,
+      "bootstrap_interval": [
+        -8.121527374055609e-05,
+        0.0003217360562053468
+      ],
+      "interval_percent": 97.5,
+      "replicates": 2000,
+      "seed": 3621,
+      "recovered_top1": 385,
+      "lost_top1": 349
+    },
+    "support": {
+      "delta_mrr": -0.0029868446748844853,
+      "bootstrap_interval": [
+        -0.003561487882863575,
+        -0.002405483290793526
+      ],
+      "interval_percent": 97.5,
+      "replicates": 2000,
+      "seed": 3622,
+      "recovered_top1": 1890,
+      "lost_top1": 2597
+    }
+  },
+  "primary_interval_correction": "Bonferroni for two planned contrasts",
+  "advance_flags": {
+    "rarity": false,
+    "support": false
+  },
+  "half_strength_vs_baseline": {
+    "delta_mrr": 0.0010440337675411064,
+    "bootstrap_interval": [
+      0.0006450757340976534,
+      0.0014571628236315966
+    ],
+    "interval_percent": 95,
+    "replicates": 2000,
+    "seed": 3623,
+    "recovered_top1": 1847,
+    "lost_top1": 1641
+  },
+  "support_vs_half_strength": {
+    "delta_mrr": -0.004030878442425592,
+    "bootstrap_interval": [
+      -0.004500023106988106,
+      -0.00355127508045063
+    ],
+    "interval_percent": 95,
+    "replicates": 2000,
+    "seed": 3624,
+    "recovered_top1": 1583,
+    "lost_top1": 2496
+  },
+  "family_direction": [
+    {
+      "family": "disease-protein",
+      "direction": "tail",
+      "queries": 1845,
+      "mrr": {
+        "baseline": 0.6828600407194803,
+        "model": 0.5649356086264361,
+        "rarity": 0.687001344698131,
+        "rarity_fixed_baseline_recipe": 0.6824850461471419,
+        "rarity_uniform": 0.7494632148204924,
+        "rarity_member1": 0.7149099181306353,
+        "rarity_member2": 0.6944881726575013,
+        "rarity_member3": 0.7220518537607179,
+        "rarity_member4": 0.7351760166201474,
+        "support": 0.6165366394462095,
+        "support_fixed_baseline_recipe": 0.6285164087331494,
+        "support_uniform": 0.637450733295657,
+        "support_member1": 0.6432374656955799,
+        "support_member2": 0.5563636527100574,
+        "support_member3": 0.6243627122392083,
+        "support_member4": 0.558400345783782,
+        "half_strength": 0.7091408535624768,
+        "half_strength_fixed_baseline_recipe": 0.6382696602804819,
+        "half_strength_uniform": 0.6951155211030002,
+        "half_strength_member1": 0.7178942664020691,
+        "half_strength_member2": 0.6687543646611058,
+        "half_strength_member3": 0.7293647912817591,
+        "half_strength_member4": 0.6989269452040405
+      }
+    },
+    {
+      "family": "disease-protein",
+      "direction": "head",
+      "queries": 1845,
+      "mrr": {
+        "baseline": 0.6765343857419397,
+        "model": 0.658752443684664,
+        "rarity": 0.6814003777023488,
+        "rarity_fixed_baseline_recipe": 0.6801249279110583,
+        "rarity_uniform": 0.6652239689526289,
+        "rarity_member1": 0.37867147758808806,
+        "rarity_member2": 0.4092298212293159,
+        "rarity_member3": 0.5588443706302053,
+        "rarity_member4": 0.620449513635435,
+        "support": 0.6641344290248481,
+        "support_fixed_baseline_recipe": 0.6554885738156833,
+        "support_uniform": 0.5600822777865547,
+        "support_member1": 0.3545766556214568,
+        "support_member2": 0.3086901185615927,
+        "support_member3": 0.30756645267978855,
+        "support_member4": 0.27977014281680057,
+        "half_strength": 0.6812996324869155,
+        "half_strength_fixed_baseline_recipe": 0.6708758186270909,
+        "half_strength_uniform": 0.6755533607781562,
+        "half_strength_member1": 0.6227850146343741,
+        "half_strength_member2": 0.6370069421252786,
+        "half_strength_member3": 0.6917884851293202,
+        "half_strength_member4": 0.6917549901536028
+      }
+    },
+    {
+      "family": "drug-disease",
+      "direction": "tail",
+      "queries": 143,
+      "mrr": {
+        "baseline": 0.4241132474155885,
+        "model": 0.2750156323830762,
+        "rarity": 0.42847114515625456,
+        "rarity_fixed_baseline_recipe": 0.40853107632550767,
+        "rarity_uniform": 0.5543136528446072,
+        "rarity_member1": 0.3513096707417882,
+        "rarity_member2": 0.29285538845383846,
+        "rarity_member3": 0.6534553195030218,
+        "rarity_member4": 0.6594735814677491,
+        "support": 0.300543925998218,
+        "support_fixed_baseline_recipe": 0.3621828345465394,
+        "support_uniform": 0.45374197566509017,
+        "support_member1": 0.37250919928698695,
+        "support_member2": 0.35921596731561817,
+        "support_member3": 0.5544424428274856,
+        "support_member4": 0.5442645738194145,
+        "half_strength": 0.4511763758677535,
+        "half_strength_fixed_baseline_recipe": 0.35056843175788815,
+        "half_strength_uniform": 0.4156647013081123,
+        "half_strength_member1": 0.370313668617542,
+        "half_strength_member2": 0.3600430605436532,
+        "half_strength_member3": 0.5144380706840056,
+        "half_strength_member4": 0.48398397903751333
+      }
+    },
+    {
+      "family": "drug-disease",
+      "direction": "head",
+      "queries": 143,
+      "mrr": {
+        "baseline": 0.6901968296733999,
+        "model": 0.42308683953284554,
+        "rarity": 0.6947714217479919,
+        "rarity_fixed_baseline_recipe": 0.6930620200385902,
+        "rarity_uniform": 0.7719656702294857,
+        "rarity_member1": 0.6969534324202816,
+        "rarity_member2": 0.6925558527273856,
+        "rarity_member3": 0.7699686201303729,
+        "rarity_member4": 0.7733540166708498,
+        "support": 0.5779926545753764,
+        "support_fixed_baseline_recipe": 0.69327502493489,
+        "support_uniform": 0.7495971987199104,
+        "support_member1": 0.6761902181070102,
+        "support_member2": 0.6661919778080843,
+        "support_member3": 0.7625492341329028,
+        "support_member4": 0.7595354502228925,
+        "half_strength": 0.7138221267522543,
+        "half_strength_fixed_baseline_recipe": 0.6069025658769402,
+        "half_strength_uniform": 0.6855057219061291,
+        "half_strength_member1": 0.6518445004849726,
+        "half_strength_member2": 0.6177463995309621,
+        "half_strength_member3": 0.749910499293196,
+        "half_strength_member4": 0.7422916667700572
+      }
+    },
+    {
+      "family": "drug-drug",
+      "direction": "tail",
+      "queries": 15609,
+      "mrr": {
+        "baseline": 0.6844993684688665,
+        "model": 0.6730905694718924,
+        "rarity": 0.6841297309108147,
+        "rarity_fixed_baseline_recipe": 0.6849878448845139,
+        "rarity_uniform": 0.6510146890569016,
+        "rarity_member1": 0.3639767714320051,
+        "rarity_member2": 0.5150095458894935,
+        "rarity_member3": 0.3967263049987761,
+        "rarity_member4": 0.5405368293217445,
+        "support": 0.6805440906934811,
+        "support_fixed_baseline_recipe": 0.6815169130392721,
+        "support_uniform": 0.6671331049172216,
+        "support_member1": 0.6355490069838725,
+        "support_member2": 0.6378665593399885,
+        "support_member3": 0.6535537994213414,
+        "support_member4": 0.6577031657608989,
+        "half_strength": 0.6847016647762371,
+        "half_strength_fixed_baseline_recipe": 0.6836324241718846,
+        "half_strength_uniform": 0.6832784061347098,
+        "half_strength_member1": 0.6559055679149465,
+        "half_strength_member2": 0.6664329571158987,
+        "half_strength_member3": 0.6736540390420556,
+        "half_strength_member4": 0.6832850752444881
+      }
+    },
+    {
+      "family": "drug-drug",
+      "direction": "head",
+      "queries": 15609,
+      "mrr": {
+        "baseline": 0.7141377871592547,
+        "model": 0.7021218616653141,
+        "rarity": 0.7131238888717589,
+        "rarity_fixed_baseline_recipe": 0.7137554504700218,
+        "rarity_uniform": 0.6775168427841333,
+        "rarity_member1": 0.3840127933266472,
+        "rarity_member2": 0.5363574025201143,
+        "rarity_member3": 0.4127403602360465,
+        "rarity_member4": 0.5646050524462823,
+        "support": 0.7118096721325071,
+        "support_fixed_baseline_recipe": 0.7099211060535942,
+        "support_uniform": 0.6934507878250558,
+        "support_member1": 0.6609296162556992,
+        "support_member2": 0.6601152529168162,
+        "support_member3": 0.676382706288738,
+        "support_member4": 0.6816627519903191,
+        "half_strength": 0.7162717282115059,
+        "half_strength_fixed_baseline_recipe": 0.7146594570030669,
+        "half_strength_uniform": 0.7121110968557484,
+        "half_strength_member1": 0.6844658806757097,
+        "half_strength_member2": 0.692924525893429,
+        "half_strength_member3": 0.7030896574332622,
+        "half_strength_member4": 0.7109947690370172
+      }
+    },
+    {
+      "family": "drug-protein",
+      "direction": "tail",
+      "queries": 3348,
+      "mrr": {
+        "baseline": 0.9082843199400359,
+        "model": 0.7464514977880747,
+        "rarity": 0.9083109254268263,
+        "rarity_fixed_baseline_recipe": 0.9083109254268263,
+        "rarity_uniform": 0.9083109254268263,
+        "rarity_member1": 0.8431442426292547,
+        "rarity_member2": 0.8537427722656594,
+        "rarity_member3": 0.8809542005794047,
+        "rarity_member4": 0.895445683305408,
+        "support": 0.8644638375697596,
+        "support_fixed_baseline_recipe": 0.8644638375697596,
+        "support_uniform": 0.8644638375697596,
+        "support_member1": 0.7704763993589047,
+        "support_member2": 0.7539924940380933,
+        "support_member3": 0.8000714054869582,
+        "support_member4": 0.80825843963233,
+        "half_strength": 0.909245143522951,
+        "half_strength_fixed_baseline_recipe": 0.8851222492125382,
+        "half_strength_uniform": 0.8851222492125382,
+        "half_strength_member1": 0.891879722584691,
+        "half_strength_member2": 0.8561062537562228,
+        "half_strength_member3": 0.909245143522951,
+        "half_strength_member4": 0.8821473298489088
+      }
+    },
+    {
+      "family": "drug-protein",
+      "direction": "head",
+      "queries": 3348,
+      "mrr": {
+        "baseline": 0.9768520356998863,
+        "model": 0.9524854307540374,
+        "rarity": 0.9766121107035102,
+        "rarity_fixed_baseline_recipe": 0.9765061073879034,
+        "rarity_uniform": 0.9774847717148085,
+        "rarity_member1": 0.9291147823248913,
+        "rarity_member2": 0.9497962348604523,
+        "rarity_member3": 0.9602592264906381,
+        "rarity_member4": 0.9700961920953264,
+        "support": 0.9764245538377881,
+        "support_fixed_baseline_recipe": 0.9747370551249894,
+        "support_uniform": 0.9743527795926227,
+        "support_member1": 0.963503959395243,
+        "support_member2": 0.9613519169813212,
+        "support_member3": 0.9752658736320744,
+        "support_member4": 0.9746361839101634,
+        "half_strength": 0.9738973910247837,
+        "half_strength_fixed_baseline_recipe": 0.9725356961351921,
+        "half_strength_uniform": 0.9701166863873832,
+        "half_strength_member1": 0.9668227089034096,
+        "half_strength_member2": 0.9637442981165718,
+        "half_strength_member3": 0.973517791238131,
+        "half_strength_member4": 0.9738973910247837
+      }
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": "tail",
+      "queries": 4262,
+      "mrr": {
+        "baseline": 0.173247155017172,
+        "model": 0.15035296645473512,
+        "rarity": 0.17375788633917072,
+        "rarity_fixed_baseline_recipe": 0.17355070171836412,
+        "rarity_uniform": 0.15287824909542672,
+        "rarity_member1": 0.05446958149008652,
+        "rarity_member2": 0.11571166817672608,
+        "rarity_member3": 0.05831515183443979,
+        "rarity_member4": 0.13857620592702025,
+        "support": 0.1706811144530648,
+        "support_fixed_baseline_recipe": 0.17593732102917825,
+        "support_uniform": 0.1624155769580703,
+        "support_member1": 0.1339252939336377,
+        "support_member2": 0.14092967950659255,
+        "support_member3": 0.1571345645922019,
+        "support_member4": 0.17021798442480512,
+        "half_strength": 0.17409719786606984,
+        "half_strength_fixed_baseline_recipe": 0.1733470631743746,
+        "half_strength_uniform": 0.16423231158612492,
+        "half_strength_member1": 0.13233274268734793,
+        "half_strength_member2": 0.1430146915719314,
+        "half_strength_member3": 0.1560235563318961,
+        "half_strength_member4": 0.17369421531067653
+      }
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": "head",
+      "queries": 4262,
+      "mrr": {
+        "baseline": 0.4358149370002938,
+        "model": 0.3645057856783759,
+        "rarity": 0.4361941712137371,
+        "rarity_fixed_baseline_recipe": 0.4357965005862054,
+        "rarity_uniform": 0.4292150539870781,
+        "rarity_member1": 0.29667205822214526,
+        "rarity_member2": 0.3796667698772179,
+        "rarity_member3": 0.319886724474102,
+        "rarity_member4": 0.4039634524320092,
+        "support": 0.4335449428930772,
+        "support_fixed_baseline_recipe": 0.43600663789733457,
+        "support_uniform": 0.43318031943932966,
+        "support_member1": 0.405827457732318,
+        "support_member2": 0.4151108008674729,
+        "support_member3": 0.41617538110280955,
+        "support_member4": 0.4301316567911332,
+        "half_strength": 0.43094944676323566,
+        "half_strength_fixed_baseline_recipe": 0.4179126441442547,
+        "half_strength_uniform": 0.4160556467847686,
+        "half_strength_member1": 0.4005231958283758,
+        "half_strength_member2": 0.4080872659130727,
+        "half_strength_member3": 0.41798529552718694,
+        "half_strength_member4": 0.43094944676323566
+      }
+    },
+    {
+      "family": "function-function",
+      "direction": "tail",
+      "queries": 19798,
+      "mrr": {
+        "baseline": 0.9556522293882801,
+        "model": 0.9532909777972867,
+        "rarity": 0.955811960583094,
+        "rarity_fixed_baseline_recipe": 0.9558075739505263,
+        "rarity_uniform": 0.938941849105566,
+        "rarity_member1": 0.8416506471846089,
+        "rarity_member2": 0.9004817163855522,
+        "rarity_member3": 0.8521961250948681,
+        "rarity_member4": 0.8888998911921394,
+        "support": 0.9592311298910964,
+        "support_fixed_baseline_recipe": 0.955948391177467,
+        "support_uniform": 0.945082926834826,
+        "support_member1": 0.9490944698140078,
+        "support_member2": 0.9263506090336613,
+        "support_member3": 0.9195784803186874,
+        "support_member4": 0.9070390542437331,
+        "half_strength": 0.9582072041683901,
+        "half_strength_fixed_baseline_recipe": 0.9548573451429918,
+        "half_strength_uniform": 0.955404201221136,
+        "half_strength_member1": 0.957258200264805,
+        "half_strength_member2": 0.9491095255606486,
+        "half_strength_member3": 0.9505605617881479,
+        "half_strength_member4": 0.9423386868097833
+      }
+    },
+    {
+      "family": "function-function",
+      "direction": "head",
+      "queries": 19798,
+      "mrr": {
+        "baseline": 0.9744288992155647,
+        "model": 0.9744551804488321,
+        "rarity": 0.9744273656065537,
+        "rarity_fixed_baseline_recipe": 0.9745683906515931,
+        "rarity_uniform": 0.9572601806509466,
+        "rarity_member1": 0.8598730978913652,
+        "rarity_member2": 0.9259596305608325,
+        "rarity_member3": 0.8731291211104263,
+        "rarity_member4": 0.9174457166898577,
+        "support": 0.9751179851630677,
+        "support_fixed_baseline_recipe": 0.9747682591414322,
+        "support_uniform": 0.9632858682100272,
+        "support_member1": 0.9629307032956267,
+        "support_member2": 0.9497094578425226,
+        "support_member3": 0.9420009542803074,
+        "support_member4": 0.9351410313784547,
+        "half_strength": 0.9744551804488321,
+        "half_strength_fixed_baseline_recipe": 0.9747465413954646,
+        "half_strength_uniform": 0.9714359533206672,
+        "half_strength_member1": 0.970924472192141,
+        "half_strength_member2": 0.9662009840927746,
+        "half_strength_member3": 0.9688086635251973,
+        "half_strength_member4": 0.9627331657615009
+      }
+    },
+    {
+      "family": "protein-function",
+      "direction": "tail",
+      "queries": 21514,
+      "mrr": {
+        "baseline": 0.9223114704392474,
+        "model": 0.9220781369160698,
+        "rarity": 0.9227746681529403,
+        "rarity_fixed_baseline_recipe": 0.9226579573500084,
+        "rarity_uniform": 0.9097417823422497,
+        "rarity_member1": 0.7105241437222307,
+        "rarity_member2": 0.7836546259836991,
+        "rarity_member3": 0.7581049417063961,
+        "rarity_member4": 0.8270076643193872,
+        "support": 0.922106364557674,
+        "support_fixed_baseline_recipe": 0.9198909265627747,
+        "support_uniform": 0.830974113490835,
+        "support_member1": 0.6843591786339313,
+        "support_member2": 0.6562448929205467,
+        "support_member3": 0.6582644714609082,
+        "support_member4": 0.6480489614801294,
+        "half_strength": 0.9230434113053061,
+        "half_strength_fixed_baseline_recipe": 0.9222397382754872,
+        "half_strength_uniform": 0.9229877958805885,
+        "half_strength_member1": 0.9194030340182376,
+        "half_strength_member2": 0.9198802596013451,
+        "half_strength_member3": 0.9227029416500344,
+        "half_strength_member4": 0.9218339923873182
+      }
+    },
+    {
+      "family": "protein-function",
+      "direction": "head",
+      "queries": 21514,
+      "mrr": {
+        "baseline": 0.870505658614642,
+        "model": 0.8026452486713228,
+        "rarity": 0.8705924556593134,
+        "rarity_fixed_baseline_recipe": 0.8706898482642194,
+        "rarity_uniform": 0.8709321582920057,
+        "rarity_member1": 0.6646891033733572,
+        "rarity_member2": 0.8101745768260848,
+        "rarity_member3": 0.6501519937648828,
+        "rarity_member4": 0.769566953629097,
+        "support": 0.8659404681263013,
+        "support_fixed_baseline_recipe": 0.8554318837141399,
+        "support_uniform": 0.8508343272635011,
+        "support_member1": 0.8424126753189277,
+        "support_member2": 0.8268541153044089,
+        "support_member3": 0.7610702915167709,
+        "support_member4": 0.7374058790765868,
+        "half_strength": 0.8714111932115551,
+        "half_strength_fixed_baseline_recipe": 0.8530515471245914,
+        "half_strength_uniform": 0.8600169164043877,
+        "half_strength_member1": 0.8649890566275203,
+        "half_strength_member2": 0.8668088622313925,
+        "half_strength_member3": 0.8525771587669408,
+        "half_strength_member4": 0.8485576354358864
+      }
+    },
+    {
+      "family": "protein-protein",
+      "direction": "tail",
+      "queries": 14680,
+      "mrr": {
+        "baseline": 0.9699236045274411,
+        "model": 0.9685512068522907,
+        "rarity": 0.9702266075227532,
+        "rarity_fixed_baseline_recipe": 0.9702306595574813,
+        "rarity_uniform": 0.9683823543395035,
+        "rarity_member1": 0.9252078236110529,
+        "rarity_member2": 0.9436106236664624,
+        "rarity_member3": 0.9396378690411811,
+        "rarity_member4": 0.9473685827448249,
+        "support": 0.9703263286215137,
+        "support_fixed_baseline_recipe": 0.9694697056499365,
+        "support_uniform": 0.9591502335757796,
+        "support_member1": 0.9301883043425507,
+        "support_member2": 0.9197270705268852,
+        "support_member3": 0.9073510830770767,
+        "support_member4": 0.9008784756287115,
+        "half_strength": 0.9700691049302408,
+        "half_strength_fixed_baseline_recipe": 0.9697481668766385,
+        "half_strength_uniform": 0.9707246918482425,
+        "half_strength_member1": 0.9706033457701304,
+        "half_strength_member2": 0.9695647198866074,
+        "half_strength_member3": 0.9701932308427699,
+        "half_strength_member4": 0.9696947846545126
+      }
+    },
+    {
+      "family": "protein-protein",
+      "direction": "head",
+      "queries": 14680,
+      "mrr": {
+        "baseline": 0.9720524824517564,
+        "model": 0.9677382415716992,
+        "rarity": 0.972165683663453,
+        "rarity_fixed_baseline_recipe": 0.9720997241739003,
+        "rarity_uniform": 0.9699276861937873,
+        "rarity_member1": 0.9256708615380854,
+        "rarity_member2": 0.9456367622880736,
+        "rarity_member3": 0.9384853752395116,
+        "rarity_member4": 0.9491532052912351,
+        "support": 0.9702099767915122,
+        "support_fixed_baseline_recipe": 0.9708503023802195,
+        "support_uniform": 0.9592455404638844,
+        "support_member1": 0.9311345972726959,
+        "support_member2": 0.918549547724498,
+        "support_member3": 0.9068685083045341,
+        "support_member4": 0.9014227905045403,
+        "half_strength": 0.9723164533136587,
+        "half_strength_fixed_baseline_recipe": 0.9706383011097923,
+        "half_strength_uniform": 0.9721171128798979,
+        "half_strength_member1": 0.9713455453454465,
+        "half_strength_member2": 0.9703630311528214,
+        "half_strength_member3": 0.971500101045645,
+        "half_strength_member4": 0.9703946185495369
+      }
+    }
+  ],
+  "seconds": 1802.6790472450084,
+  "peak_allocated_bytes": 247666176,
+  "model_unchanged": true,
+  "baseline_ranks_exact": true,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt",
+    "split/random/valid.pt"
+  ]
+}

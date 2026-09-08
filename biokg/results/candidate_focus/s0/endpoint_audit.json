@@ -1,0 +1,13 @@
+{
+  "audit_passed": true,
+  "matched_initialization_and_updates": true,
+  "teachers_unchanged": true,
+  "losses_and_schedule_verified": true,
+  "standalone_restore_and_candidate_symmetry": true,
+  "all_summary_metrics_and_intervals_reproduced": true,
+  "dataset_splits_loaded": false,
+  "checkpoint_sha256": {
+    "control": "774b1208dce5d3dc1d3df0ca0cd49ea5a6f0ebb6fea37fb31ba32cb0991c87bd",
+    "focused": "3a23c6987699b19c2edc08544618b71c9697540e4a724098e84ec744bc03603a"
+  }
+}

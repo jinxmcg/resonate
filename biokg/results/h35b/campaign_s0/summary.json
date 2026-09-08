@@ -1,0 +1,61 @@
+{
+  "screen_only": true,
+  "test_loaded": false,
+  "adaptive_followup": true,
+  "runs": {
+    "local": {
+      "metrics": {
+        "mrr": 0.8303888798673382,
+        "hits1": 0.7651946760310893,
+        "hits10": 0.9467541716292376,
+        "queries": 325772
+      },
+      "training_seconds": 63.08929474820616,
+      "elapsed_seconds": 74.90627224399941,
+      "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+      "frozen_sha256": "58f1e38d984ba7a68c948d446496ea4fd6f462d209f4e341c592905602c7b4fc",
+      "frozen_unchanged": true,
+      "initial_probe_mrr": 0.8411956954420665,
+      "mean_cosine_vs_original_query": 0.9986134767532349,
+      "peak_allocated_bytes": 348054016,
+      "parameters": 27241633,
+      "trainable_parameters": 117504
+    },
+    "shuffle": {
+      "metrics": {
+        "mrr": 0.8306100495388926,
+        "hits1": 0.7653911324484609,
+        "hits10": 0.9468309124172735,
+        "queries": 325772
+      },
+      "training_seconds": 64.39561492740177,
+      "elapsed_seconds": 76.63323020096868,
+      "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+      "frozen_sha256": "58f1e38d984ba7a68c948d446496ea4fd6f462d209f4e341c592905602c7b4fc",
+      "frozen_unchanged": true,
+      "initial_probe_mrr": 0.8411956954420665,
+      "mean_cosine_vs_original_query": 0.9989666938781738,
+      "peak_allocated_bytes": 457271296,
+      "parameters": 27241633,
+      "trainable_parameters": 117504
+    }
+  },
+  "reference": {
+    "mrr": 0.8321748668335268,
+    "hits1": 0.7676565205112779,
+    "hits10": 0.9471839200422382,
+    "queries": 325772
+  },
+  "local_delta_vs_frozen": -0.001785986966188635,
+  "shuffle_delta_vs_frozen": -0.0015648172946341487,
+  "shuffle_delta_vs_local": 0.00022116967155448618,
+  "shuffle_vs_frozen_adjusted_97_5": [
+    -0.0018058607880857196,
+    -0.001326971399136727
+  ],
+  "shuffle_vs_local_adjusted_97_5": [
+    -4.516540211203078e-06,
+    0.00043693502681314475
+  ],
+  "advance_gate": false
+}

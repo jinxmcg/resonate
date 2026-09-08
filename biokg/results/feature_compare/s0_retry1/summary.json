@@ -1,0 +1,724 @@
+{
+  "protocol": "FC1",
+  "training_performed": false,
+  "test_loaded": false,
+  "fit_triples": 81687,
+  "report_triples": 81199,
+  "metrics": {
+    "original_pipeline": {
+      "fit": {
+        "mrr": 0.8542206204078878,
+        "hits1": 0.7983644888415538,
+        "hits10": 0.9546623085680708,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8535134998097783,
+        "hits1": 0.797306617076565,
+        "hits10": 0.9551964925676425,
+        "queries": 162398
+      }
+    },
+    "original_uniform": {
+      "fit": {
+        "mrr": 0.8406024473564548,
+        "hits1": 0.781874716907219,
+        "hits10": 0.9503286936721878,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8404697747732658,
+        "hits1": 0.7815244030098892,
+        "hits10": 0.9509045677902437,
+        "queries": 162398
+      }
+    },
+    "original_model": {
+      "fit": {
+        "mrr": 0.8325697733267812,
+        "hits1": 0.7682556587951571,
+        "hits10": 0.9468458873504965,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8317775869813797,
+        "hits1": 0.7670537814505105,
+        "hits10": 0.9475239842855208,
+        "queries": 162398
+      }
+    },
+    "improved_pipeline": {
+      "fit": {
+        "mrr": 0.8553192195420011,
+        "hits1": 0.799857994540135,
+        "hits10": 0.9552193127425417,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8540538579928584,
+        "hits1": 0.7978669688050345,
+        "hits10": 0.9555597975344524,
+        "queries": 162398
+      }
+    },
+    "improved_uniform": {
+      "fit": {
+        "mrr": 0.8414146249563789,
+        "hits1": 0.7832335622559281,
+        "hits10": 0.9502491216472634,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8410802951765003,
+        "hits1": 0.7824788482616781,
+        "hits10": 0.9509907757484698,
+        "queries": 162398
+      }
+    },
+    "improved_model": {
+      "fit": {
+        "mrr": 0.8344326539109526,
+        "hits1": 0.7707285124928079,
+        "hits10": 0.9474457379999266,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8337635885128938,
+        "hits1": 0.7700649022771217,
+        "hits10": 0.9481151245704996,
+        "queries": 162398
+      }
+    },
+    "score_only_swap": {
+      "fit": {
+        "mrr": 0.8552224691364964,
+        "hits1": 0.7999804130400187,
+        "hits10": 0.9549255083428208,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8539664881773223,
+        "hits1": 0.7979039150728457,
+        "hits10": 0.9553258045049816,
+        "queries": 162398
+      }
+    },
+    "analogy_only_swap": {
+      "fit": {
+        "mrr": 0.8542189300914942,
+        "hits1": 0.7983461260665712,
+        "hits10": 0.9546194620931115,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8534452342647286,
+        "hits1": 0.7972204091183389,
+        "hits10": 0.9551533885885294,
+        "queries": 162398
+      }
+    },
+    "both_swap_original_weights": {
+      "fit": {
+        "mrr": 0.8552476428557472,
+        "hits1": 0.8000171385899837,
+        "hits10": 0.9548704200178731,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8539974193806927,
+        "hits1": 0.7979962807423737,
+        "hits10": 0.9553134890823779,
+        "queries": 162398
+      }
+    },
+    "feature_original_score": {
+      "fit": {
+        "mrr": 0.8325697733267812,
+        "hits1": 0.7682556587951571,
+        "hits10": 0.9468458873504965,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8317775869813797,
+        "hits1": 0.7670537814505105,
+        "hits10": 0.9475239842855208,
+        "queries": 162398
+      }
+    },
+    "feature_original_analogy_max": {
+      "fit": {
+        "mrr": 0.6909249383262007,
+        "hits1": 0.5569613279958867,
+        "hits10": 0.9049297929903167,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.6885389478442485,
+        "hits1": 0.552980948041232,
+        "hits10": 0.9052759270434365,
+        "queries": 162398
+      }
+    },
+    "feature_original_analogy_top3": {
+      "fit": {
+        "mrr": 0.7706616982497216,
+        "hits1": 0.6757133938080723,
+        "hits10": 0.9262734584450402,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7694698600135701,
+        "hits1": 0.6739738174115445,
+        "hits10": 0.9263784036749221,
+        "queries": 162398
+      }
+    },
+    "feature_improved_score": {
+      "fit": {
+        "mrr": 0.8344326539109526,
+        "hits1": 0.7707285124928079,
+        "hits10": 0.9474457379999266,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.8337635885128938,
+        "hits1": 0.7700649022771217,
+        "hits10": 0.9481151245704996,
+        "queries": 162398
+      }
+    },
+    "feature_improved_analogy_max": {
+      "fit": {
+        "mrr": 0.6901215347590965,
+        "hits1": 0.5566981282211367,
+        "hits10": 0.9047951326404446,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.6879211646706794,
+        "hits1": 0.5531472062463824,
+        "hits10": 0.9048572026749098,
+        "queries": 162398
+      }
+    },
+    "feature_improved_analogy_top3": {
+      "fit": {
+        "mrr": 0.7699874599199877,
+        "hits1": 0.6745871436091422,
+        "hits10": 0.9260959516202089,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.769229226360103,
+        "hits1": 0.673592039310829,
+        "hits10": 0.926249091737583,
+        "queries": 162398
+      }
+    },
+    "feature_jaccard_max": {
+      "fit": {
+        "mrr": 0.7061937843976829,
+        "hits1": 0.5764687159523547,
+        "hits10": 0.9076474836877348,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7042642173671714,
+        "hits1": 0.5736215963250779,
+        "hits10": 0.9076466458946538,
+        "queries": 162398
+      }
+    },
+    "feature_jaccard_top3": {
+      "fit": {
+        "mrr": 0.7752983364499073,
+        "hits1": 0.6850967718241581,
+        "hits10": 0.9238128465973778,
+        "queries": 163374
+      },
+      "report": {
+        "mrr": 0.7742631666097968,
+        "hits1": 0.6831118609835096,
+        "hits10": 0.9241616276062513,
+        "queries": 162398
+      }
+    }
+  },
+  "primary": {
+    "delta_mrr": 0.0005403581830799461,
+    "bootstrap_95": [
+      0.00021906305961129181,
+      0.0008650384412816849
+    ],
+    "recovered_top1": 1351,
+    "lost_top1": 1260
+  },
+  "useful_gain_flag": false,
+  "model_only_full_valid": {
+    "original": {
+      "mrr": 0.8321748668335268,
+      "hits1": 0.7676565205112779,
+      "hits10": 0.9471839200422382,
+      "queries": 325772
+    },
+    "improved": {
+      "mrr": 0.8340991234586301,
+      "hits1": 0.7703977014599167,
+      "hits10": 0.9477794285573959,
+      "queries": 325772
+    }
+  },
+  "attribution_original_weights": {
+    "score_only_swap": {
+      "delta_mrr": 0.00045298836754386013,
+      "bootstrap_95": [
+        0.00015436930733352008,
+        0.0007891717923255753
+      ],
+      "recovered_top1": 1213,
+      "lost_top1": 1116
+    },
+    "analogy_only_swap": {
+      "delta_mrr": -6.826554504975764e-05,
+      "bootstrap_95": [
+        -0.00017559401624458684,
+        5.238094597215223e-05
+      ],
+      "recovered_top1": 150,
+      "lost_top1": 164
+    },
+    "both_swap_original_weights": {
+      "delta_mrr": 0.0004839195709143147,
+      "bootstrap_95": [
+        0.00016373096823414643,
+        0.0008139624251441541
+      ],
+      "recovered_top1": 1239,
+      "lost_top1": 1127
+    }
+  },
+  "pipeline_uplift_over_model": {
+    "original": {
+      "delta_mrr": 0.02173591282839847,
+      "bootstrap_95": [
+        0.02094522236316302,
+        0.0226284448869658
+      ],
+      "recovered_top1": 7639,
+      "lost_top1": 2726
+    },
+    "improved": {
+      "delta_mrr": 0.020290269479964575,
+      "bootstrap_95": [
+        0.019484596506806513,
+        0.021046761601752558
+      ],
+      "recovered_top1": 7158,
+      "lost_top1": 2643
+    }
+  },
+  "family_direction": [
+    {
+      "family": "disease-protein",
+      "direction": "tail",
+      "queries": 1845,
+      "mrr": {
+        "original_pipeline": 0.6835816483126427,
+        "original_uniform": 0.7498934337706105,
+        "original_model": 0.5622944701838439,
+        "improved_pipeline": 0.6828600407194803,
+        "improved_uniform": 0.7499900487928725,
+        "improved_model": 0.5649356086264361,
+        "score_only_swap": 0.6849697724799216,
+        "analogy_only_swap": 0.6835971353515853,
+        "both_swap_original_weights": 0.685669888020055,
+        "feature_original_score": 0.5622944701838439,
+        "feature_original_analogy_max": 0.7138728977615014,
+        "feature_original_analogy_top3": 0.6960413189772603,
+        "feature_improved_score": 0.5649356086264361,
+        "feature_improved_analogy_max": 0.7149099181306353,
+        "feature_improved_analogy_top3": 0.6944881977432774,
+        "feature_jaccard_max": 0.7213027276409454,
+        "feature_jaccard_top3": 0.7330696452232868
+      }
+    },
+    {
+      "family": "disease-protein",
+      "direction": "head",
+      "queries": 1845,
+      "mrr": {
+        "original_pipeline": 0.6778963716480937,
+        "original_uniform": 0.6630200437007034,
+        "original_model": 0.6558422674193343,
+        "improved_pipeline": 0.6765343857419397,
+        "improved_uniform": 0.6623179138075224,
+        "improved_model": 0.658752443684664,
+        "score_only_swap": 0.6769364717294982,
+        "analogy_only_swap": 0.6780010538335374,
+        "both_swap_original_weights": 0.6766502778539357,
+        "feature_original_score": 0.6558422674193343,
+        "feature_original_analogy_max": 0.3797898661748003,
+        "feature_original_analogy_top3": 0.4088520591939239,
+        "feature_improved_score": 0.658752443684664,
+        "feature_improved_analogy_max": 0.37867147758808806,
+        "feature_improved_analogy_top3": 0.4092298234510958,
+        "feature_jaccard_max": 0.5428270296328557,
+        "feature_jaccard_top3": 0.5979958246080628
+      }
+    },
+    {
+      "family": "drug-disease",
+      "direction": "tail",
+      "queries": 143,
+      "mrr": {
+        "original_pipeline": 0.40806561537295377,
+        "original_uniform": 0.5702608444209062,
+        "original_model": 0.2572356667853368,
+        "improved_pipeline": 0.4241132474155885,
+        "improved_uniform": 0.562248300444835,
+        "improved_model": 0.2750156323830762,
+        "score_only_swap": 0.4246918438163446,
+        "analogy_only_swap": 0.4082071313963568,
+        "both_swap_original_weights": 0.4299614810495011,
+        "feature_original_score": 0.2572356667853368,
+        "feature_original_analogy_max": 0.36509946376493296,
+        "feature_original_analogy_top3": 0.2972190879661536,
+        "feature_improved_score": 0.2750156323830762,
+        "feature_improved_analogy_max": 0.3513096707417882,
+        "feature_improved_analogy_top3": 0.29285538845383846,
+        "feature_jaccard_max": 0.6372508895198193,
+        "feature_jaccard_top3": 0.6570411568266792
+      }
+    },
+    {
+      "family": "drug-disease",
+      "direction": "head",
+      "queries": 143,
+      "mrr": {
+        "original_pipeline": 0.6793549450863854,
+        "original_uniform": 0.7732187261373015,
+        "original_model": 0.4228320946626725,
+        "improved_pipeline": 0.6901968296733999,
+        "improved_uniform": 0.7735525448932835,
+        "improved_model": 0.42308683953284554,
+        "score_only_swap": 0.6914247684013385,
+        "analogy_only_swap": 0.6797045954360358,
+        "both_swap_original_weights": 0.6914247684013385,
+        "feature_original_score": 0.4228320946626725,
+        "feature_original_analogy_max": 0.6971624954733062,
+        "feature_original_analogy_top3": 0.689968278160173,
+        "feature_improved_score": 0.42308683953284554,
+        "feature_improved_analogy_max": 0.6969534324202816,
+        "feature_improved_analogy_top3": 0.6925558527273856,
+        "feature_jaccard_max": 0.7684545786163315,
+        "feature_jaccard_top3": 0.7670372824621933
+      }
+    },
+    {
+      "family": "drug-drug",
+      "direction": "tail",
+      "queries": 15609,
+      "mrr": {
+        "original_pipeline": 0.6835101971779729,
+        "original_uniform": 0.6511815432040844,
+        "original_model": 0.670977340719512,
+        "improved_pipeline": 0.6844993684688665,
+        "improved_uniform": 0.6519210493896092,
+        "improved_model": 0.6730905694718924,
+        "score_only_swap": 0.6836000132166448,
+        "analogy_only_swap": 0.6833198035106278,
+        "both_swap_original_weights": 0.6837568341995752,
+        "feature_original_score": 0.670977340719512,
+        "feature_original_analogy_max": 0.3668364401361512,
+        "feature_original_analogy_top3": 0.5167636969041068,
+        "feature_improved_score": 0.6730905694718924,
+        "feature_improved_analogy_max": 0.3639767714320051,
+        "feature_improved_analogy_top3": 0.5150095458894935,
+        "feature_jaccard_max": 0.38756490512783776,
+        "feature_jaccard_top3": 0.5328505988274134
+      }
+    },
+    {
+      "family": "drug-drug",
+      "direction": "head",
+      "queries": 15609,
+      "mrr": {
+        "original_pipeline": 0.7131402433440047,
+        "original_uniform": 0.6761736271454301,
+        "original_model": 0.6991779373619769,
+        "improved_pipeline": 0.7141377871592547,
+        "improved_uniform": 0.677463427922994,
+        "improved_model": 0.7021218616653141,
+        "score_only_swap": 0.7130257098009436,
+        "analogy_only_swap": 0.7128365472544825,
+        "both_swap_original_weights": 0.7133294909345771,
+        "feature_original_score": 0.6991779373619769,
+        "feature_original_analogy_max": 0.38812605165094566,
+        "feature_original_analogy_top3": 0.5383812789730192,
+        "feature_improved_score": 0.7021218616653141,
+        "feature_improved_analogy_max": 0.3840127933266472,
+        "feature_improved_analogy_top3": 0.5363574025201143,
+        "feature_jaccard_max": 0.40580675441516006,
+        "feature_jaccard_top3": 0.5575129985284373
+      }
+    },
+    {
+      "family": "drug-protein",
+      "direction": "tail",
+      "queries": 3348,
+      "mrr": {
+        "original_pipeline": 0.9074724364472465,
+        "original_uniform": 0.9074724364472465,
+        "original_model": 0.738563600661735,
+        "improved_pipeline": 0.9082843199400359,
+        "improved_uniform": 0.9082843199400359,
+        "improved_model": 0.7464514977880747,
+        "score_only_swap": 0.9084242505218444,
+        "analogy_only_swap": 0.9076322417686611,
+        "both_swap_original_weights": 0.9082843199400359,
+        "feature_original_score": 0.738563600661735,
+        "feature_original_analogy_max": 0.8427247220975176,
+        "feature_original_analogy_top3": 0.852870942203756,
+        "feature_improved_score": 0.7464514977880747,
+        "feature_improved_analogy_max": 0.8431442426292547,
+        "feature_improved_analogy_top3": 0.8537427462386655,
+        "feature_jaccard_max": 0.8793799273789766,
+        "feature_jaccard_top3": 0.8915704092076941
+      }
+    },
+    {
+      "family": "drug-protein",
+      "direction": "head",
+      "queries": 3348,
+      "mrr": {
+        "original_pipeline": 0.9772367513218893,
+        "original_uniform": 0.977718827501529,
+        "original_model": 0.9513899533655561,
+        "improved_pipeline": 0.9768520356998863,
+        "improved_uniform": 0.9770764446769099,
+        "improved_model": 0.9524854307540374,
+        "score_only_swap": 0.9769022011270535,
+        "analogy_only_swap": 0.977433159851631,
+        "both_swap_original_weights": 0.9769022011270535,
+        "feature_original_score": 0.9513899533655561,
+        "feature_original_analogy_max": 0.9287373780847359,
+        "feature_original_analogy_top3": 0.9492728339945717,
+        "feature_improved_score": 0.9524854307540374,
+        "feature_improved_analogy_max": 0.9291147823248913,
+        "feature_improved_analogy_top3": 0.9497962348604523,
+        "feature_jaccard_max": 0.9583386004179486,
+        "feature_jaccard_top3": 0.9686310918180235
+      }
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": "tail",
+      "queries": 4262,
+      "mrr": {
+        "original_pipeline": 0.17352077968374488,
+        "original_uniform": 0.15091068267890465,
+        "original_model": 0.1496883139447697,
+        "improved_pipeline": 0.173247155017172,
+        "improved_uniform": 0.15163306443670252,
+        "improved_model": 0.15035296645473512,
+        "score_only_swap": 0.1753222065351719,
+        "analogy_only_swap": 0.17401018176618954,
+        "both_swap_original_weights": 0.17488514483979198,
+        "feature_original_score": 0.1496883139447697,
+        "feature_original_analogy_max": 0.054376273696102144,
+        "feature_original_analogy_top3": 0.11584208559222406,
+        "feature_improved_score": 0.15035296645473512,
+        "feature_improved_analogy_max": 0.05446958149008652,
+        "feature_improved_analogy_top3": 0.11571166817672608,
+        "feature_jaccard_max": 0.05733174569505169,
+        "feature_jaccard_top3": 0.13448348041054284
+      }
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": "head",
+      "queries": 4262,
+      "mrr": {
+        "original_pipeline": 0.433935729753511,
+        "original_uniform": 0.4272324089437358,
+        "original_model": 0.3639392403607183,
+        "improved_pipeline": 0.4358149370002938,
+        "improved_uniform": 0.4273118201312186,
+        "improved_model": 0.3645057856783759,
+        "score_only_swap": 0.4361591459619763,
+        "analogy_only_swap": 0.4334152907632585,
+        "both_swap_original_weights": 0.43546962755204505,
+        "feature_original_score": 0.3639392403607183,
+        "feature_original_analogy_max": 0.29745615201676373,
+        "feature_original_analogy_top3": 0.3793827991031047,
+        "feature_improved_score": 0.3645057856783759,
+        "feature_improved_analogy_max": 0.29667205822214526,
+        "feature_improved_analogy_top3": 0.37966614915862446,
+        "feature_jaccard_max": 0.31609265312757856,
+        "feature_jaccard_top3": 0.401882762074809
+      }
+    },
+    {
+      "family": "function-function",
+      "direction": "tail",
+      "queries": 19798,
+      "mrr": {
+        "original_pipeline": 0.9551661777300527,
+        "original_uniform": 0.9380186189417288,
+        "original_model": 0.9521154593671903,
+        "improved_pipeline": 0.9556522293882801,
+        "improved_uniform": 0.9386286214821999,
+        "improved_model": 0.9532909777972867,
+        "score_only_swap": 0.9557380456609444,
+        "analogy_only_swap": 0.9551773905069292,
+        "both_swap_original_weights": 0.955793921407639,
+        "feature_original_score": 0.9521154593671903,
+        "feature_original_analogy_max": 0.8373052288508246,
+        "feature_original_analogy_top3": 0.8993619246548531,
+        "feature_improved_score": 0.9532909777972867,
+        "feature_improved_analogy_max": 0.8416506471846089,
+        "feature_improved_analogy_top3": 0.9004817163855522,
+        "feature_jaccard_max": 0.8494597008097811,
+        "feature_jaccard_top3": 0.8845952943372151
+      }
+    },
+    {
+      "family": "function-function",
+      "direction": "head",
+      "queries": 19798,
+      "mrr": {
+        "original_pipeline": 0.9744023675316099,
+        "original_uniform": 0.9567618612288797,
+        "original_model": 0.9742472392732446,
+        "improved_pipeline": 0.9744288992155647,
+        "improved_uniform": 0.9565833781153134,
+        "improved_model": 0.9744551804488321,
+        "score_only_swap": 0.974362144846017,
+        "analogy_only_swap": 0.9744051709656811,
+        "both_swap_original_weights": 0.9743600294137934,
+        "feature_original_score": 0.9742472392732446,
+        "feature_original_analogy_max": 0.8603202225721576,
+        "feature_original_analogy_top3": 0.926504203006025,
+        "feature_improved_score": 0.9744551804488321,
+        "feature_improved_analogy_max": 0.8598730978913652,
+        "feature_improved_analogy_top3": 0.9259596305608325,
+        "feature_jaccard_max": 0.8696575052933404,
+        "feature_jaccard_top3": 0.913327105647308
+      }
+    },
+    {
+      "family": "protein-function",
+      "direction": "tail",
+      "queries": 21514,
+      "mrr": {
+        "original_pipeline": 0.9223873138155337,
+        "original_uniform": 0.9088113618350806,
+        "original_model": 0.9217932373418816,
+        "improved_pipeline": 0.9223114704392474,
+        "improved_uniform": 0.909278069752709,
+        "improved_model": 0.9220781369160698,
+        "score_only_swap": 0.9224443357251171,
+        "analogy_only_swap": 0.9223893521644878,
+        "both_swap_original_weights": 0.9224711289732248,
+        "feature_original_score": 0.9217932373418816,
+        "feature_original_analogy_max": 0.7105228045431791,
+        "feature_original_analogy_top3": 0.7836610573520933,
+        "feature_improved_score": 0.9220781369160698,
+        "feature_improved_analogy_max": 0.7105241437222307,
+        "feature_improved_analogy_top3": 0.7836546259836991,
+        "feature_jaccard_max": 0.7526119868859156,
+        "feature_jaccard_top3": 0.8204009355584093
+      }
+    },
+    {
+      "family": "protein-function",
+      "direction": "head",
+      "queries": 21514,
+      "mrr": {
+        "original_pipeline": 0.8686351582989821,
+        "original_uniform": 0.8685372124210016,
+        "original_model": 0.7956096152275964,
+        "improved_pipeline": 0.870505658614642,
+        "improved_uniform": 0.8709272974548095,
+        "improved_model": 0.8026452486713228,
+        "score_only_swap": 0.870389536838609,
+        "analogy_only_swap": 0.8683706548437828,
+        "both_swap_original_weights": 0.8704103321568798,
+        "feature_original_score": 0.7956096152275964,
+        "feature_original_analogy_max": 0.6678253191452092,
+        "feature_original_analogy_top3": 0.8098849060104035,
+        "feature_improved_score": 0.8026452486713228,
+        "feature_improved_analogy_max": 0.6646891033733572,
+        "feature_improved_analogy_top3": 0.8101745768260848,
+        "feature_jaccard_max": 0.6483630358967725,
+        "feature_jaccard_top3": 0.7662599212248741
+      }
+    },
+    {
+      "family": "protein-protein",
+      "direction": "tail",
+      "queries": 14680,
+      "mrr": {
+        "original_pipeline": 0.9699569304306597,
+        "original_uniform": 0.9675972615812086,
+        "original_model": 0.9679296384490842,
+        "improved_pipeline": 0.9699236045274411,
+        "improved_uniform": 0.9678208236066651,
+        "improved_model": 0.9685512068522907,
+        "score_only_swap": 0.9699764637108891,
+        "analogy_only_swap": 0.9700016699559402,
+        "both_swap_original_weights": 0.9699315665099973,
+        "feature_original_score": 0.9679296384490842,
+        "feature_original_analogy_max": 0.9253744493752338,
+        "feature_original_analogy_top3": 0.943601230697846,
+        "feature_improved_score": 0.9685512068522907,
+        "feature_improved_analogy_max": 0.9252078236110529,
+        "feature_improved_analogy_top3": 0.9436106236664624,
+        "feature_jaccard_max": 0.9385185284206213,
+        "feature_jaccard_top3": 0.9466505946855246
+      }
+    },
+    {
+      "family": "protein-protein",
+      "direction": "head",
+      "queries": 14680,
+      "mrr": {
+        "original_pipeline": 0.9720389143236214,
+        "original_uniform": 0.9701802114405619,
+        "original_model": 0.9676406647571011,
+        "improved_pipeline": 0.9720524824517564,
+        "improved_uniform": 0.9696636029409962,
+        "improved_model": 0.9677382415716992,
+        "score_only_swap": 0.9720425519477998,
+        "analogy_only_swap": 0.9720379736197601,
+        "both_swap_original_weights": 0.9720532657975877,
+        "feature_original_score": 0.9676406647571011,
+        "feature_original_analogy_max": 0.925422017107691,
+        "feature_original_analogy_top3": 0.9456794947409463,
+        "feature_improved_score": 0.9677382415716992,
+        "feature_improved_analogy_max": 0.9256708615380854,
+        "feature_improved_analogy_top3": 0.9456367622880736,
+        "feature_jaccard_max": 0.9371048604520691,
+        "feature_jaccard_top3": 0.9481183721181086
+      }
+    }
+  ],
+  "seconds": 878.9986168079777,
+  "peak_allocated_bytes": 409551872,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt",
+    "split/random/valid.pt"
+  ],
+  "models_unchanged": true,
+  "reference_rank_audit": {
+    "original": {
+      "mrr_delta": 0.0,
+      "differing_ranks": 0
+    },
+    "improved": {
+      "mrr_delta": 0.0,
+      "differing_ranks": 0
+    }
+  }
+}

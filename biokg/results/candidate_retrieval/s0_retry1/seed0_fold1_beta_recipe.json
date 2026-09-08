@@ -1,0 +1,793 @@
+{
+  "betas": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "global_choice": {
+    "beta": 0.0,
+    "fit_mrr": 0.8552856353685142,
+    "fit_queries": 162398
+  },
+  "families": {
+    "drug-drug/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609
+    },
+    "drug-drug/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609
+    },
+    "drug-protein/0": {
+      "beta": 0.025,
+      "fit_mrr": 0.9120576865368969,
+      "fit_queries": 3348
+    },
+    "drug-protein/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.9742468615048429,
+      "fit_queries": 3348
+    },
+    "drug-sideeffect/0": {
+      "beta": 0.05,
+      "fit_mrr": 0.17996435182561607,
+      "fit_queries": 4262
+    },
+    "drug-sideeffect/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.4309494467632318,
+      "fit_queries": 4262
+    },
+    "function-function/0": {
+      "beta": 0.05,
+      "fit_mrr": 0.961833423230192,
+      "fit_queries": 19798
+    },
+    "function-function/1": {
+      "beta": 0.05,
+      "fit_mrr": 0.9776770393100508,
+      "fit_queries": 19798
+    },
+    "protein-function/0": {
+      "beta": 0.05,
+      "fit_mrr": 0.9357434056578043,
+      "fit_queries": 21514
+    },
+    "protein-function/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.8711989616225717,
+      "fit_queries": 21514
+    },
+    "protein-protein/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9714027794218827,
+      "fit_queries": 14680
+    },
+    "protein-protein/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.972452879651,
+      "fit_queries": 14680
+    }
+  },
+  "groups": {
+    "0/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.8552856353685142,
+      "fit_queries": 162398,
+      "level": "global",
+      "group_fit_queries": 1845
+    },
+    "0/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.8552856353685142,
+      "fit_queries": 162398,
+      "level": "global",
+      "group_fit_queries": 1845
+    },
+    "1/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.8552856353685142,
+      "fit_queries": 162398,
+      "level": "global",
+      "group_fit_queries": 143
+    },
+    "1/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.8552856353685142,
+      "fit_queries": 162398,
+      "level": "global",
+      "group_fit_queries": 143
+    },
+    "2/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 915
+    },
+    "2/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 915
+    },
+    "3/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 251
+    },
+    "3/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 251
+    },
+    "4/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 412
+    },
+    "4/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 412
+    },
+    "5/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 678
+    },
+    "5/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 678
+    },
+    "6/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1316
+    },
+    "6/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1316
+    },
+    "7/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 4
+    },
+    "7/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 4
+    },
+    "8/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 490
+    },
+    "8/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 490
+    },
+    "9/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 2
+    },
+    "9/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 2
+    },
+    "10/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 214
+    },
+    "10/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 214
+    },
+    "11/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 783
+    },
+    "11/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 783
+    },
+    "12/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 508
+    },
+    "12/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 508
+    },
+    "13/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1170
+    },
+    "13/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1170
+    },
+    "14/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1137
+    },
+    "14/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1137
+    },
+    "15/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 35
+    },
+    "15/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 35
+    },
+    "16/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 4
+    },
+    "16/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 4
+    },
+    "17/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 482
+    },
+    "17/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 482
+    },
+    "18/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 500
+    },
+    "18/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 500
+    },
+    "19/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 998
+    },
+    "19/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 998
+    },
+    "20/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 130
+    },
+    "20/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 130
+    },
+    "21/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 9
+    },
+    "21/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 9
+    },
+    "22/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 773
+    },
+    "22/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 773
+    },
+    "23/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1114
+    },
+    "23/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1114
+    },
+    "24/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 4
+    },
+    "24/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 4
+    },
+    "25/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 24
+    },
+    "25/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 24
+    },
+    "26/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 10
+    },
+    "26/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 10
+    },
+    "27/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 8
+    },
+    "27/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 8
+    },
+    "28/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 46
+    },
+    "28/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 46
+    },
+    "29/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 28
+    },
+    "29/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 28
+    },
+    "30/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 236
+    },
+    "30/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 236
+    },
+    "31/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1119
+    },
+    "31/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 1119
+    },
+    "32/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 16
+    },
+    "32/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 16
+    },
+    "33/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 359
+    },
+    "33/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 359
+    },
+    "34/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 30
+    },
+    "34/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 30
+    },
+    "35/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 184
+    },
+    "35/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 184
+    },
+    "36/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 58
+    },
+    "36/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 58
+    },
+    "37/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 71
+    },
+    "37/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 71
+    },
+    "38/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 933
+    },
+    "38/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 933
+    },
+    "39/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.6852113372123346,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 558
+    },
+    "39/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.7161208634316193,
+      "fit_queries": 15609,
+      "level": "family",
+      "group_fit_queries": 558
+    },
+    "40/0": {
+      "beta": 0.025,
+      "fit_mrr": 0.9120576865368969,
+      "fit_queries": 3348,
+      "level": "relation",
+      "group_fit_queries": 3348
+    },
+    "40/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.9742468615048429,
+      "fit_queries": 3348,
+      "level": "relation",
+      "group_fit_queries": 3348
+    },
+    "41/0": {
+      "beta": 0.05,
+      "fit_mrr": 0.17996435182561607,
+      "fit_queries": 4262,
+      "level": "relation",
+      "group_fit_queries": 4262
+    },
+    "41/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.4309494467632318,
+      "fit_queries": 4262,
+      "level": "relation",
+      "group_fit_queries": 4262
+    },
+    "42/0": {
+      "beta": 0.05,
+      "fit_mrr": 0.961833423230192,
+      "fit_queries": 19798,
+      "level": "relation",
+      "group_fit_queries": 19798
+    },
+    "42/1": {
+      "beta": 0.05,
+      "fit_mrr": 0.9776770393100508,
+      "fit_queries": 19798,
+      "level": "relation",
+      "group_fit_queries": 19798
+    },
+    "43/0": {
+      "beta": 0.05,
+      "fit_mrr": 0.9357434056578043,
+      "fit_queries": 21514,
+      "level": "relation",
+      "group_fit_queries": 21514
+    },
+    "43/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.8711989616225717,
+      "fit_queries": 21514,
+      "level": "relation",
+      "group_fit_queries": 21514
+    },
+    "44/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9714027794218827,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 986
+    },
+    "44/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.972452879651,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 986
+    },
+    "45/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9560044406538274,
+      "fit_queries": 4047,
+      "level": "relation",
+      "group_fit_queries": 4047
+    },
+    "45/1": {
+      "beta": 0.025,
+      "fit_mrr": 0.9568861735707003,
+      "fit_queries": 4047,
+      "level": "relation",
+      "group_fit_queries": 4047
+    },
+    "46/0": {
+      "beta": 0.025,
+      "fit_mrr": 0.9800697573643762,
+      "fit_queries": 4191,
+      "level": "relation",
+      "group_fit_queries": 4191
+    },
+    "46/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.9802095971336732,
+      "fit_queries": 4191,
+      "level": "relation",
+      "group_fit_queries": 4191
+    },
+    "47/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9714027794218827,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 31
+    },
+    "47/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.972452879651,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 31
+    },
+    "48/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9714027794218827,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 362
+    },
+    "48/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.972452879651,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 362
+    },
+    "49/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9714027794218827,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 217
+    },
+    "49/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.972452879651,
+      "fit_queries": 14680,
+      "level": "family",
+      "group_fit_queries": 217
+    },
+    "50/0": {
+      "beta": 0.0,
+      "fit_mrr": 0.9895173396901626,
+      "fit_queries": 4846,
+      "level": "relation",
+      "group_fit_queries": 4846
+    },
+    "50/1": {
+      "beta": 0.0,
+      "fit_mrr": 0.9897239357624924,
+      "fit_queries": 4846,
+      "level": "relation",
+      "group_fit_queries": 4846
+    }
+  },
+  "min_rows": 2000
+}

@@ -1,0 +1,755 @@
+{
+  "screen_only": true,
+  "test_loaded": false,
+  "runs": {
+    "single": {
+      "metrics": {
+        "mrr": 0.8309516582167599,
+        "hits1": 0.765952875016883,
+        "hits10": 0.9468677479955306,
+        "queries": 325772
+      },
+      "training_seconds": 49.93254732363857,
+      "elapsed_seconds": 59.21420401101932,
+      "peak_allocated_bytes": 311062528,
+      "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+      "frozen_sha256": "dbf42c7188d805476b193fc833481ebb74c4cbe0890ac2e9da986e1f7a6537aa",
+      "frozen_unchanged": true,
+      "initial_b_sha256": "8cee805f450d061d8b849e95c33b4f8e094169f71156cb37b7324926e73799ae",
+      "parameters": 27124129,
+      "trainable_parameters": 117504
+    },
+    "mean": {
+      "metrics": {
+        "mrr": 0.8312714993273211,
+        "hits1": 0.7664163893766193,
+        "hits10": 0.9469444887835664,
+        "queries": 325772
+      },
+      "training_seconds": 63.37053766276222,
+      "elapsed_seconds": 75.09616007498698,
+      "peak_allocated_bytes": 456778752,
+      "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+      "frozen_sha256": "58f1e38d984ba7a68c948d446496ea4fd6f462d209f4e341c592905602c7b4fc",
+      "frozen_unchanged": true,
+      "initial_b_sha256": "b8b50d23149b3488189162900478c4670bc106068675a0434eaea24560ee19f6",
+      "parameters": 27241633,
+      "trainable_parameters": 117504
+    },
+    "or": {
+      "metrics": {
+        "mrr": 0.831238274535519,
+        "hits1": 0.7663764841668406,
+        "hits10": 0.946984393993345,
+        "queries": 325772
+      },
+      "training_seconds": 73.42559097206686,
+      "elapsed_seconds": 85.35944054997526,
+      "peak_allocated_bytes": 519541248,
+      "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+      "frozen_sha256": "58f1e38d984ba7a68c948d446496ea4fd6f462d209f4e341c592905602c7b4fc",
+      "frozen_unchanged": true,
+      "initial_b_sha256": "b8b50d23149b3488189162900478c4670bc106068675a0434eaea24560ee19f6",
+      "parameters": 27241633,
+      "trainable_parameters": 117504
+    },
+    "and": {
+      "metrics": {
+        "mrr": 0.8313424501221266,
+        "hits1": 0.7665330353744336,
+        "hits10": 0.9469567673096522,
+        "queries": 325772
+      },
+      "training_seconds": 76.58493542525684,
+      "elapsed_seconds": 88.77939929201966,
+      "peak_allocated_bytes": 520450560,
+      "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+      "frozen_sha256": "58f1e38d984ba7a68c948d446496ea4fd6f462d209f4e341c592905602c7b4fc",
+      "frozen_unchanged": true,
+      "initial_b_sha256": "b8b50d23149b3488189162900478c4670bc106068675a0434eaea24560ee19f6",
+      "parameters": 27241633,
+      "trainable_parameters": 117504
+    }
+  },
+  "frozen": {
+    "mrr": 0.8321748668335268,
+    "hits1": 0.7676565205112779,
+    "hits10": 0.9471839200422382,
+    "queries": 325772
+  },
+  "comparisons": {
+    "single": {
+      "metrics": {
+        "mrr": 0.8309516582167599,
+        "hits1": 0.765952875016883,
+        "hits10": 0.9468677479955306,
+        "queries": 325772
+      },
+      "delta_vs_frozen": -0.001223208616766929,
+      "adjusted_bootstrap_98_75": [
+        -0.001434310470263222,
+        -0.0010096881674245132
+      ],
+      "worth_confirming_vs_frozen": false,
+      "recovered_beyond_top10_to_top10": 254,
+      "lost_top1": 1787,
+      "gained_top1": 1232,
+      "family_direction": [
+        {
+          "family": "disease-protein",
+          "direction": 0,
+          "queries": 3777,
+          "frozen_mrr": 0.5645539161986634,
+          "mrr": 0.5639518716174825,
+          "delta": -0.0006020445811807729
+        },
+        {
+          "family": "disease-protein",
+          "direction": 1,
+          "queries": 3777,
+          "frozen_mrr": 0.6467851707691477,
+          "mrr": 0.6455485024345515,
+          "delta": -0.0012366683345962626
+        },
+        {
+          "family": "drug-disease",
+          "direction": 0,
+          "queries": 267,
+          "frozen_mrr": 0.255935121059605,
+          "mrr": 0.26259477939193865,
+          "delta": 0.006659658332333671
+        },
+        {
+          "family": "drug-disease",
+          "direction": 1,
+          "queries": 267,
+          "frozen_mrr": 0.44050273327814976,
+          "mrr": 0.44236090976392983,
+          "delta": 0.001858176485780041
+        },
+        {
+          "family": "drug-drug",
+          "direction": 0,
+          "queries": 31135,
+          "frozen_mrr": 0.6704165976841188,
+          "mrr": 0.6694471978861314,
+          "delta": -0.0009693997979873171
+        },
+        {
+          "family": "drug-drug",
+          "direction": 1,
+          "queries": 31135,
+          "frozen_mrr": 0.7015880306710096,
+          "mrr": 0.7003039585225893,
+          "delta": -0.0012840721484203082
+        },
+        {
+          "family": "drug-protein",
+          "direction": 0,
+          "queries": 6539,
+          "frozen_mrr": 0.738869800722934,
+          "mrr": 0.738303411945829,
+          "delta": -0.0005663887771048254
+        },
+        {
+          "family": "drug-protein",
+          "direction": 1,
+          "queries": 6539,
+          "frozen_mrr": 0.9535785960687512,
+          "mrr": 0.9521270826233846,
+          "delta": -0.0014515134453664947
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 0,
+          "queries": 8619,
+          "frozen_mrr": 0.1483511502987041,
+          "mrr": 0.1465949932629605,
+          "delta": -0.001756157035743601
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 1,
+          "queries": 8619,
+          "frozen_mrr": 0.36321285174374324,
+          "mrr": 0.36077128847714285,
+          "delta": -0.0024415632666004096
+        },
+        {
+          "family": "function-function",
+          "direction": 0,
+          "queries": 39811,
+          "frozen_mrr": 0.954177072065208,
+          "mrr": 0.9512276725712673,
+          "delta": -0.00294939949394055
+        },
+        {
+          "family": "function-function",
+          "direction": 1,
+          "queries": 39811,
+          "frozen_mrr": 0.9750498446444426,
+          "mrr": 0.9742498365085093,
+          "delta": -0.0008000081359333633
+        },
+        {
+          "family": "protein-function",
+          "direction": 0,
+          "queries": 43181,
+          "frozen_mrr": 0.9224515413837633,
+          "mrr": 0.9227796118182583,
+          "delta": 0.0003280704344949846
+        },
+        {
+          "family": "protein-function",
+          "direction": 1,
+          "queries": 43181,
+          "frozen_mrr": 0.7943528010379732,
+          "mrr": 0.789808872977038,
+          "delta": -0.004543928060935117
+        },
+        {
+          "family": "protein-protein",
+          "direction": 0,
+          "queries": 29557,
+          "frozen_mrr": 0.968241619300184,
+          "mrr": 0.969406286124579,
+          "delta": 0.0011646668243948607
+        },
+        {
+          "family": "protein-protein",
+          "direction": 1,
+          "queries": 29557,
+          "frozen_mrr": 0.9672341963848855,
+          "mrr": 0.9679991272048837,
+          "delta": 0.0007649308199981326
+        }
+      ],
+      "branches": null
+    },
+    "mean": {
+      "metrics": {
+        "mrr": 0.8312714993273211,
+        "hits1": 0.7664163893766193,
+        "hits10": 0.9469444887835664,
+        "queries": 325772
+      },
+      "delta_vs_frozen": -0.0009033675062056764,
+      "adjusted_bootstrap_98_75": [
+        -0.0010992927215507124,
+        -0.0006970699613244467
+      ],
+      "worth_confirming_vs_frozen": false,
+      "recovered_beyond_top10_to_top10": 218,
+      "lost_top1": 1427,
+      "gained_top1": 1023,
+      "family_direction": [
+        {
+          "family": "disease-protein",
+          "direction": 0,
+          "queries": 3777,
+          "frozen_mrr": 0.5645539161986634,
+          "mrr": 0.5643497212654179,
+          "delta": -0.00020419493324543773
+        },
+        {
+          "family": "disease-protein",
+          "direction": 1,
+          "queries": 3777,
+          "frozen_mrr": 0.6467851707691477,
+          "mrr": 0.6468210861076625,
+          "delta": 3.5915338514793464e-05
+        },
+        {
+          "family": "drug-disease",
+          "direction": 0,
+          "queries": 267,
+          "frozen_mrr": 0.255935121059605,
+          "mrr": 0.2610701187097571,
+          "delta": 0.0051349976501521314
+        },
+        {
+          "family": "drug-disease",
+          "direction": 1,
+          "queries": 267,
+          "frozen_mrr": 0.44050273327814976,
+          "mrr": 0.4391466211082024,
+          "delta": -0.0013561121699473665
+        },
+        {
+          "family": "drug-drug",
+          "direction": 0,
+          "queries": 31135,
+          "frozen_mrr": 0.6704165976841188,
+          "mrr": 0.6694825338732863,
+          "delta": -0.000934063810832476
+        },
+        {
+          "family": "drug-drug",
+          "direction": 1,
+          "queries": 31135,
+          "frozen_mrr": 0.7015880306710096,
+          "mrr": 0.70092826061204,
+          "delta": -0.0006597700589695234
+        },
+        {
+          "family": "drug-protein",
+          "direction": 0,
+          "queries": 6539,
+          "frozen_mrr": 0.738869800722934,
+          "mrr": 0.738557133290777,
+          "delta": -0.0003126674321569281
+        },
+        {
+          "family": "drug-protein",
+          "direction": 1,
+          "queries": 6539,
+          "frozen_mrr": 0.9535785960687512,
+          "mrr": 0.9526650977834297,
+          "delta": -0.0009134982853215105
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 0,
+          "queries": 8619,
+          "frozen_mrr": 0.1483511502987041,
+          "mrr": 0.14746123475249945,
+          "delta": -0.0008899155462046603
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 1,
+          "queries": 8619,
+          "frozen_mrr": 0.36321285174374324,
+          "mrr": 0.3621863055433654,
+          "delta": -0.0010265462003778802
+        },
+        {
+          "family": "function-function",
+          "direction": 0,
+          "queries": 39811,
+          "frozen_mrr": 0.954177072065208,
+          "mrr": 0.95175733306151,
+          "delta": -0.002419739003697805
+        },
+        {
+          "family": "function-function",
+          "direction": 1,
+          "queries": 39811,
+          "frozen_mrr": 0.9750498446444426,
+          "mrr": 0.9742143670316157,
+          "delta": -0.0008354776128270585
+        },
+        {
+          "family": "protein-function",
+          "direction": 0,
+          "queries": 43181,
+          "frozen_mrr": 0.9224515413837633,
+          "mrr": 0.9230597461077412,
+          "delta": 0.0006082047239779539
+        },
+        {
+          "family": "protein-function",
+          "direction": 1,
+          "queries": 43181,
+          "frozen_mrr": 0.7943528010379732,
+          "mrr": 0.7906127713020038,
+          "delta": -0.0037400297359693638
+        },
+        {
+          "family": "protein-protein",
+          "direction": 0,
+          "queries": 29557,
+          "frozen_mrr": 0.968241619300184,
+          "mrr": 0.9691090986159823,
+          "delta": 0.000867479315798206
+        },
+        {
+          "family": "protein-protein",
+          "direction": 1,
+          "queries": 29557,
+          "frozen_mrr": 0.9672341963848855,
+          "mrr": 0.9678663095140034,
+          "delta": 0.0006321131291181071
+        }
+      ],
+      "delta_vs_single": 0.00031984111056125244,
+      "descriptive_95_vs_single": [
+        0.0002030308307519468,
+        0.0004604984523496308
+      ],
+      "second_bank_gain_gate": false,
+      "branches": {
+        "a": {
+          "mrr": 0.8321748668335268,
+          "hits1": 0.7676565205112779,
+          "hits10": 0.9471839200422382,
+          "queries": 325772
+        },
+        "b": {
+          "mrr": 0.829534871411521,
+          "hits1": 0.7638378988986162,
+          "hits10": 0.9466559434205518,
+          "queries": 325772
+        },
+        "mean_query_cosine": 0.9986535906791687,
+        "mean_b_positive_responsibility": 0.5,
+        "mean_b_top_candidate_responsibility": 0.5,
+        "b_positive_stronger_fraction": 0.14533170438220597
+      }
+    },
+    "or": {
+      "metrics": {
+        "mrr": 0.831238274535519,
+        "hits1": 0.7663764841668406,
+        "hits10": 0.946984393993345,
+        "queries": 325772
+      },
+      "delta_vs_frozen": -0.0009365922980079436,
+      "adjusted_bootstrap_98_75": [
+        -0.001120815107687106,
+        -0.0007181297544557668
+      ],
+      "worth_confirming_vs_frozen": false,
+      "recovered_beyond_top10_to_top10": 217,
+      "lost_top1": 1410,
+      "gained_top1": 993,
+      "family_direction": [
+        {
+          "family": "disease-protein",
+          "direction": 0,
+          "queries": 3777,
+          "frozen_mrr": 0.5645539161986634,
+          "mrr": 0.5640519964426148,
+          "delta": -0.0005019197560485017
+        },
+        {
+          "family": "disease-protein",
+          "direction": 1,
+          "queries": 3777,
+          "frozen_mrr": 0.6467851707691477,
+          "mrr": 0.6467659947512274,
+          "delta": -1.9176017920269764e-05
+        },
+        {
+          "family": "drug-disease",
+          "direction": 0,
+          "queries": 267,
+          "frozen_mrr": 0.255935121059605,
+          "mrr": 0.2625799886457101,
+          "delta": 0.006644867586105129
+        },
+        {
+          "family": "drug-disease",
+          "direction": 1,
+          "queries": 267,
+          "frozen_mrr": 0.44050273327814976,
+          "mrr": 0.4391723330904921,
+          "delta": -0.001330400187657739
+        },
+        {
+          "family": "drug-drug",
+          "direction": 0,
+          "queries": 31135,
+          "frozen_mrr": 0.6704165976841188,
+          "mrr": 0.6695501192591989,
+          "delta": -0.0008664784249197892
+        },
+        {
+          "family": "drug-drug",
+          "direction": 1,
+          "queries": 31135,
+          "frozen_mrr": 0.7015880306710096,
+          "mrr": 0.7010112336687466,
+          "delta": -0.0005767970022630328
+        },
+        {
+          "family": "drug-protein",
+          "direction": 0,
+          "queries": 6539,
+          "frozen_mrr": 0.738869800722934,
+          "mrr": 0.7385329993398546,
+          "delta": -0.00033680138307922043
+        },
+        {
+          "family": "drug-protein",
+          "direction": 1,
+          "queries": 6539,
+          "frozen_mrr": 0.9535785960687512,
+          "mrr": 0.9526708215829156,
+          "delta": -0.0009077744858355574
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 0,
+          "queries": 8619,
+          "frozen_mrr": 0.1483511502987041,
+          "mrr": 0.14742673837249987,
+          "delta": -0.000924411926204219
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 1,
+          "queries": 8619,
+          "frozen_mrr": 0.36321285174374324,
+          "mrr": 0.36239522680775343,
+          "delta": -0.0008176249359898047
+        },
+        {
+          "family": "function-function",
+          "direction": 0,
+          "queries": 39811,
+          "frozen_mrr": 0.954177072065208,
+          "mrr": 0.9515495907272669,
+          "delta": -0.002627481337940993
+        },
+        {
+          "family": "function-function",
+          "direction": 1,
+          "queries": 39811,
+          "frozen_mrr": 0.9750498446444426,
+          "mrr": 0.9742276616695765,
+          "delta": -0.0008221829748661666
+        },
+        {
+          "family": "protein-function",
+          "direction": 0,
+          "queries": 43181,
+          "frozen_mrr": 0.9224515413837633,
+          "mrr": 0.9230306696619321,
+          "delta": 0.0005791282781689723
+        },
+        {
+          "family": "protein-function",
+          "direction": 1,
+          "queries": 43181,
+          "frozen_mrr": 0.7943528010379732,
+          "mrr": 0.7905755356417605,
+          "delta": -0.0037772653962126167
+        },
+        {
+          "family": "protein-protein",
+          "direction": 0,
+          "queries": 29557,
+          "frozen_mrr": 0.968241619300184,
+          "mrr": 0.9689595347367663,
+          "delta": 0.0007179154365822329
+        },
+        {
+          "family": "protein-protein",
+          "direction": 1,
+          "queries": 29557,
+          "frozen_mrr": 0.9672341963848855,
+          "mrr": 0.96783428657929,
+          "delta": 0.0006000901944046861
+        }
+      ],
+      "delta_vs_single": 0.0002866163187589851,
+      "descriptive_95_vs_single": [
+        0.00016020421343130515,
+        0.00042031572010773786
+      ],
+      "second_bank_gain_gate": false,
+      "delta_vs_mean": -3.322479180226739e-05,
+      "descriptive_95_vs_mean": [
+        -7.486683639917489e-05,
+        9.603373322017506e-06
+      ],
+      "nonlinear_gain_gate": false,
+      "branches": {
+        "a": {
+          "mrr": 0.8321748668335268,
+          "hits1": 0.7676565205112779,
+          "hits10": 0.9471839200422382,
+          "queries": 325772
+        },
+        "b": {
+          "mrr": 0.8291882924016138,
+          "hits1": 0.7633651756443156,
+          "hits10": 0.9465730633694731,
+          "queries": 325772
+        },
+        "mean_query_cosine": 0.9986159801483154,
+        "mean_b_positive_responsibility": 0.47032660245895386,
+        "mean_b_top_candidate_responsibility": 0.4707559049129486,
+        "b_positive_stronger_fraction": 0.14198273639232348
+      }
+    },
+    "and": {
+      "metrics": {
+        "mrr": 0.8313424501221266,
+        "hits1": 0.7665330353744336,
+        "hits10": 0.9469567673096522,
+        "queries": 325772
+      },
+      "delta_vs_frozen": -0.0008324167114002007,
+      "adjusted_bootstrap_98_75": [
+        -0.0010298216089298332,
+        -0.0006301947834430199
+      ],
+      "worth_confirming_vs_frozen": false,
+      "recovered_beyond_top10_to_top10": 222,
+      "lost_top1": 1434,
+      "gained_top1": 1068,
+      "family_direction": [
+        {
+          "family": "disease-protein",
+          "direction": 0,
+          "queries": 3777,
+          "frozen_mrr": 0.5645539161986634,
+          "mrr": 0.5642364364852767,
+          "delta": -0.00031747971338658533
+        },
+        {
+          "family": "disease-protein",
+          "direction": 1,
+          "queries": 3777,
+          "frozen_mrr": 0.6467851707691477,
+          "mrr": 0.6469162786082778,
+          "delta": 0.0001311078391301947
+        },
+        {
+          "family": "drug-disease",
+          "direction": 0,
+          "queries": 267,
+          "frozen_mrr": 0.255935121059605,
+          "mrr": 0.2593402841341788,
+          "delta": 0.0034051630745738437
+        },
+        {
+          "family": "drug-disease",
+          "direction": 1,
+          "queries": 267,
+          "frozen_mrr": 0.44050273327814976,
+          "mrr": 0.4371248678728743,
+          "delta": -0.003377865405275501
+        },
+        {
+          "family": "drug-drug",
+          "direction": 0,
+          "queries": 31135,
+          "frozen_mrr": 0.6704165976841188,
+          "mrr": 0.6694779052700139,
+          "delta": -0.0009386924141048873
+        },
+        {
+          "family": "drug-drug",
+          "direction": 1,
+          "queries": 31135,
+          "frozen_mrr": 0.7015880306710096,
+          "mrr": 0.7009334588420434,
+          "delta": -0.0006545718289662776
+        },
+        {
+          "family": "drug-protein",
+          "direction": 0,
+          "queries": 6539,
+          "frozen_mrr": 0.738869800722934,
+          "mrr": 0.738694901090462,
+          "delta": -0.00017489963247181438
+        },
+        {
+          "family": "drug-protein",
+          "direction": 1,
+          "queries": 6539,
+          "frozen_mrr": 0.9535785960687512,
+          "mrr": 0.9526960728450394,
+          "delta": -0.0008825232237118228
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 0,
+          "queries": 8619,
+          "frozen_mrr": 0.1483511502987041,
+          "mrr": 0.1473911741805205,
+          "delta": -0.000959976118183626
+        },
+        {
+          "family": "drug-sideeffect",
+          "direction": 1,
+          "queries": 8619,
+          "frozen_mrr": 0.36321285174374324,
+          "mrr": 0.36221300734798556,
+          "delta": -0.0009998443957577182
+        },
+        {
+          "family": "function-function",
+          "direction": 0,
+          "queries": 39811,
+          "frozen_mrr": 0.954177072065208,
+          "mrr": 0.9518936296053307,
+          "delta": -0.0022834424598770576
+        },
+        {
+          "family": "function-function",
+          "direction": 1,
+          "queries": 39811,
+          "frozen_mrr": 0.9750498446444426,
+          "mrr": 0.9742593027646301,
+          "delta": -0.0007905418798126461
+        },
+        {
+          "family": "protein-function",
+          "direction": 0,
+          "queries": 43181,
+          "frozen_mrr": 0.9224515413837633,
+          "mrr": 0.9230356367054465,
+          "delta": 0.0005840953216832832
+        },
+        {
+          "family": "protein-function",
+          "direction": 1,
+          "queries": 43181,
+          "frozen_mrr": 0.7943528010379732,
+          "mrr": 0.7907573522335415,
+          "delta": -0.0035954488044316626
+        },
+        {
+          "family": "protein-protein",
+          "direction": 0,
+          "queries": 29557,
+          "frozen_mrr": 0.968241619300184,
+          "mrr": 0.9693656687980011,
+          "delta": 0.0011240494978170393
+        },
+        {
+          "family": "protein-protein",
+          "direction": 1,
+          "queries": 29557,
+          "frozen_mrr": 0.9672341963848855,
+          "mrr": 0.967982552399986,
+          "delta": 0.0007483560151006467
+        }
+      ],
+      "delta_vs_single": 0.00039079190536672813,
+      "descriptive_95_vs_single": [
+        0.00026483959324641554,
+        0.000512299364476974
+      ],
+      "second_bank_gain_gate": false,
+      "delta_vs_mean": 7.095079480547566e-05,
+      "descriptive_95_vs_mean": [
+        3.274281748188834e-05,
+        0.0001124929670673758
+      ],
+      "nonlinear_gain_gate": false,
+      "branches": {
+        "a": {
+          "mrr": 0.8321748668335268,
+          "hits1": 0.7676565205112779,
+          "hits10": 0.9471839200422382,
+          "queries": 325772
+        },
+        "b": {
+          "mrr": 0.8297850713025025,
+          "hits1": 0.7641755583659737,
+          "hits10": 0.9467511019977162,
+          "queries": 325772
+        },
+        "mean_query_cosine": 0.9986882209777832,
+        "mean_b_positive_responsibility": 0.5272789597511292,
+        "mean_b_top_candidate_responsibility": 0.5270678400993347,
+        "b_positive_stronger_fraction": 0.15044571049691194
+      }
+    }
+  }
+}

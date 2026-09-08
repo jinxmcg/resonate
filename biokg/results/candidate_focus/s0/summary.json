@@ -1,0 +1,234 @@
+{
+  "protocol": "CFKD1",
+  "screen_only": true,
+  "test_loaded": false,
+  "metrics": {
+    "control": {
+      "mrr": 0.8338693601634907,
+      "hits1": 0.7699004211534447,
+      "hits10": 0.9477886374519603,
+      "queries": 325772
+    },
+    "focused": {
+      "mrr": 0.8339914436825083,
+      "hits1": 0.7700907383077735,
+      "hits10": 0.9478469604508675,
+      "queries": 325772
+    },
+    "initial": {
+      "mrr": 0.8340991234586301,
+      "hits1": 0.7703977014599167,
+      "hits10": 0.9477794285573959,
+      "queries": 325772
+    }
+  },
+  "primary_focused_vs_control": {
+    "delta_mrr": 0.00012208351901772085,
+    "bootstrap_interval": [
+      3.613015134655246e-05,
+      0.00020632627128868068
+    ],
+    "recovered_top1": 401,
+    "lost_top1": 339,
+    "improved_queries": 3680,
+    "worsened_queries": 3280
+  },
+  "descriptive_vs_initial": {
+    "control_vs_initial": {
+      "delta_mrr": -0.00022976329513952492,
+      "bootstrap_interval": [
+        -0.0004756039458970162,
+        3.293360519801466e-05
+      ],
+      "recovered_top1": 3067,
+      "lost_top1": 3229,
+      "improved_queries": 15392,
+      "worsened_queries": 15513
+    },
+    "focused_vs_initial": {
+      "delta_mrr": -0.00010767977612180408,
+      "bootstrap_interval": [
+        -0.0003906361713976947,
+        0.0001468857992258188
+      ],
+      "recovered_top1": 2989,
+      "lost_top1": 3089,
+      "improved_queries": 15267,
+      "worsened_queries": 15141
+    }
+  },
+  "descriptive_family_direction": [
+    {
+      "family": "disease-protein",
+      "direction": "head",
+      "queries": 3777,
+      "mrr": {
+        "control": 0.6472963592251749,
+        "focused": 0.6470467036250396,
+        "initial": 0.6495866433423102
+      }
+    },
+    {
+      "family": "disease-protein",
+      "direction": "tail",
+      "queries": 3777,
+      "mrr": {
+        "control": 0.5664820371737195,
+        "focused": 0.5670853706971234,
+        "initial": 0.5655487050158606
+      }
+    },
+    {
+      "family": "drug-disease",
+      "direction": "head",
+      "queries": 267,
+      "mrr": {
+        "control": 0.4483156623666199,
+        "focused": 0.44838770238960285,
+        "initial": 0.4459505726563045
+      }
+    },
+    {
+      "family": "drug-disease",
+      "direction": "tail",
+      "queries": 267,
+      "mrr": {
+        "control": 0.2710541281415229,
+        "focused": 0.2712508562340274,
+        "initial": 0.2675117005104029
+      }
+    },
+    {
+      "family": "drug-drug",
+      "direction": "head",
+      "queries": 31135,
+      "mrr": {
+        "control": 0.7030963250380643,
+        "focused": 0.7031833822930985,
+        "initial": 0.7038946401966059
+      }
+    },
+    {
+      "family": "drug-drug",
+      "direction": "tail",
+      "queries": 31135,
+      "mrr": {
+        "control": 0.6715624112743542,
+        "focused": 0.6721856212207851,
+        "initial": 0.67291491611056
+      }
+    },
+    {
+      "family": "drug-protein",
+      "direction": "head",
+      "queries": 6539,
+      "mrr": {
+        "control": 0.9535904283429095,
+        "focused": 0.9535637361347862,
+        "initial": 0.9538237030203747
+      }
+    },
+    {
+      "family": "drug-protein",
+      "direction": "tail",
+      "queries": 6539,
+      "mrr": {
+        "control": 0.7509873303450632,
+        "focused": 0.7494807591116084,
+        "initial": 0.748141987186516
+      }
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": "head",
+      "queries": 8619,
+      "mrr": {
+        "control": 0.3636046243389078,
+        "focused": 0.36356528014363493,
+        "initial": 0.3638755150063081
+      }
+    },
+    {
+      "family": "drug-sideeffect",
+      "direction": "tail",
+      "queries": 8619,
+      "mrr": {
+        "control": 0.147992107941648,
+        "focused": 0.14795317943722922,
+        "initial": 0.14968426219066072
+      }
+    },
+    {
+      "family": "function-function",
+      "direction": "head",
+      "queries": 39811,
+      "mrr": {
+        "control": 0.9748763427908752,
+        "focused": 0.9748996408120371,
+        "initial": 0.9751019936719278
+      }
+    },
+    {
+      "family": "function-function",
+      "direction": "tail",
+      "queries": 39811,
+      "mrr": {
+        "control": 0.9549725498077374,
+        "focused": 0.9550824208881391,
+        "initial": 0.9554528873971687
+      }
+    },
+    {
+      "family": "protein-function",
+      "direction": "head",
+      "queries": 43181,
+      "mrr": {
+        "control": 0.8015888732160522,
+        "focused": 0.8016717253735848,
+        "initial": 0.8010263883604353
+      }
+    },
+    {
+      "family": "protein-function",
+      "direction": "tail",
+      "queries": 43181,
+      "mrr": {
+        "control": 0.9229449510971787,
+        "focused": 0.923088314374891,
+        "initial": 0.9231138043849637
+      }
+    },
+    {
+      "family": "protein-protein",
+      "direction": "head",
+      "queries": 29557,
+      "mrr": {
+        "control": 0.9673462145536225,
+        "focused": 0.967614880909813,
+        "initial": 0.9672385476327018
+      }
+    },
+    {
+      "family": "protein-protein",
+      "direction": "tail",
+      "queries": 29557,
+      "mrr": {
+        "control": 0.9686683057403681,
+        "focused": 0.9688015901392704,
+        "initial": 0.9685522996438334
+      }
+    }
+  ],
+  "advance_for_seed_confirmation": false,
+  "query_sha256": {
+    "control": "5f73ef54fbec901e57205b206244a14d823c4d8c23f290858bd3f7eac8bc6f26",
+    "focused": "251b40096fd750bac95a0a9361945abbe2c5663c6df306203631d2c6676eb37a"
+  },
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt",
+    "split/random/valid.pt"
+  ],
+  "source_and_input_hashes_unchanged": true,
+  "total_seconds": 496.6197769739665
+}

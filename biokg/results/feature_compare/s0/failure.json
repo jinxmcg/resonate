@@ -1,0 +1,12 @@
+{
+  "protocol": "FC1",
+  "status": "failed_before_first_scored_query",
+  "exit_code": 1,
+  "error": "TypeError: only integer scalar arrays can be converted to a scalar index",
+  "cause": "VALID entity-type metadata is a Python list; batched array indexing required np.asarray conversion.",
+  "queries_scored": 0,
+  "model_updates": 0,
+  "results_produced": false,
+  "resolution": "Convert type metadata with np.asarray; add list-type regression test; retry unchanged experiment in s0_retry1.",
+  "original_receipt_retained": true
+}

@@ -1,0 +1,31 @@
+{
+  "args": {
+    "model": "biokg/checkpoints/dist_T2_s0.pt",
+    "data_root": "/mnt/geocore/geocore/data_ogb",
+    "out": "biokg/results/h34/screen_s0",
+    "device": "cuda",
+    "triples": 5000,
+    "chunk": 32,
+    "threads": 4
+  },
+  "torch_version": "2.6.0+cu124",
+  "numpy_version": "2.5.2",
+  "feature_names": [
+    "student",
+    "global_max",
+    "global_top3",
+    "relation_max",
+    "relation_top3",
+    "jaccard_max",
+    "jaccard_top3"
+  ],
+  "checkpoint_sha256": "b463a8bcc431ada38f4834e235677464f9cd3a86346f88aecd2fd681a01260ef",
+  "input_hashes": {
+    "split/random/train.pt": "958ad61478efffda0db28cf05e49c14cba6880e0f2d50d6023aca99b354d0385",
+    "split/random/valid.pt": "e26e85eab6d822a8efbaefbf1dd279393751c8744d8be3eb612b29e524ff8ba4",
+    "processed/data_processed": "e21662048715fe6dacb2650ff11e8b49c9e5b2a178022e833b0ad8f1a0b7af00",
+    "mapping/relidx2relname.csv.gz": "7c370b8491f451ee155dc26c220f07853a5c205166ad320aecbcea6df4b1b39e"
+  },
+  "source_sha256": "37c004d0c3ec6f3bd1cab352083bfc29a4d31df81d4a12c753da35e9d9f07a1f",
+  "protocol_sha256": "e4286bd218b69b02d0213cabfc5306eaf787f94041d5a496e23bd1a94ee0f05f"
+}

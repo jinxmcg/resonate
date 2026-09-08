@@ -1,0 +1,12 @@
+{
+  "audit_passed": true,
+  "source_input_artifact_hashes_verified": true,
+  "all_twelve_fit_only_recipes_reproduced": true,
+  "all_report_ranks_exact": true,
+  "original_fc1_rf1_fold_exact": true,
+  "exactly_once_coverage_per_partition": true,
+  "all_metrics_and_clustered_interval_reproduced": true,
+  "dataset_splits_loaded": false,
+  "models_deserialized": false,
+  "test_loaded": false
+}

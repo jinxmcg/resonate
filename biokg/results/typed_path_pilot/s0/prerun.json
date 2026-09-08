@@ -1,0 +1,66 @@
+{
+  "protocol": "TP1",
+  "hashes": {
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/split/random/train.pt": "958ad61478efffda0db28cf05e49c14cba6880e0f2d50d6023aca99b354d0385",
+    "/mnt/geocore/geocore/data_ogb/ogbl_biokg/raw/num-node-dict.csv.gz": "de2fb3e32b2f3328cd82adaab40a18983954c0c356e4099ea6ca9a3fc3017375",
+    "/mnt/geocore/resonate/biokg/TYPED_PATH_PILOT.md": "9d3c653d13c312904d4660bea2a2a4634980116949b30f8dfc2eb8d182634711",
+    "/mnt/geocore/resonate/biokg/typed_path_pilot.py": "4761d2a23c860d534f1cc981a6f17b5baf879553ff0adc0d824e1712ae4f8bc7",
+    "/mnt/geocore/resonate/biokg/test_typed_path_pilot.py": "3802ed3392694fb5a22ed7915fd3242766fefbe2a1f8488129a0169729abc923",
+    "/mnt/geocore/resonate/biokg/audit_typed_path_pilot.py": "e0a98e740efcaa572b12904338984fdb228c167786ce8090d2a8383ac406e18c"
+  },
+  "paths": [
+    "protein",
+    "sideeffect",
+    "disease"
+  ],
+  "weights": [
+    [
+      0.3333333432674408,
+      0.3333333432674408,
+      0.3333333432674408
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.5,
+      0.5,
+      0.0
+    ],
+    [
+      0.5,
+      0.0,
+      0.5
+    ],
+    [
+      0.0,
+      0.5,
+      0.5
+    ]
+  ],
+  "cap": 256,
+  "negatives": 500,
+  "min_fit": 128,
+  "bootstrap_replicates": 2000,
+  "split_seed": 3650,
+  "sample_seed": 3651,
+  "negative_seed": 3653,
+  "bootstrap_seed": 3655,
+  "torch": "2.6.0+cu124",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "device": "cpu",
+  "started_utc": "2026-09-06T21:38:27Z"
+}

@@ -1,0 +1,326 @@
+{
+  "protocol": "TH1",
+  "seed": 36840,
+  "cutoff": 95,
+  "entity_types": [
+    "disease",
+    "drug",
+    "function",
+    "protein",
+    "sideeffect"
+  ],
+  "offsets": {
+    "disease": 0,
+    "drug": 10687,
+    "function": 21220,
+    "protein": 66305,
+    "sideeffect": 83804
+  },
+  "counts": {
+    "disease": 10687,
+    "protein": 17499,
+    "drug": 10533,
+    "sideeffect": 9969,
+    "function": 45085
+  },
+  "fields": [
+    "head",
+    "relation",
+    "tail",
+    "head_type_id",
+    "tail_type_id",
+    "row_id"
+  ],
+  "artifact_sha256": {
+    "fit_train.npz": "aa13b00c4f4e5f93f18a2af02e895f85375fedc873d09a25778090e97913796f",
+    "holdout_train.npz": "783a55949f188b1ac09194df3bf03ed5a371284e228a17b7ca8282003b4e7e2f",
+    "assignment.npz": "70b85b96d097bfe582f0a30b3949207324961ea477ad45a4f7743cc93640c5d6"
+  },
+  "summary": {
+    "total_rows": 4762678,
+    "total_pairs": 2226241,
+    "pair_disjoint": true,
+    "original_rows_preserved": true,
+    "roles": {
+      "fit": {
+        "rows": 4526393,
+        "pairs": 2114965,
+        "entities": 92992,
+        "row_fraction": 0.9503882059631157,
+        "pair_fraction": 0.9500161932153797,
+        "self_link_rows": 0
+      },
+      "holdout": {
+        "rows": 236285,
+        "pairs": 111276,
+        "entities": 47367,
+        "row_fraction": 0.04961179403688429,
+        "pair_fraction": 0.049983806784620353,
+        "self_link_rows": 2
+      }
+    },
+    "holdout_entities_absent_from_fit": 781,
+    "holdout_rows_with_unseen_endpoint": 1112,
+    "relations": {
+      "0": {
+        "fit": 69786,
+        "holdout": 3761
+      },
+      "1": {
+        "fit": 4863,
+        "holdout": 284
+      },
+      "2": {
+        "fit": 60354,
+        "holdout": 3076
+      },
+      "3": {
+        "fit": 17626,
+        "holdout": 928
+      },
+      "4": {
+        "fit": 28940,
+        "holdout": 1408
+      },
+      "5": {
+        "fit": 46084,
+        "holdout": 2430
+      },
+      "6": {
+        "fit": 90310,
+        "holdout": 4532
+      },
+      "7": {
+        "fit": 300,
+        "holdout": 16
+      },
+      "8": {
+        "fit": 32950,
+        "holdout": 1710
+      },
+      "9": {
+        "fit": 124,
+        "holdout": 4
+      },
+      "10": {
+        "fit": 13606,
+        "holdout": 708
+      },
+      "11": {
+        "fit": 53290,
+        "holdout": 2704
+      },
+      "12": {
+        "fit": 34346,
+        "holdout": 1768
+      },
+      "13": {
+        "fit": 79156,
+        "holdout": 4054
+      },
+      "14": {
+        "fit": 75374,
+        "holdout": 3828
+      },
+      "15": {
+        "fit": 2856,
+        "holdout": 150
+      },
+      "16": {
+        "fit": 278,
+        "holdout": 14
+      },
+      "17": {
+        "fit": 32608,
+        "holdout": 1634
+      },
+      "18": {
+        "fit": 34730,
+        "holdout": 1762
+      },
+      "19": {
+        "fit": 70280,
+        "holdout": 3622
+      },
+      "20": {
+        "fit": 8108,
+        "holdout": 420
+      },
+      "21": {
+        "fit": 562,
+        "holdout": 38
+      },
+      "22": {
+        "fit": 55056,
+        "holdout": 2870
+      },
+      "23": {
+        "fit": 76360,
+        "holdout": 3848
+      },
+      "24": {
+        "fit": 362,
+        "holdout": 18
+      },
+      "25": {
+        "fit": 1582,
+        "holdout": 98
+      },
+      "26": {
+        "fit": 914,
+        "holdout": 58
+      },
+      "27": {
+        "fit": 490,
+        "holdout": 24
+      },
+      "28": {
+        "fit": 3032,
+        "holdout": 192
+      },
+      "29": {
+        "fit": 1902,
+        "holdout": 112
+      },
+      "30": {
+        "fit": 16132,
+        "holdout": 874
+      },
+      "31": {
+        "fit": 78166,
+        "holdout": 4002
+      },
+      "32": {
+        "fit": 1182,
+        "holdout": 78
+      },
+      "33": {
+        "fit": 24654,
+        "holdout": 1206
+      },
+      "34": {
+        "fit": 2090,
+        "holdout": 124
+      },
+      "35": {
+        "fit": 25058,
+        "holdout": 1290
+      },
+      "36": {
+        "fit": 4176,
+        "holdout": 216
+      },
+      "37": {
+        "fit": 4426,
+        "holdout": 234
+      },
+      "38": {
+        "fit": 64104,
+        "holdout": 3222
+      },
+      "39": {
+        "fit": 36858,
+        "holdout": 1988
+      },
+      "40": {
+        "fit": 112182,
+        "holdout": 5748
+      },
+      "41": {
+        "fit": 149694,
+        "holdout": 7785
+      },
+      "42": {
+        "fit": 1361686,
+        "holdout": 71544
+      },
+      "43": {
+        "fit": 738346,
+        "holdout": 39231
+      },
+      "44": {
+        "fit": 69304,
+        "holdout": 3740
+      },
+      "45": {
+        "fit": 277810,
+        "holdout": 14444
+      },
+      "46": {
+        "fit": 288498,
+        "holdout": 14936
+      },
+      "47": {
+        "fit": 1848,
+        "holdout": 104
+      },
+      "48": {
+        "fit": 24472,
+        "holdout": 1260
+      },
+      "49": {
+        "fit": 14378,
+        "holdout": 742
+      },
+      "50": {
+        "fit": 335100,
+        "holdout": 17446
+      }
+    },
+    "type_endpoints": {
+      "disease": {
+        "fit": {
+          "head": 69786,
+          "tail": 4863
+        },
+        "holdout": {
+          "head": 3761,
+          "tail": 284
+        }
+      },
+      "drug": {
+        "fit": {
+          "head": 1345165,
+          "tail": 1078426
+        },
+        "holdout": {
+          "head": 69077,
+          "tail": 55260
+        }
+      },
+      "function": {
+        "fit": {
+          "head": 1361686,
+          "tail": 2100032
+        },
+        "holdout": {
+          "head": 71544,
+          "tail": 110775
+        }
+      },
+      "protein": {
+        "fit": {
+          "head": 1749756,
+          "tail": 1193378
+        },
+        "holdout": {
+          "head": 91903,
+          "tail": 62181
+        }
+      },
+      "sideeffect": {
+        "fit": {
+          "head": 0,
+          "tail": 149694
+        },
+        "holdout": {
+          "head": 0,
+          "tail": 7785
+        }
+      }
+    }
+  },
+  "old_full_train_checkpoints_ineligible": true,
+  "model_updates": 0,
+  "holdout_evaluated": false
+}

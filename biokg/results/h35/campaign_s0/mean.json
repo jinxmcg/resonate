@@ -1,0 +1,17 @@
+{
+  "metrics": {
+    "mrr": 0.8312714993273211,
+    "hits1": 0.7664163893766193,
+    "hits10": 0.9469444887835664,
+    "queries": 325772
+  },
+  "training_seconds": 63.37053766276222,
+  "elapsed_seconds": 75.09616007498698,
+  "peak_allocated_bytes": 456778752,
+  "train_stream_sha256": "190274fd1869d6dd16cb4074d46fa8e92e15e4bf0e5072ab6328aad312c23bf9",
+  "frozen_sha256": "58f1e38d984ba7a68c948d446496ea4fd6f462d209f4e341c592905602c7b4fc",
+  "frozen_unchanged": true,
+  "initial_b_sha256": "b8b50d23149b3488189162900478c4670bc106068675a0434eaea24560ee19f6",
+  "parameters": 27241633,
+  "trainable_parameters": 117504
+}

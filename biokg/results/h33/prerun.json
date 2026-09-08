@@ -1,0 +1,28 @@
+{
+  "started_utc": "2026-09-05T19:56:26.080970+00:00",
+  "source_sha256": {
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "resonate_wiki.py": "ac8ce8763f6f009634d7617755e2bbcc885e96387d54fa5a0af79473c83c6697",
+    "resonate_comp.py": "bb3451151b57fa3a314c12bd7da85a21e3f2a823ea5c5b1bf08ade4431b84444",
+    "rowadagrad.py": "de8afd9919f7478b3ab06d75846991afa92aeb412d3be5dc2b4549737aded115",
+    "biokg/train_biokg_comp.py": "c4a0f65a2e1a273bf835367533820a2ee606155cdbff0449a109137a238e5ccd",
+    "biokg/train_positive_filter.py": "c0d21b5b2973dbdfb06e0eeb8d4ffc551b0b43f43e167b0a9b702a5b4a5eb492",
+    "biokg/hard_negative.py": "5f5f75cafab4f17898ae75b88d2e001d430e25ef378f1c0686ca57f7f7c5f82e",
+    "biokg/direction_sampling.py": "9ddd382d29c9e9e20ff999195148f71e92be5c7cbcbcb7fff647fee643b3922b",
+    "biokg/analyze_errors.py": "093b7d390b1a8bd95840fd176627ebbfe3216a85e8a2dcc62579bbc86f8d4a52",
+    "biokg/test_direction_sampling.py": "dea685a00ea0609f04ed900973f47a79a55d05cf1db54fa15610b693794f1c3e",
+    "biokg/test_hard_negative.py": "f2094e0d141679dc52e5ad3dd8e88ab01b0f0e11e8170532d63abff64ae5efdd",
+    "biokg/summarize_h33.py": "9e30d4262c7cd3bb99fa1a8cefef7a735a47fb82f9e9d97d2d5443cc57d06bd3",
+    "biokg/test_h33_report.py": "b59ba7acd9e120e8961bd8402edfa00897cff8c35cd6c137a313b1c35ddcb576",
+    "biokg/scripts/run_h33.sh": "55c38024a889819ff245b2d633c515157a794088c25c7ebaee01880a0d4f3410",
+    "biokg/H33.md": "3b26be9be0feeb37c3dc2ef87b62cdf50261a7d921be854d9d5eb2231f52253f",
+    "biokg/test_training_progress.py": "ee7ac6f9b94be486cb1d5f8d770d61d75ca46f4bb6bbe753c67f8a9b68fa921f",
+    "biokg/H33_VAST.md": "774389932ea6aa53b0ced175a3b7a4c40cb4227c06dde5a45735671bd5f7e5c9",
+    "biokg/run_h33_vast.py": "3d8401cc5a03aa5942c59cdaa231bd425f6531416578526f09dd90d3e3a6ebdd"
+  },
+  "run_root": "/workspace/biokg-h33-20260905/biokg/runs/h33",
+  "diag_prefix": "/workspace/biokg-h33-20260905/biokg/results/error_analysis/h33",
+  "torch_version": "2.11.0+cu128",
+  "cuda_version": "12.8",
+  "protocol": "Fresh train-only updates; uniform directions; final validation only; no test"
+}

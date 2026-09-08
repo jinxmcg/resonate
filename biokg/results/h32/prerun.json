@@ -1,0 +1,23 @@
+{
+  "started_utc": "2026-09-05T18:27:01.093027+00:00",
+  "source_sha256": {
+    "resonate.py": "b859bf43409d32da1b312c8bb2fe67da2832c46b4584ab2b27de485ade41057e",
+    "resonate_wiki.py": "ac8ce8763f6f009634d7617755e2bbcc885e96387d54fa5a0af79473c83c6697",
+    "rowadagrad.py": "de8afd9919f7478b3ab06d75846991afa92aeb412d3be5dc2b4549737aded115",
+    "biokg/train_biokg_comp.py": "053e646b62486cc71056a94efbfe2c167b0e5ad7d91d9737b12dda4137f58c17",
+    "biokg/train_positive_filter.py": "c0d21b5b2973dbdfb06e0eeb8d4ffc551b0b43f43e167b0a9b702a5b4a5eb492",
+    "biokg/hard_negative.py": "5f5f75cafab4f17898ae75b88d2e001d430e25ef378f1c0686ca57f7f7c5f82e",
+    "biokg/direction_sampling.py": "9ddd382d29c9e9e20ff999195148f71e92be5c7cbcbcb7fff647fee643b3922b",
+    "biokg/analyze_errors.py": "093b7d390b1a8bd95840fd176627ebbfe3216a85e8a2dcc62579bbc86f8d4a52",
+    "biokg/test_direction_sampling.py": "dea685a00ea0609f04ed900973f47a79a55d05cf1db54fa15610b693794f1c3e",
+    "biokg/test_hard_negative.py": "f2094e0d141679dc52e5ad3dd8e88ab01b0f0e11e8170532d63abff64ae5efdd",
+    "biokg/summarize_h32.py": "76570f65cd239cacdea33f3549c31e7780d095cf0d817df2a652f8a69b347555",
+    "biokg/scripts/run_h32.sh": "5c8006c263e44836cb70d9838f037326320508f0025e0708483dd24074d38ae2",
+    "biokg/H32.md": "9a780d8ca95e9ddda9c7be1644b1556c4a240c5ffebcd71db07443923b22535f"
+  },
+  "run_root": "/mnt/geocore/resonate/biokg/runs/h32",
+  "diag_prefix": "/mnt/geocore/resonate/biokg/results/error_analysis/h32",
+  "torch_version": "2.6.0+cu124",
+  "cuda_version": "12.4",
+  "protocol": "train-only updates and direction policy; validation evaluation; no test"
+}

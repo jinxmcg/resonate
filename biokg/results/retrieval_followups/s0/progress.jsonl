@@ -1,0 +1,197 @@
+{"stage": "inputs_verified", "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 0, "direction": 0, "queries": 3777, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 1, "direction": 0, "queries": 4044, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 2, "direction": 0, "queries": 5806, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 3, "direction": 0, "queries": 6321, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 4, "direction": 0, "queries": 7164, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 5, "direction": 0, "queries": 8512, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 6, "direction": 0, "queries": 11147, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 7, "direction": 0, "queries": 11156, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 8, "direction": 0, "queries": 12119, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 9, "direction": 0, "queries": 12123, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 10, "direction": 0, "queries": 12521, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 11, "direction": 0, "queries": 14076, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 12, "direction": 0, "queries": 15079, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 13, "direction": 0, "queries": 17390, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 14, "direction": 0, "queries": 19590, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 15, "direction": 0, "queries": 19673, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 16, "direction": 0, "queries": 19681, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 17, "direction": 0, "queries": 20632, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 18, "direction": 0, "queries": 21646, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 19, "direction": 0, "queries": 23699, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 20, "direction": 0, "queries": 23936, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 21, "direction": 0, "queries": 23953, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 24145, "total": 325772, "seconds": 35.025004748022184, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 22, "direction": 0, "queries": 25562, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 23, "direction": 0, "queries": 27790, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 24, "direction": 0, "queries": 27801, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 25, "direction": 0, "queries": 27848, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 26, "direction": 0, "queries": 27875, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 27, "direction": 0, "queries": 27889, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 28, "direction": 0, "queries": 27979, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 29, "direction": 0, "queries": 28035, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 30, "direction": 0, "queries": 28507, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 31, "direction": 0, "queries": 30789, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 32, "direction": 0, "queries": 30824, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 33, "direction": 0, "queries": 31542, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 34, "direction": 0, "queries": 31604, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 35, "direction": 0, "queries": 31979, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 36, "direction": 0, "queries": 32101, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 37, "direction": 0, "queries": 32230, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 38, "direction": 0, "queries": 34100, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 39, "direction": 0, "queries": 35179, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 40, "direction": 0, "queries": 41718, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 44182, "total": 325772, "seconds": 70.06478715903359, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 41, "direction": 0, "queries": 50337, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 51937, "total": 325772, "seconds": 105.10480943100993, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 55585, "total": 325772, "seconds": 140.33553615002893, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 59265, "total": 325772, "seconds": 175.4158535830211, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 62945, "total": 325772, "seconds": 210.6652492270223, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 66625, "total": 325772, "seconds": 245.75278613204136, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 70305, "total": 325772, "seconds": 280.8808877490228, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 73985, "total": 325772, "seconds": 315.88857169501716, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 77633, "total": 325772, "seconds": 351.01857740501873, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 81313, "total": 325772, "seconds": 386.0647024390055, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 84993, "total": 325772, "seconds": 421.1793967120466, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 88673, "total": 325772, "seconds": 456.2335342229926, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 42, "direction": 0, "queries": 90148, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 94468, "total": 325772, "seconds": 491.3354031550116, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 101860, "total": 325772, "seconds": 526.3592324820347, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 109284, "total": 325772, "seconds": 561.3698291950277, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 116676, "total": 325772, "seconds": 596.5122154499986, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 124068, "total": 325772, "seconds": 631.5411022400367, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 131556, "total": 325772, "seconds": 666.6830038370099, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 43, "direction": 0, "queries": 133329, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 44, "direction": 0, "queries": 135358, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 142430, "total": 325772, "seconds": 701.7766149489908, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 45, "direction": 0, "queries": 143475, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 46, "direction": 0, "queries": 151904, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 47, "direction": 0, "queries": 151958, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 48, "direction": 0, "queries": 152673, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 49, "direction": 0, "queries": 153093, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 154693, "total": 325772, "seconds": 736.8576362089952, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 50, "direction": 0, "queries": 162886, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 166598, "total": 325772, "seconds": 771.8636470810161, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 0, "direction": 1, "queries": 166663, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 1, "direction": 1, "queries": 166930, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 2, "direction": 1, "queries": 168692, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 3, "direction": 1, "queries": 169207, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 4, "direction": 1, "queries": 170050, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 5, "direction": 1, "queries": 171398, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 6, "direction": 1, "queries": 174033, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 7, "direction": 1, "queries": 174042, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 8, "direction": 1, "queries": 175005, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 9, "direction": 1, "queries": 175009, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 10, "direction": 1, "queries": 175407, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 11, "direction": 1, "queries": 176962, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 12, "direction": 1, "queries": 177965, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 13, "direction": 1, "queries": 180276, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 14, "direction": 1, "queries": 182476, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 15, "direction": 1, "queries": 182559, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 16, "direction": 1, "queries": 182567, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 17, "direction": 1, "queries": 183518, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 18, "direction": 1, "queries": 184532, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 19, "direction": 1, "queries": 186585, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 20, "direction": 1, "queries": 186822, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 21, "direction": 1, "queries": 186839, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 22, "direction": 1, "queries": 188448, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 23, "direction": 1, "queries": 190676, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 24, "direction": 1, "queries": 190687, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 25, "direction": 1, "queries": 190734, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 26, "direction": 1, "queries": 190761, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 27, "direction": 1, "queries": 190775, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 28, "direction": 1, "queries": 190865, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 29, "direction": 1, "queries": 190921, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 30, "direction": 1, "queries": 191393, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 191649, "total": 325772, "seconds": 806.8689242160181, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 31, "direction": 1, "queries": 193675, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 32, "direction": 1, "queries": 193710, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 33, "direction": 1, "queries": 194428, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 34, "direction": 1, "queries": 194490, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 35, "direction": 1, "queries": 194865, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 36, "direction": 1, "queries": 194987, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 37, "direction": 1, "queries": 195116, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 38, "direction": 1, "queries": 196986, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 39, "direction": 1, "queries": 198065, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 40, "direction": 1, "queries": 204604, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 207964, "total": 325772, "seconds": 841.9291735700099, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 41, "direction": 1, "queries": 213223, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 215271, "total": 325772, "seconds": 876.9433150870027, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 218823, "total": 325772, "seconds": 912.0294986389927, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 222631, "total": 325772, "seconds": 947.269385010004, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 226439, "total": 325772, "seconds": 982.3258331200341, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 230279, "total": 325772, "seconds": 1017.4632022830192, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 234087, "total": 325772, "seconds": 1052.5917399440077, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 237927, "total": 325772, "seconds": 1087.7952459010412, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 241735, "total": 325772, "seconds": 1122.8090699100285, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 245575, "total": 325772, "seconds": 1157.9689950870234, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 249447, "total": 325772, "seconds": 1193.231461737014, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 42, "direction": 1, "queries": 253034, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 253290, "total": 325772, "seconds": 1228.4138260540203, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 257962, "total": 325772, "seconds": 1263.5885559060262, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 262602, "total": 325772, "seconds": 1298.7007038550219, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 267210, "total": 325772, "seconds": 1333.909257457999, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 271818, "total": 325772, "seconds": 1369.0123843190377, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 276330, "total": 325772, "seconds": 1404.0459561670432, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 281002, "total": 325772, "seconds": 1439.157804145012, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 285706, "total": 325772, "seconds": 1474.3065398610197, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 290378, "total": 325772, "seconds": 1509.3627084380132, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 294986, "total": 325772, "seconds": 1544.4374503560248, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 43, "direction": 1, "queries": 296215, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 44, "direction": 1, "queries": 298244, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 305188, "total": 325772, "seconds": 1579.474010036036, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 45, "direction": 1, "queries": 306361, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 46, "direction": 1, "queries": 314790, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 47, "direction": 1, "queries": 314844, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 48, "direction": 1, "queries": 315559, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 49, "direction": 1, "queries": 315979, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "feature_generation", "queries": 317259, "total": 325772, "seconds": 1614.5824021759909, "baseline_report_mrr": 0.8540538579928584, "treatment_mrr": "pending fixed evaluation", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "relation_complete", "relation": 50, "direction": 1, "queries": 325772, "baseline_report_mrr": 0.8540538579928584, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "features_complete", "queries": 325772, "seconds": 1642.1518588530016, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "baseline_reproduced", "report": {"mrr": 0.8540538579928584, "hits1": 0.7978669688050345, "hits10": 0.9555597975344524, "queries": 162398}, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "selection_start", "arm": "rarity", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "global_recipe", "label": "soft20", "weights": [0.5713736414909363, 0.03187498077750206, 0.15745502710342407, 0.047459132969379425, 0.19183723628520966], "fit_mrr": 0.8512576712521601, "fit_queries": 163374, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "drug-drug", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "drug-drug", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "drug-protein", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "drug-protein", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "function-function", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "function-function", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "protein-function", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "protein-function", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "protein-protein", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "rarity", "stage": "family_recipe", "family": "protein-protein", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "arm_evaluated", "arm": "rarity", "report": {"mrr": 0.8541798047177318, "hits1": 0.7980886464119016, "hits10": 0.9557630020074139, "queries": 162398}, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "selection_start", "arm": "support", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "global_recipe", "label": "soft50", "weights": [0.8014029264450073, 0.0942976102232933, 0.04749901592731476, 0.03404759615659714, 0.022752875462174416], "fit_mrr": 0.8447126688283794, "fit_queries": 163374, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "drug-drug", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "drug-drug", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "drug-protein", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "drug-protein", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "function-function", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "function-function", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "protein-function", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "protein-function", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "protein-protein", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "support", "stage": "family_recipe", "family": "protein-protein", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "arm_evaluated", "arm": "support", "report": {"mrr": 0.8510670133179739, "hits1": 0.7935134669146172, "hits10": 0.9542174164706462, "queries": 162398}, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "selection_start", "arm": "half_strength", "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "global_recipe", "label": "soft100", "weights": [0.06754916161298752, 0.19022828340530396, 0.18772844970226288, 0.2947961390018463, 0.25969797372817993], "fit_mrr": 0.8522723439421969, "fit_queries": 163374, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "drug-drug", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "drug-drug", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "drug-protein", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "drug-protein", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "drug-sideeffect", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "function-function", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "function-function", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "protein-function", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "protein-function", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "protein-protein", "direction": 0, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"arm": "half_strength", "stage": "family_recipe", "family": "protein-protein", "direction": 1, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "arm_evaluated", "arm": "half_strength", "report": {"mrr": 0.8550978917603994, "hits1": 0.7991354573332183, "hits10": 0.9553565930614909, "queries": 162398}, "lr": 0.0, "lr_status": "not applicable: frozen inference"}
+{"stage": "complete", "primary": {"rarity": {"delta_mrr": 0.0001259467248736469, "bootstrap_interval": [-8.121527374055609e-05, 0.0003217360562053468], "interval_percent": 97.5, "replicates": 2000, "seed": 3621, "recovered_top1": 385, "lost_top1": 349}, "support": {"delta_mrr": -0.0029868446748844853, "bootstrap_interval": [-0.003561487882863575, -0.002405483290793526], "interval_percent": 97.5, "replicates": 2000, "seed": 3622, "recovered_top1": 1890, "lost_top1": 2597}}, "advance_flags": {"rarity": false, "support": false}, "seconds": 1802.6790472450084, "lr": 0.0, "lr_status": "not applicable: frozen inference"}

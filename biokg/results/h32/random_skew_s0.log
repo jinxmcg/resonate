@@ -1,0 +1,28 @@
+ogbl-biokg loaded in 6s: 93,773 entities (disease:10687, drug:10533, function:45085, protein:17499, sideeffect:9969), 51 relations, 4,762,678 train triples
+direction sampling: train-fanout, capped at 2:1; train SHA256 ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b
+  relation 0: tail 0.6667, head 0.3333; train fanout tail 161.78, head 34.34
+  relation 1: tail 0.6509, head 0.3491; train fanout tail 29.56, head 8.50
+  relation 40: tail 0.6667, head 0.3333; train fanout tail 909.05, head 162.44
+  relation 41: tail 0.6667, head 0.3333; train fanout tail 354.65, head 63.22
+  relation 43: tail 0.3333, head 0.6667; train fanout tail 114.60, head 1834.06
+auxiliary mining: random, count 64, weight 0.1, warmup 2500, ramp 1250; original random CE unfiltered
+mining TRAIN index: 697.4 MiB, built in 2.0s; train SHA256 ac4d083d3c5104e605eb2b38563778dc4e57bf799573b39b028552606a4a038b
+sparse shell: row-sparse table grads, RowAdagrad lr 0.3, table fp32
+params: 27,124,129 (M=144)
+step 1000/12500  loss 8.213  (14s)
+step 2000/12500  loss 5.333  (28s)
+step 3000/12500  loss 7.490  (45s)  mining w=0.0400, eligible slots 100.0000%
+step 4000/12500  loss 4.457  (65s)  mining w=0.1000, eligible slots 100.0000%
+step 5000/12500  loss 4.044  (84s)  mining w=0.1000, eligible slots 100.0000%
+step 6000/12500  loss 4.077  (103s)  mining w=0.1000, eligible slots 100.0000%
+step 7000/12500  loss 3.878  (122s)  mining w=0.1000, eligible slots 100.0000%
+step 8000/12500  loss 3.503  (141s)  mining w=0.1000, eligible slots 100.0000%
+step 9000/12500  loss 3.585  (160s)  mining w=0.1000, eligible slots 100.0000%
+step 10000/12500  loss 3.571  (178s)  mining w=0.1000, eligible slots 100.0000%
+step 11000/12500  loss 3.235  (198s)  mining w=0.1000, eligible slots 100.0000%
+step 12000/12500  loss 4.451  (217s)  mining w=0.1000, eligible slots 100.0000%
+step 12500/12500  loss 4.516  (226s)  mining w=0.1000, eligible slots 100.0000%
+
+=== OGB official evaluation ===
+[valid] MRR 0.7861  hits@1 0.7087  hits@3 0.8389  hits@10 0.9277
+leaderboard context: TransE 0.745, RotatE 0.799, DistMult 0.804, ComplEx 0.810, top ~0.86

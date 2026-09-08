@@ -1,0 +1,30 @@
+ogbl-biokg loaded in 9s: 93,773 entities, 51 relations, 4,762,678 train triples
+tiers by training degree [5, 8, 32, 128, 1024]:
+  tier 0 [0, 4]: 22,766 entities ( 24.3%),   0.5% of validation answers
+  tier 1 [5, 7]:  3,666 entities (  3.9%),   0.4% of validation answers
+  tier 2 [8, 31]: 28,676 entities ( 30.6%),   5.7% of validation answers
+  tier 3 [32, 127]: 29,285 entities ( 31.2%),  19.3% of validation answers
+  tier 4 [128, 1023]:  8,038 entities (  8.6%),  29.9% of validation answers
+  tier 5 [1024, 62733]:  1,342 entities (  1.4%),  44.3% of validation answers
+wide model checkpoints/sparse_s0.pt: k=12 b=4 M=144 complex; table 27,006,624 + operators 117,505 = 27,124,129
+[valid wide (sanity)] MRR 0.8155  hits@1 0.7453  hits@3 0.8654  hits@10 0.9414
+[valid (2,4,8,32,96,144:1,1,1,1,1,1)] MRR 0.7180  hits@1 0.6378  hits@3 0.7688  hits@10 0.8649
+CP-B1 cfg 2,4,8,32,96,144:1,1,1,1,1,1: widths [2, 4, 8, 32, 96, 144] K [1, 1, 1, 1, 1, 1] -> table 4,549,704 (16.8% of the wide table), total 4,667,209  valid MRR 0.7180  variance kept per tier [0.517, 0.438, 0.358, 0.607, 0.903, 1.0]  (4s)
+[valid (2,4,8,32,96,144:16,16,16,8,4,1)] MRR 0.7696  hits@1 0.6895  hits@3 0.8238  hits@10 0.9162
+CP-B1 cfg 2,4,8,32,96,144:16,16,16,8,4,1: widths [2, 4, 8, 32, 96, 144] K [16, 16, 16, 8, 4, 1] -> table 4,981,416 (18.4% of the wide table), total 5,098,921  valid MRR 0.7696  variance kept per tier [0.166, 0.293, 0.366, 0.683, 0.944, 1.0]  (4s)
+[valid (2,4,8,32,96,144:64,64,64,16,4,1)] MRR 0.7824  hits@1 0.7033  hits@3 0.8375  hits@10 0.9252
+CP-B1 cfg 2,4,8,32,96,144:64,64,64,16,4,1: widths [2, 4, 8, 32, 96, 144] K [64, 64, 64, 16, 4, 1] -> table 5,559,720 (20.6% of the wide table), total 5,677,225  valid MRR 0.7824  variance kept per tier [0.161, 0.394, 0.431, 0.708, 0.944, 1.0]  (5s)
+[valid (2,4,8,32,96,144:256,256,256,64,8,1)] MRR 0.8006  hits@1 0.7266  hits@3 0.8530  hits@10 0.9338
+CP-B1 cfg 2,4,8,32,96,144:256,256,256,64,8,1: widths [2, 4, 8, 32, 96, 144] K [256, 256, 256, 64, 8, 1] -> table 8,394,792 (31.1% of the wide table), total 8,512,297  valid MRR 0.8006  variance kept per tier [0.215, 0.591, 0.534, 0.787, 0.956, 1.0]  (10s)
+[valid (2,4,8,32,96,144:1024,1024,1024,256,16,1)] MRR 0.8126  hits@1 0.7415  hits@3 0.8635  hits@10 0.9398
+CP-B1 cfg 2,4,8,32,96,144:1024,1024,1024,256,16,1: widths [2, 4, 8, 32, 96, 144] K [1024, 1024, 1024, 256, 16, 1] -> table 19,290,408 (71.4% of the wide table), total 19,407,913  valid MRR 0.8126  variance kept per tier [0.359, 0.87, 0.708, 0.911, 0.977, 1.0]  (22s)
+[valid (2,4,4,16,48,144:256,256,256,64,8,1)] MRR 0.7681  hits@1 0.6865  hits@3 0.8245  hits@10 0.9164
+CP-B1 cfg 2,4,4,16,48,144:256,256,256,64,8,1: widths [2, 4, 4, 16, 48, 144] K [256, 256, 256, 64, 8, 1] -> table 5,055,784 (18.7% of the wide table), total 5,173,289  valid MRR 0.7681  variance kept per tier [0.215, 0.591, 0.375, 0.619, 0.814, 1.0]  (10s)
+[valid (2,4,8,24,72,144:256,256,256,64,8,1)] MRR 0.7913  hits@1 0.7151  hits@3 0.8449  hits@10 0.9288
+CP-B1 cfg 2,4,8,24,72,144:256,256,256,64,8,1: widths [2, 4, 8, 24, 72, 144] K [256, 256, 256, 64, 8, 1] -> table 7,134,904 (26.4% of the wide table), total 7,252,409  valid MRR 0.7913  variance kept per tier [0.215, 0.591, 0.534, 0.718, 0.904, 1.0]  (10s)
+[valid (4,8,16,36,72,144:256,256,256,64,8,1)] MRR 0.8001  hits@1 0.7252  hits@3 0.8531  hits@10 0.9351
+CP-B1 cfg 4,8,16,36,72,144:256,256,256,64,8,1: widths [4, 8, 16, 36, 72, 144] K [256, 256, 256, 64, 8, 1] -> table 10,923,704 (40.4% of the wide table), total 11,041,209  valid MRR 0.8001  variance kept per tier [0.338, 0.782, 0.718, 0.814, 0.904, 1.0]  (10s)
+[valid (4,8,16,48,144,144:256,256,256,16,1,1)] MRR 0.8033  hits@1 0.7290  hits@3 0.8564  hits@10 0.9373
+CP-B1 cfg 4,8,16,48,144,144:256,256,256,16,1,1: widths [4, 8, 16, 48, 144, 144] K [256, 256, 256, 16, 1, 1] -> table 11,634,608 (43.1% of the wide table), total 11,752,113  valid MRR 0.8033  variance kept per tier [0.338, 0.782, 0.718, 0.81, 1.0, 1.0]  (9s)
+[valid (4,8,24,72,144,144:256,256,256,16,1,1)] MRR 0.8115  hits@1 0.7393  hits@3 0.8634  hits@10 0.9406
+CP-B1 cfg 4,8,24,72,144,144:256,256,256,16,1,1: widths [4, 8, 24, 72, 144, 144] K [256, 256, 256, 16, 1, 1] -> table 14,899,936 (55.2% of the wide table), total 15,017,441  valid MRR 0.8115  variance kept per tier [0.338, 0.782, 0.823, 0.9, 1.0, 1.0]  (9s)

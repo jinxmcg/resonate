@@ -1,0 +1,60 @@
+{
+  "step": 10000,
+  "parameter_changes": {
+    "initial_hashes": {
+      "B": "369f578051ebc4efdce1a367329bee2fe652fcdf7b2a0e0042390d13ce946ccd",
+      "head_scale": "f5c67e2e0d53d3199a8110f808772d7cc0174b8c7aeda60c97d4eac0aea4b9d2",
+      "tail_scale": "84c273fbdd140f82417c70cbc98f1d844548783634c02156dc3821421c7d5c4c",
+      "shift": "3ee1efe8f1208b3d80b89e69dffc169fbdd9b7ae895645ef108042006af23d85",
+      "gate_logit": "8254e48e2a5bf51b09763462558689d206de67ee1e78d87509d2123d19504c7b",
+      "log_tau_b": "34de8a12d196abf91c74f64ee77de0cb6fd89d6417824eca5f8ccfc55877f8fb",
+      "a.E": "826e0ced5fc170f75335ffae0ba34f941a0071762145dd02ac01f6471d385be6",
+      "a.log_tau": "b9063853ca4318d9717312f81f81480994e5f1cd9181ed617b18de2757181b37",
+      "a.H_b": "9295088d237b85a5fbc9aca9374dd417c87ce1e6a20cf8d2829e0292162f79e4"
+    },
+    "final_hashes": {
+      "B": "8ed4f5c2c6e2e9cf7c7e019eccc93d8f2a678a6892460822bb54cea889174d9c",
+      "head_scale": "9cbd8c27e445cc082d36d665b1a475f81077ff5d8518fdec7a26c1fa72f884a0",
+      "tail_scale": "4513c5dcc4f8e8964928bcc94938317379f71aef0ac38083015cb2ea10ddeff6",
+      "shift": "6c8f7d4a443f3ff7c1c033c0171a77e93f8adb314da5603a141699713001d26a",
+      "gate_logit": "8254e48e2a5bf51b09763462558689d206de67ee1e78d87509d2123d19504c7b",
+      "log_tau_b": "3158f7b35517bf343bea5537540cea9e12ddb9cfa03094bb890d335db7b6b7e0",
+      "a.E": "826e0ced5fc170f75335ffae0ba34f941a0071762145dd02ac01f6471d385be6",
+      "a.log_tau": "b9063853ca4318d9717312f81f81480994e5f1cd9181ed617b18de2757181b37",
+      "a.H_b": "9295088d237b85a5fbc9aca9374dd417c87ce1e6a20cf8d2829e0292162f79e4"
+    },
+    "changed": {
+      "B": true,
+      "head_scale": true,
+      "tail_scale": true,
+      "shift": true,
+      "gate_logit": false,
+      "log_tau_b": true,
+      "a.E": false,
+      "a.log_tau": false,
+      "a.H_b": false
+    }
+  },
+  "optimizer_steps": {
+    "B": 10000,
+    "head_scale": 10000,
+    "tail_scale": 10000,
+    "shift": 10000,
+    "gate_logit": 0,
+    "log_tau_b": 10000,
+    "a.E": 0,
+    "a.log_tau": 0,
+    "a.H_b": 0
+  },
+  "a_and_gate_unchanged": true,
+  "checkpoint_sha256": "d54f81d09cc584921ec3a60b5bdd655a064ce7f2b469fca1c35522645af1695f",
+  "probe": {
+    "combined_mrr": 0.8400903551170897,
+    "queries": 2000,
+    "a_mrr": 0.8411956954420665,
+    "b_mrr": 0.676280346163217,
+    "mean_gate": 0.05000000819563866,
+    "private_scale": 2.1416003704071045
+  },
+  "train_stream_sha256": "686a81ed7bb9f7e158fda0445fee47ada074249e2a448732d7dfa08a77897688"
+}

@@ -1,0 +1,13 @@
+{
+  "audit_passed": true,
+  "original_rows_and_pair_assignment_reproduced": true,
+  "pair_disjoint": true,
+  "compact_artifacts_and_fit_loader_reproduced": true,
+  "all_hashes_verified": true,
+  "validation_loaded": false,
+  "test_loaded": false,
+  "checkpoint_loaded": false,
+  "holdout_evaluated": false,
+  "model_updates": 0,
+  "lr": 0.0
+}

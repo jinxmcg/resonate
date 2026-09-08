@@ -1,0 +1,419 @@
+{
+  "protocol": "TF2",
+  "cases": 16,
+  "gradient_records": 32,
+  "cases_by_direction": {
+    "0": 8,
+    "1": 8
+  },
+  "retrieval": {
+    "model": {
+      "mrr": 0.24375,
+      "hits1": 0.0,
+      "hits10": 1.0,
+      "queries": 16
+    },
+    "pipeline": {
+      "mrr": 0.23383161976911976,
+      "hits1": 0.0,
+      "hits10": 0.875,
+      "queries": 16
+    },
+    "recovered_top1": 0,
+    "ranks_improved": 7,
+    "ranks_worsened": 5,
+    "original_competitor_overtaken": 2
+  },
+  "pools": {
+    "random": {
+      "queries": 16,
+      "competitor_present": 6,
+      "teacher_mean_prefers_positive": 5,
+      "scopes": {
+        "focal": {
+          "ce": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 17.377291321754456
+            },
+            "operators": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.04394621943356469
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 17.42123754118802
+            }
+          },
+          "kd": {
+            "entities": {
+              "helps": 9,
+              "harms": 7,
+              "mean_change": 0.02356278369552456
+            },
+            "operators": {
+              "helps": 8,
+              "harms": 8,
+              "mean_change": -0.0002122536345723347
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 9,
+              "harms": 7,
+              "mean_change": 0.023350530060952224
+            }
+          },
+          "trajectory": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.23680054675787687
+            },
+            "operators": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.0007947818030515919
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.23759532856092846
+            }
+          },
+          "total": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 17.63765424489975
+            },
+            "operators": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.044528747093863785
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 17.682182991993614
+            }
+          }
+        },
+        "batch": {
+          "ce": {
+            "entities": {
+              "helps": 13,
+              "harms": 3,
+              "mean_change": 0.016112456185510382
+            },
+            "operators": {
+              "helps": 7,
+              "harms": 9,
+              "mean_change": 5.00478558933537e-05
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 13,
+              "harms": 3,
+              "mean_change": 0.016162504041403736
+            }
+          },
+          "kd": {
+            "entities": {
+              "helps": 10,
+              "harms": 6,
+              "mean_change": 0.0010718503540374513
+            },
+            "operators": {
+              "helps": 6,
+              "harms": 10,
+              "mean_change": 2.4304263490648736e-07
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 10,
+              "harms": 6,
+              "mean_change": 0.0010720933966723578
+            }
+          },
+          "trajectory": {
+            "entities": {
+              "helps": 14,
+              "harms": 2,
+              "mean_change": 0.00015998755043256097
+            },
+            "operators": {
+              "helps": 8,
+              "harms": 8,
+              "mean_change": -3.002436990584556e-06
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 13,
+              "harms": 3,
+              "mean_change": 0.0001569851134419764
+            }
+          },
+          "total": {
+            "entities": {
+              "helps": 13,
+              "harms": 3,
+              "mean_change": 0.017344293504720554
+            },
+            "operators": {
+              "helps": 8,
+              "harms": 8,
+              "mean_change": 4.7288646555898595e-05
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 13,
+              "harms": 3,
+              "mean_change": 0.017391582151276452
+            }
+          }
+        }
+      }
+    },
+    "forced": {
+      "queries": 16,
+      "competitor_present": 16,
+      "teacher_mean_prefers_positive": 5,
+      "scopes": {
+        "focal": {
+          "ce": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 17.725869178771973
+            },
+            "operators": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.045061504060868174
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 17.77093068283284
+            }
+          },
+          "kd": {
+            "entities": {
+              "helps": 10,
+              "harms": 6,
+              "mean_change": 0.040751469030510634
+            },
+            "operators": {
+              "helps": 9,
+              "harms": 7,
+              "mean_change": -0.00013911268047195335
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 10,
+              "harms": 6,
+              "mean_change": 0.04061235635003868
+            }
+          },
+          "trajectory": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.23680054675787687
+            },
+            "operators": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.0007947818030515919
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.23759532856092846
+            }
+          },
+          "total": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 18.003421127796173
+            },
+            "operators": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.04571717273211107
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 18.049138300528284
+            }
+          }
+        },
+        "batch": {
+          "ce": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.03551792568759993
+            },
+            "operators": {
+              "helps": 8,
+              "harms": 8,
+              "mean_change": 9.744601038619294e-05
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.03561537169798612
+            }
+          },
+          "kd": {
+            "entities": {
+              "helps": 11,
+              "harms": 5,
+              "mean_change": 0.0007368421247520018
+            },
+            "operators": {
+              "helps": 7,
+              "harms": 9,
+              "mean_change": 9.373278828661569e-07
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 11,
+              "harms": 5,
+              "mean_change": 0.000737779452634868
+            }
+          },
+          "trajectory": {
+            "entities": {
+              "helps": 14,
+              "harms": 2,
+              "mean_change": 0.00015998755043256097
+            },
+            "operators": {
+              "helps": 8,
+              "harms": 8,
+              "mean_change": -3.002436990584556e-06
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 13,
+              "harms": 3,
+              "mean_change": 0.0001569851134419764
+            }
+          },
+          "total": {
+            "entities": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.03641475201584399
+            },
+            "operators": {
+              "helps": 9,
+              "harms": 7,
+              "mean_change": 9.538109088680358e-05
+            },
+            "temperature": {
+              "helps": 0,
+              "harms": 0,
+              "mean_change": 0.0
+            },
+            "representation": {
+              "helps": 16,
+              "harms": 0,
+              "mean_change": 0.03651013310673079
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_updates": 0,
+  "lr": 0.0,
+  "no_new_hyperparameter_fitting": true,
+  "validation_edges_loaded": false,
+  "test_loaded": false,
+  "external_models_loaded": false,
+  "gradients_computed_on_train_only": true,
+  "optimizer_constructed": false,
+  "not_adam_update_or_generalization_estimate": true,
+  "submission_changed": false,
+  "seconds": 39.038252372993156,
+  "peak_allocated_bytes": 2125538816,
+  "dataset_files_opened": [
+    "raw/num-node-dict.csv.gz",
+    "split/random/train.pt"
+  ]
+}

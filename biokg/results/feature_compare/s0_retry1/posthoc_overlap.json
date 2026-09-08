@@ -1,0 +1,10 @@
+{
+  "posthoc_overlap_diagnostic": true,
+  "source": "ranks.npz and metadata.npz, report queries only",
+  "new_top1_definition": "original_model > 1 and improved_model == 1 and not fit",
+  "model_new_top1": 2110,
+  "already_top1_with_original_pipeline": 1181,
+  "pipeline_new_top1_from_model_recoveries": 479,
+  "report_model_delta": 0.00198600153151407,
+  "training_or_recipe_changes_from_this_diagnostic": false
+}

@@ -1,0 +1,28 @@
+{
+  "real_data_loaded": false,
+  "device": "NVIDIA GeForce GTX 1080 Ti",
+  "torch": "2.6.0+cu124",
+  "teacher_count": 10,
+  "entities": 93773,
+  "directed_relations": 102,
+  "batch": 2048,
+  "shared_negatives": 4096,
+  "paired_updates": 20,
+  "seconds": 2.1695595729979686,
+  "estimated_5000_pair_training_seconds": 542.3898932494922,
+  "peak_allocated_bytes": 2334614016,
+  "all_student_groups_updated": true,
+  "teachers_unchanged": true,
+  "single_initial_gradient_norms": {
+    "E": 0.3187384307384491,
+    "log_tau": 0.657748281955719,
+    "H_b": 0.036168310791254044
+  },
+  "dual_initial_gradient_norms": {
+    "E": 0.31864017248153687,
+    "log_tau": 0.6574323177337646,
+    "H_a": 0.018458859995007515,
+    "H_b": 0.01771675795316696
+  },
+  "biokg_unit_tests_passed": 68
+}

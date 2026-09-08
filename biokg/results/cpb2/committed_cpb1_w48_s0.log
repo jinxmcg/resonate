@@ -1,0 +1,12 @@
+members (5): cpb1_w48_s0, analogy_cpb1_w48_s0, analogy_cpb1_w48_s0_t3, jaccard, jaccard_t3  norm: z
+global weights on full valid: uniform (0.8364)
+family weights fitted for 12 (family,dir) groups
+groups with local weights: 2/102; family weights: 91
+weights frozen -> runs/frozen_cpb1_w48_s0.npz
+frozen weights on full valid (in-sample): 0.8442
+
+================= COMMITTED TEST RESULT =================
+official Evaluator test MRR: 0.8433
+hits@1: 0.7832
+hits@3: 0.8857
+hits@10: 0.9515
