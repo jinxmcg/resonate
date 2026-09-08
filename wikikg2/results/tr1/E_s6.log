@@ -1,0 +1,25 @@
+members (9): model_cp3s6_w4_full, analogy_c6_t3, holders, cn_aa, linked, cn3_aa, typed, rev_raw_c6, rev_nov_c6  min_rows=250
+  model_cp3s6_w4_full: valid MRR alone 0.7066  (tail 0.9579 head 0.4552)
+  analogy_c6_t3: valid MRR alone 0.4893  (tail 0.8468 head 0.1318)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3699  (tail 0.4806 head 0.2592)
+  rev_raw_c6: valid MRR alone 0.6114  (tail 0.7912 head 0.4317)
+  rev_nov_c6: valid MRR alone 0.3137  (tail 0.3985 head 0.2289)
+SEL1 rich candidate family on
+global choice on fit rows: model+6@0.25 (0.7229)
+direction tail choice: soft20 (0.9602)
+direction head choice: soft10 (0.5193)
+groups with local weights: 154/726
+frozen weights on full valid (in-sample): 0.7651
+weights frozen -> results/tr1/frozen_E_s6.npz
+  fallback weights applied to 9,176 rows of unseen (relation, direction) groups
+
+================= COMMITTED TEST RESULT (wikikg2) ==============
+official Evaluator test MRR: 0.7085
+  by direction: tail 0.9569  head 0.4600
+hits@1: 0.6433
+hits@3: 0.7383
+hits@10: 0.8369
