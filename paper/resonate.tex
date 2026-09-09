@@ -45,7 +45,10 @@ scores test MRR $0.8158\pm0.0006$, above the official 188M-parameter
 baselines; label-free retrieval members read from the training graph add
 0.031 and training-time distillation from ten seeds at temperature 2 adds
 0.007, to $0.8528\pm0.0002$, which would place fifth on the current
-board at the smallest size on it by $3.5\times$. On \texttt{ogbl-wikikg2} a row-sparse training shell
+board at the smallest size on it by $3.5\times$; compressing that model's
+entity table after training, with no retraining, keeps $0.8468\pm0.0003$ at
+9.56M parameters, a second filed row $9.8\times$ smaller than the smallest
+entry on the board. On \texttt{ogbl-wikikg2} a row-sparse training shell
 fits 2.5M entities in 36 minutes on one GPU; the distilled single model
 reaches $0.6855\pm0.0008$ at 329M parameters, and the same model with its
 entity table compressed to clustered narrow rows and refit, plus
@@ -119,7 +122,10 @@ embedding scores test MRR $0.8158\pm0.0006$, above the official
 retrieval members read from the training graph and training-time
 distillation from ten seeds it reaches $0.8528\pm0.0002$, which would
 place fifth of twelve on the current board as the smallest entry on it by
-$3.5\times$. On
+$3.5\times$; its entity table compressed after training (row C$'$,
+Section~\ref{sec:compress}) keeps $0.8468\pm0.0003$ at 9.56M parameters,
+$9.8\times$ below the smallest entry on the board, and is filed alongside
+it. On
 \texttt{ogbl-wikikg2} (2.5M entities) a row-sparse shell trains the
 embedding in 36 minutes on one GPU and the distilled single model reaches
 $0.6855\pm0.0008$ at 329M parameters; compressed after training to
@@ -598,7 +604,10 @@ and the temperature restores it ($+0.0019$ on top).
 Table~\ref{tab:board} places the rows: C is fifth of twelve and the fourth
 single model, 0.0008 behind the fourth entry at one seventh of its
 parameters; every ResonatE row is the smallest model on the board by
-$3.5\times$.
+$3.5\times$. Row C$'$, the same model with its entity table compressed
+after training (Section~\ref{sec:compress}), would sit sixth at 9.56M
+parameters, $9.8\times$ below AutoSF, the smallest entry currently listed;
+C and C$'$ are the two rows filed.
 
 \begin{table}[t]
 \centering
@@ -615,13 +624,14 @@ sit.}
 2 & ComplEx$^2$ & 0.8583 & 188M \\
 3 & UniBi & 0.8550 & 182M \\
 4 & AutoBLM-KGBench \citep{zhang2022autoblm} & 0.8536 & 192M \\
-  & \textbf{ResonatE C: distilled 27M + retrieval} & $\mathbf{0.8528}$ & \textbf{27M} \\
+  & \textbf{ResonatE C: distilled 27M + retrieval (filed)} & $\mathbf{0.8528}$ & \textbf{27M} \\
 5 & ComplEx-RP \citep{chen2021relation} & 0.8492 & 188M \\
-  & \textbf{ResonatE B: 27M + retrieval} & $\mathbf{0.8463}$ & \textbf{27M} \\
+  & \textbf{ResonatE C$'$: C compressed after training + retrieval (filed)} & $\mathbf{0.8468}$ & \textbf{9.56M} \\
+  & ResonatE B: 27M + retrieval (not filed) & 0.8463 & 27M \\
 6 & TripleRE \citep{yu2021triplere} & 0.8348 & 470M \\
 7 & AutoSF \citep{zhang2020autosf} & 0.8309 & 94M \\
 8 & PairRE \citep{chao2021pairre} & 0.8164 & 188M \\
-  & \textbf{ResonatE A: 27M single model} & $\mathbf{0.8158}$ & \textbf{27M} \\
+  & ResonatE A: 27M single model (not filed) & 0.8158 & 27M \\
 9 & ComplEx \citep{trouillon2016complex} & 0.8095 & 188M \\
 10 & DistMult \citep{yang2015distmult} & 0.8043 & 188M \\
 11 & RotatE \citep{sun2019rotate} & 0.7989 & 188M \\
