@@ -319,7 +319,7 @@
 </div>
 <p class="plain">In plain words: we know what it does because we measured it. We do not yet know why it does some of it better than a standard alternative, and we do not claim it can reason.</p>
 </div></section>
-<section id="paper"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">07 / Paper · code · checkpoints · experiments · reproduce</p><h2>Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access</h2></div><p>Preprint, draft of 6 September 2026, not peer reviewed. Cristian Malaia, with Claude Fable 5 (Anthropic) as pair programmer. Every number on this page is in the paper with its receipt.</p></header>
+<section id="paper"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">07 / Paper · code · checkpoints · experiments · reproduce</p><h2>Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access</h2></div><p>Preprint, draft of 9 September 2026, not peer reviewed. Cristian Malaia. Every number on this page is in the paper with its receipt.</p></header>
 <div class="links">
 <a href="https://github.com/jinxmcg/resonate/blob/main/paper/resonate.pdf">Paper (PDF)</a>
 <a href="https://github.com/jinxmcg/resonate">Code and checkpoints (OGB)</a>
@@ -337,6 +337,8 @@
 <li><b>Every development test read is listed</b>, including the three runs of a non-submitted row read twice and the four reads of the STaRK test splits (P1 to P4, all in the table above).</li>
 </ul>
 <p class="plain">The whole story in one paragraph: we built a compact knowledge representation to predict links. It performed well. We then found that the same representation supports direct access as it is, and natural-language retrieval once continued on questions and wrapped in a separately trained pipeline of pretrained encoders, a graph walk and a reranker. We ran a control to see whether that property was generic, and it was not entirely. We do not yet claim to know why.</p>
+<h3>Acknowledgements</h3>
+<p class="small">The code, experiments and text were written with Claude Fable 5 (Anthropic) as pair programmer; the design, the protocol and every claim are the author's responsibility.</p>
 </div></section>
 <footer><div class="wrap">
   ResonatE · <a href="https://github.com/jinxmcg/resonate">github.com/jinxmcg/resonate</a> · <a href="https://github.com/jinxmcg/resonate-stark">github.com/jinxmcg/resonate-stark</a> · MIT license · leaderboard numbers as fetched from the live boards on 2026-09-04 (OGB) and 2026-09-06 (STaRK).
