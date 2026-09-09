@@ -1,9 +1,10 @@
 # Beyond Link Prediction: Compact Knowledge Representations for Prediction, Retrieval, and Direct Access
 
-> **Submission status — 9 September 2026: two ogbl-biokg entries were filed
-> on OGB's form today — C (27.1M, 0.8528) and C′ (9.56M, 0.8468) — and await
-> OGB's validity check; see [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md).**
-> The wikikg2 entry E is form-ready (ten seeds) and not yet submitted; the
+> **Submission status — 9 September 2026: three OGB entries were filed today
+> and await OGB's validity check — ogbl-biokg C (27.1M, 0.8528) and C′ (9.56M,
+> 0.8468), and ogbl-wikikg2 E (50.2M, 0.7100); see
+> [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md) and
+> [`wikikg2/SUBMISSION_WIKIKG2.md`](wikikg2/SUBMISSION_WIKIKG2.md).** The
 > STaRK-Prime entry P3 is prepared and not filed. Nothing else is proposed.
 
 *(the ResonatE repository; the model is the experimental vehicle, the properties measured are the result)*
@@ -406,15 +407,15 @@ in [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md), ready for
 | ogbl-biokg | C′. ResonatE distilled, tiered-compressed + retrieval features | 0.8468 ± 0.0003 | 0.8478 ± 0.0003 (held-out) | **9.56M** | **filed 9 Sep 2026** |
 | ogbl-biokg | A. ResonatE (single model) | 0.8158 ± 0.0006 | 0.8164 ± 0.0006 | 27.1M | not filed |
 | ogbl-biokg | B. ResonatE + retrieval features | 0.8463 ± 0.0004 | 0.8465 ± 0.0004 (held-out) | 27.1M | not filed |
-| ogbl-wikikg2 | E. ResonatE compact (clustered narrow rows, refit) + retrieval + reverse | 0.7100 ± 0.0014 | 0.7667 (held-out) | **50.2M** | **to file** (ten seeds since TR2) |
+| ogbl-wikikg2 | E. ResonatE compact (clustered narrow rows, refit) + retrieval + reverse | 0.7100 ± 0.0014 | 0.7667 (held-out) | **50.2M** | **filed 9 Sep 2026** |
 | ogbl-wikikg2 | ResonatE distilled single model (T=2 from ten seeds) | 0.6855 ± 0.0008 | 0.7190 ± 0.0004 | 328.8M | not filed |
 | STaRK-Prime | P3, reference pipeline (no LLM at query time) | 43.1 / 41.8 / 28.6 Hit@1 | — | 404M at query time | **to file** |
 
 **C and C′ were filed on 9 September 2026**, one submission each, with the
 field values recorded in `biokg/SUBMISSION_BIOKG.md`; OGB posts entries after a
 validity check, typically within a week. wikikg2 E met the ten-seed requirement
-the same day (TR2 retrained the three deleted students; `wikikg2/SUBMISSION_WIKIKG2.md`)
-and its form is prepared but not yet submitted.
+the same day (TR2 retrained the three deleted students) and was filed the same
+evening with the field values in `wikikg2/SUBMISSION_WIKIKG2.md`.
 
 A and B are dropped from the filing rather than withheld for any compliance
 reason: B is dominated by C′ on both axes the board reports — lower test MRR at

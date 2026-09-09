@@ -1,5 +1,10 @@
 # ogbl-wikikg2 filing (2026-09-09: entry E only; all reads done)
 
+> **Filed 9 September 2026:** entry E was submitted through the OGB form with
+> the values below (method "ResonatE compact+retrieval+rev", test 0.7100,0.0014,
+> validation 0.7666,0.0011 in-sample, 50,244,249 parameters, paper pinned to
+> commit d835b4f) and awaits OGB's validity check.
+
 **One entry is filed: E, the compact single model.** Both rows below were
 prepared by allowed means (validation used only to select among fixed
 per-relation weight patterns; no gradient touches validation labels; one test
@@ -57,7 +62,7 @@ teacher and the operators frozen. Alone it reads 0.7074 on validation
 
 ## RESOLVED 2026-09-09: the ten-seed requirement is met (see the TR2 completion note at the end)
 
-The section below records why E was blocked; TR2 closed it and E is now form-ready.
+The section below records why E was blocked; TR2 closed it and E was filed.
 
 ### (historical) NOT READY TO FILE: seven seeds, and OGB requires ten
 
