@@ -1,0 +1,27 @@
+members (9): model_cp3s2_w4_full, analogy_c2_t3, holders, cn_aa, linked, cn3_aa, typed, rev_raw_c2, rev_nov_c2  min_rows=250
+  model_cp3s2_w4_full: valid MRR alone 0.7074  (tail 0.9578 head 0.4569)
+  analogy_c2_t3: valid MRR alone 0.4890  (tail 0.8467 head 0.1313)
+  holders: valid MRR alone 0.4250  (tail 0.7999 head 0.0502)
+  cn_aa: valid MRR alone 0.1643  (tail 0.0957 head 0.2330)
+  linked: valid MRR alone 0.0921  (tail 0.0936 head 0.0906)
+  cn3_aa: valid MRR alone 0.3619  (tail 0.5015 head 0.2224)
+  typed: valid MRR alone 0.3701  (tail 0.4806 head 0.2595)
+  rev_raw_c2: valid MRR alone 0.6145  (tail 0.7947 head 0.4342)
+  rev_nov_c2: valid MRR alone 0.3143  (tail 0.4006 head 0.2280)
+SEL1 rich candidate family on
+global choice on fit rows: model+6@0.25 (0.7228)
+direction tail choice: soft20 (0.9601)
+direction head choice: soft10 (0.5206)
+groups with local weights: 153/726
+frozen weights on full valid (in-sample): 0.7661
+weights frozen -> results/tr1/frozen_E_s2.npz
+/venv/main/lib/python3.12/site-packages/outdated/__init__.py:36: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import parse_version
+  fallback weights applied to 9,176 rows of unseen (relation, direction) groups
+
+================= COMMITTED TEST RESULT (wikikg2) ==============
+official Evaluator test MRR: 0.7097
+  by direction: tail 0.9583  head 0.4610
+hits@1: 0.6443
+hits@3: 0.7407
+hits@10: 0.8379

@@ -9,7 +9,7 @@ submission. Team: Cristian Malaia. Code and checkpoints:
 https://github.com/jinxmcg/resonate (release v2.0-two-boards plus the compact
 checkpoints and frozen selection weights).
 
-Against the 2026-09-04 board, E at 0.7096 would rank 7th; C at 0.7320 would have
+Against the 2026-09-04 board, E at 0.7100 would rank 7th; C at 0.7320 would have
 ranked 2nd. C is a ten-model ensemble of 3,288,427,530 parameters — the largest
 thing this project has built — and filing it would put the project's headline
 wikikg2 number on the one row that argues against its own thesis. E, at
@@ -40,7 +40,7 @@ of the same procedure: 0.7909.
 | field | value |
 |---|---|
 | method name | ResonatE compact (clustered narrow rows) + retrieval + reverse |
-| test MRR | **0.7096 ± 0.0013** over seven seeds (s1, s4–s9); hits@1 0.6443 ± 0.0010, hits@10 0.8383 ± 0.0024 — **not yet form-ready, see below** |
+| test MRR | **0.7100 ± 0.0014** over ten seeds (s0–s9), one read each |
 | validation MRR | 0.7668 ± 0.0013 (frozen selection, in-sample); held-out estimate 0.7667 |
 | parameters | 50,244,249 (27,681,304 coefficients + 12,746,752 projections + 1,050,752 offsets + 8,765,440 operators + temperature) |
 | ensemble | no |
@@ -55,7 +55,11 @@ teacher and the operators frozen. Alone it reads 0.7074 on validation
 (student 0.7190); with the nine members and the richer selection family
 (SEL1) its held-out estimate is 0.7667 (student row 0.7734).
 
-## NOT READY TO FILE: seven seeds, and OGB requires ten
+## RESOLVED 2026-09-09: the ten-seed requirement is met (see the TR2 completion note at the end)
+
+The section below records why E was blocked; TR2 closed it and E is now form-ready.
+
+### (historical) NOT READY TO FILE: seven seeds, and OGB requires ten
 
 OGB's submission rules state that the "average (`torch.mean`) and unbiased
 standard deviation (`torch.std`) must be taken over 10 different random seeds".
@@ -86,3 +90,35 @@ are unaffected -- C and C' each have their full ten seeds with one read apiece
   student and refit on training edges.
 * Records: REVERSE_MEMBER.md, ENSEMBLE_SELECTION.md, SELECTION_RICH.md,
   COMPACT_K.md (CP1–CP3f), HOLDOUT_COMBINER.md (HC1–HC3), TEST_READS_PROPOSAL.md.
+
+## TR2 completion note (2026-09-09)
+
+Entry E was filed-blocked at seven seeds: OGB requires the mean and unbiased
+standard deviation over ten random seeds, and the students for seeds 0, 2 and 3
+had been deleted after their original reads. TR2 part 1 retrained those three
+(`train_wiki.py --distill <ten teachers> --distill-T 2.0`, 400k steps) and ran
+the standard E procedure on each -- compress with the student's own clusters,
+refit 200k, nine members, rich selection frozen on full validation, one test
+read. Nothing else changed; the seven existing seeds were not re-run or
+re-read.
+
+| seed | test MRR | | seed | test MRR |
+|---|---|---|---|---|
+| 0 (new) | 0.7109 | | 5 | 0.7105 |
+| 1 | 0.7116 | | 6 | 0.7085 |
+| 2 (new) | 0.7097 | | 7 | 0.7083 |
+| 3 (new) | 0.7122 | | 8 | 0.7087 |
+| 4 | 0.7090 | | 9 | 0.7107 |
+
+**Ten seeds: 0.7100 ± 0.0014** (the seven-seed figure was 0.7096 ± 0.0013). The
+three new seeds fall inside the existing spread, so the retrained students
+reproduce the recipe rather than drifting from it; seed 0's student read valid
+MRR 0.7190, matching the released students exactly.
+
+Thirteen test reads were registered for TR2; ten were used (three here, and the
+ten leave-one-out reads for entry C were NOT taken -- entry C is documented and
+not filed, so its spread is not needed). Run record: seeds 2 and 3 completed on
+vast.ai 50209059; seed 0's student and refit completed on 50270859, whose disk
+filled during member building and truncated `holders.test.npz` to zero bytes,
+failing the blend with `EOFError`. The student and refitted model were recovered
+and the members and read redone on 50209059 -- no retraining was repeated.
