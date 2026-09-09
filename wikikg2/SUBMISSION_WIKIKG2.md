@@ -122,3 +122,7 @@ vast.ai 50209059; seed 0's student and refit completed on 50270859, whose disk
 filled during member building and truncated `holders.test.npz` to zero bytes,
 failing the blend with `EOFError`. The student and refitted model were recovered
 and the members and read redone on 50209059 -- no retraining was repeated.
+
+Release `v2.2-wikikg2-compact` carries all ten compact checkpoints and their
+SHA256SUMS: seeds 0, 2 and 3 were copied off the stopped vast.ai disk on 9 September
+via a relay instance (checksums verified on both ends) and attached the same day.
