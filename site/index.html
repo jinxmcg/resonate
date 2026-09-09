@@ -66,7 +66,7 @@
 <p class="small">The row prepared for filing here is E, the compact one: the 329M student with every entity row replaced by a narrow row of width 4 to 64 by training degree, expanded through one of 4,096 learned subspaces per tier and refit against the student, then combined with nine members read from the training graph by the same fixed-candidate selection used on biokg. It reads 0.7096 ± 0.0013 over seven seeds at 50,244,249 parameters — 6.5× smaller than the model it was built from, and larger in MRR than every uncompressed row above it except the two the combiner rule excludes. Fields in <a href="https://github.com/jinxmcg/resonate/blob/main/wikikg2/SUBMISSION_WIKIKG2.md">SUBMISSION_WIKIKG2.md</a>. Nothing is filed yet.</p>
 <div class="finding"><b>Finding</b>The architecture generalises to a very different graph. It is not compact here: the entity table dominates, and a 36M-parameter entry (TripleRE + NodePiece, 0.6866) scores the same as our 329M model. We say so.</div>
 </article><article class="benchmark"><h3 class="bench" id="stark"><small>Stanford STaRK leaderboard · Prime</small>Questions in words over PrimeKG — 129,375 entities, 18 relations</h3>
-<p>Stanford's STaRK benchmark asks written questions ("Which drugs target GCK and are indicated for diabetes?", or a researcher's own phrasing) and scores the ranked entities over the whole graph: Hit@1, Hit@5, Recall@20, MRR. Every strong published row calls GPT-4 or Claude at query time.</p>
+<p>Stanford's STaRK benchmark asks written questions ("Which drugs target GCK and are indicated for diabetes?", or a researcher's own phrasing) and scores the ranked entities over the whole graph: Hit@1, Hit@5, Recall@20, MRR. The strongest published rows run a large language model on every query (GPT-4o, Llama 3.3 70B, gpt-oss-120b); the strongest without one, mFAR, is a trained multi-field retriever.</p>
 <figure class="diagram"><svg aria-label="STaRK pipeline: a question goes to a learned parser head, then to four sources (exact walk, ResonatE operators, fine-tuned text ranker, ResonatE readout from the question), fused and reranked into ranked entities; no generative LLM" role="img" viewbox="0 0 860 330">
 <g class="node"><rect height="56" rx="0" width="150" x="20" y="126"></rect><text class="nt" text-anchor="middle" x="95" y="150">Question in words</text><text class="ns" text-anchor="middle" x="95" y="169">any phrasing</text></g>
 <path class="edge" d="M170 154 H222"></path>
@@ -92,22 +92,22 @@
 <button aria-controls="tab-human" aria-selected="false" id="tabbtn-human" role="tab">Human-generated</button>
 </div>
 <div aria-labelledby="tabbtn-full" id="tab-full" role="tabpanel">
-<figure><svg aria-label="STaRK full synthesized Hit at one" height="400" id="starksvg1" role="img" width="780"></svg><figcaption>Synthesized (full), 2,801 questions: Hit@1 for every row on the Stanford STaRK leaderboard (fetched from the leaderboard's source on 2026-09-06), sorted by Hit@1, MRR after the dot. The rows are Stanford's own; no community entry exists for Prime.</figcaption></figure>
+<figure><svg aria-label="STaRK full synthesized Hit at one" height="400" id="starksvg1" role="img" width="780"></svg><figcaption>Synthesized (full), 2,801 questions: Hit@1 for every row on the Stanford STaRK leaderboard (fetched from the leaderboard's source on 2026-09-06) and for the later published rows that evaluate on the full split — KAR (NAACL 2025), mFAR (ICLR 2025), AF-Retriever (TMLR 2026), each copied from its paper on 2026-09-09 — sorted by Hit@1, MRR after the dot. ResonatE is second on Hit@1 to AF-Retriever, which generates graph queries and reranks with a 120B language model per question, and first on Hit@5, Recall@20 and MRR.</figcaption></figure>
 </div>
 <div aria-labelledby="tabbtn-ten" hidden="" id="tab-ten" role="tabpanel">
-<figure><svg aria-label="STaRK ten percent synthesized Hit at one" height="400" id="starksvg2" role="img" width="780"></svg><figcaption>Synthesized (10%), 280 questions.</figcaption></figure>
+<figure><svg aria-label="STaRK ten percent synthesized Hit at one" height="400" id="starksvg2" role="img" width="780"></svg><figcaption>Synthesized (10%), 280 questions. 4StepFocus and FocusedRetriever (the Boer et al. papers, GPT-4o and Llama 3.3 70B at query time) report only on this subset, as do the leaderboard's two LLM rerankers, so they are compared here and not with the full split. On 280 questions a 95% interval on Hit@1 is about ±6 points: FocusedRetriever's 46.4 against ResonatE's 41.8 is thirteen questions.</figcaption></figure>
 </div>
 <div aria-labelledby="tabbtn-human" hidden="" id="tab-human" role="tabpanel">
-<figure><svg aria-label="STaRK human questions Hit at one" height="420" id="starksvg3" role="img" width="780"></svg><figcaption>Human-generated, 98 questions. Sorted by Hit@1, so AvaTaR is first by about four questions and ResonatE is tied at 28.6 with the two LLM rerankers; on Hit@5 and Recall@20 ResonatE is ahead of every row, on MRR it is level with AvaTaR. On 98 questions a 95% bootstrap interval on Hit@1 is about 18 points wide (measured on our P2 read: [21.4, 39.8]).</figcaption></figure>
+<figure><svg aria-label="STaRK human questions Hit at one" height="420" id="starksvg3" role="img" width="780"></svg><figcaption>Human-generated, 98 questions. Here the query-time LLM pipelines are far ahead: FocusedRetriever 58.8, AF-Retriever 57.1, 4StepFocus 50.5 and KAR 45.0 Hit@1 against ResonatE's 28.6, a gap outside any interval (a 95% bootstrap interval on Hit@1 is about 18 points wide on 98 questions; ours on the P2 read was [21.4, 39.8]). ResonatE is level with the leaderboard's LLM rerankers and behind AvaTaR by four questions; on Recall@20 the one later row that reports it, KAR at 59.9, is level with ResonatE's 61.9. The parser is trained on synthesized templates and does not read free phrasing the way a language model does; that is the limit of the design on this set.</figcaption></figure>
 </div>
 <div class="tablewrap"><table>
-<thead><tr><th>split</th><th class="num">ResonatE (no llm), P3 <span class="tag">To file</span></th><th class="num">best published row, per column</th></tr></thead>
+<thead><tr><th>split</th><th class="num">ResonatE (no llm), P3 <span class="tag">To file</span></th><th class="num">best published number per column (who)</th></tr></thead>
 <tbody>
-<tr class="ours filing"><td>Synthesized (full, 2,801)</td><td class="num">43.1 / 68.8 / 75.5 / 54.7</td><td class="num">20.1 / 39.9 / 42.2 / 29.2</td></tr>
-<tr class="ours filing"><td>Synthesized (10%, 280)</td><td class="num">41.8 / 72.5 / 77.8 / 54.3</td><td class="num">18.3 / 37.3 / 41.1 / 26.6</td></tr>
-<tr class="ours filing"><td>Human-generated (98)</td><td class="num">28.6 / 53.1 / 61.9 / 40.7</td><td class="num">33.0 / 51.4 / 53.3 / 41.0 (AvaTaR, gpt-4-turbo)</td></tr>
+<tr class="ours filing"><td>Synthesized (full, 2,801)</td><td class="num">43.1 / <b>68.8</b> / <b>75.5</b> / <b>54.7</b></td><td class="num"><b>46.2</b> / 63.7 / 68.3 / 54.0 (AF-Retriever, gpt-oss-120b at query time; Recall@20 from mFAR, no LLM)</td></tr>
+<tr class="ours filing"><td>Synthesized (10%, 280)</td><td class="num">41.8 / <b>72.5</b> / <b>77.8</b> / <b>54.3</b></td><td class="num"><b>46.4</b> / 63.9 / 65.5 / 53.7 (FocusedRetriever, Llama 3.3 70B at query time; this subset only)</td></tr>
+<tr class="ours filing"><td>Human-generated (98)</td><td class="num">28.6 / 53.1 / <b>61.9</b> / 40.7</td><td class="num"><b>58.8</b> / <b>69.4</b> / 59.9 / <b>62.7</b> (FocusedRetriever / AF-Retriever / KAR / AF-Retriever)</td></tr>
 </tbody></table></div>
-<p class="small">Hit@1 / Hit@5 / Recall@20 / MRR. Each read is one frozen pipeline run once per split after a dry run reproduced the validation number to four decimals. All four reads, Hit@1 on test / test-0.1 / human: P1, hand-written parser and off-the-shelf embedder, 28.7 / 28.2 / 20.4. P2, learned parser, fine-tuned ranker, joint table, out-of-fold reranker, 41.8 / 41.8 / 30.6. <b>P3, P2 plus one correctness fix</b> (gene symbols shorter than four characters were never matched), 43.1 / 41.8 / 28.6: the reference system. P4, P3 plus a learned selector over four readings of each question, 43.7 / 41.8 / 25.5: rejected, because the selector is a bolt fit to the synthesized templates and it cost five human questions. The rule we chose before P4 was read: publish the best model and architecture, not the best score, so a bug fix stays and a dataset-specific selector goes. On 98 human questions the differences among P2, P3 and P4 are two to five questions, inside the noise.</p>
+<p class="small">Hit@1 / Hit@5 / Recall@20 / MRR; bold is the better of the two cells. The comparison column is the Stanford leaderboard plus the later published Prime rows — KAR (Xia et al., NAACL 2025), mFAR (Li et al., ICLR 2025), 4StepFocus (Boer, Koch, Kramer, 2024), FocusedRetriever (Boer, Roth, Kramer, 2025) and its published successor AF-Retriever (TMLR 2026) — each number copied from the paper's own table on 2026-09-09. <b>The 10% caveat:</b> 4StepFocus and FocusedRetriever evaluate only on the 280-question subset ("for methods that use proprietary LLMs, only 10% of synthetic test sets are used"), so they appear in the 10% row and never against the full split; KAR, mFAR and AF-Retriever evaluate on all 2,801. Each read is one frozen pipeline run once per split after a dry run reproduced the validation number to four decimals. All four reads, Hit@1 on test / test-0.1 / human: P1, hand-written parser and off-the-shelf embedder, 28.7 / 28.2 / 20.4. P2, learned parser, fine-tuned ranker, joint table, out-of-fold reranker, 41.8 / 41.8 / 30.6. <b>P3, P2 plus one correctness fix</b> (gene symbols shorter than four characters were never matched), 43.1 / 41.8 / 28.6: the reference system. P4, P3 plus a learned selector over four readings of each question, 43.7 / 41.8 / 25.5: rejected, because the selector is a bolt fit to the synthesized templates and it cost five human questions. The rule we chose before P4 was read: publish the best model and architecture, not the best score, so a bug fix stays and a dataset-specific selector goes. On 98 human questions the differences among P2, P3 and P4 are two to five questions, inside the noise.</p>
 <div class="finding"><b>Finding</b>The same representation can be reached from language through a pretrained encoder with a learned head. Continued on edges and training questions, it answers a question from the text alone at 26.7 ± 0.2 Hit@1 (three seeds), its sensitivity to phrasing is under one point, and its link MRR rose from 0.557 to 0.568 while it learned. The pipeline around it runs no generative model.</div>
 <p class="plain">In plain words: nobody types a database query. You type the question, a learned reader (a pretrained encoder with three small heads) turns it into "which thing, which relation", the graph and the model answer, and no chatbot is consulted.</p>
 </article></div></section>
@@ -296,7 +296,7 @@
 <div>
 <h3>Observed</h3>
 <ul>
-<li>Strong link prediction on two OGB boards, top of the synthesized STaRK splits.</li>
+<li>Strong link prediction on two OGB boards; on the synthesized STaRK splits, first on Hit@5, Recall@20 and MRR and second on Hit@1 to pipelines that run a 70B–120B language model per question; well behind those pipelines on the 98 human questions.</li>
 <li>A compact representation on biokg: 27M parameters, above the 188M official baselines.</li>
 <li>Missing-link completion: true unseen facts separated from random false ones at AUROC 0.98, from the most plausible false alternative at 0.71; 496 new facts absorbed to rank 1 in 223 s on a laptop GPU.</li>
 <li>Direct access to the graph, O(1) in depth: compiled chains at 0.08–0.11 ms for depth 1–6; for these graph queries the fp16 table or index is the whole deployable; an exact oracle labels every answer graph-supported or unverified. This describes the graph operations, not the language pipeline.</li>
@@ -391,6 +391,9 @@
   function sortDesc(rows){return rows.slice().sort(function(a,b){return b[1]-a[1];});}
   drawBoard('starksvg1', sortDesc([
       ['ResonatE (no llm)',43.09,'MRR 54.73',1],
+      ['AF-Retriever (gpt-oss-120b)',46.2,'MRR 54.0',0],
+      ['mFAR (no llm at query time)',40.9,'MRR 51.2',0],
+      ['KAR (gpt-4o)',30.35,'MRR 39.22',0],
       ['AvaTaR (gpt-4-turbo)',20.10,'MRR 29.18',0],
       ['AvaTaR (claude-3-opus)',18.44,'MRR 26.73',0],
       ['GritLM-7b',15.57,'MRR 24.11',0],
@@ -405,6 +408,8 @@
       ['DPR (roberta)',4.46,'MRR 12.38',0]]), 50, h1);
   drawBoard('starksvg2', sortDesc([
       ['ResonatE (no llm)',41.79,'MRR 54.34',1],
+      ['FocusedRetriever (Llama 3.3 70B)',46.4,'MRR 53.7',0],
+      ['4StepFocus (gpt-4o)',39.3,'MRR 45.8',0],
       ['GPT4 Reranker',18.28,'MRR 26.55',0],
       ['Claude3 Reranker',17.79,'MRR 26.27',0],
       ['GritLM-7b',16.79,'MRR 24.99',0],
@@ -418,6 +423,10 @@
       ['ANCE (roberta)',6.78,'MRR 11.42',0],
       ['DPR (roberta)',5.00,'MRR 13.50',0]]), 50, h1);
   drawBoard('starksvg3', sortDesc([
+      ['FocusedRetriever (Llama 3.3 70B)',58.8,'MRR 62.3',0],
+      ['AF-Retriever (gpt-oss-120b)',57.1,'MRR 62.7',0],
+      ['4StepFocus (gpt-4o)',50.5,'MRR 57.9',0],
+      ['KAR (gpt-4o)',44.95,'MRR 51.85',0],
       ['AvaTaR (gpt-4-turbo)',33.03,'MRR 41.00',0],
       ['ResonatE (no llm)',28.57,'MRR 40.67',1],
       ['Claude3 Reranker',28.57,'MRR 36.32',0],
@@ -431,7 +440,7 @@
       ['LLM2Vec',9.18,'MRR 15.24',0],
       ['ANCE (roberta)',7.14,'MRR 10.07',0],
       ['QAGNN (roberta)',6.12,'MRR 9.39',0],
-      ['DPR (roberta)',2.04,'MRR 7.05',0]]), 50, h1);
+      ['DPR (roberta)',2.04,'MRR 7.05',0]]), 65, h1);
   document.querySelectorAll('.tabs [role="tab"]').forEach(function(b){
     b.addEventListener('click',function(){
       var list=b.parentNode;

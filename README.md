@@ -119,11 +119,23 @@ question from its text with the readout that scores a graph query; the reported 
 language model at query time. Committed reads (one per split, second read overall; the first read,
 28.7 / 28.2 / 20.4 Hit@1, is reported alongside):
 
-| split | Hit@1 | Hit@5 | R@20 | MRR | best published row (per column) |
+| split | Hit@1 | Hit@5 | R@20 | MRR | best published number per column (who) |
 |---|---|---|---|---|---|
-| Synthesized (full) | 41.8 | 68.3 | 74.8 | 53.7 | 20.1 / 39.9 / 42.2 / 29.2 |
-| Synthesized (10%) | 41.8 | 71.1 | 75.9 | 54.3 | 18.3 / 37.3 / 41.1 / 26.6 |
-| Human-generated | 30.6 | 53.1 | 60.6 | 41.7 | 33.0 / 51.4 / 53.3 / 41.0 |
+| Synthesized (full) | 41.8 | 68.3 | 74.8 | 53.7 | 46.2 / 63.7 / 68.3 / 54.0 (AF-Retriever, gpt-oss-120b at query time; R@20 from mFAR, no LLM) |
+| Synthesized (10%) | 41.8 | 71.1 | 75.9 | 54.3 | 46.4 / 63.9 / 65.5 / 53.7 (FocusedRetriever, Llama 3.3 70B at query time; reports on this subset only) |
+| Human-generated | 30.6 | 53.1 | 60.6 | 41.7 | 58.8 / 69.4 / 59.9 / 62.7 (FocusedRetriever / AF-Retriever / KAR / AF-Retriever) |
+
+The reference read (P3, the entry): 43.1 / 68.8 / 75.5 / 54.7, 41.8 / 72.5 / 77.8 / 54.3 and
+28.6 / 53.1 / 61.9 / 40.7 on the three splits. The comparison column is no longer the Stanford
+leaderboard alone: it includes the later published Prime rows — KAR (NAACL 2025), mFAR (ICLR
+2025), 4StepFocus (2024), FocusedRetriever (2025) and its published successor AF-Retriever (TMLR
+2026), every number copied from the paper's own table on 2026-09-09. Two of those, 4StepFocus and
+FocusedRetriever, evaluate only on the 280-question 10% subset (their papers say so), so they are
+compared with our 10% read and never with the full split. Read plainly: on the synthesized splits
+the entry is first on Hit@5, Recall@20 and MRR and second on Hit@1 to a pipeline that runs a
+70B–120B language model at query time; on the 98 human questions those pipelines are far ahead
+(58.8 against 28.6 Hit@1) and only Recall@20 is level. The full tables, with regimes, are in the
+STaRK repository's README.
 
 Why it matters for this paper, and what it does not show, is one paragraph in the paper's
 "One table for everything" section; every number, ablation and pre-registration is in that

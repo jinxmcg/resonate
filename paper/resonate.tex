@@ -22,13 +22,12 @@
 \begin{document}
 \maketitle
 \begin{center}\small\itshape
-Preprint, draft of 7 September 2026. Not peer reviewed. Preliminary
+Preprint, draft of 9 September 2026. Not peer reviewed. Preliminary
 results of research in progress: every number is self-reported from our
 own runs of the official evaluators, and nothing has been filed on a
 leaderboard yet, for that reason. Code, logs, receipts and checkpoints:
 \url{https://github.com/jinxmcg/resonate}; project page:
-\url{https://resonate.page}. Written with Claude Fable 5 (Anthropic) as
-pair programmer; the claims are the author's responsibility. Two wikikg2
+\url{https://resonate.page}. Two wikikg2
 results are excluded from any filing (Section~\ref{sec:protocol}, Compliance).
 \end{center}
 
@@ -64,10 +63,13 @@ MRR rises; with a learned parser head, an exact adjacency walk, a
 fine-tuned text ranker and a logistic reranker (two pretrained 110M
 encoders with learned heads around the table, 404M parameters in all),
 and no generative model at query time, it reaches 43.1~/~68.8~/~75.5~/~54.7
-(Hit@1, Hit@5, Recall@20, MRR) on the synthesized test split, twice the
-best published row, and 28.6~/~53.1~/~61.9~/~40.7 on 98 human-written
-questions (the third of four disclosed reads, chosen by a rule fixed
-before the fourth). A
+(Hit@1, Hit@5, Recall@20, MRR) on the synthesized test split---first
+among published rows on Hit@5, Recall@20 and MRR, second on Hit@1 to
+AF-Retriever \citep{boer2026afretriever}, which runs a 120B language
+model on every question---and 28.6~/~53.1~/~61.9~/~40.7 on 98 human-written
+questions, where the query-time LLM pipelines are far ahead on Hit@1
+(58.8) and only Recall@20 is level (the third of four disclosed reads,
+chosen by a rule fixed before the fourth). A
 RotatE embedding of the same width and near-equal link MRR takes the
 identical language projection at 15.8 against 19.7 Hit@1 frozen and 21.2
 against 26.9 jointly: equal link prediction does not imply equal
@@ -142,8 +144,9 @@ of a learned parser head, an exact adjacency walk, a fine-tuned text
 ranker and a logistic reranker (two pretrained 110M encoders with
 learned heads around the 37M table, 404M parameters in all), with no
 generative model at query time, reaches 43.1 Hit@1 on the synthesized
-test split, twice the best published row, and 28.6 on 98 human-written
-questions (Section~\ref{sec:beyond}).
+test split (second to a 120B-LLM pipeline's 46.2; first on Hit@5,
+Recall@20 and MRR) and 28.6 on 98 human-written questions, where those
+pipelines reach 58.8 (Section~\ref{sec:beyond}).
 \item \emph{Equal link prediction does not imply equal usefulness for
 language.} A RotatE embedding of the same width, trained on the same graph
 under the same regime and tuned to near-equal link MRR, takes the
@@ -1163,18 +1166,37 @@ the adjacency walk, the model and a logistic reranker fit on train with
 out-of-fold features, at 32~ms median (49~ms p90) per question at batch size one on one
 RTX 5090 in 1.9~GB of GPU memory (measured in the probe's repository). With the 7B parser instead it
 is two Hit@1 points higher on validation, and both are reported. The
-published rows it is compared with are the leaderboard's own; their
-training regimes differ (some are fine-tuned on the STaRK train split,
-some are zero-shot embedders, some call a large model at query time)
-and the human set has 98 questions, so its 95\% bootstrap intervals
-are wide (reported in the repository) and no superiority claim is made
-on it beyond what those intervals allow. Committed reads, each one frozen
+published rows it is compared with are the leaderboard's own
+\citep{wu2024stark} and the later Prime results the leaderboard does not
+carry: KAR \citep{xia2025kar}, mFAR \citep{li2025mfar}, 4StepFocus
+\citep{boer2024fourstepfocus}, FocusedRetriever
+\citep{boer2025focusedretriever} and its published successor
+AF-Retriever \citep{boer2026afretriever}, each copied from its own
+table. Their regimes differ (mFAR is trained on the STaRK train split
+and runs no LLM at query time; KAR, 4StepFocus, FocusedRetriever and
+AF-Retriever are zero-shot pipelines that run GPT-4o, Llama 3.3 70B or
+gpt-oss-120b on every question), and two of them, 4StepFocus and
+FocusedRetriever, evaluate only on the 280-question 10\% subset of the
+synthesized split, so they are compared with the 10\% read and never
+with the full one; on 280 questions a 95\% interval on Hit@1 is about
+$\pm6$ points. The human set has 98 questions, so its bootstrap
+intervals are wide (reported in the repository) and no superiority claim
+is made on it beyond what those intervals allow. Committed reads, each one frozen
 pipeline run once per split after a dry run that reproduced the
 validation number to four decimals. The reference read (P3): synthesized
 43.1 / 68.8 / 75.5 / 54.7, the 10\% subset 41.8 / 72.5 / 77.8 / 54.3,
 human-written 28.6 / 53.1 / 61.9 / 40.7 (Hit@1 / Hit@5 / Recall@20 /
-MRR), against the best published rows of 20.1 / 39.9 / 42.2 / 29.2, 18.3
-/ 37.3 / 41.1 / 26.6 and 33.0 / 51.4 / 53.3 / 41.0. The test splits were
+MRR). The best published number in each column is 46.2 / 63.7 / 68.3 /
+54.0 on the full split (AF-Retriever; Recall@20 from mFAR, which reports
+40.9 / 62.8 / 68.3 / 51.2 with no LLM at query time), 46.4 / 63.9 / 65.5
+/ 53.7 on the 10\% subset (FocusedRetriever) and 58.8 / 69.4 / 59.9 /
+62.7 on the human set (FocusedRetriever, AF-Retriever, KAR,
+AF-Retriever). Read plainly: on the synthesized splits the pipeline is
+first on Hit@5, Recall@20 and MRR and second on Hit@1 to a pipeline
+with a 70B--120B language model per question; on the human set those
+pipelines are far ahead on Hit@1 and only Recall@20 is level---the
+parser is trained on synthesized templates and does not read free
+phrasing the way a language model does. The test splits were
 read four times in all and every read is disclosed (Hit@1 on the
 synthesized / 10\% / human splits): P1, a hand-written parser and an
 off-the-shelf embedder, 28.7 / 28.2 / 20.4; P2, the pipeline above,
@@ -1190,7 +1212,7 @@ P4 are two to five questions, inside the noise. A fifth candidate,
 letting the question vector disambiguate same-name entities before the
 walk (latent-confirmed anchors), lost 1--7 Hit@1 at every threshold on
 training questions and was dropped without a read. What this does and does not show:
-the leaderboard margin on synthesized questions comes largely from
+the margin over the leaderboard's own rows on synthesized questions comes largely from
 ordinary pipeline work (a fine-tuned embedder, a reranker); what is the
 model's own is that one table, one readout, serves link prediction, the
 oracle and language questions, with a sensitivity to phrasing under one
@@ -1293,6 +1315,11 @@ The releases carry the twenty sparse-shell \texttt{ogbl-biokg} checkpoints
 of the real-view table, and the $T=2$ students), the first ladder's
 twenty, and \texttt{ogbl-wikikg2}'s ten teachers and seven surviving
 students with bf16 tables.
+
+\section*{Acknowledgements}
+The code, experiments and text were written with Claude Fable 5
+(Anthropic) as pair programmer; the design, the protocol and every claim
+are the author's responsibility.
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
