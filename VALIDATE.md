@@ -1,9 +1,10 @@
 # Validating the results without retraining
 
-> **Submission status — 9 September 2026: nothing has been filed for BioKG,
-> WikiKG2, or STaRK-Prime.** Two biokg entries (rows C and C′) are prepared for
-> filing — see [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md) — but
-> the form has not been submitted. Everything else is proposed only.
+> **Submission status — 9 September 2026: two ogbl-biokg entries were filed
+> on OGB's form today — C (27.1M, 0.8528) and C′ (9.56M, 0.8468) — and await
+> OGB's validity check; see [`biokg/SUBMISSION_BIOKG.md`](biokg/SUBMISSION_BIOKG.md).**
+> The wikikg2 entry E is form-ready (ten seeds) and not yet submitted; the
+> STaRK-Prime entry P3 is prepared and not filed. Nothing else is proposed.
 
 What a reviewer can run, what it costs, and what it printed when we ran it
 ourselves on a machine that had nothing but this repository, its GitHub

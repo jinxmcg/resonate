@@ -24,8 +24,9 @@
 \begin{center}\small\itshape
 Preprint, draft of 9 September 2026. Not peer reviewed. Preliminary
 results of research in progress: every number is self-reported from our
-own runs of the official evaluators, and nothing has been filed on a
-leaderboard yet, for that reason. Code, logs, receipts and checkpoints:
+own runs of the official evaluators. The two \texttt{ogbl-biokg} entries (C
+and C$'$) were filed on 9 September 2026 and await OGB's validity check;
+nothing else has been filed. Code, logs, receipts and checkpoints:
 \url{https://github.com/jinxmcg/resonate}; project page:
 \url{https://resonate.page}. Two wikikg2
 results are excluded from any filing (Section~\ref{sec:protocol}, Compliance).
@@ -46,8 +47,10 @@ baselines; label-free retrieval members read from the training graph add
 0.007, to $0.8528\pm0.0002$, which would place fifth on the current
 board at the smallest size on it by $3.5\times$. On \texttt{ogbl-wikikg2} a row-sparse training shell
 fits 2.5M entities in 36 minutes on one GPU; the distilled single model
-reaches $0.6855\pm0.0008$, competitive with the strong single models and
-not compact there (329M parameters). Unseen edges are predicted, not
+reaches $0.6855\pm0.0008$ at 329M parameters, and the same model with its
+entity table compressed to clustered narrow rows and refit, plus
+label-free graph members, reaches $0.7100\pm0.0014$ at 50.2M --- seventh on
+the current board, $6.5\times$ smaller than the model it was built from. Unseen edges are predicted, not
 stored: a held-out fact is separated from a random false one at AUROC
 0.98 and from the most plausible false alternative at 0.71.
 \emph{Direct access.} A chain of relation operators compiles to one
@@ -119,8 +122,10 @@ place fifth of twelve on the current board as the smallest entry on it by
 $3.5\times$. On
 \texttt{ogbl-wikikg2} (2.5M entities) a row-sparse shell trains the
 embedding in 36 minutes on one GPU and the distilled single model reaches
-$0.6855\pm0.0008$, competitive with the strong single models; it is not
-compact there, and we say so (Section~\ref{sec:results}).
+$0.6855\pm0.0008$ at 329M parameters; compressed after training to
+clustered narrow rows, refit, and combined with label-free graph members it
+reaches $0.7100\pm0.0014$ at 50.2M, the entry we file
+(Sections~\ref{sec:results} and \ref{sec:compress}).
 \item \emph{Missing links are predicted, not stored.} Test MRR is
 already that measurement; in addition, on 598k held-out Wikidata facts
 the model's score separates a true unseen fact from a random false one at
@@ -493,9 +498,11 @@ split and applies the weights to test: that is gradient-based search on
 validation labels, and rows F, C-F and the ensemble, which depend on it,
 are therefore reported with their receipts but not filed. Row B+'s
 selection blend is also not filed, for the second reason below. What we
-file for \texttt{ogbl-wikikg2} is the distilled single model alone,
-$0.6855\pm0.0008$ over its ten students' own test evaluations, whose
-recipe was tuned on validation only. Second, during \texttt{ogbl-wikikg2}
+file for \texttt{ogbl-wikikg2} is row E: the distilled student with its
+table compressed and refit (Section~\ref{sec:compress}) plus nine label-free
+members under the fixed-candidate selection, $0.7100\pm0.0014$ over ten
+seeds, one test read each, every choice made on validation only. The
+student alone reads $0.6855\pm0.0008$ and is reported. Second, during \texttt{ogbl-wikikg2}
 development the test split's relation mix (the query relations, not the
 answers) was used to explain the validation--test gap, and a
 validation number reweighted to that mix was used as a development
@@ -554,7 +561,7 @@ wikikg2 members are GPU-batched and take seconds to minutes per split.
 
 \begin{table}[t]
 \centering
-\caption{\texttt{ogbl-biokg}, the sparse-shell ladder (to be filed) and the
+\caption{\texttt{ogbl-biokg}, the sparse-shell ladder (C and C$'$ filed 9 September 2026) and the
 first (dense-Adam) ladder. Ten runs per row, one test read per run.
 ``held-out'' is the blend procedure fit on half of validation and
 measured on the other half; ``valid'' is the in-sample value. Every row
@@ -566,7 +573,7 @@ has 27{,}124{,}129 parameters.}
 \toprule
  & test MRR & valid MRR & held-out & hits@1 & hits@3 & hits@10 \\
 \midrule
-\multicolumn{7}{l}{\emph{sparse shell (to be filed; not yet filed)}} \\
+\multicolumn{7}{l}{\emph{sparse shell (C and C$'$ filed 9 September 2026; A and B not filed)}} \\
 A. single model & $0.8158\pm0.0006$ & $0.8164\pm0.0006$ & --- & 0.746 & 0.866 & 0.941 \\
 B. A + retrieval features & $0.8463\pm0.0004$ & $0.8472\pm0.0004$ & $0.8465\pm0.0004$ & 0.788 & 0.888 & 0.952 \\
 C. distilled ($T=2$) + retrieval & $\mathbf{0.8528\pm0.0002}$ & $0.8537\pm0.0002$ & $0.8532\pm0.0003$ & 0.796 & 0.893 & 0.954 \\
@@ -630,8 +637,9 @@ sit.}
 \caption{\texttt{ogbl-wikikg2}, ten runs per row, one test read per run.
 ``valid'' is in-sample for the blend rows; ``held-out'' is the
 cross-fitted estimate of the learned combiner (ensemble: the one fit;
-row F: seven of ten seeds; C-F: the six seeds whose member caches survived). The
-single-model rows have 328{,}842{,}753 parameters.}
+row F: seven of ten seeds; C-F: the six seeds whose member caches survived;
+row E: the selection fit on one validation half, scored on the other). The
+single-model rows have 328{,}842{,}753 parameters; row E has 50{,}244{,}249.}
 \label{tab:wiki}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -643,7 +651,8 @@ A. single model & $0.6676\pm0.0010$ & $0.7030\pm0.0009$ & --- \\
 B. A + 8 members, frozen blend & $0.6820\pm0.0014$ & 0.7413 & --- \\
 B+. + self-augmented members & $0.6866\pm0.0015$ & 0.7467 & --- \\
 F. A + 10 members + learned combiner & $0.7222\pm0.0010$ & 0.7800 & 0.779 \\
-\quad student alone ($T=2$), \textbf{to be filed} & $\mathbf{0.6855\pm0.0008}$ & 0.7190 & --- \\
+\quad C. student alone ($T=2$), reported & $0.6855\pm0.0008$ & 0.7190 & --- \\
+\textbf{E. C compressed to clustered narrow rows, refit, + 9 members (to be filed)} & $\mathbf{0.7100\pm0.0014}$ & 0.7666 & 0.7667 \\
 C-F. distilled ($T=2$) + members + combiner (not filed) & $0.7320\pm0.0010$ & 0.7880 & 0.787 \\
 ensemble of 10 seeds + members + combiner (not filed) & $0.7426\pm0.0002$ (LOO) & 0.7994 & 0.7992 \\
 \quad full ten-seed ensemble, one read & 0.7430 & 0.7998 & \\
@@ -655,9 +664,15 @@ Table~\ref{tab:wiki} gives the ladder. A single 329M model trained in 36
 minutes reaches 0.6676; the members and the learned combiner add
 $+0.055$; the $T=2$ student adds $+0.010$ more; the ten-seed ensemble
 under the same combiner $+0.011$ beyond that. Table~\ref{tab:wboard}
-places the rows against the public board's top entries. The entry to be filed,
-the distilled single model alone at 0.6855, would sit between TripleRE +
-NodePiece (0.6866) and InterHT (0.6779), eleventh of twenty-eight.
+places the rows against the public board's top entries. The entry to be filed
+is E: the $T=2$ student with its entity table replaced by clustered narrow
+rows of width 4/8/36/64 by degree tier and refit against the student
+(Section~\ref{sec:compress}), plus nine label-free members under the
+fixed-candidate selection --- $0.7100\pm0.0014$ at 50{,}244{,}249
+parameters, which would sit seventh of twenty-eight, between StarGraph +
+TripleRE (2022) at 0.7201 and CompoundE3D at 0.7006, at $6.5\times$ fewer
+parameters than the student it was built from. The student alone, 0.6855,
+would sit eleventh and is reported, not filed.
 The two combiner rows are shown for what they measure and are not filed
 (Section~\ref{sec:protocol}): the ensemble would be first and is also
 the largest entry on the board (ten tables, 3.29B parameters); the
@@ -682,11 +697,12 @@ where our rows sit.}
 4 & StarGraph + TripleRE \citep{li2022stargraph} & 0.7286 & 93M \\
 5 & InterHT+ (256-dim) & 0.7257 & 148M \\
 6 & StarGraph + TripleRE (2022) & 0.7201 & 87M \\
+  & \textbf{ResonatE E: compact 50.2M + retrieval + reverse (to be filed)} & $\mathbf{0.7100}$ & \textbf{50.2M} \\
 7 & CompoundE3D \citep{ge2023compounde3d} & 0.7006 & 751M \\
 8 & TranS \citep{zhang2022trans} & 0.6939 & 38M \\
 9 & TranS (2022) & 0.6882 & 19M \\
 10 & TripleRE + NodePiece & 0.6866 & 36M \\
-  & \textbf{ResonatE: distilled 329M, alone (to be filed)} & $\mathbf{0.6855}$ & \textbf{329M} \\
+  & ResonatE C: distilled 329M, alone (reported) & 0.6855 & 329M \\
 11 & InterHT & 0.6779 & 19M \\
 14 & ComplEx-RP (50-dim) \citep{chen2021relation} & 0.6392 & 250M \\
 23 & ComplEx (250-dim) & 0.4027 & 1.25B \\
@@ -899,6 +915,21 @@ instead sits near $K=256$. And biokg's entities live in five
 type-disjoint ranges with type-matched negatives, so the model never has
 to separate a protein from a side-effect; its rows are correspondingly
 more clusterable.
+
+\paragraph{wikikg2: a bank of subspaces, then a refit.} What rescues
+wikikg2 is the bank: widths $(4,8,36,64)$ by degree tier with
+$K=(4096,4096,16,1)$ clusters, so the tail rows each choose one of 4{,}096
+narrow subspaces, then --- unlike biokg --- a refit of the coefficients for
+200k steps against the student as teacher ($T=2$), operators frozen. The
+compact model alone reads 0.7074 on validation against the student's
+0.7190, and with nine label-free members (two analogy, holders,
+common-neighbour, linked, three-hop, typed paths, and two reverse-operator
+members) under the fixed-candidate selection it reads
+$0.7100\pm0.0014$ on test over ten seeds, one read each, at 50{,}244{,}249
+parameters: 27.7M coefficients, 12.7M projections, 1.1M offsets and the
+8.8M of operators. That is row E of Table~\ref{tab:wiki}, the wikikg2
+entry we file; the search that led to it (CP1--CP3f) is recorded in
+\texttt{wikikg2/COMPACT\_K.md}.
 
 \paragraph{Where the width belongs.} Degree tiers on biokg are far
 flatter than on wikikg2 (median degree 22 against $\approx6$), and the

@@ -1,5 +1,9 @@
 # ogbl-biokg filings (2026-09-09)
 
+> **Filed 9 September 2026:** both entries below were submitted through the OGB
+> form with the field values recorded here, and await OGB's validity check.
+> The section "Open before the form goes in" is kept as the pre-filing record.
+
 Two entries, the Pareto frontier of the sparse ladder: the best MRR (C) and the
 best MRR per parameter (C′). Rows A and B are not filed — B is dominated by C′
 on both axes the board reports (lower MRR at 2.84× the parameters) and A is a
