@@ -363,18 +363,40 @@
 <script>
 (function(){
   function el(p,t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
-  function drawBoard(id,rows,max,fmt){
-    fmt=fmt||function(v){return v.toFixed(4);};
-    var svg=document.getElementById(id); if(!svg) return;
-    var W=980,L=360,R=185,T=16,rh=18,gap=16;
-    var H=T+rows.length*(rh+gap)+4; svg.setAttribute('height',H); svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width','100%');
-    rows.forEach(function(r,i){
-      var y=T+i*(rh+gap);
-      el(svg,'text',{x:L-8,y:y+rh-7,'text-anchor':'end',style:r[3]?'font-weight:600':''},r[0]);
-      el(svg,'rect',{x:L,y:y,width:(W-L-R)*(r[1]/max),height:rh,rx:0,class:'bar'+(r[3]?' ours':'')});
-      el(svg,'text',{x:L+(W-L-R)*(r[1]/max)+6,y:y+rh-7,'text-anchor':'start'},fmt(r[1])+(r[2]?' · '+r[2]:''));
-    });
+  // small screens: tables become cards; each cell carries its column header
+  document.querySelectorAll('table').forEach(function(t){
+    var ths=Array.prototype.map.call(t.querySelectorAll('thead th'),function(h){return h.textContent.trim();});
+    t.querySelectorAll('tbody tr').forEach(function(tr){Array.prototype.forEach.call(tr.children,function(td,i){ if(ths[i]) td.setAttribute('data-label',ths[i]); });});
+  });
+  var boards={};
+  function drawBoard(id,rows,max,fmt){ boards[id]={rows:rows,max:max,fmt:fmt}; renderBoard(id); }
+  function renderBoard(id){
+    var b=boards[id], svg=document.getElementById(id); if(!svg) return;
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var rows=b.rows, max=b.max, fmt=b.fmt||function(v){return v.toFixed(4);};
+    var cw=svg.parentNode.clientWidth||Math.max(window.innerWidth-60,300);
+    if(cw>=720){
+      var W=980,L=360,R=185,T=16,rh=18,gap=16;
+      var H=T+rows.length*(rh+gap)+4; svg.setAttribute('height',H); svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width','100%');
+      rows.forEach(function(r,i){
+        var y=T+i*(rh+gap);
+        el(svg,'text',{x:L-8,y:y+rh-7,'text-anchor':'end',style:r[3]?'font-weight:600':''},r[0]);
+        el(svg,'rect',{x:L,y:y,width:(W-L-R)*(r[1]/max),height:rh,rx:0,class:'bar'+(r[3]?' ours':'')});
+        el(svg,'text',{x:L+(W-L-R)*(r[1]/max)+6,y:y+rh-7,'text-anchor':'start'},fmt(r[1])+(r[2]?' \u00b7 '+r[2]:''));
+      });
+    } else {
+      // narrow screens: label on its own line, full-width bar, value right-aligned
+      var W=Math.max(cw,300),R=118,T=6,lh=17,rh=12,gap=14,step=lh+4+rh+gap;
+      var H=T+rows.length*step; svg.setAttribute('height',H); svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width','100%');
+      rows.forEach(function(r,i){
+        var y=T+i*step, by=y+lh+4;
+        el(svg,'text',{x:0,y:y+lh-4,'text-anchor':'start',class:'lbl',style:r[3]?'font-weight:600':''},r[0]);
+        el(svg,'rect',{x:0,y:by,width:(W-R)*(r[1]/max),height:rh,rx:0,class:'bar'+(r[3]?' ours':'')});
+        el(svg,'text',{x:W,y:by+rh-2,'text-anchor':'end',class:'val'},fmt(r[1])+(r[2]?' \u00b7 '+r[2]:''));
+      });
+    }
   }
+  var rsz; window.addEventListener('resize',function(){clearTimeout(rsz);rsz=setTimeout(function(){for(var k in boards) renderBoard(k);},120);});
   drawBoard('boardsvg',[
       ['RelEns (ensemble)',.9618,'849M',0],
       ['ComplEx²',.8583,'188M',0],
@@ -465,7 +487,7 @@
     b.addEventListener('click',function(){
       var list=b.parentNode;
       list.querySelectorAll('[role="tab"]').forEach(function(x){x.setAttribute('aria-selected','false'); document.getElementById(x.getAttribute('aria-controls')).hidden=true;});
-      b.setAttribute('aria-selected','true'); document.getElementById(b.getAttribute('aria-controls')).hidden=false;
+      b.setAttribute('aria-selected','true'); document.getElementById(b.getAttribute('aria-controls')).hidden=false; document.getElementById(b.getAttribute('aria-controls')).querySelectorAll('svg[id]').forEach(function(s){ if(boards[s.id]) renderBoard(s.id); });
     });
   });
 })();
