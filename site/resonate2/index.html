@@ -99,14 +99,15 @@ td.ab{color:var(--muted)}
 </div>
 <div>
 <h3>The addition program, as found</h3>
-<pre class="term prog"><span class="c"># found from the traces of 12+11, 383+47, 19+65 — slots 0,1: the two numbers as places</span>
-init   SET 2&lt;0                <span class="c"># slot 2 holds the carry: none yet</span>
-body   LOAD 0&gt;3   LOAD 1&gt;4    <span class="c"># walk each number one place back: two digits</span>
-       BIND 3,4   BIND 3,2     <span class="c"># digit ⊙ digit ⊙ carry, in the value code</span>
-       READ 3                  <span class="c"># one light over the 0..19 line</span>
-       SETD 5   SETC 2         <span class="c"># the digit into slot 5, its carry back into slot 2</span>
-       WRITE 5                 <span class="c"># next digit of the result</span>
-stop   slot 4 empty            <span class="c"># chosen by the search: nothing left to walk</span></pre>
+<pre class="term prog"><span class="c"># found from the traces of 12+11, 383+47, 19+65</span>
+<span class="c"># slots 0,1: the numbers as places · 2: carry · 5: digit</span>
+init  SET 2&lt;0              <span class="c"># no carry yet</span>
+body  LOAD 0&gt;3  LOAD 1&gt;4   <span class="c"># one place back, each</span>
+      BIND 3,4  BIND 3,2   <span class="c"># digit ⊙ digit ⊙ carry</span>
+      READ 3               <span class="c"># light on the 0..19 line</span>
+      SETD 5  SETC 2       <span class="c"># digit out, carry kept</span>
+      WRITE 5              <span class="c"># next digit of the result</span>
+stop  slot 4 empty         <span class="c"># chosen by the search</span></pre>
 <p class="small">Subtraction, found next with addition callable, is the same cycle with the memory's inverse move (<code>UNBIND</code>) and the −10..9 line (<code>READN</code>). In the earlier machine, found from the addition program alone, it came out as an idiom of its own — the borrow added to y's digit and subtracted once, a permanent zero kept in a slot for the stop rule, two dead instructions — exact at every length.</p>
 </div>
 </div>
