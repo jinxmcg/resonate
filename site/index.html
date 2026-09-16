@@ -22,14 +22,33 @@
 <meta content="Compact knowledge-graph representation on three Stanford leaderboards; no LLM at query time. Preprint, code and receipts." name="twitter:description"/>
 <meta content="https://resonate.page/assets/og.png" name="twitter:image"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;450;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<link href="design.css" rel="stylesheet"/></head>
+<link href="design.css" rel="stylesheet"/><style>
+/* part two band under the hero */
+.part2band{padding:54px 0;background:var(--accent-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.p2grid{display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center}
+.p2copy h2{max-width:none;font-size:clamp(26px,2.8vw,38px);margin-bottom:16px}.p2copy p{max-width:560px;font-size:16px;color:var(--muted)}.p2copy .eyebrow{margin-bottom:14px}
+.p2stats{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px}.p2stats .n{font-size:34px}.p2stats .stat-label{margin-bottom:8px}
+@media(max-width:900px){.p2grid{grid-template-columns:1fr;gap:28px}}
+@media(max-width:600px){.part2band{padding:40px 0}.p2stats{gap:18px}.p2stats .n{font-size:30px}}
+</style></head>
 <body><a class="skip" href="#found">Skip to research</a>
 <div class="topbar"><div class="wrap">
 <span class="brand">RESONATE / RESEARCH</span>
 <span class="spacer"></span>
 <nav aria-label="Main navigation"><a href="#found">Findings</a><a href="#evidence">Evidence</a><a href="#examples">Examples</a><a href="#control">Control</a><a href="#how">How</a><a href="#limits">Limits</a><a href="#paper">Paper</a><a href="resonate2/" style="color:var(--ink)">Part two →</a></nav><a aria-label="ResonatE on GitHub" class="github-link" href="https://github.com/jinxmcg/resonate"><img alt="" height="20" src="assets/github.svg" width="20"/><span>GitHub</span></a></div></div><div aria-label="Research status" class="notice top-disclaimer" role="note"><div class="wrap"><b>Preliminary results</b>This is research in progress, updated as it moves (last change 9 September 2026). Every number here is self-reported from our own runs of the official evaluators; three OGB entries — ogbl-biokg C and C′ and ogbl-wikikg2 E — were filed on 9 September 2026 and await OGB's validity check; the STaRK-Prime entry is not filed yet. Results can be reproduced and checked using the code, released model weights, evaluation scripts and result logs in our <a href="https://github.com/jinxmcg/resonate">OGB</a> and <a href="https://github.com/jinxmcg/resonate-stark">STaRK repositories</a>. See the <a href="https://github.com/jinxmcg/resonate/blob/main/VALIDATE.md">reproduction guide</a> for available checkpoints and coverage.</div></div>
 <section class="hero"><div class="wrap"><div class="hero-grid"><div class="hero-copy"><p class="eyebrow">Independent research / 2026</p><h1>A structure<br/>for knowledge.</h1><p class="intro">A research graph representation, measured for link prediction and missing-fact prediction, for multi-hop graph queries whose cost is O(1) in depth, and, with a separately trained retrieval pipeline around it, for natural-language questions with no generative model at query time.</p><a class="text-link" href="#found">Explore the research <span aria-hidden="true">↗</span></a>
-<a class="text-link" href="resonate2/" style="margin-top:10px">Part two: numbers, arithmetic from three examples, instructions in words, kinship reasoning <span aria-hidden="true">→</span></a><div class="hero-meta"><span>RESONATE</span><span>RESEARCH PREVIEW</span></div></div><figure class="hero-art"><img alt="Conceptual sculpture of layered ceramic plates above a limestone cube" height="1280" src="assets/representation.webp" width="1024"/><figcaption>Representation / a conceptual study</figcaption></figure></div></div></section>
+<div class="hero-meta"><span>RESONATE</span><span>RESEARCH PREVIEW</span></div></div><figure class="hero-art"><img alt="Conceptual sculpture of layered ceramic plates above a limestone cube" height="1280" src="assets/representation.webp" width="1024"/><figcaption>Representation / a conceptual study</figcaption></figure></div></div></section>
+<section class="part2band"><div class="wrap">
+<div class="p2grid">
+<div class="p2copy"><p class="eyebrow">Part two / September 2026 / in progress</p><h2>The same memory, asked to compute.</h2><p>Eighteen rows hold every number below a billion. Arithmetic found from three worked examples and stored in the table. "To double something, add it to itself." Kinship reasoning over ten hops from a graph — and a clear negative from raw text. One seed, told in order.</p><a class="text-link" href="resonate2/">Read part two <span aria-hidden="true">→</span></a></div>
+<div class="p2stats">
+<div><div class="stat-label">rows for every number below 10⁹</div><div class="n">18</div></div>
+<div><div class="stat-label">worked examples per operation</div><div class="n">3</div></div>
+<div><div class="stat-label">commands and definitions in words</div><div class="n">1.00</div></div>
+<div><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div></div>
+</div>
+</div>
+</div></section>
 <section id="found"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">01 / What we found</p><h2>One representation supports several operations</h2></div><p>We trained the representation to predict links. Then we measured what else it could do. The graph operations use the link-trained representation as it is. Language did need more: the representation was continued on edges and training questions together, and a separately trained retrieval pipeline was built around it.</p></header>
 <figure class="diagram"><svg aria-label="One embedding feeds four operations: link prediction, missing-link completion, direct access, natural-language retrieval; language enters through pretrained encoders with learned heads, no LLM" role="img" viewbox="0 0 860 300">
 <defs><marker id="arr" markerheight="8" markerwidth="8" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"></path></marker></defs>
