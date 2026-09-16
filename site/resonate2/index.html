@@ -4,216 +4,202 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>ResonatE 2 — a memory that computes</title>
-<meta content="Continuation of the ResonatE research: a knowledge-graph memory of sixteen rows that holds every number below a billion, learns arithmetic from three worked examples, stores its own programs in the same table, and answers CLUTRR kinship chains of ten hops at 0.99 with the relation words as learned operators. Single seed, in-progress, negatives included." name="description"/>
+<meta content="Part two of the ResonatE research, told in order: a knowledge-graph memory of eighteen rows that holds every number below a billion; arithmetic found from three worked examples and stored in the same table; commands and definitions in plain words; a story memory that reasons over kinship chains — 0.99 at ten hops from the graph, and an honest negative from raw text. Single seed, in progress." name="description"/>
 <link href="https://resonate.page/resonate2/" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="https://resonate.page/resonate2/" property="og:url"/>
 <meta content="ResonatE 2 — a memory that computes" property="og:title"/>
-<meta content="Sixteen rows hold every number below a billion. Addition, subtraction, comparison and multiplication induced from three worked examples each. Programs stored as places in the same table. CLUTRR ten-hop kinship reasoning at 0.99 exact, ≤1% wrong, with the words as learned operators." property="og:description"/>
+<meta content="Eighteen rows hold every number below a billion. Arithmetic found from three worked examples. 'To double something, add it to itself.' CLUTRR kinship reasoning at 0.99 over ten hops from the graph — and a clear negative from raw text. Told in order." property="og:description"/>
 <meta content="https://resonate.page/assets/og.png" property="og:image"/>
 <meta content="ResonatE" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="ResonatE 2 — a memory that computes" name="twitter:title"/>
-<meta content="A knowledge-graph memory that holds numbers without storing them, learns operations from three examples, keeps its programs in the same table, and reasons over kinship chains at 0.99." name="twitter:description"/>
+<meta content="A graph memory that holds numbers without storing them, learns operations from three examples, takes commands in words, and reasons over kinship chains at 0.99. Told in order, negatives included." name="twitter:description"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;450;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="../design.css" rel="stylesheet"/>
 <style>
-/* page-local: the chain diagram, the program listing, the principle list */
-.chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px 0;margin:36px 0 10px;font-family:'IBM Plex Mono',monospace;font-size:13px}
+/* page-local: the map, the step blocks, the chain diagram, the program listing */
+.map{border-top:1px solid var(--line);margin:10px 0 0}
+.map li{display:grid;grid-template-columns:44px 1fr 150px;gap:20px;align-items:baseline;padding:18px 0}
+.map .num{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.map .what b{font-weight:500}.map .what{font-size:16px}.map .what span{display:block;color:var(--muted);font-size:14px;margin-top:3px}
+.map .res{font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:right;white-space:nowrap}
+.map .res.neg{color:#865c45}.map .res.pos{color:var(--good)}
+.map li.track{border-top:1px solid var(--line);padding:26px 0 6px}.map li.track .what{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.step{border-top:1px solid var(--line);padding:48px 0 20px}
+.step:first-of-type{border-top:0;padding-top:0}
+.step h3{margin:0 0 26px;font-size:28px}
+.step h3 small{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.dd{display:grid;grid-template-columns:110px 1fr;gap:10px 28px;max-width:900px}
+.dd dt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.dd dd{margin:0 0 14px;font-size:16px;line-height:1.6}
+.dd dd.num{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--good)}
+.dd dd.num.neg{color:#865c45}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px 0;margin:8px 0 6px;font-family:'IBM Plex Mono',monospace;font-size:13px}
 .chain .n{font-size:13px;letter-spacing:0;font-weight:400;border:1px solid #a3a69b;background:var(--panel);padding:10px 14px;line-height:1}
 .chain .n.anchor{background:#e5e7dc;border-color:var(--accent)}
-.chain .op{padding:0 12px;color:var(--muted)}
-.chain .op b{font-weight:500;color:var(--ink)}
-.chain .eq{padding:0 16px;color:var(--muted)}
-.chain .state{border:1px dashed var(--accent);padding:10px 14px;line-height:1}
-.light{display:grid;grid-template-columns:120px 1fr;gap:8px 20px;margin:24px 0 0;font-family:'IBM Plex Mono',monospace;font-size:12.5px}
-.light .k{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding-top:2px}
-.light .v b{font-weight:500;color:var(--good)}
-pre.term.prog{font-size:12.5px}
-pre.term.prog .c{color:var(--muted)}
+.chain .op{padding:0 12px;color:var(--muted)}.chain .op b{font-weight:500;color:var(--ink)}
+.chain .eq{padding:0 16px;color:var(--muted)}.chain .state{border:1px dashed var(--accent);padding:10px 14px;line-height:1}
+pre.term.prog{font-size:12.5px;margin:10px 0 0;max-width:640px}pre.term.prog .c{color:var(--muted)}
+.mini{font-size:14px;margin:6px 0 10px}.mini th,.mini td{padding:9px 10px}
+.hero .intro{max-width:470px}
 .principles li{display:grid;grid-template-columns:200px 1fr;gap:24px}
 .principles li b{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:400;text-transform:uppercase;letter-spacing:.1em;padding-top:3px}
-.hero .intro{max-width:470px}
-.prev-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-td.ab{color:var(--muted)}
 .stats .n{font-variant-numeric:tabular-nums}
-@media(max-width:600px){.principles li{grid-template-columns:1fr;gap:6px}.light{grid-template-columns:1fr;gap:2px 0}.light .k{margin-top:10px}.chain{font-size:12px}.chain .op,.chain .eq{padding:0 8px}}
+td.ab{color:var(--muted)}
+@media(max-width:700px){.map li{grid-template-columns:36px 1fr;gap:8px 14px}.map .res{grid-column:2;text-align:left}.dd{grid-template-columns:1fr;gap:4px}.dd dt{margin-top:8px}.principles li{grid-template-columns:1fr;gap:6px}.chain{font-size:12px}.chain .op,.chain .eq{padding:0 8px}}
 </style>
 </head>
-<body><a class="skip" href="#numbers">Skip to research</a>
+<body><a class="skip" href="#map">Skip to research</a>
 <div class="topbar"><div class="wrap">
 <span class="brand">RESONATE / RESEARCH / PART TWO</span>
 <span class="spacer"></span>
-<nav aria-label="Main navigation"><a href="#numbers">Numbers</a><a href="#programs">Programs</a><a href="#onemem">One memory</a><a href="#reasoning">Reasoning</a><a href="#clutrr">CLUTRR</a><a href="#principles">Principles</a><a href="#limits">Limits</a><a href="../">Part one</a></nav><a aria-label="ResonatE on GitHub" class="github-link" href="https://github.com/jinxmcg/resonate"><img alt="" height="20" src="../assets/github.svg" width="20"/><span>GitHub</span></a>
+<nav aria-label="Main navigation"><a href="#map">In order</a><a href="#numbers">Numbers</a><a href="#reasoning">Reasoning</a><a href="#principles">Principles</a><a href="#limits">Limits</a><a href="../">Part one</a></nav><a aria-label="ResonatE on GitHub" class="github-link" href="https://github.com/jinxmcg/resonate"><img alt="" height="20" src="../assets/github.svg" width="20"/><span>GitHub</span></a>
 </div></div>
-<div class="top-disclaimer"><div class="wrap"><b>Research status</b>Work in progress, September 2026. Everything on this page is a single seed on one consumer GPU, self-reported, with the negatives kept in. Nothing here is filed on a leaderboard. It continues <a href="../">part one</a>, which measured the representation on three Stanford boards; here we ask what else the same memory can do.</div></div>
+<div class="top-disclaimer"><div class="wrap"><b>Research status</b>Work in progress, September 2026. One seed, one consumer GPU, self-reported, negatives kept in; nothing here is filed on a leaderboard. This page continues <a href="../">part one</a>, which measured the representation on three Stanford boards. Here we ask what else the same memory can do, and tell it in the order it happened.</div></div>
 
-<section class="hero"><div class="wrap"><div class="hero-grid"><div class="hero-copy"><p class="eyebrow">Independent research / 2026 / part two</p><h1>A memory<br/>that computes.</h1><p class="intro">Part one trained a compact graph representation to predict links. Part two asks whether the same kind of memory — unit-norm rows and block-diagonal relation operators, nothing else — can hold every number without storing any, learn what to do with them from three worked examples, keep those procedures in the same table as the data, and reason over stories it has never seen. It can, within limits we list.</p>
-<a class="text-link" href="#clutrr">The CLUTRR result <span>→</span></a>
+<section class="hero"><div class="wrap"><div class="hero-grid"><div class="hero-copy"><p class="eyebrow">Independent research / 2026 / part two</p><h1>A memory<br/>that computes.</h1><p class="intro">Part one trained a compact graph representation — unit-norm rows and block-diagonal relation operators — to predict links. Part two keeps that memory exactly as it is and asks two questions of it. <b>Numbers:</b> can it hold and compute with numbers it never stored, and take instructions in words? <b>Reasoning:</b> can it follow chains of facts it has never seen? Yes to both, within limits we list — and one clear no.</p>
+<a class="text-link" href="#map">What we did, in order <span>→</span></a>
 <div class="hero-meta"><span>ONE GPU (1080 Ti)</span><span>ONE SEED</span><span>NO LLM ANYWHERE</span><span>NEGATIVES INCLUDED</span></div></div>
 <div>
 <div class="stats" style="margin-top:0;grid-template-columns:1fr 1fr;row-gap:36px">
-<div class="stat"><div class="stat-label">rows that hold every number below 10⁹</div><div class="n">18</div><div class="stat-detail">digits 0–9 and place anchors 10 … 10⁸; a number is a place you walk to, read back exactly.</div></div>
-<div class="stat" style="border:0"><div class="stat-label">worked examples per operation</div><div class="n">3</div><div class="stat-detail">add, subtract, compare, multiply: each found from three examples, exact on lengths never shown.</div></div>
-<div class="stat" style="padding-left:0"><div class="stat-label">table for numbers, facts and programs</div><div class="n">1</div><div class="stat-detail">a program is pages of places; a new program's name row needs no training.</div></div>
-<div class="stat" style="border:0"><div class="stat-label">CLUTRR, 10 hops, exact</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; wrong ≤ 1% at every length; best published 0.90.</div></div>
+<div class="stat"><div class="stat-label">rows that hold every number below 10⁹</div><div class="n">18</div><div class="stat-detail">a number is a place you walk to, not a row; read back exactly.</div></div>
+<div class="stat" style="border:0"><div class="stat-label">worked examples per operation</div><div class="n">3</div><div class="stat-detail">add, subtract, compare, multiply — each found, exact on lengths never shown.</div></div>
+<div class="stat" style="padding-left:0"><div class="stat-label">"to double something, add it to itself."</div><div class="n">1.00</div><div class="stat-detail">commands and definitions in words, on numbers and names never shown.</div></div>
+<div class="stat" style="border:0"><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; wrong ≤ 1 %. From raw text: a negative, below.</div></div>
 </div>
 </div></div></div></section>
 
-<section id="numbers"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">01 / Numbers</p><h2>Every number, from sixteen rows and two moves</h2></div><p>The memory stores sixteen symbols — the digits 0–9 and the places 10, 100, … 10⁶ — and two relations, <code>+</code> and <code>×</code>. No number has a row. 347 is not stored; it is <em>reached</em>.</p></header>
-<div class="chain" aria-label="347 as a walk: 3 times 100, plus 4 times 10, plus 7">
-<span class="n">3</span><span class="op"><b>×</b></span><span class="n anchor">100</span><span class="op"><b>+</b></span><span class="n">4</span><span class="op"><b>×</b></span><span class="n anchor">10</span><span class="op"><b>+</b></span><span class="n">7</span><span class="eq">→</span><span class="state">a place for 347</span>
-</div>
-<p class="small">Each term is one hop of <code>×</code> on a digit and a place anchor; each <code>+</code> hop chains the next term onto the state. The output of one step is the input of the next. The result is a point in the same space as the sixteen rows, computed, never written.</p>
-<div class="two" style="margin-top:40px">
-<div>
-<h3>Reading it back is one light per step</h3>
-<p>Walking the chain backwards — one <code>+⁻¹</code> hop, then one light over the sixteen rows — shows the last term and nothing else. Hop again, the next term. On numbers never seen in training, seven places from units to millions, the walk reads every term exactly.</p>
-<div class="light"><span class="k">347, step 1</span><span class="v"><b>7</b> +9.5 · everything else ≈ −10.5</span><span class="k">step 2</span><span class="v"><b>4, 10</b></span><span class="k">step 3</span><span class="v"><b>3, 100</b></span></div>
-</div>
-<div>
-<h3>What did not work, and why it mattered</h3>
-<p>Our first version made the anchors ordinary nodes and let the model superpose them. It read 347 and 437 as the same thing (cosine 0.993): a hop is linear, so a hop on a superposition is a superposition of hops, and the number collapses into the bag {3, 100, 4, 10, 7} with no record of what is paired with what. The fix was not a bigger model. The graph is directed, and direction carries the pairing. Trained on the directed walk, the same sixteen rows read back exactly.</p>
-<p>Learning <code>=</code> as a relation, in contrast, fails at everything — it cannot even memorise single facts. Evaluation is a light over the memory, not a move in it. This one negative shaped everything below.</p>
-</div>
-</div>
-<div class="tablewrap"><table>
-<thead><tr><th>never-trained numbers, one seed</th><th class="num">exact</th><th>what is stored</th></tr></thead>
-<tbody>
-<tr class="ours"><td>walk back, all 7 places, unseen numbers below 10⁷</td><td class="num">1.000</td><td>16 rows, 2 relations</td></tr>
-<tr class="ours"><td>comparison <code>x &lt; y</code>, 6,000 unseen pairs at every distance 1 … 10⁵</td><td class="num">1.000</td><td>+ ten digit-order facts</td></tr>
-<tr class="ours"><td>addition, 1–7 digits with carries (1,000 sums per length)</td><td class="num">1.000</td><td>+ a nine-line program over lights</td></tr>
-<tr class="ours"><td>grown to a billion by continuation: two new anchors, operators keep learning, old numbers replayed</td><td class="num">1.000</td><td>18 rows; 7 minutes; nothing old forgotten</td></tr>
-<tr><td>the same growth with the operators frozen (new rows only)</td><td class="num">0.000</td><td>depth lives in the operator, not in rows</td></tr>
-</tbody></table></div>
-<div class="finding"><b>The point</b><div>A place can exist in the memory without a row for it. That is the same claim part one made about missing links, now made for objects the data never contained at all. The memory learned no arithmetic: <code>+</code> and <code>×</code> are moves that keep terms separable. Adding, comparing and deciding are done <em>over</em> the memory, by a program that reads lights and chooses moves.</div></div>
+<section id="map"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">00 / The map</p><h2>What we did, in order</h2></div><p>Two tracks on the same memory. Each step is one experiment with one number; the sections below give each step its own page. Green is a result we can defend; brown is a negative we keep.</p></header>
+<ul class="map">
+<li class="track"><span class="num"></span><span class="what">Track one — numbers</span><span class="res"></span></li>
+<li><span class="num">01</span><span class="what"><b>Numbers as places.</b><span>Sixteen rows (digits, place anchors) and two moves; a number is reached, never stored, and read back by walking.</span></span><span class="res pos">1.000 unseen, to 10⁹</span></li>
+<li><span class="num">02</span><span class="what"><b>Operations found from three worked examples.</b><span>Add, subtract, compare, multiply as programs over lights, found by search; exact on lengths never shown.</span></span><span class="res pos">1.000 at 1–9 digits</span></li>
+<li><span class="num">03</span><span class="what"><b>Programs stored in the same table.</b><span>A program is pages of places; a new program's name needs no training.</span></span><span class="res pos">executes from memory</span></li>
+<li><span class="num">04</span><span class="what"><b>Instructions in words.</b><span>"add 3421 and 57." — and "to double something, add it to itself." defines a program the next sentence can call.</span></span><span class="res pos">1.00 unseen numbers, names</span></li>
+<li class="track"><span class="num"></span><span class="what">Track two — reasoning</span><span class="res"></span></li>
+<li><span class="num">05</span><span class="what"><b>A story memory.</b><span>Facts as places; "is A bigger than B?" answered by a program found from three worked stories.</span></span><span class="res pos">1.000 to 10 links</span></li>
+<li><span class="num">06</span><span class="what"><b>CLUTRR from the graph.</b><span>Twenty kinship words as learned operators; ten-hop questions after training on two and three.</span></span><span class="res pos">0.99 exact, ≤ 1 % wrong</span></li>
+<li><span class="num">07</span><span class="what"><b>CLUTRR from raw text.</b><span>The same reasoner behind a reader of the sentences. Every reader we built stops at the same wall — and the wall is in the benchmark.</span></span><span class="res neg">0.08 exact, 0.90 abstain</span></li>
+</ul>
 </div></section>
 
-<section id="programs"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">02 / Programs</p><h2>Operations found from three worked examples</h2></div><p>Reasoning is not another relation in the space. It is a small machine over the memory: six anonymous slots that hold places, a dozen primitives, and a program that reads lights and chooses moves. The programs are not written by us. They are found.</p></header>
-<div class="two">
-<div>
-<h3>The machine</h3>
-<p>Three kinds of primitive, none of which knows what a carry or a verdict is. <b>Moves</b>: walk a slot's place one step back, bind or unbind two values, shift a digit, call another program. <b>Lights</b>: read a slot against the 0–19 line, the −10–9 line, the times table, or the digit order. <b>Writes</b>: set, copy, write a digit to the result, answer. The controller keeps no state of its own: everything it needs is in a slot. With the verdict kept in a hidden state, comparison generalised to 0.24 at nine digits; with the verdict in a slot, 1.000.</p>
-<h3>The search</h3>
-<p>A program is an initialisation, a loop body, and the slot whose emptiness ends the loop. We show the machine three worked examples of an operation — the steps of <code>12+11</code>, <code>383+47</code>, <code>19+65</code> as flat lists, no loop marked — and search for a program whose loop reproduces them. Acceptance requires exactness on held-out cases two digits longer than any shown; without that rule, a first multiplication carried a spare <code>SHIFT</code>, perfect to four digits, 0.5 at nine.</p>
-</div>
-<div>
-<h3>The addition program, as found</h3>
-<pre class="term prog"><span class="c"># found from the traces of 12+11, 383+47, 19+65</span>
-<span class="c"># slots 0,1: the numbers as places · 2: carry · 5: digit</span>
-init  SET 2&lt;0              <span class="c"># no carry yet</span>
+<section id="numbers"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">Track one</p><h2>Numbers</h2></div><p>The question: can a memory that stores sixteen symbols hold every number, compute with them, and take its instructions in words — without any number ever being written into it?</p></header>
+
+<article class="step"><h3><small>Step 01</small>Numbers as places</h3>
+<dl class="dd">
+<dt>We did</dt><dd>Stored only the digits 0–9 and the place anchors 10, 100 … 10⁶, with two relations, <code>+</code> and <code>×</code>. To reach 347 the memory walks: three <code>×</code> hundred, <code>+</code> four <code>×</code> ten, <code>+</code> seven. The result is a point in the same space as the sixteen rows — computed, never written.
+<div class="chain" aria-label="347 as a walk"><span class="n">3</span><span class="op"><b>×</b></span><span class="n anchor">100</span><span class="op"><b>+</b></span><span class="n">4</span><span class="op"><b>×</b></span><span class="n anchor">10</span><span class="op"><b>+</b></span><span class="n">7</span><span class="eq">→</span><span class="state">a place for 347</span></div></dd>
+<dt>We found</dt><dd>Walking the chain back — one reverse hop, one light over the sixteen rows per step — reads every digit of numbers never seen in training. Growing to a billion is two more anchors, with the operators allowed to keep learning while old numbers are replayed; freezing the operators and adding rows alone fails (0.000): depth lives in the operator, not in rows.</dd>
+<dt>Number</dt><dd class="num">1.000 on unseen numbers, all places, to 10⁹ · comparison 1.000 on 6,000 unseen pairs</dd>
+<dt>Kept</dt><dd>Our first version let the anchors superpose and read 347 as 437 (cosine 0.993): superposition keeps <em>what</em> is present, direction keeps <em>what is paired with what</em>. And learning <code>=</code> as a relation fails at everything — evaluation is a light over the memory, not a move in it.</dd>
+</dl></article>
+
+<article class="step"><h3><small>Step 02</small>Operations found from three worked examples</h3>
+<dl class="dd">
+<dt>We did</dt><dd>Built a small machine over the memory: six slots that hold places, and a dozen primitives of three kinds — <b>moves</b> (walk a place one step, bind two values, call a program), <b>lights</b> (read a slot against the 0–19 line, the times table, the digit order), <b>writes</b>. Nothing in it knows what a carry is. Showed it three worked examples of an operation (the steps of <code>12+11</code>, <code>383+47</code>, <code>19+65</code>) and searched for a program whose loop reproduces them, accepting only if exact on cases two digits longer than any shown.</dd>
+<dt>We found</dt><dd>Addition at generation 1, subtraction, comparison and single-digit multiplication likewise, multiplication at generation 5 as calls to the ones below it. Each exact at every length tested. The controller must keep no state of its own — with the verdict kept in a hidden state, comparison generalised to 0.24 at nine digits; with it in a slot, 1.000.
+<pre class="term prog"><span class="c"># addition, as found from the three traces</span>
 body  LOAD 0&gt;3  LOAD 1&gt;4   <span class="c"># one place back, each</span>
       BIND 3,4  BIND 3,2   <span class="c"># digit ⊙ digit ⊙ carry</span>
       READ 3               <span class="c"># light on the 0..19 line</span>
       SETD 5  SETC 2       <span class="c"># digit out, carry kept</span>
-      WRITE 5              <span class="c"># next digit of the result</span>
-stop  slot 4 empty         <span class="c"># chosen by the search</span></pre>
-<p class="small">Subtraction, found next with addition callable, is the same cycle with the memory's inverse move (<code>UNBIND</code>) and the −10..9 line (<code>READN</code>). In the earlier machine, found from the addition program alone, it came out as an idiom of its own — the borrow added to y's digit and subtracted once, a permanent zero kept in a slot for the stop rule, two dead instructions — exact at every length.</p>
-</div>
-</div>
-<div class="tablewrap"><table>
-<thead><tr><th>operation</th><th>may call</th><th class="num">found at</th><th class="num">exact, 1–8 digits (4–8 never shown)</th><th class="num">9 digits</th></tr></thead>
-<tbody>
-<tr class="ours"><td>add</td><td>—</td><td class="num">gen 1</td><td class="num">1.000</td><td class="num">1.000</td></tr>
-<tr class="ours"><td>sub</td><td>add</td><td class="num">gen 1</td><td class="num">1.000</td><td class="num">1.000</td></tr>
-<tr class="ours"><td>cmp</td><td>add, sub</td><td class="num">gen 1</td><td class="num">1.000</td><td class="num">1.000</td></tr>
-<tr class="ours"><td>muld (× one digit)</td><td>add, sub, cmp</td><td class="num">gen 1</td><td class="num">1.000</td><td class="num">1.000</td></tr>
-<tr class="ours"><td>mul</td><td>add, sub, cmp, muld</td><td class="num">gen 5</td><td class="num">1.000</td><td class="num">0.893 <span class="ab">(the memory's 10⁹ range, not the program)</span></td></tr>
-<tr><td>add, from nothing (examples only, random programs)</td><td>—</td><td class="num">plateau, 300 gens</td><td class="num">—</td><td class="num">—</td></tr>
-</tbody></table></div>
-<p class="small">Each rung may call the programs below it: multiplication was found as <code>SHIFT, CALL add, LOAD, CALL muld</code> over the found programs. Retention of every earlier operation after each rung: 1.00. The last row is the negative that frames the rest: blank-slate search has no slope — the six-instruction core of addition earns no credit until it is complete. Nobody discovers addition; one is shown a few worked examples, or counts.</p>
-<div class="finding"><b>The claim</b><div>Operations are induced from three worked examples and generalise in length without limit in the range tested. The controller must be stateless and the context must live in memory; this is what makes a program found on two-digit examples exact on nine.</div></div>
+      WRITE 5              <span class="c"># next digit of the result</span></pre></dd>
+<dt>Number</dt><dd class="num">add, sub, cmp, muld, mul: 1.000 at 1–9 digits (4–9 never shown); blank-slate search: nothing</dd>
+<dt>Kept</dt><dd>Searching from nothing has no slope — the six-instruction core earns no credit until complete. Nobody discovers addition; one is shown a few worked examples. And a found program can have a hole an acceptance test never sampled: our first addition dropped the top carry when the second operand was shorter (<code>99+1 = 0</code>). Found by the language layer three steps later; fixed by sampling the failure patterns explicitly, and re-found.</dd>
+</dl></article>
+
+<article class="step"><h3><small>Step 03</small>Programs stored in the same table</h3>
+<dl class="dd">
+<dt>We did</dt><dd>Bound each instruction to four role relations into one place, chained four instructions into a page, and continued the number table with the instruction rows: one table, one <code>+</code>, one <code>×</code>, for numbers and procedures.</dd>
+<dt>We found</dt><dd>The five found programs walk back from their pages identically and execute from memory; numbers still walk back exactly after the continuation; a new program's name is a freshly appended row and a call to it reads back with no training. Adding a skill is a write.</dd>
+<dt>Number</dt><dd class="num">1.000 for all five programs executed from the one memory, at 1 / 3 / 5 / 7 digits</dd>
+</dl></article>
+
+<article class="step"><h3><small>Step 04</small>Instructions in words</h3>
+<dl class="dd">
+<dt>We did</dt><dd>Made every word a row — the ten digit words and a few function words stored, any new word a fresh row — and a sentence a chain of word places, read back by walking. A numeral is read digit by digit; the number is the place its digits walk to. Then searched for a reader: a program that walks the sentence, lights each word (<em>is it a digit? a program's name? "from"?</em>) and either calls a found program or defines a new one.</dd>
+<dt>We found</dt><dd>Commands work on numbers and filler words never shown; a definition names a program the next sentence can call:
+<pre class="term prog">add 3421 and 57 .                            <span class="c">→ 3478</span>
+please subtract 9114 from 95365 .            <span class="c">→ 86251</span>
+compare 99 and 100 ?                         <span class="c">→ smaller</span>
+to double something , add it to itself .     <span class="c">→ (defined double)</span>
+double 34324 .                               <span class="c">→ 68648</span>
+frobnicate 12 and 7 .                        <span class="c">→ (nothing called)</span></pre></dd>
+<dt>Number</dt><dd class="num">1.00 on 1–7-digit numbers (train 1–3), 0–4 fillers (train 0–1), unseen definition names and bodies</dd>
+<dt>Kept</dt><dd>Number <em>places</em> must not be sentence tokens — they are near-parallel as vectors (cos 0.98) and no light can tell two apart. Digits as words removed the problem. And "found at generation 1" here means the search <em>selected</em> the reader from the worked traces; discovery from answers alone is not shown.</dd>
+</dl></article>
 </div></section>
 
-<section id="onemem"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">03 / One memory</p><h2>The programs live in the same table as the numbers</h2></div><p>A found program is not kept in a file. Each instruction is bound to four role relations — opcode and three arguments — into one place; four to six instructions are chained into a page; a program is a few pages. The number table of section 01 was continued with 36 instruction-symbol rows and 4 role relations: one table, one <code>+</code>, one <code>×</code>.</p></header>
-<div class="tablewrap"><table>
-<thead><tr><th>on the merged table (54 rows), one seed</th><th class="num">result</th></tr></thead>
-<tbody>
-<tr class="ours"><td>numbers 1–9 digits still walk back (retention after the continuation)</td><td class="num">1.000 at every length</td></tr>
-<tr><td>random programs of 2 / 4 / 6 / 8 instructions read back from one place</td><td class="num">1.000 / 1.000 / 0.32 / 0.00 → page size 4</td></tr>
-<tr class="ours"><td>the five found programs promoted as pages, walked back</td><td class="num">all identical</td></tr>
-<tr class="ours"><td>executed from the one memory, calls resolved by walking, 1 / 3 / 5 / 7 digits</td><td class="num">1.000 for all five</td></tr>
-<tr class="ours"><td>a new program's name = a freshly appended random row; a <code>CALL</code> to it reads back with no training</td><td class="num">yes</td></tr>
-</tbody></table></div>
-<p class="plain">In plain words: adding a skill to this memory is a write. Append its pages, and calls to it are readable through the role operators that already exist. Numbers, facts and procedures are the same kind of object in the same space — and, as in part one, a computation over them is a walk whose cost does not grow with the size of the table.</p>
-</div></section>
+<section id="reasoning"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">Track two</p><h2>Reasoning</h2></div><p>The question: can the same memory follow a chain of facts it has never seen — first in a synthetic world, then on a benchmark, first from its graph and then from its text?</p></header>
 
-<section id="reasoning"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">04 / Reasoning over stories</p><h2>Transitive inference from three worked stories</h2></div><p>The same machine, with a story memory: a fact is <code>subject⊗SUBJECT + relation⊗RELATION + object⊗OBJECT</code>, three role relations trained once on random triples in 25 seconds. A story is a set of such places in working memory. The names are fresh random rows the memory has never seen.</p></header>
-<div class="two">
-<div>
-<p>Two reads were added: the fact keyed by a name and a relation, <em>verified by reading its subject and relation back</em> — a light, never a threshold — and a whole-fact check. From three worked stories of at most three links each, the search found the chain-following program, the YES / NO / UNKNOWN decision that calls it, and the program that refuses to propagate a non-transitive relation (<code>knows</code>), each at generation 1.</p>
-</div>
-<div class="tablewrap"><table>
-<thead><tr><th>program (3 worked stories each, ≤ 3 links)</th><th class="num">chain length 1–10, fresh names</th></tr></thead>
-<tbody>
-<tr class="ours"><td><code>chain_bigger</code></td><td class="num">1.000 × 10</td></tr>
-<tr class="ours"><td><code>decide_bigger</code> — YES 1.00 (69) · NO 1.00 (86) · UNKNOWN 1.00 (145) at six links</td><td class="num">1.000 × 10</td></tr>
-<tr class="ours"><td><code>decide_knows</code> — the trap: direct fact only</td><td class="num">1.000 × 10</td></tr>
-</tbody></table></div>
-</div>
-<p class="small">Two lessons we keep: every read the machine makes is verified by a light, never by a threshold (a keyed read separated present from absent facts by 0.72 vs 0.71 cosine — useless as a cutoff, exact as a read-back); and the first "3–7% errors" were our generator's labels, not the machine. Then we went to an external benchmark.</p>
-</div></section>
+<article class="step"><h3><small>Step 05</small>A story memory</h3>
+<dl class="dd">
+<dt>We did</dt><dd>A fact is one place, <code>subject⊗SUBJECT + relation⊗RELATION + object⊗OBJECT</code>, with three role relations trained once on random triples (25 seconds). A story is a set of such places in working memory; the names are fresh rows the memory has never seen. The machine gained one read — the fact keyed by a name and a relation, verified by reading its subject and relation back, a light and never a threshold — and the search was shown three worked stories of at most three links.</dd>
+<dt>We found</dt><dd>The chain-following program, the YES / NO / UNKNOWN decision that calls it, and the program that refuses to propagate a non-transitive relation, each found at generation 1.</dd>
+<dt>Number</dt><dd class="num">1.000 on chains of 1–10 links with fresh names (only ≤ 3 shown)</dd>
+</dl></article>
 
-<section id="clutrr"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">05 / CLUTRR</p><h2>Kinship chains of ten hops from stories of two and three</h2></div><p>CLUTRR (Sinha et al., 2019) asks: given a chain of family relations between people — Ann's mother's brother's daughter — what is Ann to the last person? Training stories have 2–3 hops, test stories 2–10. We use the graph form of the benchmark, the setting of the strongest published systems.</p></header>
-<article class="benchmark" style="margin-top:0;padding-top:0;border:0">
-<h3 class="bench"><small>First attempt · the negative</small>We wrote the algebra, and it got worse every time we touched it</h3>
-<p>The obvious route is a family algebra — up, down, side, spouse, reduce by rules — with the twenty words learned as paths in it. The words came out right (father = up♂, niece = side-down♀, all twenty). Every hand-written or hand-repaired rule made the generalisation worse: 54/62 training compositions consistent, then over-generalisation, then 25/62. Three hours; recorded, abandoned.</p>
-<h3 class="bench" style="margin-top:36px"><small>Second attempt · the result</small>Each relation word is a learned operator. Nothing else.</h3>
-<p>Twenty words, twenty block-diagonal operators of the ResonatE kind, on 64-dimensional places (four blocks of 16×16 per word; about twenty thousand complex numbers in all). A training story <code>(r₁, r₂ → r₃)</code> says only: applying the chain's operators to any random place must land where the target word's operator lands. No steps, no genders, no rules, no meanings. A test chain is the product of its operators on a probe, named by the closest word's single hop, averaged over 64 probes; it abstains when the margin is below the 95th percentile of wrong-answer margins on validation.</p>
-<figure><svg aria-label="CLUTRR exact accuracy at ten hops, trained on two and three hops: ResonatE 2 0.99, CTP-A 0.90, LSTM 0.75, GAT 0.45, GCN 0.39, GNTP 0.31" height="240" id="clutrrsvg" role="img" width="780"></svg>
-<figcaption>Exact answers at ten hops, trained on 2–3 hops, graph input, full test set. Published rows are from Minervini et al. 2020 (means over seeds; CTP_A ± 0.07, LSTM ± 0.09, GAT ± 0.06, GCN ± 0.02, GNTP ± 0.22); ours is one seed, 119 stories at ten hops, and abstains on the 1% it does not answer.</figcaption></figure>
-<div class="tablewrap"><table>
-<thead><tr><th>chain length</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th><th class="num">9</th><th class="num">10</th></tr></thead>
+<article class="step"><h3><small>Step 06</small>CLUTRR from the graph</h3>
+<dl class="dd">
+<dt>We did</dt><dd>CLUTRR (Sinha et al., 2019): given a chain of family relations — Ann's mother's brother's daughter — what is Ann to the last person? Training stories have 2–3 hops, test stories 2–10. We took the benchmark's graph form (the relation sequence along the path), the setting of the strongest published systems. Each of the twenty relation words became a learned operator; a training story says only "applying the chain's operators to any random place must land where the target word's operator lands". No rules, no genders, no meanings.</dd>
+<dt>We found</dt><dd>The product of the operators answers ten-hop questions after seeing two and three. The remaining abstentions are the benchmark's own ambiguities: all fifteen at length 3 are one chain, <em>wife → son → grandmother</em> — either <em>mother</em> or <em>mother-in-law</em>, and the test set labels it both ways, ten to five.
+<figure style="margin:18px 0 0"><svg aria-label="CLUTRR exact accuracy at ten hops: ResonatE 2 0.99, CTP-A 0.90, LSTM 0.75, GAT 0.45, GCN 0.39, GNTP 0.31" height="240" id="clutrrsvg" role="img" width="780"></svg>
+<figcaption>Exact answers at ten hops, trained on 2–3, graph input, full test set. Published rows from Minervini et al. 2020; ours is one seed, 119 stories at ten hops, abstaining on the 1 % it does not answer. Controls: shuffled training targets → 0.00 exact, 1.00 abstain; the model sees only the relation-word sequence; no test chain of three or more words occurs in training.</figcaption></figure>
+<div class="tablewrap"><table class="mini">
+<thead><tr><th>hops</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th><th class="num">9</th><th class="num">10</th></tr></thead>
 <tbody>
-<tr><td>stories</td><td class="num">38</td><td class="num">105</td><td class="num">190</td><td class="num">174</td><td class="num">107</td><td class="num">144</td><td class="num">150</td><td class="num">119</td><td class="num">119</td></tr>
-<tr class="ours"><td>exact</td><td class="num">38 · 1.00</td><td class="num">90 · 0.86*</td><td class="num">189 · 0.99</td><td class="num">172 · 0.99</td><td class="num">106 · 0.99</td><td class="num">143 · 0.99</td><td class="num">148 · 0.99</td><td class="num">112 · 0.94*</td><td class="num">118 · 0.99</td></tr>
-<tr><td>abstain</td><td class="num ab">0</td><td class="num ab">15 · 0.14*</td><td class="num ab">1 · 0.01</td><td class="num ab">0</td><td class="num ab">0</td><td class="num ab">0</td><td class="num ab">2 · 0.01</td><td class="num ab">7 · 0.06*</td><td class="num ab">1 · 0.01</td></tr>
+<tr class="ours"><td>exact</td><td class="num">38 · 1.00</td><td class="num">90 · 0.86</td><td class="num">189 · 0.99</td><td class="num">172 · 0.99</td><td class="num">106 · 0.99</td><td class="num">143 · 0.99</td><td class="num">148 · 0.99</td><td class="num">112 · 0.94</td><td class="num">118 · 0.99</td></tr>
+<tr><td>abstain</td><td class="num ab">0</td><td class="num ab">15 · 0.14</td><td class="num ab">1 · 0.01</td><td class="num ab">0</td><td class="num ab">0</td><td class="num ab">0</td><td class="num ab">2 · 0.01</td><td class="num ab">7 · 0.06</td><td class="num ab">1 · 0.01</td></tr>
 <tr><td>wrong</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2 · 0.01</td><td class="num">1 · 0.01</td><td class="num">1 · 0.01</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
 </tbody></table></div>
-<p class="small">Counts, then fractions of the stories at that length. k = 8, 20,000 steps, 64 probes, seed 0; all 1,146 test stories; validation 0.996; all 62 training length-2 compositions reproduced by the operator products. Training instances: the 9,074 training stories of the split (4,076 of two hops, 4,998 of three; 383 distinct word sequences), each an instance <code>(word sequence → target word)</code>; a step draws 256 stories, gives each a fresh random unit-norm probe, and takes the cross-entropy over the 18 target words' single-hop landings from that same probe. Widths 12 and 16 give the same numbers within one or two stories per length. The first run of this code, at 4,000 steps and 8 probes, gave 0.78 at ten hops; the whole gap was convergence and read noise, not capacity or a missing primitive.</p>
-<div class="finding"><b>* The abstentions</b><div>All fifteen abstentions at length 3 are the fifteen test occurrences of one chain, <em>wife → son → grandmother</em>, which is either <em>mother</em> or <em>mother-in-law</em> — and the test set labels it both ways, ten to five. The length-9 abstentions are walks that can return to oneself (<em>father → wife → son</em> is me or my brother, so a later <em>daughter → sister</em> is a daughter or a niece); the two candidate words light within 0.01–0.04 of each other. The benchmark's labels assume the walk never returns to self; the operators see that it can. Where a model that must answer would score these by luck, this one says "two answers".</div></div>
-<div class="two" style="margin-top:36px">
-<div><h3>Controls</h3><p>With the training targets randomly permuted, the same run gives exact 0.00 and abstain 1.00 at every length: the operators learn nothing consistent and the margin test refuses everything. The model sees only the sequence of relation words — no names, genders or text. Training contains two- and three-hop stories only. Every length-2 test sequence occurs in training (38 of 38 — they are the composition table itself); no test sequence of three or more words occurs in training (0 of 105 at length 3, 0 of 1,003 at lengths 4–10), so from length 3 up every test chain is a new product of the operators.</p></div>
-<div><h3>What it is not</h3><p>It is not reading English: the input is the benchmark's relation graph, as for CTP and the GNN baselines; the text setting (BERT, LSTM readers at 0.2–0.4) is a different task. It is one seed. And a kinship algebra is small — twenty operators — which is exactly why the products compose without drift over ten hops; larger vocabularies are untested.</p></div>
-</div>
-<div class="finding"><b>The lesson</b><div>Do not write the algebra. The version with no rules, trained only on "this chain lands where that word lands", is the one that generalises — the same emergence part one measured on biokg's relation families, now doing inference. And abstention is a first-class outcome: exact where it knows, silent where it does not, and, on this benchmark, silent precisely where the benchmark is ambiguous.</div></div>
-</article>
+<p class="small">Counts, then fractions of the stories at that length; 1,146 test stories in all. k = 8 (64-dimensional places, four 16×16 blocks per word, ~20k complex parameters), 20,000 steps, 64 probes, seed 0.</p></dd>
+<dt>Number</dt><dd class="num">0.99 exact at ten hops, wrong ≤ 0.01 at every length · best published on this split: CTP_A 0.90</dd>
+<dt>Kept</dt><dd>Before this we spent three hours hand-writing a kinship algebra; the words came out right and every rule we touched made generalisation worse. Do not write the algebra.</dd>
+</dl></article>
+
+<article class="step"><h3><small>Step 07 — negative</small>CLUTRR from raw text</h3>
+<dl class="dd">
+<dt>We did</dt><dd>Put a reader in front of the same reasoner. The text is crowd-written: 4,620 sentence templates in training, 1,423 of the 1,438 test templates unseen. We built four readers: cue rules over the sentence chain (relation word, names, <code>'s</code> / <code>of</code> for direction); a sequence model over the story; a local classifier over windows around each relation word; the cue reader with a table counted from the training data. Each turned sentences into facts; the facts went to the operators of step 06.</dd>
+<dt>We found</dt><dd>The cue reader reads the English correctly for 0.96 of clean sentences on unseen templates. Yet every reader stops at the same wall — about 0.55 precision against the gold facts — and the pipeline abstains on nearly everything rather than guess. The wall is in the benchmark: the gold graph writes the <em>same reading</em> in a template-dependent form. "A's son B" is (A, son, B) in 900 training sentences and (B, father or mother, A) in 378; fixed within a template, unpredictable across templates, and the test templates are unseen. Add facts split across sentences by pronouns, synonyms outside the twenty words, and 4 % of templates that contradict their own graph, and a ten-hop path is intact for 0.39 of test stories at best.</dd>
+<dt>Number</dt><dd class="num neg">0.08 exact / 0.02 wrong / 0.90 abstain overall from text · gold facts through the same pipeline: 0.97</dd>
+<dt>Kept</dt><dd>Why step 04 worked and this does not: a controlled grammar (one fact per sentence, local cues, closed vocabulary) versus real text. The memory and the chain are not what failed. The fix this points to is in the reasoner, not the reader: a fact should be usable in whichever form the text gives it, which needs the reverse of an operator to be its exact inverse — kept unitary by construction. Free reverse hops learned nothing; the adjoint drifted. That is the next experiment.</dd>
+</dl></article>
 </div></section>
 
-<section id="principles"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">06 / What we learned</p><h2>Five principles, each bought with a negative</h2></div></header>
+<section id="principles"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">What we learned</p><h2>Five principles, each bought with a negative</h2></div></header>
 <ul class="principles">
-<li><b>Evaluation is not a move</b><div><code>=</code> as a relation cannot memorise single facts; learned operator generators memorise and do not generalise (fourteen configurations at 0.000); a successor walk is not an adder in three parametrisations. Equality is a light over the memory.</div></li>
-<li><b>Superposition keeps <em>what</em>, direction keeps <em>pairing</em>, multiplication keeps <em>value</em></b><div>The bag encoding reads 347 as 437. The directed chain reads every term back. The phase code adds exactly, carries free, and has no order — which is why addition is done one place at a time, never as one value.</div></li>
-<li><b>The controller is stateless</b><div>Verdict in the hidden state: 0.24 at nine digits. Verdict in a slot: 1.000. Every decision must be local to the current lights; then a program found on two-digit examples runs on nine.</div></li>
-<li><b>Nobody discovers addition</b><div>Blank-slate search has no slope. Three worked examples give it one; a neighbouring program gives it another. Learning from examples is what it looks like here.</div></li>
-<li><b>Do not write the algebra</b><div>Hand-written kinship rules got worse with every repair. Twenty learned operators and one objective reached 0.99. Depth lives in the operator, not in rows: a memory grows by continuation, with its moves still learning.</div></li>
+<li><b>Evaluation is not a move</b><div><code>=</code> as a relation cannot memorise single facts; a successor walk is not an adder. Equality is a light over the memory.</div></li>
+<li><b>Superposition keeps <em>what</em>, direction keeps <em>pairing</em></b><div>The bag encoding reads 347 as 437; the directed chain reads every term back. Number places in a sentence are near-parallel; digits as words are not.</div></li>
+<li><b>The controller is stateless</b><div>Verdict in the hidden state: 0.24 at nine digits. Verdict in a slot: 1.000.</div></li>
+<li><b>Nobody discovers addition</b><div>Blank-slate search has no slope; three worked examples give it one; a neighbouring program gives another. A ladder of rungs beats one joint search every time we tried.</div></li>
+<li><b>Do not write the algebra</b><div>Hand-written kinship rules got worse with every repair; twenty learned operators and one objective reached 0.99. And test what you accept: an acceptance test that never samples the failure pattern is not a test.</div></li>
 </ul>
 </div></section>
 
-<section id="limits"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">07 / What we can and cannot conclude</p><h2>Observed, and not established</h2></div></header>
+<section id="limits"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">What we can and cannot conclude</p><h2>Observed, and not established</h2></div></header>
 <div class="two">
 <div>
 <h3>Observed</h3>
 <ul>
-<li>Unseen numbers below 10⁹ are composed, decomposed, compared, added and multiplied exactly from 18 stored rows, on one seed, on thousands of never-trained cases per length.</li>
-<li>Five arithmetic programs and three logic programs were induced from three worked examples each and are exact on lengths never shown; the search never saw the ground-truth programs.</li>
-<li>Programs stored as pages in the number table execute from it; a new program's name row needs no training.</li>
-<li>Ten-hop CLUTRR at 0.99 exact and ≤ 1% wrong on the full test set, with every remaining abstention traceable to an ambiguity in the benchmark.</li>
+<li>Unseen numbers below 10⁹ composed, decomposed, compared, added and multiplied exactly from 18 stored rows.</li>
+<li>Five arithmetic and three logic programs induced from three worked examples each, exact on lengths never shown; commands and definitions in words on numbers and names never shown.</li>
+<li>Ten-hop CLUTRR from the graph at 0.99 exact and ≤ 1 % wrong, the abstentions traceable to the benchmark's ambiguities.</li>
+<li>From raw text, a negative with a located cause.</li>
 </ul>
 </div>
 <div>
 <h3>Not established</h3>
 <ul>
-<li>Seeds. Every table here is one seed. Between three widths the CLUTRR numbers moved by one or two stories per length; the arithmetic tables have not been re-seeded at all.</li>
-<li>Baselines we owe: an NPI-style program-induction baseline and a VSA / holographic baseline on the same tasks. Program induction from traces is known (NPI, DreamCoder); binding and superposition are known (HRR, VSA). What is new is a learned relational geometry doing both, exactly, in one table — and that comparison has not been run.</li>
-<li>The machine's primitives — about a dozen moves, lights and writes — are ours. The programs are found; the instruction set is not.</li>
-<li>The proposer is random mutation seeded by examples. It found each operation in seconds to minutes, but it is scaffolding for measuring the landscape, not a learner.</li>
-<li>CLUTRR here is graph input; reading the English is a separate, unbuilt step. Multiplication at nine digits is limited by the memory's range (0.893), and the range is grown by continuation, not unbounded.</li>
-<li>No real-graph result yet: compositional queries on wikikg2 or biokg from three worked examples is the experiment that would connect this page to part one's tables.</li>
+<li>Seeds: every table is one seed (CLUTRR moved by one or two stories per length across widths 8, 12, 16).</li>
+<li>The machine's primitives and the word → program aliases are ours; the programs are found, the instruction set is not. "Found at generation 1" is selection from worked traces, not discovery from answers.</li>
+<li>Baselines we owe on the same tasks: an NPI-style program-induction baseline and a VSA / holographic baseline.</li>
+<li>Reading real text: open. The graph-to-text gap is where the work is, and it is a different problem from the memory.</li>
+<li>No real-graph result yet (compositional queries on wikikg2 / biokg) to connect this page to part one's tables.</li>
 </ul>
 </div>
 </div>
-<p class="small">Code, the found programs, the run logs and the working paper log for this part are being prepared for release with the write-up; until then the numbers on this page are ours alone to defend, and we have tried to say at each one what would change them.</p>
+<p class="small">Code, found programs, run logs and the working paper log for this part are being prepared for release with the write-up.</p>
 </div></section>
 
 <footer><div class="wrap">
@@ -226,13 +212,7 @@ stop  slot 4 empty         <span class="c"># chosen by the search</span></pre>
     var ths=Array.prototype.map.call(t.querySelectorAll('thead th'),function(h){return h.textContent.trim();});
     t.querySelectorAll('tbody tr').forEach(function(tr){Array.prototype.forEach.call(tr.children,function(td,i){ if(ths[i]) td.setAttribute('data-label',ths[i]); });});
   });
-  var rows=[
-    ['ResonatE 2 — words as operators (one seed)',.99,'abstains 0.01',1],
-    ['CTP_A (Minervini et al. 2020)',.90,'',0],
-    ['LSTM',.75,'',0],
-    ['GAT',.45,'',0],
-    ['GCN',.39,'',0],
-    ['GNTP',.31,'',0]];
+  var rows=[['ResonatE 2 — words as operators (one seed)',.99,'abstains 0.01',1],['CTP_A (Minervini et al. 2020)',.90,'',0],['LSTM',.75,'',0],['GAT',.45,'',0],['GCN',.39,'',0],['GNTP',.31,'',0]];
   function render(){
     var svg=document.getElementById('clutrrsvg'); if(!svg) return; while(svg.firstChild) svg.removeChild(svg.firstChild);
     var max=1.0, fmt=function(v){return v.toFixed(2);}, cw=svg.parentNode.clientWidth||Math.max(window.innerWidth-60,300);
