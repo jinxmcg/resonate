@@ -32,7 +32,7 @@
 .step h3 small{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .dd{display:grid;grid-template-columns:110px 1fr;gap:10px 28px;max-width:900px}
 .dd dt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:4px}
-.dd dd{margin:0 0 14px;font-size:16px;line-height:1.6}
+.dd dd{margin:0 0 14px;font-size:16px;line-height:1.6;min-width:0}.dd dd figure,.dd dd .tablewrap,.dd dd pre{max-width:100%;min-width:0}.dd dd figure{margin-left:0;margin-right:0}
 .dd dd.num{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--good)}
 .dd dd.num.neg{color:#865c45}
 .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px 0;margin:8px 0 6px;font-family:'IBM Plex Mono',monospace;font-size:13px}
@@ -47,6 +47,8 @@ pre.term.prog{font-size:12.5px;margin:10px 0 0;max-width:640px}pre.term.prog .c{
 .principles li b{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:400;text-transform:uppercase;letter-spacing:.1em;padding-top:3px}
 .stats .n{font-variant-numeric:tabular-nums}
 td.ab{color:var(--muted)}
+/* the by-hops grid stays a table on phones (the site's card rule is for leaderboards) */
+@media(max-width:600px){.tablewrap table.keep,.tablewrap table.keep thead,.tablewrap table.keep tbody{display:table;width:100%}.tablewrap table.keep thead{display:table-header-group;position:static;left:auto;top:auto}.tablewrap table.keep tr{display:table-row;border:0;padding:0}.tablewrap table.keep th,.tablewrap table.keep td{display:table-cell;padding:7px 6px;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}.tablewrap table.keep td[data-label]::before{content:none}.tablewrap table.keep td[data-label]:not(:first-child){margin:0}.tablewrap.keep{overflow-x:auto;margin:10px -22px 0;padding:0 22px}}
 @media(max-width:700px){.map li{grid-template-columns:36px 1fr;gap:8px 14px}.map .res{grid-column:2;text-align:left}.dd{grid-template-columns:1fr;gap:4px}.dd dt{margin-top:8px}.principles li{grid-template-columns:1fr;gap:6px}.chain{font-size:12px}.chain .op,.chain .eq{padding:0 8px}}
 </style>
 </head>
@@ -146,7 +148,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <dt>We found</dt><dd>The product of the operators answers ten-hop questions after seeing two and three. The remaining abstentions are the benchmark's own ambiguities: all fifteen at length 3 are one chain, <em>wife → son → grandmother</em> — either <em>mother</em> or <em>mother-in-law</em>, and the test set labels it both ways, ten to five.
 <figure style="margin:18px 0 0"><svg aria-label="CLUTRR exact accuracy at ten hops: ResonatE 2 0.99, CTP-A 0.90, LSTM 0.75, GAT 0.45, GCN 0.39, GNTP 0.31" height="240" id="clutrrsvg" role="img" width="780"></svg>
 <figcaption>Exact answers at ten hops, trained on 2–3, graph input, full test set. Published rows from Minervini et al. 2020; ours is one seed, 119 stories at ten hops, abstaining on the 1 % it does not answer. Controls: shuffled training targets → 0.00 exact, 1.00 abstain; the model sees only the relation-word sequence; no test chain of three or more words occurs in training.</figcaption></figure>
-<div class="tablewrap"><table class="mini">
+<div class="tablewrap keep"><table class="mini keep">
 <thead><tr><th>hops</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th><th class="num">9</th><th class="num">10</th></tr></thead>
 <tbody>
 <tr class="ours"><td>exact</td><td class="num">38 · 1.00</td><td class="num">90 · 0.86</td><td class="num">189 · 0.99</td><td class="num">172 · 0.99</td><td class="num">106 · 0.99</td><td class="num">143 · 0.99</td><td class="num">148 · 0.99</td><td class="num">112 · 0.94</td><td class="num">118 · 0.99</td></tr>
@@ -224,7 +226,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
         el(svg,'rect',{x:L,y:y,width:(W-L-R)*(r[1]/max),height:rh,class:'bar'+(r[3]?' ours':'')});
         el(svg,'text',{x:L+(W-L-R)*(r[1]/max)+6,y:y+rh-7,'text-anchor':'start'},fmt(r[1])+(r[2]?' · '+r[2]:''));});
     } else {
-      var W2=Math.max(cw,300),R2=118,T2=6,lh=17,rh2=12,gap2=14,step=lh+4+rh2+gap2,H2=T2+rows.length*step;
+      var W2=Math.max(cw,300),R2=170,T2=6,lh=17,rh2=12,gap2=14,step=lh+4+rh2+gap2,H2=T2+rows.length*step;
       svg.setAttribute('height',H2); svg.setAttribute('viewBox','0 0 '+W2+' '+H2); svg.setAttribute('width','100%');
       rows.forEach(function(r,i){var y=T2+i*step, by=y+lh+4;
         el(svg,'text',{x:0,y:y+lh-4,'text-anchor':'start',class:'lbl',style:r[3]?'font-weight:600':''},r[0]);
