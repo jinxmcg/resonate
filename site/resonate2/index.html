@@ -68,7 +68,7 @@ td.ab{color:var(--muted)}
 <div class="stat"><div class="stat-label">parameters that hold every number below 10²⁴</div><div class="n">12k</div><div class="stat-detail">eleven rows and one move; a number is a chain of its digits, read back exactly to 24 digits.</div></div>
 <div class="stat" style="border:0"><div class="stat-label">worked examples per operation</div><div class="n">3</div><div class="stat-detail">add, subtract, compare, multiply — each found, exact on lengths never shown.</div></div>
 <div class="stat" style="padding-left:0"><div class="stat-label">"to double something, add it to itself."</div><div class="n">1.00</div><div class="stat-detail">commands and definitions in words, on numbers and names never shown.</div></div>
-<div class="stat" style="border:0"><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; 0.988 ± 0.008 over ten seeds, wrong ≤ 1 %, 41k parameters. From raw text: a negative, below.</div></div>
+<div class="stat" style="border:0"><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; 0.988 ± 0.008 over ten seeds; wrong ≤ 1.2 % at 4–10 hops, 2.2 % at three (the ambiguous chain); 41k parameters. From raw text: a negative, below.</div></div>
 </div>
 </div></div></div></section>
 
@@ -81,7 +81,7 @@ td.ab{color:var(--muted)}
 <li><span class="num">04</span><span class="what"><b>Instructions in words.</b><span>"add 3421 and 57." — and "to double something, add it to itself." defines a program the next sentence can call.</span></span><span class="res pos">1.00 unseen numbers, names</span></li>
 <li class="track"><span class="num"></span><span class="what">Track two — reasoning</span><span class="res"></span></li>
 <li><span class="num">05</span><span class="what"><b>A story memory.</b><span>Facts as places; "is A bigger than B?" answered by a program found from three worked stories.</span></span><span class="res pos">1.000 to 10 links</span></li>
-<li><span class="num">06</span><span class="what"><b>CLUTRR from the graph.</b><span>Twenty kinship words as learned operators; ten-hop questions after training on two and three.</span></span><span class="res pos">0.99 ± 0.01, ten seeds</span></li>
+<li><span class="num">06</span><span class="what"><b>CLUTRR from the graph.</b><span>Twenty kinship words as learned operators; ten-hop questions after training on two and three.</span></span><span class="res pos">0.99 ± 0.01, ten seeds; wrong ≤ 2 %</span></li>
 <li><span class="num">07</span><span class="what"><b>CLUTRR from raw text.</b><span>The same reasoner behind a reader of the sentences. Every reader we built stops at the same wall — and the wall is in the benchmark.</span></span><span class="res neg">0.08 exact, 0.90 abstain</span></li>
 </ul>
 </div></section>
@@ -102,7 +102,7 @@ td.ab{color:var(--muted)}
 <tr><td>anchored table to 10¹², k = 12</td><td class="num">144</td><td class="num">24,481</td><td class="num">12 digits</td></tr>
 </tbody></table></div></dd>
 <dt>Number</dt><dd class="num">1.000 on unseen numbers to 24 digits from 12,385 parameters · comparison 1.000 on 6,000 unseen pairs at every distance</dd>
-<dt>Kept</dt><dd>Our first version let the anchors superpose and read 347 as 437 (cosine 0.993): superposition keeps <em>what</em> is present, direction keeps <em>what is paired with what</em>. Learning <code>=</code> as a relation fails at everything — evaluation is a light over the memory, not a move in it. And the 144-dimensional digit chain read random strings exactly to 24 digits while misreading <em>runs of nines</em> from length 9 — a pattern random training strings never show; test the patterns sampling never produces.</dd>
+<dt>Kept</dt><dd>Our first version let the anchors superpose and read 347 as 437 (cosine 0.993): superposition keeps <em>what</em> is present, direction keeps <em>what is paired with what</em>. Learning <code>=</code> as a relation fails at everything — evaluation is a light over the memory, not a move in it. And the 144-dimensional digit chain read random strings exactly to 24 digits while misreading <em>runs of nines</em> from length 9 — a pattern random training strings never show; test the patterns sampling never produces. To be explicit about which checkpoints carry it: the published k = 12 chain has this fault; the k = 20 chain that the programs, the digit-sum and parity results run on reads every run of one digit correctly (checked for all ten digits at length 24), as does k = 32; the trainer now samples runs, and the seeded reruns use it. The sentence memory of the language layer had the same fault on numerals like 4444444 and is being retrained the same way.</dd>
 </dl></article>
 
 <article class="step"><h3><small>Step 02</small>Operations found from three worked examples</h3>
@@ -166,7 +166,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <tr><td>wrong, ten seeds</td><td class="num">0.00</td><td class="num">0.02 ± .02</td><td class="num">0.00</td><td class="num">0.01 ± .00</td><td class="num">0.01 ± .01</td><td class="num">0.01 ± .01</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0.00 ± .01</td></tr>
 </tbody></table></div>
 <p class="small">First three rows: seed 0 — counts, then fractions of the stories at that length; 1,146 test stories in all. Last two rows: mean ± standard deviation over seeds 0–9 (ten-hop exact per seed: 0.99 0.98 0.98 0.98 1.00 0.99 1.00 0.99 0.98 0.98 → 0.988 ± 0.008). k = 8 (64-dimensional places, four 16×16 blocks per word, ~20k complex parameters), 20,000 steps, 64 probes. Every remaining miss is a chain with two logically valid answers — <em>wife → son → grandmother</em> is a mother or a mother-in-law, <em>… → daughter → sister</em> a daughter or a niece — and the model's two top words are exactly those two, 0.00–0.05 apart; kinship is one-to-many and the benchmark labels one member.</p></dd>
-<dt>Number</dt><dd class="num">0.99 exact at ten hops (0.988 ± 0.008 over ten seeds), wrong ≤ 0.01 at every length, 41,473 parameters · best published on this split: CTP_A 0.90 · at 16 dimensions (10k parameters) still 0.87</dd>
+<dt>Number</dt><dd class="num">0.99 exact at ten hops (0.988 ± 0.008 over ten seeds); wrong, ten-seed mean: ≤ 0.012 at 4–10 hops, 0.022 ± 0.023 at three hops (the chain the benchmark labels both ways); 41,473 parameters · best published on this split: CTP_A 0.90 · at 16 dimensions (10k parameters) still 0.87</dd>
 <dt>Kept</dt><dd>Before this we spent three hours hand-writing a kinship algebra; the words came out right and every rule we touched made generalisation worse. Do not write the algebra.</dd>
 </dl></article>
 
@@ -196,7 +196,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <ul>
 <li>Unseen numbers to 24 digits composed, decomposed, compared, added and multiplied exactly from eleven rows and one move (12k parameters); programs found on the anchored 10⁹ table run unchanged on the digit chain.</li>
 <li>Five arithmetic and three logic programs induced from three worked examples each, exact on lengths never shown; commands and definitions in words on numbers and names never shown.</li>
-<li>Ten-hop CLUTRR from the graph at 0.99 exact and ≤ 1 % wrong, the abstentions traceable to the benchmark's ambiguities.</li>
+<li>Ten-hop CLUTRR from the graph at 0.99 exact; wrong ≤ 1.2 % at 4–10 hops and 2.2 % at three hops over ten seeds, the abstentions and most of the wrong answers traceable to the benchmark's ambiguities.</li>
 <li>From raw text, a negative with a located cause.</li>
 </ul>
 </div>
