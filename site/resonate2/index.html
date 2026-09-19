@@ -65,7 +65,7 @@ td.ab{color:var(--muted)}
 <div class="hero-meta"><span>ONE GPU (1080 Ti)</span><span>ONE SEED</span><span>NO LLM ANYWHERE</span><span>NEGATIVES INCLUDED</span></div></div>
 <div>
 <div class="stats" style="margin-top:0;grid-template-columns:1fr 1fr;row-gap:36px">
-<div class="stat"><div class="stat-label">rows that hold every number below 10⁹</div><div class="n">18</div><div class="stat-detail">a number is a place you walk to, not a row; read back exactly.</div></div>
+<div class="stat"><div class="stat-label">rows that hold every number below 10¹²</div><div class="n">21</div><div class="stat-detail">a number is a place you walk to, not a row; read back exactly.</div></div>
 <div class="stat" style="border:0"><div class="stat-label">worked examples per operation</div><div class="n">3</div><div class="stat-detail">add, subtract, compare, multiply — each found, exact on lengths never shown.</div></div>
 <div class="stat" style="padding-left:0"><div class="stat-label">"to double something, add it to itself."</div><div class="n">1.00</div><div class="stat-detail">commands and definitions in words, on numbers and names never shown.</div></div>
 <div class="stat" style="border:0"><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; 0.988 ± 0.008 over ten seeds, wrong ≤ 1 %. From raw text: a negative, below.</div></div>
@@ -75,8 +75,8 @@ td.ab{color:var(--muted)}
 <section id="map"><div class="wrap"><header class="section-heading"><div><p class="eyebrow">00 / The map</p><h2>What we did, in order</h2></div><p>Two tracks on the same memory. Each step is one experiment with one number; the sections below give each step its own page. Green is a result we can defend; brown is a negative we keep.</p></header>
 <ul class="map">
 <li class="track"><span class="num"></span><span class="what">Track one — numbers</span><span class="res"></span></li>
-<li><span class="num">01</span><span class="what"><b>Numbers as places.</b><span>Sixteen rows (digits, place anchors) and two moves; a number is reached, never stored, and read back by walking.</span></span><span class="res pos">1.000 unseen, to 10⁹</span></li>
-<li><span class="num">02</span><span class="what"><b>Operations found from three worked examples.</b><span>Add, subtract, compare, multiply as programs over lights, found by search; exact on lengths never shown.</span></span><span class="res pos">1.000 at 1–9 digits</span></li>
+<li><span class="num">01</span><span class="what"><b>Numbers as places.</b><span>Sixteen rows (digits, place anchors) and two moves; a number is reached, never stored, and read back by walking.</span></span><span class="res pos">1.000 unseen, to 10¹²</span></li>
+<li><span class="num">02</span><span class="what"><b>Operations found from three worked examples.</b><span>Add, subtract, compare, multiply as programs over lights, found by search; exact on lengths never shown.</span></span><span class="res pos">1.000 at 1–12 digits</span></li>
 <li><span class="num">03</span><span class="what"><b>Programs stored in the same table.</b><span>A program is pages of places; a new program's name needs no training.</span></span><span class="res pos">executes from memory</span></li>
 <li><span class="num">04</span><span class="what"><b>Instructions in words.</b><span>"add 3421 and 57." — and "to double something, add it to itself." defines a program the next sentence can call.</span></span><span class="res pos">1.00 unseen numbers, names</span></li>
 <li class="track"><span class="num"></span><span class="what">Track two — reasoning</span><span class="res"></span></li>
@@ -92,8 +92,8 @@ td.ab{color:var(--muted)}
 <dl class="dd">
 <dt>We did</dt><dd>Stored only the digits 0–9 and the place anchors 10, 100 … 10⁶, with two relations, <code>+</code> and <code>×</code>. To reach 347 the memory walks: three <code>×</code> hundred, <code>+</code> four <code>×</code> ten, <code>+</code> seven. The result is a point in the same space as the sixteen rows — computed, never written.
 <div class="chain" aria-label="347 as a walk"><span class="n">3</span><span class="op"><b>×</b></span><span class="n anchor">100</span><span class="op"><b>+</b></span><span class="n">4</span><span class="op"><b>×</b></span><span class="n anchor">10</span><span class="op"><b>+</b></span><span class="n">7</span><span class="eq">→</span><span class="state">a place for 347</span></div></dd>
-<dt>We found</dt><dd>Walking the chain back — one reverse hop, one light over the sixteen rows per step — reads every digit of numbers never seen in training. Growing to a billion is two more anchors, with the operators allowed to keep learning while old numbers are replayed; freezing the operators and adding rows alone fails (0.000): depth lives in the operator, not in rows.</dd>
-<dt>Number</dt><dd class="num">1.000 on unseen numbers, all places, to 10⁹ · comparison 1.000 on 6,000 unseen pairs</dd>
+<dt>We found</dt><dd>Walking the chain back — one reverse hop, one light over the sixteen rows per step — reads every digit of numbers never seen in training. Growing is a continuation: to a billion with two more anchors, to a trillion with three more (513 s), the operators allowed to keep learning while old numbers are replayed; freezing the operators and adding rows alone fails (0.000): depth lives in the operator, not in rows.</dd>
+<dt>Number</dt><dd class="num">1.000 on unseen numbers, all places, to 10¹² · comparison 1.000 on 6,000 unseen pairs at every distance</dd>
 <dt>Kept</dt><dd>Our first version let the anchors superpose and read 347 as 437 (cosine 0.993): superposition keeps <em>what</em> is present, direction keeps <em>what is paired with what</em>. And learning <code>=</code> as a relation fails at everything — evaluation is a light over the memory, not a move in it.</dd>
 </dl></article>
 
@@ -107,7 +107,7 @@ body  LOAD 0&gt;3  LOAD 1&gt;4   <span class="c"># one place back, each</span>
       READ 3               <span class="c"># light on the 0..19 line</span>
       SETD 5  SETC 2       <span class="c"># digit out, carry kept</span>
       WRITE 5              <span class="c"># next digit of the result</span></pre></dd>
-<dt>Number</dt><dd class="num">add, sub, cmp, muld, mul: 1.000 at 1–9 digits (4–9 never shown); blank-slate search: nothing</dd>
+<dt>Number</dt><dd class="num">add, sub, cmp, muld, mul: 1.000 at 1–9 digits (4–9 never shown) — and, unchanged, 1.000 at 1–12 digits on the trillion table grown after they were found; blank-slate search: nothing</dd>
 <dt>Kept</dt><dd>Searching from nothing has no slope — the six-instruction core earns no credit until complete. Nobody discovers addition; one is shown a few worked examples. And a found program can have a hole an acceptance test never sampled: our first addition dropped the top carry when the second operand was shorter (<code>99+1 = 0</code>). Found by the language layer three steps later; fixed by sampling the failure patterns explicitly, and re-found.</dd>
 </dl></article>
 
@@ -186,7 +186,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <div>
 <h3>Observed</h3>
 <ul>
-<li>Unseen numbers below 10⁹ composed, decomposed, compared, added and multiplied exactly from 18 stored rows.</li>
+<li>Unseen numbers below 10¹² composed, decomposed, compared, added and multiplied exactly from 21 stored rows; programs found on the 10⁹ table run unchanged on the 10¹² one.</li>
 <li>Five arithmetic and three logic programs induced from three worked examples each, exact on lengths never shown; commands and definitions in words on numbers and names never shown.</li>
 <li>Ten-hop CLUTRR from the graph at 0.99 exact and ≤ 1 % wrong, the abstentions traceable to the benchmark's ambiguities.</li>
 <li>From raw text, a negative with a located cause.</li>
