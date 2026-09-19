@@ -68,7 +68,7 @@ td.ab{color:var(--muted)}
 <div class="stat"><div class="stat-label">rows that hold every number below 10⁹</div><div class="n">18</div><div class="stat-detail">a number is a place you walk to, not a row; read back exactly.</div></div>
 <div class="stat" style="border:0"><div class="stat-label">worked examples per operation</div><div class="n">3</div><div class="stat-detail">add, subtract, compare, multiply — each found, exact on lengths never shown.</div></div>
 <div class="stat" style="padding-left:0"><div class="stat-label">"to double something, add it to itself."</div><div class="n">1.00</div><div class="stat-detail">commands and definitions in words, on numbers and names never shown.</div></div>
-<div class="stat" style="border:0"><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; wrong ≤ 1 %. From raw text: a negative, below.</div></div>
+<div class="stat" style="border:0"><div class="stat-label">CLUTRR, ten hops, from the graph</div><div class="n">0.99</div><div class="stat-detail">1,146 test stories, trained on 2–3 hops; 0.988 ± 0.008 over ten seeds, wrong ≤ 1 %. From raw text: a negative, below.</div></div>
 </div>
 </div></div></div></section>
 
@@ -81,7 +81,7 @@ td.ab{color:var(--muted)}
 <li><span class="num">04</span><span class="what"><b>Instructions in words.</b><span>"add 3421 and 57." — and "to double something, add it to itself." defines a program the next sentence can call.</span></span><span class="res pos">1.00 unseen numbers, names</span></li>
 <li class="track"><span class="num"></span><span class="what">Track two — reasoning</span><span class="res"></span></li>
 <li><span class="num">05</span><span class="what"><b>A story memory.</b><span>Facts as places; "is A bigger than B?" answered by a program found from three worked stories.</span></span><span class="res pos">1.000 to 10 links</span></li>
-<li><span class="num">06</span><span class="what"><b>CLUTRR from the graph.</b><span>Twenty kinship words as learned operators; ten-hop questions after training on two and three.</span></span><span class="res pos">0.99 exact, ≤ 1 % wrong</span></li>
+<li><span class="num">06</span><span class="what"><b>CLUTRR from the graph.</b><span>Twenty kinship words as learned operators; ten-hop questions after training on two and three.</span></span><span class="res pos">0.99 ± 0.01, ten seeds</span></li>
 <li><span class="num">07</span><span class="what"><b>CLUTRR from raw text.</b><span>The same reasoner behind a reader of the sentences. Every reader we built stops at the same wall — and the wall is in the benchmark.</span></span><span class="res neg">0.08 exact, 0.90 abstain</span></li>
 </ul>
 </div></section>
@@ -147,15 +147,17 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <dt>We did</dt><dd>CLUTRR (Sinha et al., 2019): given a chain of family relations — Ann's mother's brother's daughter — what is Ann to the last person? Training stories have 2–3 hops, test stories 2–10. We took the benchmark's graph form (the relation sequence along the path), the setting of the strongest published systems. Each of the twenty relation words became a learned operator; a training story says only "applying the chain's operators to any random place must land where the target word's operator lands". No rules, no genders, no meanings.</dd>
 <dt>We found</dt><dd>The product of the operators answers ten-hop questions after seeing two and three. The remaining abstentions are the benchmark's own ambiguities: all fifteen at length 3 are one chain, <em>wife → son → grandmother</em> — either <em>mother</em> or <em>mother-in-law</em>, and the test set labels it both ways, ten to five.
 <figure style="margin:18px 0 0"><svg aria-label="CLUTRR exact accuracy at ten hops: ResonatE 2 0.99, CTP-A 0.90, LSTM 0.75, GAT 0.45, GCN 0.39, GNTP 0.31" height="240" id="clutrrsvg" role="img" width="780"></svg>
-<figcaption>Exact answers at ten hops, trained on 2–3, graph input, full test set. Published rows from Minervini et al. 2020; ours is one seed, 119 stories at ten hops, and abstains on the 1 % it does not answer (no wrong answers at ten hops). Controls: shuffled training targets → 0.00 exact, 1.00 abstain; the model sees only the relation-word sequence; no test chain of three or more words occurs in training.</figcaption></figure>
+<figcaption>Exact answers at ten hops, trained on 2–3, graph input, full test set. Published rows from Minervini et al. 2020; ours is the mean of ten seeds, 119 stories at ten hops, and abstains on the 1 % it does not answer (no wrong answers at ten hops). Controls: shuffled training targets → 0.00 exact, 1.00 abstain; the model sees only the relation-word sequence; no test chain of three or more words occurs in training.</figcaption></figure>
 <div class="tablewrap keep"><table class="mini keep">
 <thead><tr><th>hops</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th><th class="num">9</th><th class="num">10</th></tr></thead>
 <tbody>
 <tr class="ours"><td>exact</td><td class="num">38 · 1.00</td><td class="num">90 · 0.86</td><td class="num">189 · 0.99</td><td class="num">172 · 0.99</td><td class="num">106 · 0.99</td><td class="num">143 · 0.99</td><td class="num">148 · 0.99</td><td class="num">112 · 0.94</td><td class="num">118 · 0.99</td></tr>
 <tr><td>abstain</td><td class="num ab">0</td><td class="num ab">15 · 0.14</td><td class="num ab">1 · 0.01</td><td class="num ab">0</td><td class="num ab">0</td><td class="num ab">0</td><td class="num ab">2 · 0.01</td><td class="num ab">7 · 0.06</td><td class="num ab">1 · 0.01</td></tr>
 <tr><td>wrong</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2 · 0.01</td><td class="num">1 · 0.01</td><td class="num">1 · 0.01</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr class="ours"><td>exact, ten seeds</td><td class="num">1.00 ± .00</td><td class="num">0.89 ± .04</td><td class="num">1.00 ± .00</td><td class="num">0.99 ± .00</td><td class="num">0.98 ± .01</td><td class="num">0.99 ± .01</td><td class="num">0.99 ± .01</td><td class="num">0.98 ± .01</td><td class="num">0.99 ± .01</td></tr>
+<tr><td>wrong, ten seeds</td><td class="num">0.00</td><td class="num">0.02 ± .02</td><td class="num">0.00</td><td class="num">0.01 ± .00</td><td class="num">0.01 ± .01</td><td class="num">0.01 ± .01</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0.00 ± .01</td></tr>
 </tbody></table></div>
-<p class="small">Counts, then fractions of the stories at that length; 1,146 test stories in all. k = 8 (64-dimensional places, four 16×16 blocks per word, ~20k complex parameters), 20,000 steps, 64 probes, seed 0.</p></dd>
+<p class="small">First three rows: seed 0 — counts, then fractions of the stories at that length; 1,146 test stories in all. Last two rows: mean ± standard deviation over seeds 0–9 (ten-hop exact per seed: 0.99 0.98 0.98 0.98 1.00 0.99 1.00 0.99 0.98 0.98 → 0.988 ± 0.008). k = 8 (64-dimensional places, four 16×16 blocks per word, ~20k complex parameters), 20,000 steps, 64 probes. Every remaining miss is a chain with two logically valid answers — <em>wife → son → grandmother</em> is a mother or a mother-in-law, <em>… → daughter → sister</em> a daughter or a niece — and the model's two top words are exactly those two, 0.00–0.05 apart; kinship is one-to-many and the benchmark labels one member.</p></dd>
 <dt>Number</dt><dd class="num">0.99 exact at ten hops, wrong ≤ 0.01 at every length · best published on this split: CTP_A 0.90</dd>
 <dt>Kept</dt><dd>Before this we spent three hours hand-writing a kinship algebra; the words came out right and every rule we touched made generalisation worse. Do not write the algebra.</dd>
 </dl></article>
@@ -193,7 +195,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <div>
 <h3>Not established</h3>
 <ul>
-<li>Seeds: every table is one seed (CLUTRR moved by one or two stories per length across widths 8, 12, 16).</li>
+<li>Seeds: the CLUTRR headline now has ten (0.988 ± 0.008 at ten hops); the arithmetic and program-search tables are still one seed each.</li>
 <li>The machine's primitives and the word → program aliases are ours; the programs are found, the instruction set is not. "Found at generation 1" is selection from worked traces, not discovery from answers.</li>
 <li>Baselines we owe on the same tasks: an NPI-style program-induction baseline and a VSA / holographic baseline.</li>
 <li>Reading real text: open. The graph-to-text gap is where the work is, and it is a different problem from the memory.</li>
@@ -214,7 +216,7 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
     var ths=Array.prototype.map.call(t.querySelectorAll('thead th'),function(h){return h.textContent.trim();});
     t.querySelectorAll('tbody tr').forEach(function(tr){Array.prototype.forEach.call(tr.children,function(td,i){ if(ths[i]) td.setAttribute('data-label',ths[i]); });});
   });
-  var rows=[['ResonatE 2 (one seed)',.99,'',1],['CTP_A (Minervini et al. 2020)',.90,'',0],['LSTM',.75,'',0],['GAT',.45,'',0],['GCN',.39,'',0],['GNTP',.31,'',0]];
+  var rows=[['ResonatE 2 (ten seeds)',.988,'± 0.008',1],['CTP_A (Minervini et al. 2020)',.90,'',0],['LSTM',.75,'',0],['GAT',.45,'',0],['GCN',.39,'',0],['GNTP',.31,'',0]];
   function render(){
     var svg=document.getElementById('clutrrsvg'); if(!svg) return; while(svg.firstChild) svg.removeChild(svg.firstChild);
     var max=1.0, fmt=function(v){return v.toFixed(2);}, cw=svg.parentNode.clientWidth||Math.max(window.innerWidth-60,300);
