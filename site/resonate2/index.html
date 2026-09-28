@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>ResonatE 2 — a memory that computes</title>
-<meta content="Part two of the ResonatE research, told in order: a knowledge-graph memory of eighteen rows that holds every number below a billion; arithmetic found from three worked examples and stored in the same table; commands and definitions in plain words; a story memory that reasons over kinship chains — 0.99 at ten hops from the graph, and an honest negative from raw text. Single seed, in progress." name="description"/>
+<meta content="Act II of the ResonatE research, told in order: a knowledge-graph memory of eighteen rows that holds every number below a billion; arithmetic found from three worked examples and stored in the same table; commands and definitions in plain words; a story memory that reasons over kinship chains — 0.99 at ten hops from the graph, and an honest negative from raw text. Single seed, in progress." name="description"/>
 <link href="https://resonate.page/resonate2/" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="https://resonate.page/resonate2/" property="og:url"/>
@@ -54,13 +54,13 @@ td.ab{color:var(--muted)}
 </head>
 <body><a class="skip" href="#map">Skip to research</a>
 <div class="topbar"><div class="wrap">
-<span class="brand">RESONATE / RESEARCH / PART TWO</span>
+<span class="brand">RESONATE / RESEARCH / ACT II</span>
 <span class="spacer"></span>
-<nav aria-label="Main navigation"><a href="#map">In order</a><a href="#numbers">Numbers</a><a href="#reasoning">Reasoning</a><a href="#principles">Principles</a><a href="#limits">Limits</a><a href="../">Part one</a></nav><a aria-label="ResonatE 2 on GitHub" class="github-link" href="https://github.com/jinxmcg/resonate2"><img alt="" height="20" src="../assets/github.svg" width="20"/><span>GitHub</span></a>
+<nav aria-label="Main navigation"><a href="#map">In order</a><a href="#numbers">Numbers</a><a href="#reasoning">Reasoning</a><a href="#principles">Principles</a><a href="#limits">Limits</a><a href="../">Act I</a></nav><a aria-label="ResonatE 2 on GitHub" class="github-link" href="https://github.com/jinxmcg/resonate2"><img alt="" height="20" src="../assets/github.svg" width="20"/><span>GitHub</span></a>
 </div></div>
-<div class="top-disclaimer"><div class="wrap"><b>Research status</b>Work in progress, September 2026. One seed, one consumer GPU, self-reported, negatives kept in; nothing here is filed on a leaderboard. This page continues <a href="../">part one</a>, which measured the representation on three Stanford boards. Here we ask what else the same memory can do, and tell it in the order it happened.</div></div>
+<div class="top-disclaimer"><div class="wrap"><b>Research status</b>Work in progress, September 2026. One seed, one consumer GPU, self-reported, negatives kept in; nothing here is filed on a leaderboard. This page continues <a href="../">Act I</a>, which measured the representation on three Stanford boards. Here we ask what else the same memory can do, and tell it in the order it happened.</div></div>
 
-<section class="hero"><div class="wrap"><div class="hero-grid"><div class="hero-copy"><p class="eyebrow">Independent research / 2026 / part two</p><h1>A memory<br/>that computes.</h1><p class="intro">Part one trained a compact graph representation — unit-norm rows and block-diagonal relation operators — to predict links. Part two keeps that memory exactly as it is and asks two questions of it. <b>Numbers:</b> can it hold and compute with numbers it never stored, and take instructions in words? <b>Reasoning:</b> can it follow chains of facts it has never seen? Yes to both, within limits we list — and one clear no.</p>
+<section class="hero"><div class="wrap"><div class="hero-grid"><div class="hero-copy"><p class="eyebrow">Independent research / 2026 / Act II</p><h1>A memory<br/>that computes.</h1><p class="intro">Act I trained a compact graph representation — unit-norm rows and block-diagonal relation operators — to predict links. Act II keeps that memory exactly as it is and asks two questions of it. <b>Numbers:</b> can it hold and compute with numbers it never stored, and take instructions in words? <b>Reasoning:</b> can it follow chains of facts it has never seen? Yes to both, within limits we list — and one clear no.</p>
 <a class="text-link" href="#map">What we did, in order <span>→</span></a>
 <div class="hero-meta"><span>ONE GPU (1080 Ti)</span><span>ONE SEED</span><span>NO LLM ANYWHERE</span><span>NEGATIVES INCLUDED</span></div></div>
 <div>
@@ -207,15 +207,15 @@ frobnicate 12 and 7 .                        <span class="c">→ (nothing called
 <li>The machine's primitives and the word → program aliases are ours; the programs are found, the instruction set is not. "Found at generation 1" is selection from worked traces, not discovery from answers.</li>
 <li>Baselines we owe on the same tasks: an NPI-style program-induction baseline and a VSA / holographic baseline.</li>
 <li>Reading real text: open. The graph-to-text gap is where the work is, and it is a different problem from the memory.</li>
-<li>No real-graph result yet (compositional queries on wikikg2 / biokg) to connect this page to part one's tables.</li>
+<li>No real-graph result yet (compositional queries on wikikg2 / biokg) to connect this page to Act I's tables.</li>
 </ul>
 </div>
 </div>
-<p class="small">Code, found programs, run logs, result files and the working paper log for this part: <a href="https://github.com/jinxmcg/resonate2">github.com/jinxmcg/resonate2</a>. The CLUTRR result reproduces from a clean clone in under six minutes on a GTX 1080 Ti (<code>clutrr_prepare.py</code>, then <code>kinship_ops.py</code>); <code>resonate.py</code> is imported from part one's repository unchanged.</p>
+<p class="small">Code, found programs, run logs, result files and the working paper log for this part: <a href="https://github.com/jinxmcg/resonate2">github.com/jinxmcg/resonate2</a>. The CLUTRR result reproduces from a clean clone in under six minutes on a GTX 1080 Ti (<code>clutrr_prepare.py</code>, then <code>kinship_ops.py</code>); <code>resonate.py</code> is imported from Act I's repository unchanged.</p>
 </div></section>
 
 <footer><div class="wrap">
-  ResonatE · part two, September 2026 · <a href="../">part one: the representation on three Stanford boards</a> · <a href="https://github.com/jinxmcg/resonate2">github.com/jinxmcg/resonate2</a> (this part) · <a href="https://github.com/jinxmcg/resonate">github.com/jinxmcg/resonate</a> (the memory) · MIT license · CLUTRR comparison rows from Minervini et al., "Learning Reasoning Strategies in End-to-End Differentiable Proving", ICML 2020.
+  ResonatE · Act II, September 2026 · <a href="../">Act I: the representation on three Stanford boards</a> · <a href="https://github.com/jinxmcg/resonate2">github.com/jinxmcg/resonate2</a> (this part) · <a href="https://github.com/jinxmcg/resonate">github.com/jinxmcg/resonate</a> (the memory) · MIT license · CLUTRR comparison rows from Minervini et al., "Learning Reasoning Strategies in End-to-End Differentiable Proving", ICML 2020.
 </div></footer>
 <script>
 (function(){
